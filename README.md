@@ -73,4 +73,4 @@ git clone https://github.com/testonuovo/oreste-ai.git
 
 ---
 
-## 👨‍💻 Autore
+## 👨‍💻 Autore Oreste De Chiara
