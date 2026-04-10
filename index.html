@@ -18,29 +18,29 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 .box {
     background: blue;
-    padding: 30px;
+    padding: 25px;
     border-radius: 20px;
-    width: 90%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 420px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 h1 {
-    font-size: 28px;
-    margin-bottom: 5px;
+    font-size: 26px;
 }
 
 input {
+    width: 100%;
     padding: 12px;
-    width: 90%;
+    margin-top: 10px;
     border-radius: 10px;
     border: none;
-    margin-top: 10px;
     font-size: 16px;
 }
 
@@ -49,14 +49,18 @@ button {
     color: white;
     border: none;
     border-radius: 25px;
-    padding: 12px 18px;
-    margin: 8px;
+    padding: 12px 16px;
+    margin-top: 10px;
     font-size: 16px;
-    cursor: pointer;
+    width: 100%;
 }
 
 button:hover {
     background: darkred;
+}
+
+button:active {
+    background: yellow;
 }
 
 #output {
@@ -65,7 +69,7 @@ button:hover {
 }
 
 .mic {
-    font-size: 90px;
+    font-size: 70px;
 }
 </style>
 </head>
@@ -73,71 +77,103 @@ button:hover {
 <body>
 
 <div class="container">
-    <div class="box">
+<div class="box">
 
-        <h1>🎤 Oreste AI</h1>
-        <p>Il tuo assistente vocale intelligente</p>
+<h1>🎤 Oreste AI</h1>
+<p>Assistente vocale</p>
 
-        <div class="mic">🎤</div><br>
+<div class="mic">🎤</div>
 
-        <button onclick="startVoice()">Parla</button>
+<button onclick="startVoice()">Parla</button>
 
-        <br>
+<input type="text" id="textInput" placeholder="Scrivi un comando...">
+<button onclick="handleText()">Invia</button>
 
-        <input type="text" id="textInput" placeholder="Scrivi un comando...">
-        <br>
+<p id="output"></p>
 
-        <button onclick="handleText()">Invia</button>
-
-        <p id="output"></p>
-
-    </div>
+</div>
 </div>
 
 <script>
-let userName = localStorage.getItem("userName");
-let lastCommand = localStorage.getItem("lastCommand");
+
+let userName = localStorage.getItem("userName") || "";
+let lastCommand = "";
 
 // 🔊 VOCE
 function speak(text){
     const speech = new SpeechSynthesisUtterance(text);
     speech.lang = "it-IT";
-    speech.rate = 1;
     window.speechSynthesis.speak(speech);
 }
 
-// 🎤 VOCE
+// 🎤 MICROFONO (FIX MOBILE)
 function startVoice(){
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if(!SpeechRecognition){
-        alert("Microfono non supportato");
+        speak("Il tuo dispositivo non supporta il microfono. Usa la scrittura.");
+        document.getElementById("output").innerText =
+            "❌ Microfono non supportato";
         return;
     }
 
-    const recognition = new SpeechRecognition();
-    recognition.lang = "it-IT";
+    try {
+        const recognition = new SpeechRecognition();
 
-    document.getElementById("output").innerText = "🎤 Ascolto...";
+        recognition.lang = "it-IT";
+        recognition.continuous = false;
+        recognition.interimResults = false;
 
-    recognition.start();
+        document.getElementById("output").innerText = "🎤 Parla ora...";
+        speak("Parla ora");
 
-    recognition.onresult = function(event){
-        const text = event.results[0][0].transcript.toLowerCase();
-        document.getElementById("output").innerText = "Hai detto: " + text;
-        handleCommand(text);
-    };
+        recognition.start();
+
+        recognition.onstart = function(){
+            document.getElementById("output").innerText = "🎤 Sto ascoltando...";
+        };
+
+        recognition.onresult = function(event){
+            const text = event.results[0][0].transcript.toLowerCase();
+
+            document.getElementById("output").innerText =
+                "Hai detto: " + text;
+
+            handleCommand(text);
+        };
+
+        recognition.onerror = function(event){
+            console.log("Errore voce:", event.error);
+
+            if(event.error === "not-allowed"){
+                speak("Permesso microfono negato. Attivalo nelle impostazioni.");
+            }
+            else if(event.error === "no-speech"){
+                speak("Non ho sentito nulla, riprova.");
+            }
+            else{
+                speak("Errore microfono. Usa la tastiera.");
+            }
+
+            document.getElementById("output").innerText =
+                "❌ Errore voce";
+        };
+
+    } catch(e){
+        console.log(e);
+        speak("Errore microfono sul dispositivo");
+    }
 }
 
 // ⌨️ TESTO
 function handleText(){
     const text = document.getElementById("textInput").value.toLowerCase();
-    document.getElementById("output").innerText = "Hai scritto: " + text;
+    document.getElementById("output").innerText = text;
     handleCommand(text);
 }
 
-// 🌐 APRI SITO
+// 🌐 SITI
 function openSite(name, url){
     speak("Apro " + name);
     window.open(url, "_blank");
@@ -146,9 +182,8 @@ function openSite(name, url){
 // 🧠 COMANDI
 function handleCommand(text){
 
-    localStorage.setItem("lastCommand", text);
+    lastCommand = text;
 
-    // 🌐 SITI
     if(text.includes("apri google")){
         openSite("Google","https://www.google.com");
     }
@@ -157,114 +192,43 @@ function handleCommand(text){
         openSite("YouTube","https://www.youtube.com");
     }
 
-    else if(text.includes("apri github")){
-        openSite("GitHub","https://github.com");
+    else if(text.includes("musica")){
+        openSite("Musica","https://www.youtube.com/results?search_query=musica");
     }
 
-    else if(text.includes("apri canva")){
-        openSite("Canva","https://www.canva.com");
-    }
-
-    else if(text.includes("apri chatgpt")){
-        openSite("ChatGPT","https://chat.openai.com");
-    }
-
-    else if(text.includes("apri linkedin")){
-        openSite("LinkedIn","https://www.linkedin.com/feed/");
-    }
-
-    else if(text.startsWith("apri ")){
-        let sito = text.replace("apri ","").trim();
-        openSite(sito, "https://www."+sito+".com");
-    }
-
-    // 🔎 RICERCA
-    else if(text.startsWith("cerca ")){
-        let query = text.replace("cerca ","");
-        speak("Cerco " + query);
-        window.open("https://www.google.com/search?q="+query, "_blank");
-    }
-
-    // 🕒 INFO
     else if(text.includes("che ore sono")){
-        speak("Sono le " + new Date().toLocaleTimeString());
+        speak(new Date().toLocaleTimeString());
     }
 
-    else if(text.includes("che giorno è")){
-        speak("Oggi è il " + new Date().toLocaleDateString());
+    else if(text.includes("ciao")){
+        speak(userName ? "Ciao " + userName : "Ciao!");
     }
 
-    // 👤 UTENTE
-    else if(text.startsWith("mi chiamo ")){
+    else if(text.includes("mi chiamo ")){
         userName = text.replace("mi chiamo ","");
         localStorage.setItem("userName", userName);
         speak("Piacere " + userName);
     }
 
-    else if(text.includes("ciao")){
-        speak(userName ? "Ciao " + userName : "Ciao! Sono Oreste AI");
-    }
-
-    // 🤖 INFO
-    else if(text.includes("chi sei")){
-        speak("Sono Oreste AI, il tuo assistente vocale.");
-    }
-
-    else if(text.includes("come stai")){
-        speak("Sto benissimo, grazie!");
-    }
-
-    else if(text.includes("cosa puoi fare")){
-        speak("Posso aprire siti, cercare su internet e parlare con te!");
-    }
-
     else if(text.includes("ripeti")){
-        speak(lastCommand ? "Hai detto: " + lastCommand : "Non ho nulla da ripetere");
+        speak(lastCommand);
     }
 
-    // 😂 DIVERTIMENTO
-    else if(text.includes("scherzo")){
-        speak("Ahah! Sei un programmatore? allora niente bug, solo feature!");
-    }
-
-    else if(text.includes("ridere")){
-        speak("Ahah! Spero di averti fatto sorridere!");
-    }
-
-    // 🎵 MUSICA
-    else if(text.includes("musica rock")){
-        speak("Apro musica rock");
-        window.open("https://www.youtube.com/results?search_query=rock+music","_blank");
-    }
-
-    else if(text.includes("musica rap")){
-        speak("Apro musica rap");
-        window.open("https://www.youtube.com/results?search_query=rap+italiano","_blank");
-    }
-
-    else if(text.includes("musica")){
-        speak("Apro musica su YouTube");
-        window.open("https://www.youtube.com/results?search_query=musica","_blank");
-    }
-
-    // 🌍 INTERNET
-    else if(text.includes("google")){
-        openSite("Google","https://www.google.com");
-    }
-
-    else if(text.includes("youtube")){
-        openSite("YouTube","https://www.youtube.com");
-    }
-
-    // 🧠 DEFAULT
     else{
-        speak("Non ho capito il comando");
+        speak("Non ho capito");
     }
 }
+
 </script>
 
 </body>
 </html>
+
+   
+
+   
+    
+   
 
 
 
