@@ -9,7 +9,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: blue;
+    background:blue;
     color: white;
     text-align: center;
 }
@@ -19,20 +19,37 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px;
 }
 
 .box {
-    background: blue;
+    background:blue;
     padding: 25px;
     border-radius: 20px;
-    width: 100%;
+    width: 90%;
     max-width: 420px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
-h1 {
-    font-size: 26px;
+.mic {
+    font-size:90px;
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+button {
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px;
+    margin-top: 10px;
+    width: 100%;
+    font-size: 16px;
 }
 
 input {
@@ -41,35 +58,6 @@ input {
     margin-top: 10px;
     border-radius: 10px;
     border: none;
-    font-size: 16px;
-}
-
-button {
-    background: red;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    padding: 12px 16px;
-    margin-top: 10px;
-    font-size: 16px;
-    width: 100%;
-}
-
-button:hover {
-    background: darkred;
-}
-
-button:active {
-    background: yellow;
-}
-
-#output {
-    margin-top: 15px;
-    font-size: 16px;
-}
-
-.mic {
-    font-size: 70px;
 }
 </style>
 </head>
@@ -80,7 +68,7 @@ button:active {
 <div class="box">
 
 <h1>🎤 Oreste AI</h1>
-<p>Assistente vocale</p>
+<p>Assistente vocale PRO</p>
 
 <div class="mic">🎤</div>
 
@@ -101,75 +89,63 @@ let lastCommand = "";
 
 // 🔊 VOCE
 function speak(text){
+    window.speechSynthesis.cancel();
     const speech = new SpeechSynthesisUtterance(text);
     speech.lang = "it-IT";
     window.speechSynthesis.speak(speech);
 }
 
-// 🎤 MICROFONO (FIX MOBILE)
+// 📅 DATA FORMAT
+function formatData(d){
+    return d.toLocaleDateString("it-IT", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
+}
+
+// ⏳ PARSING GIORNI
+function parseGiorni(text){
+
+    let match = text.match(/(\d+)\s*(giorno|giorni)/);
+    if(match) return parseInt(match[1]);
+
+    if(text.includes("una settimana")) return 7;
+    if(text.includes("due settimane")) return 14;
+
+    return null;
+}
+
+// 🎤 VOCE
 function startVoice(){
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if(!SpeechRecognition){
-        speak("Il tuo dispositivo non supporta il microfono. Usa la scrittura.");
-        document.getElementById("output").innerText =
-            "❌ Microfono non supportato";
+        speak("Microfono non supportato");
         return;
     }
 
-    try {
-        const recognition = new SpeechRecognition();
+    const recognition = new SpeechRecognition();
+    recognition.lang = "it-IT";
 
-        recognition.lang = "it-IT";
-        recognition.continuous = false;
-        recognition.interimResults = false;
+    recognition.start();
 
-        document.getElementById("output").innerText = "🎤 Parla ora...";
-        speak("Parla ora");
+    recognition.onresult = function(event){
+        const text = event.results[0][0].transcript.toLowerCase();
+        document.getElementById("output").innerText = "Hai detto: " + text;
+        handleCommand(text);
+    };
 
-        recognition.start();
-
-        recognition.onstart = function(){
-            document.getElementById("output").innerText = "🎤 Sto ascoltando...";
-        };
-
-        recognition.onresult = function(event){
-            const text = event.results[0][0].transcript.toLowerCase();
-
-            document.getElementById("output").innerText =
-                "Hai detto: " + text;
-
-            handleCommand(text);
-        };
-
-        recognition.onerror = function(event){
-            console.log("Errore voce:", event.error);
-
-            if(event.error === "not-allowed"){
-                speak("Permesso microfono negato. Attivalo nelle impostazioni.");
-            }
-            else if(event.error === "no-speech"){
-                speak("Non ho sentito nulla, riprova.");
-            }
-            else{
-                speak("Errore microfono. Usa la tastiera.");
-            }
-
-            document.getElementById("output").innerText =
-                "❌ Errore voce";
-        };
-
-    } catch(e){
-        console.log(e);
-        speak("Errore microfono sul dispositivo");
-    }
+    recognition.onerror = function(){
+        speak("Errore microfono");
+    };
 }
 
 // ⌨️ TESTO
 function handleText(){
     const text = document.getElementById("textInput").value.toLowerCase();
-    document.getElementById("output").innerText = text;
     handleCommand(text);
 }
 
@@ -179,89 +155,89 @@ function openSite(name, url){
     window.open(url, "_blank");
 }
 
-// 🧠 COMANDI
+// 🧠 RISPOSTE CASUALI
+function randomReply(){
+    const r = [
+        "Non ho capito",
+        "Puoi ripetere?",
+        "Sto imparando",
+        "Interessante"
+    ];
+    speak(r[Math.floor(Math.random()*r.length)]);
+}
+
+// 🧠 CUORE ORESTE AI
 function handleCommand(text){
 
     lastCommand = text;
 
-    if(text.includes("apri google")){
-        openSite("Google","https://www.google.com");
+    if(text.includes("oreste")){
+        speak("Dimmi");
+        return;
     }
 
-    else if(text.includes("apri youtube")){
-        openSite("YouTube","https://www.youtube.com");
+    if(text.includes("google")) return openSite("Google","https://www.google.com");
+    if(text.includes("youtube")) return openSite("YouTube","https://www.youtube.com");
+    if(text.includes("canva")) return openSite("Canva","https://www.canva.com");
+    if(text.includes("facebook")) return openSite("Facebook","https://www.facebook.com");
+
+    if(text.includes("che ore")){
+        return speak("Sono le " + new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"}));
     }
 
-    else if(text.includes("musica")){
-        openSite("Musica","https://www.youtube.com/results?search_query=musica");
+    if(text.includes("giorno") || text.includes("data")){
+
+        let d = new Date();
+
+        if(text.includes("domani")){
+            d.setDate(d.getDate() + 1);
+            return speak("Domani sarà " + formatData(d));
+        }
+
+        if(text.includes("ieri")){
+            d.setDate(d.getDate() - 1);
+            return speak("Ieri era " + formatData(d));
+        }
+
+        return speak("Oggi è " + formatData(d));
     }
 
-    else if(text.includes("che ore sono")){
-        speak(new Date().toLocaleTimeString());
+    if(text.includes("tra")){
+
+        let giorni = parseGiorni(text);
+
+        if(giorni !== null){
+            let d = new Date();
+            d.setDate(d.getDate() + giorni);
+
+            if(giorni === 1){
+                return speak("Domani sarà " + formatData(d));
+            }
+
+            return speak("Tra " + giorni + " giorni sarà " + formatData(d));
+        }
+
+        return speak("Non ho capito il numero di giorni");
     }
 
-    else if(text.includes("ciao")){
-        speak(userName ? "Ciao " + userName : "Ciao!");
-    }
-
-    else if(text.includes("mi chiamo ")){
+    if(text.includes("mi chiamo")){
         userName = text.replace("mi chiamo ","");
         localStorage.setItem("userName", userName);
-        speak("Piacere " + userName);
+        return speak("Piacere " + userName);
     }
 
-    else if(text.includes("ripeti")){
-        speak(lastCommand);
+    if(text.includes("ciao")){
+        return speak(userName ? "Ciao " + userName : "Ciao!");
     }
 
-    else{
-        speak("Non ho capito");
+    if(text.includes("ripeti")){
+        return speak(lastCommand);
     }
+
+    randomReply();
 }
 
 </script>
 
 </body>
 </html>
-
-   
-
-   
-    
-   
-
-
-
-    
-
-
-    
-
-   
-
-  
-    
-    
-
-    
-   
-
-    
-
-
-
-
- 
-
-   
-
-    
-   
-  
-
-
-    
-   
-   
-     
-   
