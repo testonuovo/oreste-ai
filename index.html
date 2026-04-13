@@ -180,7 +180,13 @@ function handleCommand(text){
     if(text.includes("youtube")) return openSite("YouTube","https://www.youtube.com");
     if(text.includes("canva")) return openSite("Canva","https://www.canva.com");
     if(text.includes("facebook")) return openSite("Facebook","https://www.facebook.com");
-
+    if(text.includes("chatgpt"))  return openSite("chatgpt","https://chatgpt.com/");
+    if(text.includes("linkedin")) return openSite("linkedin","https://www.linkedin.com/feed/");
+    if(text.includes("twitter"))  return openSite("twitter","https://x.com/?lang=it");
+    if(text.inclues("pinterest")) return openSite("pinterest","https://it.pinterest.com/");
+    if(text.includes("instagram")) return openSite("instagram","https://www.instagram.com/");
+    if(text.includes("tik tok")) return openSite("tik tok","https://www.tiktok.com/it-IT/");
+    if(text.includes("reddit")) return openSite("reddit","https://www.reddit.com/");
     if(text.includes("che ore")){
         return speak("Sono le " + new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"}));
     }
