@@ -162,6 +162,7 @@ function handleCommand(text){
         return;
     }
 
+    // 🌐 SITI
     if(text.includes("google")) return openSite("Google","https://www.google.com");
     if(text.includes("youtube")) return openSite("YouTube","https://www.youtube.com");
     if(text.includes("canva")) return openSite("Canva","https://www.canva.com");
@@ -175,25 +176,20 @@ function handleCommand(text){
     if(text.includes("reddit")) return openSite("Reddit","https://www.reddit.com/");
 
     // ⏰ ORARIO
-    if(
-        text.includes("che ore") ||
-        text.includes("che ora") ||
-        text.includes("ore sono") ||
-        text.includes("ora è")
-    ){
+    if(text.includes("ora") || text.includes("ore")){
         const now = new Date();
         const ora = now.getHours().toString().padStart(2,"0");
         const min = now.getMinutes().toString().padStart(2,"0");
-
-        return speak(`Sono le ${ora}:${min}`);
+        return speak("Sono le " + ora + ":" + min);
     }
 
     // 📅 DATA
     if(
-        text.includes("che giorno") ||
-        text.includes("che data") ||
+        text.includes("giorno") ||
+        text.includes("data") ||
         text.includes("oggi") ||
-        text.includes("data")
+        text.includes("domani") ||
+        text.includes("ieri")
     ){
         let d = new Date();
 
@@ -210,23 +206,25 @@ function handleCommand(text){
         return speak("Oggi è " + formatData(d));
     }
 
+    // 👤 NOME
     if(text.includes("mi chiamo")){
         userName = text.replace("mi chiamo ","");
         localStorage.setItem("userName", userName);
         return speak("Piacere " + userName);
     }
 
+    // 👋 SALUTI
     if(text.includes("ciao")){
         return speak(userName ? "Ciao " + userName : "Ciao!");
     }
 
+    // 🔁 RIPETI
     if(text.includes("ripeti")){
         return speak(lastCommand);
     }
 
     randomReply();
 }
-
 </script>
 
 </body>
@@ -236,3 +234,10 @@ function handleCommand(text){
     
  
 
+
+
+
+ 
+
+
+   
