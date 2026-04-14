@@ -9,7 +9,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background:blue;
+    background: blue;
     color: white;
     text-align: center;
 }
@@ -22,7 +22,7 @@ body {
 }
 
 .box {
-    background:blue;
+    background: blue;
     padding: 25px;
     border-radius: 20px;
     width: 90%;
@@ -31,7 +31,7 @@ body {
 }
 
 .mic {
-    font-size:90px;
+    font-size: 90px;
     animation: pulse 1.2s infinite;
 }
 
@@ -95,26 +95,12 @@ function speak(text){
     window.speechSynthesis.speak(speech);
 }
 
-// 📅 DATA FORMAT
+// 📅 DATA FORMAT MIGLIORATA
 function formatData(d){
-    return d.toLocaleDateString("it-IT", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-    });
-}
+    const giorni = ["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"];
+    const mesi = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
 
-// ⏳ PARSING GIORNI
-function parseGiorni(text){
-
-    let match = text.match(/(\d+)\s*(giorno|giorni)/);
-    if(match) return parseInt(match[1]);
-
-    if(text.includes("una settimana")) return 7;
-    if(text.includes("due settimane")) return 14;
-
-    return null;
+    return `${giorni[d.getDay()]} ${d.getDate()} ${mesi[d.getMonth()]} ${d.getFullYear()}`;
 }
 
 // 🎤 VOCE
@@ -133,7 +119,7 @@ function startVoice(){
     recognition.start();
 
     recognition.onresult = function(event){
-        const text = event.results[0][0].transcript.toLowerCase();
+        const text = event.results[0][0].transcript.toLowerCase().trim();
         document.getElementById("output").innerText = "Hai detto: " + text;
         handleCommand(text);
     };
@@ -145,7 +131,7 @@ function startVoice(){
 
 // ⌨️ TESTO
 function handleText(){
-    const text = document.getElementById("textInput").value.toLowerCase();
+    const text = document.getElementById("textInput").value.toLowerCase().trim();
     handleCommand(text);
 }
 
@@ -158,10 +144,10 @@ function openSite(name, url){
 // 🧠 RISPOSTE CASUALI
 function randomReply(){
     const r = [
-        "Non ho capito",
+        "Non ho capito bene",
         "Puoi ripetere?",
-        "Sto imparando",
-        "Interessante"
+        "Sto imparando questo comando",
+        "Non conosco questa richiesta"
     ];
     speak(r[Math.floor(Math.random()*r.length)]);
 }
@@ -180,19 +166,35 @@ function handleCommand(text){
     if(text.includes("youtube")) return openSite("YouTube","https://www.youtube.com");
     if(text.includes("canva")) return openSite("Canva","https://www.canva.com");
     if(text.includes("facebook")) return openSite("Facebook","https://www.facebook.com");
-    if(text.includes("chatgpt"))  return openSite("chatgpt","https://chatgpt.com/");
-    if(text.includes("linkedin")) return openSite("linkedin","https://www.linkedin.com/feed/");
-    if(text.includes("twitter"))  return openSite("twitter","https://x.com/?lang=it");
-    if(text.inclues("pinterest")) return openSite("pinterest","https://it.pinterest.com/");
-    if(text.includes("instagram")) return openSite("instagram","https://www.instagram.com/");
-    if(text.includes("tik tok")) return openSite("tik tok","https://www.tiktok.com/it-IT/");
-    if(text.includes("reddit")) return openSite("reddit","https://www.reddit.com/");
-    if(text.includes("che ore")){
-        return speak("Sono le " + new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"}));
+    if(text.includes("chatgpt")) return openSite("ChatGPT","https://chatgpt.com/");
+    if(text.includes("linkedin")) return openSite("LinkedIn","https://www.linkedin.com/feed/");
+    if(text.includes("twitter")) return openSite("X","https://x.com/?lang=it");
+    if(text.includes("pinterest")) return openSite("Pinterest","https://it.pinterest.com/");
+    if(text.includes("instagram")) return openSite("Instagram","https://www.instagram.com/");
+    if(text.includes("tiktok") || text.includes("tik tok")) return openSite("TikTok","https://www.tiktok.com/it-IT/");
+    if(text.includes("reddit")) return openSite("Reddit","https://www.reddit.com/");
+
+    // ⏰ ORARIO
+    if(
+        text.includes("che ore") ||
+        text.includes("che ora") ||
+        text.includes("ore sono") ||
+        text.includes("ora è")
+    ){
+        const now = new Date();
+        const ora = now.getHours().toString().padStart(2,"0");
+        const min = now.getMinutes().toString().padStart(2,"0");
+
+        return speak(`Sono le ${ora}:${min}`);
     }
 
-    if(text.includes("giorno") || text.includes("data")){
-
+    // 📅 DATA
+    if(
+        text.includes("che giorno") ||
+        text.includes("che data") ||
+        text.includes("oggi") ||
+        text.includes("data")
+    ){
         let d = new Date();
 
         if(text.includes("domani")){
@@ -206,24 +208,6 @@ function handleCommand(text){
         }
 
         return speak("Oggi è " + formatData(d));
-    }
-
-    if(text.includes("tra")){
-
-        let giorni = parseGiorni(text);
-
-        if(giorni !== null){
-            let d = new Date();
-            d.setDate(d.getDate() + giorni);
-
-            if(giorni === 1){
-                return speak("Domani sarà " + formatData(d));
-            }
-
-            return speak("Tra " + giorni + " giorni sarà " + formatData(d));
-        }
-
-        return speak("Non ho capito il numero di giorni");
     }
 
     if(text.includes("mi chiamo")){
@@ -247,9 +231,3 @@ function handleCommand(text){
 
 </body>
 </html>
-    
-    
-    
-
-    
-      
