@@ -95,17 +95,15 @@ function speak(text){
     window.speechSynthesis.speak(speech);
 }
 
-// 📅 DATA FORMAT MIGLIORATA
+// 📅 DATA
 function formatData(d){
     const giorni = ["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"];
     const mesi = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
-
     return `${giorni[d.getDay()]} ${d.getDate()} ${mesi[d.getMonth()]} ${d.getFullYear()}`;
 }
 
 // 🎤 VOCE
 function startVoice(){
-
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if(!SpeechRecognition){
@@ -141,7 +139,7 @@ function openSite(name, url){
     window.open(url, "_blank");
 }
 
-// 🧠 RISPOSTE CASUALI
+// 🧠 RISPOSTE
 function randomReply(){
     const r = [
         "Non ho capito bene",
@@ -152,7 +150,56 @@ function randomReply(){
     speak(r[Math.floor(Math.random()*r.length)]);
 }
 
-// 🧠 CUORE ORESTE AI
+// 🌦️ METEO CITTÀ
+async function getWeather(city = "Napoli"){
+    try{
+        speak("Controllo il meteo di " + city);
+
+        const url = `https://wttr.in/${city}?format=3`;
+        const response = await fetch(url);
+        const data = await response.text();
+
+        document.getElementById("output").innerText = data;
+        speak(data);
+
+    } catch(e){
+        speak("Errore nel meteo");
+    }
+}
+
+// 📍 METEO GPS
+function getWeatherByLocation(){
+
+    if(!navigator.geolocation){
+        speak("Geolocalizzazione non supportata");
+        return;
+    }
+
+    speak("Controllo la tua posizione");
+
+    navigator.geolocation.getCurrentPosition(async function(position){
+
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        try{
+            const url = `https://wttr.in/${lat},${lon}?format=3`;
+            const response = await fetch(url);
+            const data = await response.text();
+
+            document.getElementById("output").innerText = data;
+            speak("Ecco il meteo: " + data);
+
+        } catch(e){
+            speak("Errore nel meteo");
+        }
+
+    }, function(){
+        speak("Permesso posizione negato");
+    });
+}
+
+// 🧠 CORE
 function handleCommand(text){
 
     lastCommand = text;
@@ -174,6 +221,15 @@ function handleCommand(text){
     if(text.includes("instagram")) return openSite("Instagram","https://www.instagram.com/");
     if(text.includes("tiktok") || text.includes("tik tok")) return openSite("TikTok","https://www.tiktok.com/it-IT/");
     if(text.includes("reddit")) return openSite("Reddit","https://www.reddit.com/");
+
+    // 🌐 SITI TUOI
+    if(text.includes("amnesty international") || text.includes("amnesty")){
+        return openSite("Amnesty International","https://iostoconamnesty.altervista.org");
+    }
+
+    if(text.includes("non ti arrendere") || text.includes("nontiarrendere")){
+        return openSite("Non Ti Arrendere","https://nontiarrendere.altervista.org");
+    }
 
     // ⏰ ORARIO
     if(text.includes("ora") || text.includes("ore")){
@@ -206,6 +262,23 @@ function handleCommand(text){
         return speak("Oggi è " + formatData(d));
     }
 
+    // 🌤️ METEO DOMANI (PRIMA!)
+    if(text.includes("domani") && (text.includes("meteo") || text.includes("tempo"))){
+        return openSite("Meteo Domani",
+        "https://www.google.com/search?q=meteo+domani");
+    }
+
+    // 🌍 METEO CITTÀ
+    if(text.includes("meteo a") || text.includes("tempo a")){
+        let city = text.replace("meteo a","").replace("tempo a","").trim();
+        return getWeather(city || "Napoli");
+    }
+
+    // 📍 METEO AUTOMATICO
+    if(text.includes("meteo") || text.includes("tempo")){
+        return getWeatherByLocation();
+    }
+
     // 👤 NOME
     if(text.includes("mi chiamo")){
         userName = text.replace("mi chiamo ","");
@@ -213,7 +286,7 @@ function handleCommand(text){
         return speak("Piacere " + userName);
     }
 
-    // 👋 SALUTI
+    // 👋 SALUTO
     if(text.includes("ciao")){
         return speak(userName ? "Ciao " + userName : "Ciao!");
     }
@@ -225,14 +298,17 @@ function handleCommand(text){
 
     randomReply();
 }
+
 </script>
 
 </body>
 </html>
-    
+
    
     
- 
+
+   
+    
 
 
 
