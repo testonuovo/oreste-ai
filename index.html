@@ -133,10 +133,44 @@ function handleText(){
     handleCommand(text);
 }
 
-// 🌐 SITI
+// 🌐 APRI SITO
 function openSite(name, url){
     speak("Apro " + name);
     window.open(url, "_blank");
+}
+
+// 🌐 MAPPA SITI (COMPLETA)
+const sites = {
+    "google": "https://www.google.com",
+    "youtube": "https://www.youtube.com",
+    "canva": "https://www.canva.com",
+    "facebook": "https://www.facebook.com",
+    "chatgpt": "https://chatgpt.com/",
+    "linkedin": "https://www.linkedin.com/feed/",
+    "twitter": "https://x.com/?lang=it",
+    "pinterest": "https://it.pinterest.com/",
+    "instagram": "https://www.instagram.com/",
+    "tiktok": "https://www.tiktok.com/it-IT/",
+    "reddit": "https://www.reddit.com/",
+
+    // 🌟 tuoi siti
+    "amnesty": "https://iostoconamnesty.altervista.org",
+    "amnesty international": "https://iostoconamnesty.altervista.org",
+    "non ti arrendere": "https://nontiarrendere.altervista.org",
+    "nontiarrendere": "https://nontiarrendere.altervista.org",
+    "solo con dio": "https://solocondio.altervista.org",
+    "la vita in viaggio": "https://lavitainviaggio.altervista.org/"
+};
+
+// 🔍 CONTROLLO SITI
+function checkSites(text){
+    for(let key in sites){
+        if(text.includes(key)){
+            openSite(key, sites[key]);
+            return true;
+        }
+    }
+    return false;
 }
 
 // 🧠 RISPOSTE
@@ -150,7 +184,7 @@ function randomReply(){
     speak(r[Math.floor(Math.random()*r.length)]);
 }
 
-// 🌦️ METEO CITTÀ
+// 🌦️ METEO
 async function getWeather(city = "Napoli"){
     try{
         speak("Controllo il meteo di " + city);
@@ -209,72 +243,38 @@ function handleCommand(text){
         return;
     }
 
-    // 🌐 SITI
-    if(text.includes("google")) return openSite("Google","https://www.google.com");
-    if(text.includes("youtube")) return openSite("YouTube","https://www.youtube.com");
-    if(text.includes("canva")) return openSite("Canva","https://www.canva.com");
-    if(text.includes("facebook")) return openSite("Facebook","https://www.facebook.com");
-    if(text.includes("chatgpt")) return openSite("ChatGPT","https://chatgpt.com/");
-    if(text.includes("linkedin")) return openSite("LinkedIn","https://www.linkedin.com/feed/");
-    if(text.includes("twitter")) return openSite("X","https://x.com/?lang=it");
-    if(text.includes("pinterest")) return openSite("Pinterest","https://it.pinterest.com/");
-    if(text.includes("instagram")) return openSite("Instagram","https://www.instagram.com/");
-    if(text.includes("tiktok") || text.includes("tik tok")) return openSite("TikTok","https://www.tiktok.com/it-IT/");
-    if(text.includes("reddit")) return openSite("Reddit","https://www.reddit.com/");
+    // 🌐 SITI INTELLIGENTI
+    if(checkSites(text)) return;
 
-    // 🌐 SITI TUOI
-    if(text.includes("amnesty international") || text.includes("amnesty")){
-        return openSite("Amnesty International","https://iostoconamnesty.altervista.org");
-    }
-
-    if(text.includes("non ti arrendere") || text.includes("nontiarrendere")){
-        return openSite("Non Ti Arrendere","https://nontiarrendere.altervista.org");
-    }
-
-    // ⏰ ORARIO
+    // ⏰ ORA
     if(text.includes("ora") || text.includes("ore")){
         const now = new Date();
-        const ora = now.getHours().toString().padStart(2,"0");
-        const min = now.getMinutes().toString().padStart(2,"0");
-        return speak("Sono le " + ora + ":" + min);
+        return speak("Sono le " + now.getHours().toString().padStart(2,"0") + ":" + now.getMinutes().toString().padStart(2,"0"));
     }
 
     // 📅 DATA
-    if(
-        text.includes("giorno") ||
-        text.includes("data") ||
-        text.includes("oggi") ||
-        text.includes("domani") ||
-        text.includes("ieri")
-    ){
+    if(text.includes("giorno") || text.includes("data") || text.includes("oggi")){
+        return speak("Oggi è " + formatData(new Date()));
+    }
+
+    if(text.includes("domani")){
         let d = new Date();
-
-        if(text.includes("domani")){
-            d.setDate(d.getDate() + 1);
-            return speak("Domani sarà " + formatData(d));
-        }
-
-        if(text.includes("ieri")){
-            d.setDate(d.getDate() - 1);
-            return speak("Ieri era " + formatData(d));
-        }
-
-        return speak("Oggi è " + formatData(d));
+        d.setDate(d.getDate() + 1);
+        return speak("Domani sarà " + formatData(d));
     }
 
-    // 🌤️ METEO DOMANI (PRIMA!)
-    if(text.includes("domani") && (text.includes("meteo") || text.includes("tempo"))){
-        return openSite("Meteo Domani",
-        "https://www.google.com/search?q=meteo+domani");
+    if(text.includes("ieri")){
+        let d = new Date();
+        d.setDate(d.getDate() - 1);
+        return speak("Ieri era " + formatData(d));
     }
 
-    // 🌍 METEO CITTÀ
+    // 🌤️ METEO
     if(text.includes("meteo a") || text.includes("tempo a")){
         let city = text.replace("meteo a","").replace("tempo a","").trim();
         return getWeather(city || "Napoli");
     }
 
-    // 📍 METEO AUTOMATICO
     if(text.includes("meteo") || text.includes("tempo")){
         return getWeatherByLocation();
     }
@@ -295,7 +295,22 @@ function handleCommand(text){
     if(text.includes("ripeti")){
         return speak(lastCommand);
     }
+if(text.startsWith("apri ")){
 
+    let query = text.replace("apri ", "").trim();
+
+    // pulizia frase
+    query = query.replace("il sito di ", "")
+                 .replace("il sito ", "")
+                 .replace("sito ", "");
+
+    let url = "https://www.google.com/search?q=" + encodeURIComponent(query);
+
+    speak("Cerco " + query + " su Google");
+    window.open(url, "_blank");
+
+    return;
+}
     randomReply();
 }
 
@@ -303,11 +318,13 @@ function handleCommand(text){
 
 </body>
 </html>
-
-    
-
+  
 
 
+
+  
+
+  
 
  
    
