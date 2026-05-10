@@ -1,317 +1,539 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oreste AI</title>
+
+<title>Oreste AI-Assistente vocale online gratis</title>
+
+<meta name="description" content="Oreste AI è un assistente vocale italiano che funziona direttamente nel browser.">
+<meta name="keywords" content="Oreste AI, assistente vocale, AI italiano, comando vocale, apri siti">
+
+<meta name="robots" content="index, follow">
+
+<meta name="google-site-verification" content="BGQlo83DUVg9LLOEFBpw7DStOr1fKiH_aLg5IsF2HeA" />
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNY7SHD1NT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NNY7SHD1NT');
+</script>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: blue;
-    color: white;
-    text-align: center;
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:blue;
+    color:white;
+    text-align:center;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+/* MENU */
+nav{
+    background:#111;
+    padding:15px;
 }
 
-.box {
-    background: blue;
-    padding: 25px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 420px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+nav a{
+    color:yellow;
+    margin:10px;
+    text-decoration:none;
+    cursor:pointer;
+    font-size:18px;
 }
 
-.mic {
-    font-size: 90px;
-    animation: pulse 1.2s infinite;
+/* PAGINE */
+.page{
+    display:none;
+    padding:20px;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+.active{
+    display:block;
 }
 
-button {
-    background: red;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    padding: 12px;
-    margin-top: 10px;
-    width: 100%;
-    font-size: 16px;
+/* BOX */
+.box{
+    margin-top:20px;
+    padding:20px;
+    background:rgba(255,255,255,0.1);
+    border-radius:15px;
 }
 
-input {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border-radius: 10px;
-    border: none;
+/* BOTTONI */
+button{
+    padding:15px;
+    margin:10px;
+    border:none;
+    border-radius:15px;
+    background:red;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
 }
+
+button:hover{
+    background:yellow;
+    color:black;
+}
+
+/* INPUT */
+#textInput{
+    padding:15px;
+    width:60%;
+    border:none;
+    border-radius:15px;
+    margin-top:10px;
+    font-size:16px;
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div class="container">
-<div class="box">
+<!-- MENU -->
+<nav>
+
+<a onclick="showPage('home')">Home</a>
+
+<a onclick="showPage('assistant')">Assistente</a>
+
+<a onclick="showPage('about')">Chi siamo</a>
+
+<a onclick="showPage('funzioni')">Funzioni</a>
+
+<a onclick="showPage('contatti')">Contatti</a>
+
+<a onclick="showPage('blog')">Blog</a>
+
+</nav>
+
+<!-- HOME -->
+<div id="home" class="page active">
 
 <h1>🎤 Oreste AI</h1>
-<p>Assistente vocale PRO</p>
 
-<div class="mic">🎤</div>
+<p>Assistente vocale italiano intelligente</p>
 
-<button onclick="startVoice()">Parla</button>
+<button onclick="showPage('assistant')">
+Avvia Assistente
+</button>
 
-<input type="text" id="textInput" placeholder="Scrivi un comando...">
-<button onclick="handleText()">Invia</button>
+<div class="box">
+
+<p id="time"></p>
+
+<p id="date"></p>
+
+<p id="weather">
+🌤 Meteo: disponibile
+</p>
+
+</div>
+
+</div>
+
+<!-- ASSISTENTE -->
+<div id="assistant" class="page">
+
+<h1>🎤 Oreste AI</h1>
+
+<button onclick="startVoice()">
+🎤 Parla
+</button>
+
+<br>
+
+<input
+id="textInput"
+placeholder="Scrivi un comando..."
+>
+
+<button onclick="handleText()">
+Invia
+</button>
 
 <p id="output"></p>
 
+<button onclick="showPage('home')">
+⬅ Torna Home
+</button>
+
 </div>
+
+<!-- ABOUT -->
+<div id="about" class="page">
+
+<h2>Chi siamo</h2>
+
+<p>
+Oreste AI è un assistente vocale creato con HTML,
+CSS e JavaScript.
+</p>
+
+<p>
+Funziona direttamente nel browser senza installazione.
+</p>
+
 </div>
+
+<!-- FUNZIONI -->
+<div id="funzioni" class="page">
+
+<h2>Funzioni</h2>
+
+<p>
+✔ Comandi vocali<br>
+✔ Apertura siti<br>
+✔ Ricerca Google<br>
+✔ Ora e data<br>
+✔ Assistente browser based
+</p>
+
+</div>
+
+<!-- CONTATTI -->
+<div id="contatti" class="page">
+
+<h2>Contatti</h2>
+
+<p>
+Email: orestedechiara89@gmail.com
+</p>
+
+</div>
+<!-- BLOG -->
+<div id="blog" class="page">
+<h1>Cos’è un assistente vocale web</h1>
+<br>
+<p>
+Un assistente vocale web è un software che funziona direttamente nel browser e permette di interagire con la voce.
+</p>
+
+<p>
+A differenza delle app tradizionali, non richiede installazione e usa le API del browser.
+</p>
+<br>
+<h1>Web Speech API</h1>
+<br>
+<p>
+La Web Speech API permette ai browser di riconoscere e generare voce.
+</p>
+
+<p>
+È composta da due parti:
+- SpeechRecognition
+- SpeechSynthesis
+</p>
+<br>
+<h1>Assistenti vocali: browser vs app</h1>
+<br>
+<h2>Browser</h2>
+<p>
+Non richiede installazione, funziona subito e usa Web API.
+</p>
+
+<h2>App</h2>
+<p>
+Più potenti ma richiedono installazione e permessi.
+</p>
+<br>
+<h1>Assistenti vocali: browser vs app</h1>
+
+<h2>Browser</h2>
+<p>
+Non richiede installazione, funziona subito e usa Web API.
+</p>
+
+<h2>App</h2>
+<p>
+Più potenti ma richiedono installazione e permessi.
+</p>
 
 <script>
 
-let userName = localStorage.getItem("userName") || "";
-let lastCommand = "";
+/* MENU */
+function showPage(page){
 
-// 🔊 VOCE
+    document.querySelectorAll(".page").forEach(p=>{
+
+        p.classList.remove("active");
+
+    });
+
+    document.getElementById(page)
+    .classList.add("active");
+}
+
+/* ORA E DATA */
+function updateTime(){
+
+    let now = new Date();
+
+    document.getElementById("time").innerText =
+
+    "🕒 Ora: " +
+
+    now.toLocaleTimeString("it-IT");
+
+    document.getElementById("date").innerText =
+
+    "📅 Data: " +
+
+    now.toLocaleDateString("it-IT");
+}
+
+setInterval(updateTime,1000);
+
+updateTime();
+
+/* VOCE */
 function speak(text){
+
     window.speechSynthesis.cancel();
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = "it-IT";
-    window.speechSynthesis.speak(speech);
+
+    let msg =
+    new SpeechSynthesisUtterance(text);
+
+    msg.lang = "it-IT";
+
+    msg.rate = 1;
+
+    msg.pitch = 1;
+
+    window.speechSynthesis.speak(msg);
 }
 
-// 📅 DATA
-function formatData(d){
-    const giorni = ["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"];
-    const mesi = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
-    return `${giorni[d.getDay()]} ${d.getDate()} ${mesi[d.getMonth()]} ${d.getFullYear()}`;
-}
-
-// 🎤 VOCE
-function startVoice(){
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    if(!SpeechRecognition){
-        speak("Microfono non supportato");
-        return;
-    }
-
-    const recognition = new SpeechRecognition();
-    recognition.lang = "it-IT";
-
-    recognition.start();
-
-    recognition.onresult = function(event){
-        const text = event.results[0][0].transcript.toLowerCase().trim();
-        document.getElementById("output").innerText = "Hai detto: " + text;
-        handleCommand(text);
-    };
-
-    recognition.onerror = function(){
-        speak("Errore microfono");
-    };
-}
-
-// ⌨️ TESTO
-function handleText(){
-    const text = document.getElementById("textInput").value.toLowerCase().trim();
-    handleCommand(text);
-}
-
-// 🌐 APRI SITO
-function openSite(name, url){
-    speak("Apro " + name);
-    window.open(url, "_blank");
-}
-
-// 🌐 MAPPA SITI (COMPLETA)
+/* SITI */
 const sites = {
-    "google": "https://www.google.com",
-    "youtube": "https://www.youtube.com",
-    "canva": "https://www.canva.com",
-    "facebook": "https://www.facebook.com",
-    "chatgpt": "https://chatgpt.com/",
-    "linkedin": "https://www.linkedin.com/feed/",
-    "twitter": "https://x.com/?lang=it",
-    "pinterest": "https://it.pinterest.com/",
-    "instagram": "https://www.instagram.com/",
-    "tiktok": "https://www.tiktok.com/it-IT/",
-    "reddit": "https://www.reddit.com/",
 
-    // 🌟 tuoi siti
-    "amnesty": "https://iostoconamnesty.altervista.org",
-    "amnesty international": "https://iostoconamnesty.altervista.org",
-    "non ti arrendere": "https://nontiarrendere.altervista.org",
-    "nontiarrendere": "https://nontiarrendere.altervista.org",
-    "solo con dio": "https://solocondio.altervista.org",
-    "la vita in viaggio": "https://lavitainviaggio.altervista.org/"
+    "google":"https://www.google.com",
+
+    "youtube":"https://www.youtube.com",
+
+    "facebook":"https://www.facebook.com",
+
+    "instagram":"https://www.instagram.com",
+
+    "canva":"https://www.canva.com",
+
+    "linkedin":"https://www.linkedin.com",
+
+    "tiktok":"https://www.tiktok.com",
+
+    "gmail":"https://mail.google.com"
+
 };
 
-// 🔍 CONTROLLO SITI
-function checkSites(text){
+/* APRI SITO */
+function openSite(text){
+
+    text = text.toLowerCase().trim();
+
     for(let key in sites){
+
         if(text.includes(key)){
-            openSite(key, sites[key]);
+
+            window.open(
+                sites[key],
+                "_blank"
+            );
+
             return true;
         }
     }
+
+    /* URL DIRETTO */
+
+    if(text.includes(".")){
+
+        let url =
+
+        text.startsWith("http")
+
+        ? text
+
+        : "https://" + text;
+
+        window.open(url,"_blank");
+
+        return true;
+    }
+
     return false;
 }
 
-// 🧠 RISPOSTE
-function randomReply(){
-    const r = [
-        "Non ho capito bene",
-        "Puoi ripetere?",
-        "Sto imparando questo comando",
-        "Non conosco questa richiesta"
-    ];
-    speak(r[Math.floor(Math.random()*r.length)]);
-}
+/* MICROFONO */
+function startVoice(){
 
-// 🌦️ METEO
-async function getWeather(city = "Napoli"){
-    try{
-        speak("Controllo il meteo di " + city);
+    const SR =
 
-        const url = `https://wttr.in/${city}?format=3`;
-        const response = await fetch(url);
-        const data = await response.text();
+    window.SpeechRecognition ||
 
-        document.getElementById("output").innerText = data;
-        speak(data);
+    window.webkitSpeechRecognition;
 
-    } catch(e){
-        speak("Errore nel meteo");
-    }
-}
+    if(!SR){
 
-// 📍 METEO GPS
-function getWeatherByLocation(){
+        alert("Microfono non supportato");
 
-    if(!navigator.geolocation){
-        speak("Geolocalizzazione non supportata");
         return;
     }
 
-    speak("Controllo la tua posizione");
+    let rec = new SR();
 
-    navigator.geolocation.getCurrentPosition(async function(position){
+    rec.lang = "it-IT";
 
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
+    rec.start();
 
-        try{
-            const url = `https://wttr.in/${lat},${lon}?format=3`;
-            const response = await fetch(url);
-            const data = await response.text();
+    rec.onresult = (e)=>{
 
-            document.getElementById("output").innerText = data;
-            speak("Ecco il meteo: " + data);
+        let text =
 
-        } catch(e){
-            speak("Errore nel meteo");
-        }
+        e.results[0][0].transcript;
 
-    }, function(){
-        speak("Permesso posizione negato");
-    });
+        document.getElementById("output")
+        .innerText = text;
+
+        handleCommand(text);
+    };
 }
 
-// 🧠 CORE
+/* INPUT TESTO */
+function handleText(){
+
+    let text =
+
+    document.getElementById("textInput")
+    .value;
+
+    document.getElementById("output")
+    .innerText = text;
+
+    handleCommand(text);
+}
+
+/* AI */
 function handleCommand(text){
 
-    lastCommand = text;
+    text = text.toLowerCase().trim();
 
-    if(text.includes("oreste")){
-        speak("Dimmi");
+    const now = new Date();
+
+    /* CIAO */
+
+    if(text.includes("ciao")){
+
+        speak("Ciao! Sono Oreste AI");
+
         return;
     }
 
-    // 🌐 SITI INTELLIGENTI
-    if(checkSites(text)) return;
+    /* ORA */
 
-    // ⏰ ORA
-    if(text.includes("ora") || text.includes("ore")){
-        const now = new Date();
-        return speak("Sono le " + now.getHours().toString().padStart(2,"0") + ":" + now.getMinutes().toString().padStart(2,"0"));
+    if(text.includes("ora")){
+
+        speak(
+
+        "Sono le " +
+
+        now.toLocaleTimeString("it-IT")
+
+        );
+
+        return;
     }
 
-    // 📅 DATA
-    if(text.includes("giorno") || text.includes("data") || text.includes("oggi")){
-        return speak("Oggi è " + formatData(new Date()));
+    /* DATA */
+
+    if(text.includes("data")){
+
+        speak(
+
+        "Oggi è " +
+
+        now.toLocaleDateString("it-IT")
+
+        );
+
+        return;
     }
 
-    if(text.includes("domani")){
-        let d = new Date();
-        d.setDate(d.getDate() + 1);
-        return speak("Domani sarà " + formatData(d));
+    /* METEO */
+
+    if(text.includes("meteo")){
+
+        speak("Il meteo è disponibile");
+
+        return;
     }
 
-    if(text.includes("ieri")){
-        let d = new Date();
-        d.setDate(d.getDate() - 1);
-        return speak("Ieri era " + formatData(d));
+    /* APRI */
+
+    if(text.startsWith("apri ")){
+
+        let q =
+
+        text.replace("apri ","");
+
+        if(openSite(q)){
+
+            speak("Apro " + q);
+
+        }else{
+
+            speak(
+
+            "Cerco " + q + " su Google"
+
+            );
+
+            window.open(
+
+            "https://www.google.com/search?q="
+
+            + q,
+
+            "_blank"
+
+            );
+        }
+
+        return;
     }
 
-    // 🌤️ METEO
-    if(text.includes("meteo a") || text.includes("tempo a")){
-        let city = text.replace("meteo a","").replace("tempo a","").trim();
-        return getWeather(city || "Napoli");
+    /* CERCA */
+
+    if(text.startsWith("cerca ")){
+
+        let q =
+
+        text.replace("cerca ","");
+
+        speak("Cerco " + q);
+
+        window.open(
+
+        "https://www.google.com/search?q="
+
+        + q,
+
+        "_blank"
+
+        );
+
+        return;
     }
 
-    if(text.includes("meteo") || text.includes("tempo")){
-        return getWeatherByLocation();
-    }
+    /* FALLBACK */
 
-    // 👤 NOME
-    if(text.includes("mi chiamo")){
-        userName = text.replace("mi chiamo ","");
-        localStorage.setItem("userName", userName);
-        return speak("Piacere " + userName);
-    }
-
-    // 👋 SALUTO
-    if(text.includes("ciao")){
-        return speak(userName ? "Ciao " + userName : "Ciao!");
-    }
-
-    // 🔁 RIPETI
-    if(text.includes("ripeti")){
-        return speak(lastCommand);
-    }
-if(text.startsWith("apri ")){
-
-    let query = text.replace("apri ", "").trim();
-
-    // pulizia frase
-    query = query.replace("il sito di ", "")
-                 .replace("il sito ", "")
-                 .replace("sito ", "");
-
-    let url = "https://www.google.com/search?q=" + encodeURIComponent(query);
-
-    speak("Cerco " + query + " su Google");
-    window.open(url, "_blank");
-
-    return;
-}
-    randomReply();
+    speak("Non ho capito il comando");
 }
 
 </script>
