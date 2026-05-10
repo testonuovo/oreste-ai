@@ -1,76 +1,59 @@
-# 🎤 Oreste AI
+🎤 Oreste AI
+Oreste AI è un assistente vocale italiano che funziona direttamente nel browser, senza installazione e senza backend.
+Sfrutta le moderne Web API per riconoscere la voce e rispondere in tempo reale.
 
-Oreste AI è un assistente vocale online sviluppato in HTML, CSS e JavaScript.
+🚀 Demo Live
+👉 https://aesthetic-brioche-05a3b7.netlify.app/
 
-Permette di interagire tramite voce o tastiera per eseguire comandi, aprire siti web e ricevere risposte vocali.
+✨ Features
+🎤 Riconoscimento vocale in italiano
+🔊 Sintesi vocale naturale
+🌐 Apertura siti web tramite comandi vocali
+🔎 Ricerca automatica su Google
+🕒 Ora e data in tempo reale
+⚡ Funziona completamente nel browser
+📱 Interfaccia semplice e responsive
+🧠 Come funziona
+Oreste AI utilizza:
 
----
+SpeechRecognition → per ascoltare la voce dell’utente
+SpeechSynthesis → per rispondere vocalmente
+JavaScript vanilla → per la logica dell’assistente
+Tutto gira direttamente nel browser, senza server.
 
-## 🚀 Demo
+💡 Esempi di comandi
+“apri YouTube”
+“apri Google”
+“cerca pizza vicino a me”
+“che ore sono”
+“che giorno è oggi”
+“apri Instagram”
+⚙️ Tech Stack
+HTML5
+CSS3
+JavaScript (Vanilla)
+Web Speech API
+🎯 Obiettivo
+Creare un assistente vocale leggero, veloce e accessibile a tutti, direttamente dal browser, senza installazioni o app esterne.
 
-👉 https://testonuovo.github.io/oreste-ai/
+📸 Screenshot
+(aggiungi qui uno screenshot del progetto)
 
----
+🔮 Roadmap
+ Modalità ascolto continuo
+ Miglioramento AI dei comandi
+ Risposte più naturali
+ Supporto mobile avanzato
+ Integrazione meteo reale
+ Memoria conversazionale
+🤝 Contribuire
+Pull request e idee sono benvenute 🚀
+Se vuoi migliorare Oreste AI, sentiti libero di contribuire.
 
-## ✨ Funzionalità
+📄 Licenza
+Questo progetto è open-source e libero per uso educativo e personale.
 
-- 🎤 Riconoscimento vocale
-- ⌨️ Comandi da tastiera
-- 🌐 Apertura siti web (Google, YouTube, Canva, GitHub, ecc.)
-- 🔍 Ricerca su Google
-- ⏰ Ora corrente
-- 📅 Data corrente
-- 🧮 Calcoli semplici
-- 🔊 Risposte vocali
+👨‍💻 Creatore
+Oreste Team
+Sviluppato con passione per l’innovazione nel web voice AI.
 
----
-
-## 💡 Esempi di comandi
-
-- apri google  
-- apri youtube  
-- apri canva  
-- apri github  
-- cerca pizza  
-- che ore sono  
-- che giorno è  
-- calcola 5+5  
-
----
-
-## 🛠️ Tecnologie
-
-- HTML5  
-- CSS3  
-- JavaScript  
-- Web Speech API  
-
----
-
-## 📦 Installazione
-
-1. Clona il repository:
-
-git clone https://github.com/testonuovo/oreste-ai.git
-
-2. Apri il file `index.html` nel browser.
-
----
-
-## 📱 Compatibilità
-
-- ✔ PC (Chrome, Edge)
-- ✔ Android (Chrome)
-- ⚠️ iPhone (supporto limitato per il microfono)
-
----
-
-## ⚠️ Note
-
-- Il microfono deve essere abilitato
-- Funziona meglio su Google Chrome
-- Alcuni browser non supportano il riconoscimento vocale
-
----
-
-## 👨‍💻 Autore Oreste De Chiara
