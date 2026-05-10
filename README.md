@@ -1,4 +1,5 @@
 🎤 Oreste AI
+
 Oreste AI è un assistente vocale italiano che funziona direttamente nel browser, senza installazione e senza backend.
 Sfrutta le moderne Web API per riconoscere la voce e rispondere in tempo reale.
 
