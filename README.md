@@ -4,7 +4,7 @@ Oreste AI è un assistente vocale italiano che funziona direttamente nel browser
 Sfrutta le moderne Web API per riconoscere la voce e rispondere in tempo reale.
 
 🚀 Demo Live
-👉 https://delicate-brigadeiros-8dd823.netlify.app/
+👉https://sunny-liger-d42219.netlify.app/
 ✨ Features
 🎤 Riconoscimento vocale in italiano
 🔊 Sintesi vocale naturale
