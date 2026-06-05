@@ -6,3 +6,23 @@
     <priority>1.0</priority>
     <changefreq>daily</changefreq>
   </url>
+
+  <url>
+    <loc>https://testonuovo.github.io/oreste-ai/assistente.html</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://testonuovo.github.io/oreste-ai/download.html</loc>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://testonuovo.github.io/oreste-ai/blog.html</loc>
+    <priority>0.8</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+</urlset>
