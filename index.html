@@ -1,539 +1,145 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Oreste AI-Assistente vocale online gratis</title>
+<title>Oreste AI - Assistente Vocale Italiano</title>
 
-<meta name="description" content="Oreste AI è un assistente vocale italiano che funziona direttamente nel browser.">
-<meta name="keywords" content="Oreste AI, assistente vocale, AI italiano, comando vocale, apri siti">
-
-<meta name="robots" content="index, follow">
-
-<meta name="google-site-verification" content="BGQlo83DUVg9LLOEFBpw7DStOr1fKiH_aLg5IsF2HeA" />
-
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNY7SHD1NT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-NNY7SHD1NT');
-</script>
+<meta name="description" content="Oreste AI è un assistente vocale italiano per controllare il web con la voce.">
 
 <style>
-
 body{
-    margin:0;
-    font-family:Arial;
-    background:blue;
-    color:white;
-    text-align:center;
+background:blue;
+font-family:Arial;
+text-align:center;
+color:white;
 }
 
-/* MENU */
-nav{
-    background:#111;
-    padding:15px;
-}
-
-nav a{
-    color:yellow;
-    margin:10px;
-    text-decoration:none;
-    cursor:pointer;
-    font-size:18px;
-}
-
-/* PAGINE */
-.page{
-    display:none;
-    padding:20px;
-}
-
-.active{
-    display:block;
-}
-
-/* BOX */
-.box{
-    margin-top:20px;
-    padding:20px;
-    background:rgba(255,255,255,0.1);
-    border-radius:15px;
-}
-
-/* BOTTONI */
 button{
-    padding:15px;
-    margin:10px;
-    border:none;
-    border-radius:15px;
-    background:red;
-    color:white;
-    cursor:pointer;
-    font-size:16px;
+background:red;
+color:white;
+border-radius:19px;
+padding:10px;
+border:none;
+margin:5px;
+cursor:pointer;
 }
 
-button:hover{
-    background:yellow;
-    color:black;
+a{
+text-decoration:none;
+color:red;
+margin:10px;
+display:inline-block;
 }
 
-/* INPUT */
-#textInput{
-    padding:15px;
-    width:60%;
-    border:none;
-    border-radius:15px;
-    margin-top:10px;
-    font-size:16px;
+.card{
+margin-top:20px;
 }
-
 </style>
 
 </head>
 
 <body>
 
-<!-- MENU -->
+<h1>🎤 Assistente vocale Oreste AI</h1>
+
 <nav>
-
-<a onclick="showPage('home')">Home</a>
-
-<a onclick="showPage('assistant')">Assistente</a>
-
-<a onclick="showPage('about')">Chi siamo</a>
-
-<a onclick="showPage('funzioni')">Funzioni</a>
-
-<a onclick="showPage('contatti')">Contatti</a>
-
-<a onclick="showPage('blog')">Blog</a>
-
+<a href="index.html">Home</a>
+<a href="assistente.html">Assistente</a>
+<a href="download.html">Download</a>
+<a href="blog.html">Blog</a>
 </nav>
 
-<!-- HOME -->
-<div id="home" class="page active">
+<div class="card">
 
-<h1>🎤 Oreste AI</h1>
-
-<p>Assistente vocale italiano intelligente</p>
-
-<button onclick="showPage('assistant')">
-Avvia Assistente
-</button>
-
-<div class="box">
-
-<p id="time"></p>
-
-<p id="date"></p>
-
-<p id="weather">
-🌤 Meteo: disponibile
-</p>
-
-</div>
-
-</div>
-
-<!-- ASSISTENTE -->
-<div id="assistant" class="page">
-
-<h1>🎤 Oreste AI</h1>
-
-<button onclick="startVoice()">
-🎤 Parla
-</button>
+<input id="input" placeholder="Scrivi o usa la voce...">
 
 <br>
 
-<input
-id="textInput"
-placeholder="Scrivi un comando..."
->
-
-<button onclick="handleText()">
-Invia
-</button>
+<button onclick="run()">Invia</button>
+<button onclick="voice()">🎤 Parla</button>
 
 <p id="output"></p>
 
-<button onclick="showPage('home')">
-⬅ Torna Home
-</button>
-
 </div>
-
-<!-- ABOUT -->
-<div id="about" class="page">
-
-<h2>Chi siamo</h2>
-
-<p>
-Oreste AI è un assistente vocale creato con HTML,
-CSS e JavaScript.
-</p>
-
-<p>
-Funziona direttamente nel browser senza installazione.
-</p>
-
-</div>
-
-<!-- FUNZIONI -->
-<div id="funzioni" class="page">
-
-<h2>Funzioni</h2>
-
-<p>
-✔ Comandi vocali<br>
-✔ Apertura siti<br>
-✔ Ricerca Google<br>
-✔ Ora e data<br>
-✔ Assistente browser based
-</p>
-
-</div>
-
-<!-- CONTATTI -->
-<div id="contatti" class="page">
-
-<h2>Contatti</h2>
-
-<p>
-Email: orestedechiara89@gmail.com
-</p>
-
-</div>
-<!-- BLOG -->
-<div id="blog" class="page">
-<h1>Cos’è un assistente vocale web</h1>
-<br>
-<p>
-Un assistente vocale web è un software che funziona direttamente nel browser e permette di interagire con la voce.
-</p>
-
-<p>
-A differenza delle app tradizionali, non richiede installazione e usa le API del browser.
-</p>
-<br>
-<h1>Web Speech API</h1>
-<br>
-<p>
-La Web Speech API permette ai browser di riconoscere e generare voce.
-</p>
-
-<p>
-È composta da due parti:
-- SpeechRecognition
-- SpeechSynthesis
-</p>
-<br>
-<h1>Assistenti vocali: browser vs app</h1>
-<br>
-<h2>Browser</h2>
-<p>
-Non richiede installazione, funziona subito e usa Web API.
-</p>
-
-<h2>App</h2>
-<p>
-Più potenti ma richiedono installazione e permessi.
-</p>
-<br>
-<h1>Assistenti vocali: browser vs app</h1>
-
-<h2>Browser</h2>
-<p>
-Non richiede installazione, funziona subito e usa Web API.
-</p>
-
-<h2>App</h2>
-<p>
-Più potenti ma richiedono installazione e permessi.
-</p>
 
 <script>
 
-/* MENU */
-function showPage(page){
-
-    document.querySelectorAll(".page").forEach(p=>{
-
-        p.classList.remove("active");
-
-    });
-
-    document.getElementById(page)
-    .classList.add("active");
-}
-
-/* ORA E DATA */
-function updateTime(){
-
-    let now = new Date();
-
-    document.getElementById("time").innerText =
-
-    "🕒 Ora: " +
-
-    now.toLocaleTimeString("it-IT");
-
-    document.getElementById("date").innerText =
-
-    "📅 Data: " +
-
-    now.toLocaleDateString("it-IT");
-}
-
-setInterval(updateTime,1000);
-
-updateTime();
-
-/* VOCE */
 function speak(text){
-
-    window.speechSynthesis.cancel();
-
-    let msg =
-    new SpeechSynthesisUtterance(text);
-
-    msg.lang = "it-IT";
-
-    msg.rate = 1;
-
-    msg.pitch = 1;
-
-    window.speechSynthesis.speak(msg);
+let msg = new SpeechSynthesisUtterance(text);
+msg.lang = "it-IT";
+speechSynthesis.cancel();
+speechSynthesis.speak(msg);
 }
 
-/* SITI */
-const sites = {
+function run(){
+handle(document.getElementById("input").value);
+}
 
-    "google":"https://www.google.com",
+function voice(){
 
-    "youtube":"https://www.youtube.com",
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-    "facebook":"https://www.facebook.com",
+if(!SpeechRecognition){
+speak("Microfono non supportato");
+return;
+}
 
-    "instagram":"https://www.instagram.com",
+try{
+const recognition = new SpeechRecognition();
+recognition.lang = "it-IT";
 
-    "canva":"https://www.canva.com",
+recognition.start();
 
-    "linkedin":"https://www.linkedin.com",
-
-    "tiktok":"https://www.tiktok.com",
-
-    "gmail":"https://mail.google.com"
-
+recognition.onresult = function(e){
+let text = e.results[0][0].transcript;
+document.getElementById("input").value = text;
+handle(text);
 };
 
-/* APRI SITO */
-function openSite(text){
-
-    text = text.toLowerCase().trim();
-
-    for(let key in sites){
-
-        if(text.includes(key)){
-
-            window.open(
-                sites[key],
-                "_blank"
-            );
-
-            return true;
-        }
-    }
-
-    /* URL DIRETTO */
-
-    if(text.includes(".")){
-
-        let url =
-
-        text.startsWith("http")
-
-        ? text
-
-        : "https://" + text;
-
-        window.open(url,"_blank");
-
-        return true;
-    }
-
-    return false;
+}catch(err){
+speak("Errore microfono");
 }
 
-/* MICROFONO */
-function startVoice(){
-
-    const SR =
-
-    window.SpeechRecognition ||
-
-    window.webkitSpeechRecognition;
-
-    if(!SR){
-
-        alert("Microfono non supportato");
-
-        return;
-    }
-
-    let rec = new SR();
-
-    rec.lang = "it-IT";
-
-    rec.start();
-
-    rec.onresult = (e)=>{
-
-        let text =
-
-        e.results[0][0].transcript;
-
-        document.getElementById("output")
-        .innerText = text;
-
-        handleCommand(text);
-    };
 }
 
-/* INPUT TESTO */
-function handleText(){
+function handle(text){
 
-    let text =
+text = (text || "").toLowerCase();
 
-    document.getElementById("textInput")
-    .value;
-
-    document.getElementById("output")
-    .innerText = text;
-
-    handleCommand(text);
+if(text.includes("google")){
+window.open("https://google.com","_blank");
+speak("Apro Google");
+return;
 }
 
-/* AI */
-function handleCommand(text){
+if(text.startsWith("cerca ")){
+let q = text.replace("cerca ","");
+window.open("https://google.com/search?q="+q,"_blank");
+speak("Cerco " + q);
+return;
+}
 
-    text = text.toLowerCase().trim();
+if(text.startsWith("apri youtube")){
+window.open("https://youtube.com","_blank");
+speak("Apro YouTube");
+return;
+}
 
-    const now = new Date();
+if(text.startsWith("apri facebook")){
+window.open("https://facebook.com","_blank");
+speak("Apro Facebook");
+return;
+}
 
-    /* CIAO */
+if(text.includes("che ore")){
+let t = new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"});
+speak("Sono le " + t);
+return;
+}
 
-    if(text.includes("ciao")){
-
-        speak("Ciao! Sono Oreste AI");
-
-        return;
-    }
-
-    /* ORA */
-
-    if(text.includes("ora")){
-
-        speak(
-
-        "Sono le " +
-
-        now.toLocaleTimeString("it-IT")
-
-        );
-
-        return;
-    }
-
-    /* DATA */
-
-    if(text.includes("data")){
-
-        speak(
-
-        "Oggi è " +
-
-        now.toLocaleDateString("it-IT")
-
-        );
-
-        return;
-    }
-
-    /* METEO */
-
-    if(text.includes("meteo")){
-
-        speak("Il meteo è disponibile");
-
-        return;
-    }
-
-    /* APRI */
-
-    if(text.startsWith("apri ")){
-
-        let q =
-
-        text.replace("apri ","");
-
-        if(openSite(q)){
-
-            speak("Apro " + q);
-
-        }else{
-
-            speak(
-
-            "Cerco " + q + " su Google"
-
-            );
-
-            window.open(
-
-            "https://www.google.com/search?q="
-
-            + q,
-
-            "_blank"
-
-            );
-        }
-
-        return;
-    }
-
-    /* CERCA */
-
-    if(text.startsWith("cerca ")){
-
-        let q =
-
-        text.replace("cerca ","");
-
-        speak("Cerco " + q);
-
-        window.open(
-
-        "https://www.google.com/search?q="
-
-        + q,
-
-        "_blank"
-
-        );
-
-        return;
-    }
-
-    /* FALLBACK */
-
-    speak("Non ho capito il comando");
+speak("Non ho capito il comando");
 }
 
 </script>
