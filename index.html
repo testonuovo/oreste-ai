@@ -10,31 +10,50 @@
 
 <style>
 body{
-background:blue;
-font-family:Arial;
-text-align:center;
-color:white;
+    background: blue;
+    font-family: Arial;
+    text-align: center;
+    color: white;
+    margin: 0;
 }
 
-button{
-background:red;
-color:white;
-border-radius:19px;
-padding:10px;
-border:none;
-margin:5px;
-cursor:pointer;
+h1{
+    margin-top: 20px;
 }
 
-a{
-text-decoration:none;
-color:red;
-margin:10px;
-display:inline-block;
+nav a{
+    text-decoration: none;
+    color: red;
+    margin: 10px;
+    display: inline-block;
+    font-weight: bold;
 }
 
 .card{
-margin-top:20px;
+    margin-top: 30px;
+}
+
+input{
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+
+button{
+    background: red;
+    color: white;
+    border-radius: 19px;
+    padding: 10px 15px;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover{
+    background: darkred;
 }
 </style>
 
@@ -53,9 +72,11 @@ margin-top:20px;
 
 <div class="card">
 
+<h2>Parla con Oreste AI</h2>
+
 <input id="input" placeholder="Scrivi o usa la voce...">
 
-<br>
+<br><br>
 
 <button onclick="run()">Invia</button>
 <button onclick="voice()">🎤 Parla</button>
@@ -66,80 +87,93 @@ margin-top:20px;
 
 <script>
 
+// 🔊 VOCE
 function speak(text){
-let msg = new SpeechSynthesisUtterance(text);
-msg.lang = "it-IT";
-speechSynthesis.cancel();
-speechSynthesis.speak(msg);
+    let msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "it-IT";
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
 }
 
+// ⌨️ INPUT TESTO
 function run(){
-handle(document.getElementById("input").value);
+    handle(document.getElementById("input").value);
 }
 
+// 🎤 VOCE
 function voice(){
 
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-if(!SpeechRecognition){
-speak("Microfono non supportato");
-return;
+    if(!SpeechRecognition){
+        speak("Microfono non supportato");
+        return;
+    }
+
+    try{
+        const recognition = new SpeechRecognition();
+        recognition.lang = "it-IT";
+
+        recognition.start();
+
+        recognition.onresult = function(event){
+            let text = event.results[0][0].transcript;
+            document.getElementById("input").value = text;
+            handle(text);
+        };
+
+        recognition.onerror = function(){
+            speak("Errore microfono");
+        };
+
+    }catch(err){
+        speak("Errore riconoscimento vocale");
+    }
 }
 
-try{
-const recognition = new SpeechRecognition();
-recognition.lang = "it-IT";
-
-recognition.start();
-
-recognition.onresult = function(e){
-let text = e.results[0][0].transcript;
-document.getElementById("input").value = text;
-handle(text);
-};
-
-}catch(err){
-speak("Errore microfono");
-}
-
-}
-
+// 🧠 COMANDI
 function handle(text){
 
-text = (text || "").toLowerCase();
+    text = (text || "").toLowerCase().trim();
 
-if(text.includes("google")){
-window.open("https://google.com","_blank");
-speak("Apro Google");
-return;
-}
+    // 🌐 GOOGLE
+    if(text.includes("google")){
+        window.open("https://www.google.com","_blank");
+        speak("Apro Google");
+        return;
+    }
 
-if(text.startsWith("cerca ")){
-let q = text.replace("cerca ","");
-window.open("https://google.com/search?q="+q,"_blank");
-speak("Cerco " + q);
-return;
-}
+    // 🔎 CERCA
+    if(text.startsWith("cerca ")){
+        let q = text.replace("cerca ","");
+        window.open("https://www.google.com/search?q=" + encodeURIComponent(q), "_blank");
+        speak("Cerco " + q);
+        return;
+    }
 
-if(text.startsWith("apri youtube")){
-window.open("https://youtube.com","_blank");
-speak("Apro YouTube");
-return;
-}
+    // ▶️ YOUTUBE
+    if(text.includes("youtube")){
+        window.open("https://www.youtube.com","_blank");
+        speak("Apro YouTube");
+        return;
+    }
 
-if(text.startsWith("apri facebook")){
-window.open("https://facebook.com","_blank");
-speak("Apro Facebook");
-return;
-}
+    // 📘 FACEBOOK
+    if(text.includes("facebook")){
+        window.open("https://www.facebook.com","_blank");
+        speak("Apro Facebook");
+        return;
+    }
 
-if(text.includes("che ore")){
-let t = new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"});
-speak("Sono le " + t);
-return;
-}
+    // 🕒 ORA
+    if(text.includes("che ore")){
+        let t = new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"});
+        speak("Sono le " + t);
+        return;
+    }
 
-speak("Non ho capito il comando");
+    // ❌ DEFAULT
+    speak("Non ho capito il comando");
 }
 
 </script>
