@@ -1,80 +1,119 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Download Oreste AI</title>
 
+<head>
 <style>
 body{
-margin:0;
-font-family:Arial;
-background:linear-gradient(135deg,#0b1b3a,#000);
-color:white;
-text-align:center;
+background:blue;
 }
-
-.container{
-padding:60px;
-}
-
 h1{
-font-size:40px;
-}
-
-button{
-padding:18px 30px;
-font-size:18px;
-border:none;
-border-radius:12px;
-background:red;
 color:white;
-cursor:pointer;
-margin-top:20px;
 }
-
-button:hover{
-background:yellow;
-color:black;
-}
-
-.card{
-background:#111;
-padding:20px;
-border-radius:15px;
-margin:20px auto;
-width:80%;
-max-width:500px;
+button{
+background:blue;
+color:white;
+border-radius:19px;
 }
 </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Download Oreste AI - Assistente vocale gratis</title>
+
+<meta name="description" content="Scarica Oreste AI gratuitamente. Assistente vocale AI italiano con comandi vocali, ricerca e controllo browser.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://transcendent-hummingbird-77d6b1.netlify.app/download.html">
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<div class="container">
+<header>
 
-<h1>🎤 Oreste AI</h1>
-<p>Scarica l’assistente vocale per Windows</p>
+<h1>Download Oreste AI</h1>
+<p>Scarica gratuitamente il tuo assistente vocale AI</p>
 
-<div class="card">
-✔ AI vocale<br>
-✔ Comandi PC<br>
-✔ Electron App<br>
-✔ Offline
-</div>
+</header>
 
-<button onclick="download()">📥 Scarica Ora</button>
+<nav>
 
-</div>
+<select id="lang">
+<option value="it">Italiano</option>
+<option value="en">English</option>
+<option value="es">Español</option>
+<option value="fr">Français</option>
+</select>
+
+<a href="index.html">Home</a>
+<a href="assistant-vocale.html">Assistente</a>
+<a href="download.html">Download</a>
+<a href="blog.html">Blog</a>
+
+</nav>
+
+<main>
+
+<section class="card">
+
+<img src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png"
+alt="Oreste AI download assistente vocale"
+class="avatar">
+
+<h2>Scarica Oreste AI</h2>
+
+<p>
+Versione gratuita con assistente vocale, ricerca Google e controllo browser.
+</p>
+
+<button onclick="downloadApp()">
+⬇ Scarica ora
+</button>
+
+</section>
+
+<section class="card">
+
+<h2>Cosa include</h2>
+
+<ul>
+
+<li>✔ Assistente vocale AI</li>
+<li>✔ Comandi vocali</li>
+<li>✔ Multilingua</li>
+<li>✔ Ricerca Google</li>
+<li>✔ Controllo browser</li>
+
+</ul>
+
+</section>
+
+</main>
 
 <script>
-function download(){
 
-window.location.href =
-"https://github.com/TUO-USERNAME/oreste-ai/releases/latest/download/OresteAI-Setup.exe";
-
+function speak(text){
+const msg = new SpeechSynthesisUtterance(text);
+msg.lang = "it-IT";
+speechSynthesis.cancel();
+speechSynthesis.speak(msg);
 }
+
+function downloadApp(){
+
+window.open(
+"https://github.com/testonuovo/oreste-ai/releases/tag/v1.0.0",
+"_blank"
+);
+
+speak("Scarico Oreste AI");
+}
+
 </script>
 
 </body>
+
 </html>
