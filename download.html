@@ -2,57 +2,80 @@
 <html lang="it">
 
 <head>
-<style>
-body{
-background:blue;
-}
-h1{
-color:white;
-}
-button{
-background:blue;
-color:white;
-border-radius:19px;
-}
-</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Download Oreste AI - Assistente vocale gratis</title>
 
-<meta name="description" content="Scarica Oreste AI gratuitamente. Assistente vocale AI italiano con comandi vocali, ricerca e controllo browser.">
+<meta name="description" content="Scarica Oreste AI gratuitamente. Assistente vocale AI italiano con comandi vocali e controllo browser.">
 
 <meta name="robots" content="index, follow">
 
-<link rel="canonical" href="https://transcendent-hummingbird-77d6b1.netlify.app/download.html">
+<link rel="canonical" href="https://oreste-ai.github.io/oreste-ai/download.html">
 
-<link rel="stylesheet" href="style.css">
+<style>
+body{
+    background: blue;
+    font-family: Arial;
+    text-align: center;
+    color: white;
+    margin: 0;
+}
+
+header{
+    padding: 20px;
+}
+
+h1{
+    margin-top: 10px;
+}
+
+nav a{
+    text-decoration: none;
+    color: red;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.card{
+    margin-top: 30px;
+    padding: 10px;
+}
+
+button{
+    background: red;
+    color: white;
+    border-radius: 19px;
+    padding: 12px 18px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover{
+    background: darkred;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+}
+</style>
 
 </head>
 
 <body>
 
 <header>
-
-<h1>Download Oreste AI</h1>
-<p>Scarica gratuitamente il tuo assistente vocale AI</p>
-
+<h1>⬇ Download Oreste AI</h1>
+<p>Assistente vocale AI italiano gratuito</p>
 </header>
 
 <nav>
-
-<select id="lang">
-<option value="it">Italiano</option>
-<option value="en">English</option>
-<option value="es">Español</option>
-<option value="fr">Français</option>
-</select>
-
 <a href="index.html">Home</a>
-<a href="assistant-vocale.html">Assistente</a>
+<a href="assistente.html">Assistente</a>
 <a href="download.html">Download</a>
 <a href="blog.html">Blog</a>
-
 </nav>
 
 <main>
@@ -60,13 +83,13 @@ border-radius:19px;
 <section class="card">
 
 <img src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png"
-alt="Oreste AI download assistente vocale"
-class="avatar">
+alt="Oreste AI assistente vocale"
+width="120">
 
 <h2>Scarica Oreste AI</h2>
 
 <p>
-Versione gratuita con assistente vocale, ricerca Google e controllo browser.
+Oreste AI è un assistente vocale che funziona direttamente nel browser con comandi vocali.
 </p>
 
 <button onclick="downloadApp()">
@@ -80,13 +103,11 @@ Versione gratuita con assistente vocale, ricerca Google e controllo browser.
 <h2>Cosa include</h2>
 
 <ul>
-
 <li>✔ Assistente vocale AI</li>
-<li>✔ Comandi vocali</li>
-<li>✔ Multilingua</li>
-<li>✔ Ricerca Google</li>
-<li>✔ Controllo browser</li>
-
+<li>✔ Comandi vocali in italiano</li>
+<li>✔ Ricerca Google automatica</li>
+<li>✔ Apertura siti web</li>
+<li>✔ Versione web gratuita</li>
 </ul>
 
 </section>
@@ -95,21 +116,23 @@ Versione gratuita con assistente vocale, ricerca Google e controllo browser.
 
 <script>
 
+// 🔊 VOCE
 function speak(text){
-const msg = new SpeechSynthesisUtterance(text);
-msg.lang = "it-IT";
-speechSynthesis.cancel();
-speechSynthesis.speak(msg);
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "it-IT";
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
 }
 
+// ⬇ DOWNLOAD
 function downloadApp(){
 
-window.open(
-"https://github.com/testonuovo/oreste-ai/releases/tag/v1.0.0",
-"_blank"
-);
+    // 🔥 Link temporaneo (puoi sostituirlo con ZIP reale o release GitHub)
+    const url = "https://github.com/testonuovo/oreste-ai";
 
-speak("Scarico Oreste AI");
+    window.open(url, "_blank");
+
+    speak("Scarico Oreste AI");
 }
 
 </script>
