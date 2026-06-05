@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://testonuovo.github.io/oreste-ai/sitemap.xml
