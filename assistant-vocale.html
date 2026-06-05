@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<style>
+h1{
+color:white;
+text-align:center;
+}
+body{
+background:blue;
+}
+button{
+background:red;
+color:white;
+border-radius:19px;
+}
+a{
+text-decoration:none;
+color:red;
+}
+
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Assistente vocale - Oreste AI</title>
+
+<meta name="description" content="Assistente vocale di Oreste AI: parla con l’AI e controlla il browser con la voce.">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+<h1>Assistente vocale Oreste AI</h1>
+<p>Controlla il web con la voce</p>
+<a href="assistente.html">Assistente</a>
+</header>
+
+<nav>
+
+<select id="lang">
+<option value="it">Italiano</option>
+<option value="en">English</option>
+<option value="es">Español</option>
+<option value="fr">Français</option>
+</select>
+
+<a href="index.html">Home</a>
+<a href="assistant-vocale.html">Assistente</a>
+<a href="download.html">Download</a>
+<a href="blog.html">Blog</a>
+
+</nav>
+
+<main>
+
+<div class="card">
+
+<img src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png"
+alt="Oreste AI assistente vocale"
+class="avatar">
+
+<h2>Parla con Oreste AI</h2>
+
+<input id="input" placeholder="Scrivi o usa la voce...">
+
+<br><br>
+
+<button onclick="run()">Invia</button>
+<button onclick="voice()">🎤 Parla</button>
+
+<p id="output"></p>
+
+</div>
+
+</main>
+
+<script>
+
+/* ======================
+   VOCE
+====================== */
+function speak(text){
+
+const msg = new SpeechSynthesisUtterance(text);
+msg.lang = "it-IT";
+speechSynthesis.cancel();
+speechSynthesis.speak(msg);
+
+}
+
+/* ======================
+   INPUT
+====================== */
+function run(){
+handle(document.getElementById("input").value);
+}
+
+/* ======================
+   VOCE INPUT
+====================== */
+function voice(){
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if(!SpeechRecognition){
+speak("Voce non supportata");
+return;
+}
+
+const recognition = new SpeechRecognition();
+recognition.lang = "it-IT";
+
+recognition.start();
+
+recognition.onresult = function(event){
+const text = event.results[0][0].transcript;
+document.getElementById("input").value = text;
+handle(text);
+};
+
+}
+
+/* ======================
+   COMANDI ASSISTENTE
+====================== */
+function handle(text){
+
+text = (text || "").toLowerCase().trim();
+
+/* ---- GOOGLE ---- */
+if(text.includes("google")){
+window.open("https://www.google.com", "_blank");
+speak("Apro Google");
+return;
+}
+
+/* ---- CERCA ---- */
+if(text.startsWith("cerca ")){
+let q = text.replace("cerca ","");
+window.open("https://www.google.com/search?q=" + encodeURIComponent(q), "_blank");
+speak("Cerco " + q);
+return;
+}
+
+/* ---- APRI SITI ---- */
+if(text.startsWith("apri ")){
+
+let sito = text.replace("apri ","");
+
+let url = "";
+
+if(sito.includes("youtube")){
+url = "https://www.youtube.com";
+}
+else if(sito.includes("instagram")){
+url = "https://www.instagram.com";
+}
+else if(sito.includes("facebook")){
+url = "https://www.facebook.com";
+}
+else {
+url = "https://www.google.com/search?q=" + encodeURIComponent(sito);
+}
+
+window.open(url, "_blank");
+speak("Apro " + sito);
+return;
+}
+
+/* ---- SEARCH INGLESE ---- */
+if(text.startsWith("search ")){
+let q = text.replace("search ","");
+window.open("https://www.google.com/search?q=" + encodeURIComponent(q), "_blank");
+speak("Searching " + q);
+return;
+}
+
+speak("Non ho capito il comando");
+
+}
+
+</script>
+
+</body>
+</html>
