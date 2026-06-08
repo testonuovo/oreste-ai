@@ -1,36 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Homepage (index.html) -->
-  <url>
-    <loc>https://testonuovo.github.io/oreste-ai/</loc>
-    <lastmod>2026-06-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+<url>
+  <loc>https:/https://testonuovo.github.io/oreste-ai/</loc>
+</url>
 
-  <!-- Pagina principale app (se separata) -->
-  <url>
-    <loc>https://testonuovo.github.io/oreste-ai/index.html</loc>
-    <lastmod>2026-06-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+<url>
+  <loc>https://https://testonuovo.github.io/oreste-ai/</loc>
+</url>
 
-  <!-- Blog (Altervista) -->
-  <url>
-    <loc>https://oresteai.altervista.org/</loc>
-    <lastmod>2026-06-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+<url>
+  <loc>https://https://testonuovo.github.io/oreste-ai/</loc>
+</url>
 
-  <!-- Download GitHub release -->
-  <url>
-    <loc>https://github.com/testonuovo/oreste-ai/releases</loc>
-    <lastmod>2026-06-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+<url>
+  <loc>https://https://testonuovo.github.io/oreste-ai/</loc>
+</url>
 
 </urlset>
