@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard Oreste AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#0b1b3a;
+    color:white;
+    text-align:center;
+}
+
+h1{margin-top:20px;}
+
+.card{
+    background:#142850;
+    margin:20px;
+    padding:20px;
+    border-radius:15px;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    background:red;
+    color:white;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📊 Dashboard Oreste AI</h1>
+
+<div class="card">
+<h2>🌍 Visitatori live (demo)</h2>
+<p id="visitatori"></p>
+</div>
+
+<div class="card">
+<h2>📈 Stato sito</h2>
+<p>Online ✔️</p>
+<p>GitHub Pages attivo ✔️</p>
+</div>
+
+<div class="card">
+<h2>📊 Google Analytics</h2>
+<button onclick="window.open('https://analytics.google.com','_blank')">
+Apri Analytics
+</button>
+</div>
+
+<script>
+
+// simulazione live
+function update(){
+    let base = 120;
+    let random = Math.floor(Math.random()*50);
+    document.getElementById("visitatori").innerText =
+        (base + random) + " utenti online (stimati)";
+}
+
+update();
+setInterval(update, 3000);
+
+</script>
+
+</body>
+</html>
