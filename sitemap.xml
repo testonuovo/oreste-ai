@@ -2,19 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-  <loc>https:/https://testonuovo.github.io/oreste-ai/</loc>
+  <loc>https://testonuovo.github.io/oreste-ai/</loc>
 </url>
 
 <url>
-  <loc>https://https://testonuovo.github.io/oreste-ai/</loc>
+  <loc>https://testonuovo.github.io/oreste-ai/index.html</loc>
 </url>
 
 <url>
-  <loc>https://https://testonuovo.github.io/oreste-ai/</loc>
+  <loc>https://testonuovo.github.io/oreste-ai/assistente.html</loc>
 </url>
 
 <url>
-  <loc>https://https://testonuovo.github.io/oreste-ai/</loc>
+  <loc>https://testonuovo.github.io/oreste-ai/download.html</loc>
+</url>
+
+<url>
+  <loc>https://testonuovo.github.io/oreste-ai/blog.html</loc>
 </url>
 
 </urlset>
