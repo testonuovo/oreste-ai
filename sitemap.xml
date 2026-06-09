@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-<url>
-  <loc>https://testonuovo.github.io/oreste-ai/</loc>
-</url>
+  <url>
+    <loc>https://testonuovo.github.io/oreste-ai/</loc>
+  </url>
 
-<url>
-  <loc>https://testonuovo.github.io/oreste-ai/index.html</loc>
-</url>
+  <url>
+    <loc>https://testonuovo.github.io/oreste-ai/assistente.html</loc>
+  </url>
 
-<url>
-  <loc>https://testonuovo.github.io/oreste-ai/assistente.html</loc>
-</url>
+  <url>
+    <loc>https://testonuovo.github.io/oreste-ai/download.html</loc>
+  </url>
 
-<url>
-  <loc>https://testonuovo.github.io/oreste-ai/download.html</loc>
-</url>
+  <url>
+    <loc>https://testonuovo.github.io/oreste-ai/blog.html</loc>
+  </url>
 
-<url>
-  <loc>https://testonuovo.github.io/oreste-ai/blog.html</loc>
-</url>
+  <url>
+    <loc>https://testonuovo.github.io/oreste-ai/chi-siamo.html</loc>
+  </url>
+
+  <url>
+    <loc>https://testonuovo.github.io/oreste-ai/contatti.html</loc>
+  </url>
+
+  <url>
+    <loc>https://testonuovo.github.io/oreste-ai/dashboard.html</loc>
+  </url>
 
 </urlset>
