@@ -140,7 +140,10 @@ function handle(text){
     else if(text.includes("canva")){
         response = openSite("https://www.canva.com", "Apro Canva.");
     }
-
+    else if(text.includes("karaoke")){
+        response = openSite("https://testonuovo.github.io/karaoke/", "Apro Karaoke.");
+    }
+    
     // INFO
     else if(text.includes("ciao")){
         response = "Ciao! Sono Oreste AI.";
@@ -157,7 +160,7 @@ function handle(text){
     else if(text.includes("data")){
         response = "Oggi è " + new Date().toLocaleDateString();
     }
-
+   
     else{
         response = "Non ho capito: " + text;
     }
