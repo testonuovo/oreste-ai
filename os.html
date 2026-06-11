@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oreste OS</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0b1b3a;
+color:white;
+text-align:center;
+}
+
+nav{
+background:blue;
+padding:10px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:10px;
+font-weight:bold;
+}
+
+button{
+padding:8px;
+border:none;
+border-radius:6px;
+background:#0071e3;
+color:white;
+cursor:pointer;
+margin:4px;
+}
+
+.card{
+background:#1e3a8a;
+padding:15px;
+border-radius:10px;
+max-width:600px;
+margin:20px auto;
+}
+
+#stage{
+display:flex;
+justify-content:center;
+gap:40px;
+margin:20px;
+}
+
+.character{
+width:120px;
+border-radius:50%;
+transition:0.3s;
+}
+
+.speaking{
+transform:scale(1.2);
+box-shadow:0 0 20px cyan;
+}
+
+.app{
+display:none;
+margin-top:20px;
+}
+
+input{
+padding:6px;
+margin:4px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="assistente.html">Assistente</a>
+<a href="download.html">Download</a>
+<a href="blog.html">Blog</a>
+<a href="chi-siamo.html">Chi siamo</a>
+<a href="contatti.html">Contatti</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="os.html">Oreste OS</a>
+</nav>
+
+<div id="stage">
+<img id="oreste" class="character"
+src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png">
+
+<img id="virus" class="character"
+src="https://i.ibb.co/wHZ8KG6/logo.jpg">
+</div>
+
+<h1>🖥️ Oreste OS</h1>
+
+<div class="card">
+
+<button onclick="app('calc')">Calcolatrice</button>
+<button onclick="app('browser')">Browser</button>
+<button onclick="app('antivirus')">Antivirus</button>
+
+<!-- CALC -->
+<div id="calc" class="app">
+<h3>Calcolatrice</h3>
+
+<input id="a" type="number" placeholder="numero 1">
+<input id="b" type="number" placeholder="numero 2">
+
+<br>
+
+<button onclick="sum()">+</button>
+<button onclick="sub()">-</button>
+
+<p id="res"></p>
+</div>
+
+<!-- BROWSER -->
+<div id="browser" class="app">
+<h3>Browser</h3>
+
+<input id="url" placeholder="google.com">
+<button onclick="go()">Vai</button>
+</div>
+
+<!-- ANTIVIRUS -->
+<div id="antivirus" class="app">
+<h3>Antivirus</h3>
+
+<button onclick="scan()">Scansiona</button>
+<p id="status"></p>
+</div>
+
+</div>
+
+<script>
+
+/* SPEECH + AVATAR SAFE */
+function speak(t){
+
+const oreste = document.getElementById("oreste");
+const virus = document.getElementById("virus");
+
+let u = new SpeechSynthesisUtterance(t);
+u.lang = "it-IT";
+
+u.onstart = ()=>{
+oreste?.classList.add("speaking");
+virus?.classList.add("speaking");
+};
+
+u.onend = ()=>{
+oreste?.classList.remove("speaking");
+virus?.classList.remove("speaking");
+};
+
+speechSynthesis.cancel();
+speechSynthesis.speak(u);
+}
+
+/* APPS SWITCH */
+function app(id){
+
+document.querySelectorAll(".app")
+.forEach(a => a.style.display = "none");
+
+document.getElementById(id).style.display = "block";
+}
+
+/* CALCOLATRICE */
+function sum(){
+let aVal = document.getElementById("a").value;
+let bVal = document.getElementById("b").value;
+
+document.getElementById("res").innerText =
+Number(aVal) + Number(bVal);
+}
+
+function sub(){
+let aVal = document.getElementById("a").value;
+let bVal = document.getElementById("b").value;
+
+document.getElementById("res").innerText =
+Number(aVal) - Number(bVal);
+}
+
+/* BROWSER */
+function go(){
+let u = document.getElementById("url").value;
+
+if(!u.startsWith("http")){
+u = "https://" + u;
+}
+
+window.open(u,"_blank");
+}
+
+/* ANTIVIRUS */
+function scan(){
+
+document.getElementById("status").innerText = "Scansione...";
+
+setTimeout(()=>{
+
+let r = Math.random() > 0.5
+? "Virus rilevato"
+: "Sistema pulito";
+
+document.getElementById("status").innerText = r;
+speak(r);
+
+},1200);
+
+}
+
+/* START */
+window.onload = ()=>{
+speak("Benvenuto in Oreste OS");
+};
+
+</script>
+
+</body>
+</html>
