@@ -14,23 +14,31 @@ body{
     text-align:center;
 }
 
-h1{margin-top:20px;}
+/* NAV FIX */
+nav{
+    background:#142850;
+    padding:10px;
+}
 
+nav a{
+    color:red;
+    margin:10px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* CARD */
 .card{
     background:#142850;
-    margin:20px;
+    margin:20px auto;
     padding:20px;
     border-radius:15px;
+    width:80%;
+    max-width:600px;
 }
 
-button{
-    padding:10px 15px;
-    border:none;
-    border-radius:10px;
-    background:red;
-    color:white;
-    cursor:pointer;
-}
+/* HEADER */
+h1{margin-top:20px;}
 </style>
 </head>
 
@@ -38,8 +46,19 @@ button{
 
 <h1>📊 Dashboard Oreste AI</h1>
 
+<nav>
+<a href="index.html">Home</a>
+<a href="assistente.html">Assistente</a>
+<a href="download.html">Download</a>
+<a href="blog.html">Blog</a>
+<a href="chi-siamo.html">Chi siamo</a>
+<a href="contatti.html">Contatti</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="os.html">Oreste OS</a>
+</nav>
+
 <div class="card">
-<h2>🌍 Visitatori live (demo)</h2>
+<h2>🌍 Visitatori live (stimati)</h2>
 <p id="visitatori"></p>
 </div>
 
@@ -55,23 +74,19 @@ button{
 Apri Analytics
 </button>
 </div>
-<nav>
-<a href="index.html">Home</a>
-<a href="assistente.html">Assistente</a>
-<a href="download.html">Download</a>
-<a href="blog.html">Blog</a>
-<a href="chi-siamo.html">Chi siamo</a>
-<a href="contatti.html">Contatti</a>
-<a href="dashboard.html">Dashboard</a>
-<a href="os.html">Oreste OS</a>
-</nav>
-<center><a href="index.html">Torna alla Home</a></center>
+
+<div class="card">
+<h2>🏠 Ritorno</h2>
+<a href="index.html" style="color:white;">Torna alla Home</a>
+</div>
+
 <script>
 
-// simulazione live
+// simulazione live utenti
 function update(){
     let base = 120;
     let random = Math.floor(Math.random()*50);
+
     document.getElementById("visitatori").innerText =
         (base + random) + " utenti online (stimati)";
 }
@@ -83,3 +98,4 @@ setInterval(update, 3000);
 
 </body>
 </html>
+
