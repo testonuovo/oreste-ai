@@ -62,11 +62,15 @@ transform:scale(1.2);
 box-shadow:0 0 20px cyan;
 }
 
-.app{display:none;margin-top:20px;}
+.app{
+display:none;
+margin-top:20px;
+}
 
 input{
 padding:6px;
 margin:4px;
+border-radius:19px;
 }
 </style>
 </head>
@@ -75,12 +79,21 @@ margin:4px;
 
 <nav>
 <a href="index.html">Home</a>
+<a href="assistente.html">Assistente</a>
+<a href="download.html">Download</a>
+<a href="blog.html">Blog</a>
+<a href="chi-siamo.html">Chi siamo</a>
+<a href="contatti.html">Contatti</a>
+<a href="dashboard.html">Dashboard</a>
 <a href="os.html">Oreste OS</a>
 </nav>
 
 <div id="stage">
-<img id="oreste" class="character" src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png">
-<img id="virus" class="character" src="https://i.ibb.co/wHZ8KG6/logo.jpg">
+<img id="oreste" class="character"
+src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png">
+
+<img id="virus" class="character"
+src="https://i.ibb.co/wHZ8KG6/logo.jpg">
 </div>
 
 <h1>🖥️ Oreste OS</h1>
@@ -88,27 +101,36 @@ margin:4px;
 <div class="card">
 
 <button onclick="app('calc')">Calcolatrice</button>
-<button onclick="app('browser')">Browser</button>
+<button onclick="app('browser')">Oreste Os Browser</button>
 <button onclick="app('antivirus')">Antivirus</button>
 
+<!-- CALC -->
 <div id="calc" class="app">
 <h3>Calcolatrice</h3>
+
 <input id="a" type="number" placeholder="numero 1">
 <input id="b" type="number" placeholder="numero 2">
+
 <br>
+
 <button onclick="sum()">+</button>
 <button onclick="sub()">-</button>
+
 <p id="res"></p>
 </div>
 
+<!-- BROWSER -->
 <div id="browser" class="app">
-<h3>Browser</h3>
+<h3>Oreste OS Browser</h3>
+
 <input id="url" placeholder="google.com">
 <button onclick="go()">Vai</button>
 </div>
 
+<!-- ANTIVIRUS -->
 <div id="antivirus" class="app">
 <h3>Antivirus</h3>
+
 <button onclick="scan()">Scansiona</button>
 <p id="status"></p>
 </div>
@@ -117,63 +139,88 @@ margin:4px;
 
 <script>
 
+/* SPEECH + AVATAR SAFE */
+function speak(t){
+
 const oreste = document.getElementById("oreste");
 const virus = document.getElementById("virus");
 
-/* VOCE + ANIMAZIONE */
-function speak(t){
 let u = new SpeechSynthesisUtterance(t);
 u.lang = "it-IT";
 
 u.onstart = ()=>{
-oreste.classList.add("speaking");
-virus.classList.add("speaking");
+oreste?.classList.add("speaking");
+virus?.classList.add("speaking");
 };
 
 u.onend = ()=>{
-oreste.classList.remove("speaking");
-virus.classList.remove("speaking");
+oreste?.classList.remove("speaking");
+virus?.classList.remove("speaking");
 };
 
 speechSynthesis.cancel();
 speechSynthesis.speak(u);
 }
 
-/* APPS */
+/* APPS SWITCH */
 function app(id){
-document.querySelectorAll(".app").forEach(a=>a.style.display="none");
-document.getElementById(id).style.display="block";
+
+document.querySelectorAll(".app")
+.forEach(a => a.style.display = "none");
+
+document.getElementById(id).style.display = "block";
 }
 
-/* CALC */
+/* CALCOLATRICE */
 function sum(){
+let aVal = document.getElementById("a").value;
+let bVal = document.getElementById("b").value;
+
 document.getElementById("res").innerText =
-Number(a.value) + Number(b.value);
+Number(aVal) + Number(bVal);
 }
 
 function sub(){
+let aVal = document.getElementById("a").value;
+let bVal = document.getElementById("b").value;
+
 document.getElementById("res").innerText =
-Number(a.value) - Number(b.value);
+Number(aVal) - Number(bVal);
 }
 
 /* BROWSER */
 function go(){
 let u = document.getElementById("url").value;
-if(!u.startsWith("http")) u = "https://" + u;
+
+if(!u.startsWith("http")){
+u = "https://" + u;
+}
+
 window.open(u,"_blank");
 }
 
 /* ANTIVIRUS */
 function scan(){
-status.innerText = "Scansione...";
+
+document.getElementById("status").innerText = "Scansione...";
+
 setTimeout(()=>{
-let r = Math.random() > 0.5 ? "Virus rilevato" : "Sistema pulito";
-status.innerText = r;
+
+let r = Math.random() > 0.5
+? "Virus rilevato"
+: "Sistema pulito";
+
+document.getElementById("status").innerText = r;
 speak(r);
+
 },1200);
+
 }
 
-window.onload = ()=>speak("Benvenuto in Oreste OS");
+/* START */
+window.onload = ()=>{
+speak("Benvenuto in Oreste OS");
+};
 
 </script>
 
