@@ -1,9 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap del sito
 Sitemap: https://testonuovo.github.io/oreste-ai/sitemap.xml
-
-# Blocchi opzionali (non necessari ma puliti)
-Disallow: /private/
-Disallow: /admin/
