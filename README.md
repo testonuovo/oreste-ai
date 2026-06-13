@@ -1,98 +1,72 @@
-# 🎤 Oreste AI
+# 🎤 Oreste AI - Assistente Vocale Italiano
 
-Oreste AI è un assistente vocale italiano che funziona direttamente nel browser, senza installazione e senza backend. Sfrutta le moderne Web Speech API per riconoscere la voce e rispondere in tempo reale.
+Oreste AI è un assistente vocale web sviluppato in HTML, CSS e JavaScript.  
+Permette di controllare il browser tramite comandi vocali e testuali direttamente dal web.
 
----
-
-## 🚀 Demo Live
-👉 https://testonuovo.github.io/oreste-ai/
+👉 Live demo: https://testonuovo.github.io/oreste-ai/index.html
 
 ---
 
-## ✨ Features
+## 🚀 Funzionalità
 
-- 🎤 Riconoscimento vocale in italiano
-- 🔊 Sintesi vocale naturale
-- 🌐 Apertura siti web tramite comandi vocali
-- 🔎 Ricerca automatica su Google
-- 🕒 Ora e data in tempo reale
-- 📱 Interfaccia semplice e responsive
-- ⚡ Funziona completamente nel browser
-
----
-
-## 🧠 Come funziona
-
-Oreste AI utilizza:
-
-- `SpeechRecognition` → per ascoltare la voce dell’utente  
-- `SpeechSynthesis` → per rispondere vocalmente  
-- JavaScript Vanilla → per la logica dell’assistente  
-
-Tutto gira direttamente nel browser, senza server.
+- 🎤 Riconoscimento vocale (SpeechRecognition)
+- 🔊 Risposta vocale (SpeechSynthesis)
+- 🌐 Apertura siti web con la voce
+- 🔎 Ricerca su Google con comandi vocali
+- ▶️ Apertura YouTube, Facebook, Canva e altri siti
+- 🕒 Risposte su ora e data
+- 💬 Chat vocale interattiva
+- 🖥️ Sistema OS integrato (Oreste OS)
+- 📊 Dashboard con statistiche demo
 
 ---
 
-## 💡 Esempi di comandi
+## 🧠 Esempi di comandi vocali
 
-- “apri YouTube”
-- “apri Google”
-- “cerca pizza vicino a me”
+- “cerca programmazione”
+- “google”
+- “youtube”
 - “che ore sono”
-- “che giorno è oggi”
-- “apri Instagram”
-- “meteo Roma”
-- “musica trap”
+- “facebook”
+- “canva”
+- “meteo Napoli”
+- “notizie tecnologia”
 
 ---
 
-## ⚙️ Tech Stack
+## 🛠️ Tecnologie utilizzate
 
 - HTML5
 - CSS3
-- JavaScript (Vanilla)
+- JavaScript
 - Web Speech API
 
 ---
 
-## 🎯 Obiettivo
+## 📁 Struttura progetto
 
-Creare un assistente vocale leggero, veloce e accessibile a tutti, direttamente dal browser, senza installazioni o app esterne.
-
----
-
-## 📸 Screenshot
-
-(Aggiungi qui uno screenshot del progetto)
+- `index.html` → assistente vocale principale
+- `os.html` → sistema operativo web
+- `dashboard.html` → statistiche sito
+- `blog.html` → articoli aggiornamenti
+- `chi-siamo.html` → informazioni progetto
 
 ---
 
-## 🔮 Roadmap
+## 🌍 Obiettivo
 
-- Modalità ascolto continuo
-- Miglioramento AI dei comandi
-- Risposte più naturali
-- Supporto mobile avanzato
-- Integrazione meteo reale
-- Memoria conversazionale
+Creare un assistente vocale italiano completamente funzionante nel browser,  
+facile da usare e accessibile a tutti senza installazioni.
 
 ---
 
-## 🤝 Contribuire
+## 👨‍💻 Autore
 
-Pull request e idee sono benvenute 🚀  
-Se vuoi migliorare Oreste AI, sentiti libero di contribuire.
-
----
-
-## 📄 Licenza
-
-Questo progetto è open-source e libero per uso educativo e personale.
+Progetto creato da **Oreste De Chiara**
 
 ---
 
-## 👨‍💻 Creatore
+## 📌 Stato progetto
 
-Oreste Team  
-Sviluppato con passione per l’innovazione nel web voice AI.
-
+🚧 In continuo sviluppo  
+✨ Nuove funzioni aggiunte regolarmente
