@@ -5,14 +5,19 @@
 <title>Oreste AI - Assistente Vocale Italiano Gratis Online</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO -->
+<!-- SEO BASE -->
 <meta name="description" content="Oreste AI è un assistente vocale italiano gratuito online.">
 <meta name="author" content="Oreste De Chiara">
 <meta name="robots" content="index, follow">
 
-<!-- SOCIAL / GOOGLE IMAGE -->
-<meta property="og:image" content="https://testonuovo.github.io/oreste-ai/oreste-ai.png">
-<link rel="image_src" href="https://testonuovo.github.io/oreste-ai/oreste-ai.png">
+<!-- OPEN GRAPH / SOCIAL -->
+<meta property="og:title" content="Oreste AI - Assistente Vocale Italiano">
+<meta property="og:description" content="Assistente vocale italiano gratuito online.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://testonuovo.github.io/oreste-ai/assets/images/oreste-ai.png">
+
+<!-- IMAGE SEO -->
+<link rel="image_src" href="https://testonuovo.github.io/oreste-ai/assets/images/oreste-ai.png">
 
 <style>
 body{
@@ -92,9 +97,8 @@ button:hover{
 
 <body>
 
-<!-- IMMAGINE CORRETTA -->
-<img src="https://testonuovo.github.io/oreste-ai/oreste-ai.png" width="120" alt="Oreste AI">
-
+<!-- LOGO -->
+<img src="oreste-ai.png" alt="Oreste AI assistente vocale italiano" width="120">
 <h1>🎤 Oreste AI</h1>
 
 <nav>
@@ -121,7 +125,7 @@ button:hover{
 
 <script>
 
-/* CHAT */
+/* CHAT UI */
 function addMessage(type, text){
     const chat = document.getElementById("chat");
 
@@ -142,7 +146,7 @@ function speak(text){
     speechSynthesis.speak(msg);
 }
 
-/* LOGICA AI */
+/* LOGICA */
 function handle(text){
 
     text = text.toLowerCase().trim();
