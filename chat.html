@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Oreste AI - Chat</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    background: #0b2cff;
+    font-family: Arial;
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+h1{
+    margin-top: 20px;
+}
+
+/* LINK HOME */
+a{
+    color: #00ffcc;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* CHAT BOX */
+#chat{
+    width: 90%;
+    max-width: 700px;
+    height: 400px;
+    margin: 20px auto;
+    padding: 10px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 12px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.msg{
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.user{
+    background: #ff4444;
+    margin-left: auto;
+    text-align: right;
+}
+
+.ai{
+    background: #00aa88;
+    margin-right: auto;
+}
+
+/* INPUT */
+#box{
+    margin-top: 10px;
+}
+
+input{
+    width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+
+button{
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    background: red;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover{
+    background: darkred;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎤 Oreste AI Chat</h1>
+
+<!-- LINK HOME CORRETTO PER GITHUB PAGES -->
+<a href="/oreste-ai/">💬 Torna alla home</a>
+
+<!-- CHAT -->
+<div id="chat"></div>
+
+<!-- INPUT -->
+<div id="box">
+    <input id="input" placeholder="Scrivi qui..." />
+    <button onclick="send()">Invia</button>
+    <button onclick="voice()">🎤</button>
+</div>
+
+<script>
+
+/* ================= CHAT ================= */
+function addMsg(type, text){
+
+    const chat = document.getElementById("chat");
+
+    const div = document.createElement("div");
+    div.className = "msg " + type;
+
+    div.textContent = (type === "user" ? " Tu: " : "🤖 Oreste AI: ") + text;
+
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+/* ================= VOCE ================= */
+function speak(text){
+    let msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "it-IT";
+    msg.rate = 1;
+
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
+}
+
+/* ================= AI ================= */
+function aiResponse(text){
+
+    text = text.toLowerCase();
+
+    if(text.includes("ciao")){
+        return "Ciao! Sono Oreste AI ";
+    }
+
+    if(text.includes("chi sei")){
+        return "Sono il tuo assistente vocale Oreste AI.";
+    }
+
+    if(text.includes("come stai")){
+        return "Sto bene  grazie!";
+    }
+
+    if(text.includes("ora")){
+        return "Sono le " + new Date().toLocaleTimeString();
+    }
+
+    if(text.includes("data")){
+        return "Oggi è " + new Date().toLocaleDateString();
+    }
+
+    if(text.startsWith("calcola")){
+        try{
+            let exp = text.replace("calcola","").trim();
+            return "Risultato: " + eval(exp);
+        }catch{
+            return "Errore nel calcolo";
+        }
+    }
+
+    if(text.includes("google")){
+        window.open("https://www.google.com","_blank");
+        return "Apro Google";
+    }
+
+    if(text.includes("youtube")){
+        window.open("https://www.youtube.com","_blank");
+        return "Apro YouTube";
+    }
+
+    if(text.includes("canva")){
+        window.open("https://www.canva.com","_blank");
+        return "Apro Canva";
+    }
+    if(text.includes("linkedin")){
+         window.open("https://www.linkedin.com","_blank");
+         return "Apro Linkedin";
+    }
+    return "Non ho capito ";
+}
+
+/* ================= SEND ================= */
+function send(){
+
+    let input = document.getElementById("input");
+    let text = input.value;
+
+    if(!text) return;
+
+    addMsg("user", text);
+
+    let response = aiResponse(text);
+
+    setTimeout(() => {
+        addMsg("ai", response);
+        speak(response);
+    }, 400);
+
+    input.value = "";
+}
+
+/* ================= VOCE ================= */
+function voice(){
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if(!SpeechRecognition){
+        alert("Microfono non supportato");
+        return;
+    }
+
+    let r = new SpeechRecognition();
+    r.lang = "it-IT";
+
+    r.onresult = function(e){
+        let text = e.results[0][0].transcript;
+        document.getElementById("input").value = text;
+        send();
+    };
+
+    r.start();
+}
+
+</script>
+
+</body>
+</html>
