@@ -5,19 +5,9 @@
 <title>Oreste AI - Assistente Vocale Italiano Gratis Online</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO BASE -->
 <meta name="description" content="Oreste AI è un assistente vocale italiano gratuito online.">
 <meta name="author" content="Oreste De Chiara">
 <meta name="robots" content="index, follow">
-
-<!-- OPEN GRAPH / SOCIAL -->
-<meta property="og:title" content="Oreste AI - Assistente Vocale Italiano">
-<meta property="og:description" content="Assistente vocale italiano gratuito online.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://testonuovo.github.io/oreste-ai/assets/images/oreste-ai.png">
-
-<!-- IMAGE SEO -->
-<link rel="image_src" href="https://testonuovo.github.io/oreste-ai/assets/images/oreste-ai.png">
 
 <style>
 body{
@@ -38,13 +28,6 @@ nav a{
     font-weight: bold;
 }
 
-/* IMMAGINE */
-img{
-    margin-top: 10px;
-    border-radius: 10px;
-}
-
-/* CHAT */
 #chat{
     width: 85%;
     max-width: 700px;
@@ -62,15 +45,9 @@ img{
     border-radius: 10px;
 }
 
-.user{
-    background: #ff4444;
-}
+.user{ background:#ff4444; }
+.ai{ background:#00aa88; }
 
-.ai{
-    background: #00aa88;
-}
-
-/* INPUT */
 input{
     width: 80%;
     padding: 10px;
@@ -97,10 +74,9 @@ button:hover{
 
 <body>
 
-<!-- LOGO -->
-<img src="oreste-ai.png" alt="Oreste AI assistente vocale italiano" width="120">
 <h1>🎤 Oreste AI</h1>
 
+<!-- MENU COMPLETO -->
 <nav>
 <a href="index.html">Home</a>
 <a href="assistente.html">Assistente</a>
@@ -112,7 +88,6 @@ button:hover{
 <a href="dashboard.html">Dashboard</a>
 <a href="os.html">Oreste OS</a>
 </nav>
-<h2>Parla con Oreste AI</h2>
 
 <input id="input" placeholder="Scrivi o usa la voce...">
 
@@ -125,7 +100,7 @@ button:hover{
 
 <script>
 
-/* CHAT UI */
+/* ================= CHAT ================= */
 function addMessage(type, text){
     const chat = document.getElementById("chat");
 
@@ -138,7 +113,7 @@ function addMessage(type, text){
     chat.scrollTop = chat.scrollHeight;
 }
 
-/* VOCE */
+/* ================= VOCE ================= */
 function speak(text){
     let msg = new SpeechSynthesisUtterance(text);
     msg.lang = "it-IT";
@@ -146,7 +121,19 @@ function speak(text){
     speechSynthesis.speak(msg);
 }
 
-/* LOGICA */
+/* ================= RICERCA ================= */
+function searchGoogle(query){
+    if(!query) return;
+
+    window.open(
+        "https://www.google.com/search?q=" + encodeURIComponent(query),
+        "_blank"
+    );
+
+    return "Cerco: " + query;
+}
+
+/* ================= LOGICA PRINCIPALE ================= */
 function handle(text){
 
     text = text.toLowerCase().trim();
@@ -156,52 +143,104 @@ function handle(text){
     if(text.includes("ora")) return "Sono le " + new Date().toLocaleTimeString();
     if(text.includes("data")) return "Oggi è " + new Date().toLocaleDateString();
 
+    /* 🔎 CERCA */
     if(text.startsWith("cerca")){
-        let q = text.replace("cerca","").trim();
-        window.open("https://www.google.com/search?q=" + encodeURIComponent(q));
-        return "Cerco " + q;
+        let query = text.replace("cerca","").trim();
+        return searchGoogle(query);
     }
 
+    /* 🌐 APERTURE SITI */
     if(text.includes("google")){
-        window.open("https://www.google.com");
+        window.open("https://www.google.com", "_blank");
         return "Apro Google";
     }
 
     if(text.includes("youtube")){
-        window.open("https://www.youtube.com");
+        window.open("https://www.youtube.com", "_blank");
         return "Apro YouTube";
     }
 
-    return "Ho eseguito: " + text;
-}
-if(text.startsWith("scarica")){
-    let app = text.replace("scarica","").trim().toLowerCase();
-
-    const download = {
-        "chrome": "https://www.google.com/chrome/",
-        "firefox": "https://www.mozilla.org/firefox/",
-        "edge": "https://www.microsoft.com/edge",
-        "vscode": "https://code.visualstudio.com/",
-        "blender": "https://www.blender.org/download/",
-        "discord": "https://discord.com/download",
-        "spotify": "https://www.spotify.com/download",
-        "telegram": "https://telegram.org/apps"
-    };
-
-    // 1. Se lo conosce → apre diretto
-    if(download[app]){
-        window.open(download[app], "_blank");
-        return "Scarico " + app;
+    if(text.includes("canva")){
+        window.open("https://www.canva.com", "_blank");
+        return "Apro Canva";
     }
 
-    // 2. Se NON lo conosce → cerca su Google
-    let query = app + " download ufficiale";
-    window.open("https://www.google.com/search?q=" + encodeURIComponent(query), "_blank");
+    if(text.includes("linkedin")){
+        window.open("https://www.linkedin.com", "_blank");
+        return "Apro LinkedIn";
+    }
 
-    return "Non lo trovo,cerco su internet " + app;
+    if(text.includes("facebook")){
+        window.open("https://www.facebook.com", "_blank");
+        return "Apro Facebook";
+    }
+
+    if(text.includes("instagram")){
+        window.open("https://www.instagram.com", "_blank");
+        return "Apro Instagram";
+    }
+
+    /* 📚 WIKI */
+    if(text.startsWith("wiki")){
+        let q = text.replace("wiki","").trim();
+        window.open("https://it.wikipedia.org/wiki/" + encodeURIComponent(q), "_blank");
+        return "Cerco su Wikipedia: " + q;
+    }
+
+    /* 🌦 METEO */
+    if(text.startsWith("meteo")){
+        let citta = text.replace("meteo","").trim();
+        window.open("https://www.google.com/search?q=meteo+" + encodeURIComponent(citta), "_blank");
+        return "Cerco il meteo di " + citta;
+    }
+
+    /* 🌐 APRI SITO */
+    if(text.startsWith("apri ")){
+        let sito = text.replace("apri ","").trim();
+        if(!sito.startsWith("http")) sito = "https://" + sito;
+        window.open(sito, "_blank");
+        return "Apro " + sito;
+    }
+
+    /* 🔗 VAI SU */
+    if(text.startsWith("vai su")){
+        let sito = text.replace("vai su","").trim();
+        if(!sito.startsWith("http")) sito = "https://" + sito;
+        window.open(sito, "_blank");
+        return "Ti porto su " + sito;
+    }
+
+    /* 📥 DOWNLOAD PROGRAMMI */
+    if(text.startsWith("scarica")){
+        let app = text.replace("scarica","").trim().toLowerCase();
+
+        const download = {
+            "chrome": "https://www.google.com/chrome/",
+            "firefox": "https://www.mozilla.org/firefox/",
+            "edge": "https://www.microsoft.com/edge",
+            "vscode": "https://code.visualstudio.com/",
+            "blender": "https://www.blender.org/download/",
+            "discord": "https://discord.com/download",
+            "spotify": "https://www.spotify.com/download",
+            "telegram": "https://telegram.org/apps",
+            "whatsapp": "https://www.whatsapp.com/download"
+        };
+
+        if(download[app]){
+            window.open(download[app], "_blank");
+            return "Scarico: " + app;
+        }
+
+        let query = app + " download ufficiale";
+        window.open("https://www.google.com/search?q=" + encodeURIComponent(query), "_blank");
+
+        return "Non trovato, cerco su internet: " + app;
+    }
+
+    return "Non ho capito il comando";
 }
 
-/* INVIO */
+/* ================= INVIO ================= */
 function ask(){
     let input = document.getElementById("input");
     let text = input.value;
@@ -217,7 +256,7 @@ function ask(){
     input.value = "";
 }
 
-/* VOCE */
+/* ================= VOCE ================= */
 function voice(){
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -238,7 +277,7 @@ function voice(){
     r.start();
 }
 
-/* MESSAGGIO INIZIALE */
+/* ================= START ================= */
 window.onload = function(){
     addMessage("ai", "Ciao! Sono Oreste AI 👋");
 };
@@ -247,3 +286,4 @@ window.onload = function(){
 
 </body>
 </html>
+🚀 COSA HAI ORA
