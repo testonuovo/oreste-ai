@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Assistente Vocale Oreste AI</title>
+
+<style>
+body{
+    font-family: Arial;
+    background: #0a3d91;
+    color: white;
+    text-align: center;
+    margin: 0;
+}
+
+h1{
+    margin-top: 20px;
+}
+
+#chat{
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    margin-top: 20px;
+    background: rgba(0,0,0,0.3);
+    padding: 10px;
+    border-radius: 10px;
+    min-height: 300px;
+    text-align: left;
+}
+
+.msg{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.user{ background: #ff4444; }
+.ai{ background: #00aa88; }
+
+button{
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    background: red;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover{
+    background: darkred;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎤 Assistente Vocale Oreste AI</h1>
+
+<button onclick="voice()">Parla 🎤</button>
+
+<div id="chat"></div>
+
+<script>
+
+function addMsg(type, text){
+    const chat = document.getElementById("chat");
+
+    const div = document.createElement("div");
+    div.className = "msg " + type;
+    div.textContent = text;
+
+    chat.appendChild(div);
+}
+
+function speak(text){
+    let msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "it-IT";
+    speechSynthesis.speak(msg);
+}
+
+function handle(text){
+
+    text = text.toLowerCase().trim();
+
+    // 🌐 GOOGLE
+    if(text.includes("google")){
+        window.open("https://www.google.com","_blank");
+        return "Apro Google";
+    }
+
+    // ▶️ YOUTUBE
+    if(text.includes("youtube")){
+        window.open("https://www.youtube.com","_blank");
+        return "Apro YouTube";
+    }
+
+    // 🎨 CANVA
+    if(text.includes("canva")){
+        window.open("https://www.canva.com","_blank");
+        return "Apro Canva";
+    }
+
+    // 💬 LINKEDIN
+    if(text.includes("linkedin")){
+        window.open("https://www.linkedin.com","_blank");
+        return "Apro LinkedIn";
+    }
+
+    // 🧠 APRI SITO GENERICO
+    if(text.startsWith("apri ")){
+        let sito = text.replace("apri ","").trim();
+
+        if(!sito.startsWith("http")){
+            sito = "https://" + sito;
+        }
+
+        window.open(sito, "_blank");
+        return "Apro " + sito;
+    }
+
+    // 🎤 CIAO
+    if(text.includes("ciao")){
+        return "Ciao! Sono Oreste AI 👋";
+    }
+
+    // 🕒 ORA
+    if(text.includes("che ora è") || text.includes("ora")){
+        return "Sono le " + new Date().toLocaleTimeString();
+    }
+
+    // 🔎 CERCA
+    if(text.startsWith("cerca")){
+        let q = text.replace("cerca","").trim();
+        window.open("https://www.google.com/search?q=" + encodeURIComponent(q), "_blank");
+        return "Cerco " + q;
+    }
+
+    return "Non ho capito il comando: " + text;
+}
+function voice(){
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if(!SpeechRecognition){
+        alert("Voce non supportata");
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = "it-IT";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    addMsg("ai","🎤 Parla adesso...");
+
+    recognition.onstart = function(){
+        console.log("start listening");
+    };
+
+    recognition.onresult = function(event){
+        console.log("RESULT ARRIVATO");
+
+        const text = event.results[0][0].transcript;
+
+        addMsg("user","🧑 " + text);
+
+        const response = handle(text);
+
+        addMsg("ai","🤖 " + response);
+
+        speak(response);
+    };
+
+    recognition.onerror = function(event){
+        addMsg("ai","⚠️ Errore: " + event.error);
+    };
+
+    recognition.onend = function(){
+        console.log("fine ascolto");
+    };
+
+    try{
+        recognition.start();
+    }catch(e){
+        addMsg("ai","Errore avvio: " + e.message);
+    }
+}
+</script>
+
+</body>
+</html>
