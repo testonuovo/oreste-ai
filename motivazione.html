@@ -130,7 +130,7 @@ a{
 <div class="wave wave2"></div>
 
 <!-- 🌊 SUONO MARE -->
-<audio id="music" loop>
+<audio id="music" loop preload="auto">
   <source src="music/mare.mp3" type="audio/mpeg">
 </audio>
 
@@ -210,13 +210,23 @@ function motivami(){
 /* 🌊 MARE */
 function toggleMusic(){
     const music = document.getElementById("music");
+
+    if(!music){
+        alert("Audio non trovato!");
+        return;
+    }
+
+    music.volume = 0.5;
+
     if(music.paused){
-        music.play();
+        music.play().catch(err=>{
+            console.log("Errore audio:", err);
+            alert("Premi di nuovo il bottone per attivare l'audio");
+        });
     } else {
         music.pause();
     }
 }
-
 /* 🧘 MEDITAZIONE */
 function toggleMeditation(){
     const music = document.getElementById("music");
