@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Motivazione - Oreste AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family: Arial;
+    background: linear-gradient(120deg, #1e3c72, #2a5298);
+    color:white;
+    text-align:center;
+}
+
+h1{
+    margin-top:20px;
+}
+
+.container{
+    width:90%;
+    max-width:800px;
+    margin:30px auto;
+}
+
+.card{
+    background: rgba(255,255,255,0.10);
+    padding:20px;
+    margin:15px 0;
+    border-radius:15px;
+    font-size:18px;
+    line-height:1.5;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:red;
+    color:white;
+    margin-top:10px;
+}
+
+button:hover{
+    background:darkred;
+}
+
+p{
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🌻 Motivazione - Oreste AI</h1>
+
+<div class="container">
+
+<!-- FRASI -->
+<div class="card" id="frase">
+🌻 Clicca il pulsante per ricevere una frase motivazionale
+</div>
+
+<button onclick="nuovaFrase()">✨ Nuova frase</button>
+
+<!-- VIDEO 1 -->
+<div class="card">
+  <h2>🌻 Sorridi anche quando sei triste</h2>
+
+  <video width="100%" controls>
+    <source src="videos/sorridi.mp4" type="video/mp4">
+  </video>
+
+  <p>Un sorriso può cambiare la giornata di qualcuno.</p>
+</div>
+
+<!-- VIDEO 2 -->
+<div class="card">
+  <h2>💪 Non ti arrendere</h2>
+
+  <video width="100%" controls>
+    <source src="videos/non-ti-arrendere.mp4" type="video/mp4">
+  </video>
+
+  <p>Anche quando sembra difficile, continua un passo alla volta.</p>
+</div>
+
+</div>
+
+<script>
+
+const frasi = [
+"Non devi essere perfetto, devi continuare.",
+"Un passo alla volta è già progresso.",
+"Respira e vai avanti.",
+"Anche i giorni difficili passano.",
+"La calma è una forma di forza.",
+"Non arrenderti proprio adesso.",
+"Il tuo valore non dipende dagli altri.",
+"Ogni piccolo passo conta.",
+"Puoi sempre ricominciare.",
+"Ciò che oggi è difficile, domani sarà ricordo."
+];
+
+function nuovaFrase(){
+    const i = Math.floor(Math.random() * frasi.length);
+    document.getElementById("frase").innerText = frasi[i];
+}
+
+// frase automatica all'apertura
+window.onload = nuovaFrase;
+
+</script>
+
+</body>
+</html>
