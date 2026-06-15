@@ -27,6 +27,7 @@ h1{
     border-radius: 10px;
     min-height: 300px;
     text-align: left;
+    overflow-y: auto;
 }
 
 .msg{
@@ -38,6 +39,15 @@ h1{
 .user{ background: #ff4444; }
 .ai{ background: #00aa88; }
 
+input{
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
 button{
     padding: 10px 15px;
     border: none;
@@ -46,6 +56,7 @@ button{
     color: white;
     cursor: pointer;
     margin-top: 10px;
+    margin-left: 5px;
 }
 
 button:hover{
@@ -58,22 +69,18 @@ button:hover{
 
 <h1>🎤 Assistente Vocale Oreste AI</h1>
 
+<input id="input" placeholder="Scrivi o parla..." />
+
+<br>
+
+<button onclick="ask()">Invia</button>
 <button onclick="voice()">Parla 🎤</button>
 
 <div id="chat"></div>
-<nav>
-<a href="index.html">Home</a>
-<a href="assistente-vocale.html">Assistente</a>
-<a href="chat.html">Chat</a>
-<a href="download.html">Download</a>
-<a href="blog.html">Blog</a>
-<a href="chi-siamo.html">Chi siamo</a>
-<a href="contatti.html">Contatti</a>
-<a href="dashboard.html">Dashboard</a>
-<a href="os.html">Oreste OS</a>
-</nav>
+
 <script>
 
+/* CHAT */
 function addMsg(type, text){
     const chat = document.getElementById("chat");
 
@@ -82,14 +89,20 @@ function addMsg(type, text){
     div.textContent = text;
 
     chat.appendChild(div);
+
+    // scroll automatico
+    chat.scrollTop = chat.scrollHeight;
 }
 
+/* VOCE OUTPUT */
 function speak(text){
     let msg = new SpeechSynthesisUtterance(text);
     msg.lang = "it-IT";
+    speechSynthesis.cancel();
     speechSynthesis.speak(msg);
 }
 
+/* LOGICA AI */
 function handle(text){
 
     text = text.toLowerCase().trim();
@@ -112,13 +125,13 @@ function handle(text){
         return "Apro Canva";
     }
 
-    // 💬 LINKEDIN
+    // 💼 LINKEDIN
     if(text.includes("linkedin")){
         window.open("https://www.linkedin.com","_blank");
         return "Apro LinkedIn";
     }
 
-    // 🧠 APRI SITO GENERICO
+    // 🌐 APRI GENERICO
     if(text.startsWith("apri ")){
         let sito = text.replace("apri ","").trim();
 
@@ -149,6 +162,26 @@ function handle(text){
 
     return "Non ho capito il comando: " + text;
 }
+
+/* INVIA TESTO */
+function ask(){
+    let input = document.getElementById("input");
+    let text = input.value.trim();
+
+    if(!text) return;
+
+    addMsg("user","🧑 " + text);
+
+    let response = handle(text);
+
+    addMsg("ai","🤖 " + response);
+
+    speak(response);
+
+    input.value = "";
+}
+
+/* VOCE */
 function voice(){
 
     const SpeechRecognition =
@@ -169,12 +202,7 @@ function voice(){
 
     addMsg("ai","🎤 Parla adesso...");
 
-    recognition.onstart = function(){
-        console.log("start listening");
-    };
-
     recognition.onresult = function(event){
-        console.log("RESULT ARRIVATO");
 
         const text = event.results[0][0].transcript;
 
@@ -191,16 +219,9 @@ function voice(){
         addMsg("ai","⚠️ Errore: " + event.error);
     };
 
-    recognition.onend = function(){
-        console.log("fine ascolto");
-    };
-
-    try{
-        recognition.start();
-    }catch(e){
-        addMsg("ai","Errore avvio: " + e.message);
-    }
+    recognition.start();
 }
+
 </script>
 
 </body>
