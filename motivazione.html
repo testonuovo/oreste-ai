@@ -9,11 +9,76 @@
 body{
     margin:0;
     font-family: Arial;
-    background: linear-gradient(120deg, #1e3c72, #2a5298);
     color:white;
     text-align:center;
+    overflow-x:hidden;
+    transition: 1s;
 }
 
+/* 🌊 SFONDO */
+.sky{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background: linear-gradient(to top, #0077be, #00c6ff, #87ceeb);
+    z-index:-3;
+    animation: skyMove 10s infinite alternate;
+}
+
+@keyframes skyMove{
+    0% {filter: brightness(1);}
+    100% {filter: brightness(1.2);}
+}
+
+/* ☀️ SOLE CHE CAMMINA */
+.sun{
+    position:fixed;
+    top:60px;
+    left:-120px;
+    width:100px;
+    height:100px;
+    background: yellow;
+    border-radius:50%;
+    box-shadow:0 0 40px yellow;
+    z-index:-2;
+    animation: sunMove 20s linear infinite, sunPulse 3s ease-in-out infinite;
+}
+@keyframes sunMove{
+    0% {left:-120px;}
+    100% {left:110%;}
+}
+
+@keyframes sunPulse{
+    0% {transform: scale(1);}
+    50% {transform: scale(1.1);}
+    100% {transform: scale(1);}
+}
+
+/* 🌊 ONDE */
+.wave{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:200%;
+    height:120px;
+    background: rgba(255,255,255,0.15);
+    border-radius:50%;
+    animation: waveMove 6s infinite linear;
+    z-index:-1;
+}
+
+.wave2{
+    bottom:-20px;
+    opacity:0.5;
+    animation: waveMove 10s infinite linear reverse;
+}
+
+@keyframes waveMove{
+    0% {transform: translateX(0);}
+    100% {transform: translateX(-50%);}
+}
+
+/* CONTENUTO */
 h1{
     margin-top:20px;
 }
@@ -25,12 +90,13 @@ h1{
 }
 
 .card{
-    background: rgba(255,255,255,0.10);
+    background: rgba(0,0,0,0.25);
     padding:20px;
     margin:15px 0;
     border-radius:15px;
     font-size:18px;
     line-height:1.5;
+    transition: 1s;
 }
 
 button{
@@ -40,77 +106,143 @@ button{
     cursor:pointer;
     background:red;
     color:white;
-    margin-top:10px;
+    margin:5px;
 }
 
 button:hover{
     background:darkred;
 }
 
-p{
+a{
     color:white;
+    text-decoration:none;
+    font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
+<!-- 🌊 SFONDO -->
+<div class="sky"></div>
+<div class="sun"></div>
+<div class="wave"></div>
+<div class="wave wave2"></div>
+
+<!-- 🌊 SUONO MARE -->
+<audio id="music" loop>
+  <source src="music/mare.mp3" type="audio/mpeg">
+</audio>
+
 <h1>🌻 Motivazione - Oreste AI</h1>
 
 <div class="container">
 
-<!-- FRASI -->
 <div class="card" id="frase">
-🌻 Clicca il pulsante per ricevere una frase motivazionale
+🌻 Premi un pulsante per iniziare
 </div>
 
+<button onclick="motivami()">💖 Motivami ora</button>
 <button onclick="nuovaFrase()">✨ Nuova frase</button>
+<button onclick="toggleMusic()">🎧 Suono mare</button>
+<button onclick="toggleMeditation()">🧘 Modalità meditazione</button>
 
-<!-- VIDEO 1 -->
 <div class="card">
   <h2>🌻 Sorridi anche quando sei triste</h2>
-
-  <video width="100%" controls>
-    <source src="videos/sorridi.mp4" type="video/mp4">
-  </video>
-
-  <p>Un sorriso può cambiare la giornata di qualcuno.</p>
+  <a href="https://www.youtube.com/shorts/WjHpxfvz4A0" target="_blank">▶ Guarda il video</a>
 </div>
 
-<!-- VIDEO 2 -->
 <div class="card">
   <h2>💪 Non ti arrendere</h2>
-
-  <video width="100%" controls>
-    <source src="videos/non-ti-arrendere.mp4" type="video/mp4">
-  </video>
-
-  <p>Anche quando sembra difficile, continua un passo alla volta.</p>
+  <a href="https://www.youtube.com/shorts/8GSkkc4VjLU" target="_blank">▶ Guarda il video</a>
 </div>
 
 </div>
 
 <script>
 
+let meditation = false;
+let interval = null;
+
 const frasi = [
-"Non devi essere perfetto, devi continuare.",
-"Un passo alla volta è già progresso.",
-"Respira e vai avanti.",
-"Anche i giorni difficili passano.",
-"La calma è una forma di forza.",
-"Non arrenderti proprio adesso.",
-"Il tuo valore non dipende dagli altri.",
-"Ogni piccolo passo conta.",
-"Puoi sempre ricominciare.",
-"Ciò che oggi è difficile, domani sarà ricordo."
+"Respira lentamente...",
+"Sei al sicuro.",
+"Lascia andare i pensieri.",
+"Sei nel presente.",
+"Ogni respiro ti calma.",
+"Non devi fare nulla adesso.",
+"Tutto è già abbastanza così com’è.",
+"La calma è dentro di te.",
+"Rilassa la mente...",
+"Sei qui, e va bene così.",
+"Non ti arrendere mai.",
+"Non ti arrendere mai,neanche quando è tutto finito,è un nuovo inizio."
 ];
 
 function nuovaFrase(){
     const i = Math.floor(Math.random() * frasi.length);
-    document.getElementById("frase").innerText = frasi[i];
+    const box = document.getElementById("frase");
+
+    box.style.opacity = 0;
+
+    setTimeout(()=>{
+        box.innerText = frasi[i];
+        box.style.opacity = 1;
+    },800);
 }
 
-// frase automatica all'apertura
+function motivami(){
+    nuovaFrase();
+    speak(document.getElementById("frase").innerText);
+}
+
+/* 🌊 MARE */
+function toggleMusic(){
+    const music = document.getElementById("music");
+    if(music.paused){
+        music.play();
+    } else {
+        music.pause();
+    }
+}
+
+/* 🧘 MEDITAZIONE */
+function toggleMeditation(){
+    const music = document.getElementById("music");
+
+    meditation = !meditation;
+
+    if(meditation){
+
+        // evita duplicazioni
+        clearInterval(interval);
+
+        music.play();
+        music.volume = 0.4;
+
+        interval = setInterval(()=>{
+            nuovaFrase();
+            speak(document.getElementById("frase").innerText);
+        }, 8000);
+
+        document.body.style.filter = "brightness(0.85) saturate(1.2)";
+
+    } else {
+        music.pause();
+        clearInterval(interval);
+        interval = null;
+        document.body.style.filter = "none";
+    }
+}
+/* 🔊 VOCE */
+function speak(text){
+    let msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "it-IT";
+    msg.rate = 0.9;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
+}
+
 window.onload = nuovaFrase;
 
 </script>
