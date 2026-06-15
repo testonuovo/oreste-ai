@@ -218,9 +218,13 @@ function toggleMusic(){
     music.volume = 0.5;
 
     if(music.paused){
-        music.play().catch(err=>{
+        music.play()
+        .then(()=>{
+            console.log("Audio partito");
+        })
+        .catch(err=>{
             console.log("Errore audio:", err);
-            alert("Premi di nuovo il bottone per attivare l'audio");
+            alert("Clicca di nuovo il bottone per attivare l'audio");
         });
     } else {
         music.pause();
