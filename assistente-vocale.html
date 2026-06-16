@@ -13,9 +13,7 @@ body{
     margin: 0;
 }
 
-h1{
-    margin-top: 20px;
-}
+h1{ margin-top: 20px; }
 
 #chat{
     width: 90%;
@@ -27,7 +25,6 @@ h1{
     border-radius: 10px;
     min-height: 300px;
     text-align: left;
-    overflow-y: auto;
 }
 
 .msg{
@@ -40,12 +37,10 @@ h1{
 .ai{ background: #00aa88; }
 
 input{
-    width: 80%;
+    width: 70%;
     padding: 10px;
     border-radius: 10px;
     border: none;
-    margin-top: 10px;
-    font-size: 16px;
 }
 
 button{
@@ -55,8 +50,7 @@ button{
     background: red;
     color: white;
     cursor: pointer;
-    margin-top: 10px;
-    margin-left: 5px;
+    margin: 5px;
 }
 
 button:hover{
@@ -69,26 +63,13 @@ button:hover{
 
 <h1>🎤 Assistente Vocale Oreste AI</h1>
 
-<input id="input" placeholder="Scrivi o parla..." />
-
-<br>
+<input id="input" placeholder="Scrivi un comando...">
 
 <button onclick="ask()">Invia</button>
-<button onclick="voice()">Parla 🎤</button>
+<button onclick="voice()">🎤 Parla</button>
 
 <div id="chat"></div>
-<nav>
-<a href="index.html">🏠 Home</a>
-<a href="assistente-vocale.html">🎤 Assistente</a>
-<a href="chat.html">💬 Chat</a>
-<a href="motivazione.html">🌻 Motivazione</a>
-<a href="download.html">📥 Download</a>
-<a href="blog.html">📰 Blog</a>
-<a href="chi-siamo.html">👤 Chi siamo</a>
-<a href="contatti.html">📞 Contatti</a>
-<a href="dashboard.html">📊 Dashboard</a>
-<a href="os.html">🖥️ Oreste OS</a>
-</nav>
+
 <script>
 
 /* CHAT */
@@ -100,8 +81,6 @@ function addMsg(type, text){
     div.textContent = text;
 
     chat.appendChild(div);
-
-    // scroll automatico
     chat.scrollTop = chat.scrollHeight;
 }
 
@@ -113,79 +92,65 @@ function speak(text){
     speechSynthesis.speak(msg);
 }
 
-/* LOGICA AI */
+/* LOGICA COMANDI */
 function handle(text){
 
     text = text.toLowerCase().trim();
 
-    // 🌐 GOOGLE
+    if(text.includes("ciao")) return "Ciao! Sono Oreste AI 👋";
+
+    if(text.includes("ora"))
+        return "Sono le " + new Date().toLocaleTimeString();
+
+    if(text.includes("data"))
+        return "Oggi è " + new Date().toLocaleDateString();
+
     if(text.includes("google")){
-        window.open("https://www.google.com","_blank");
+        window.open("https://www.google.com", "_blank");
         return "Apro Google";
     }
 
-    // ▶️ YOUTUBE
     if(text.includes("youtube")){
-        window.open("https://www.youtube.com","_blank");
+        window.open("https://www.youtube.com", "_blank");
         return "Apro YouTube";
     }
 
-    // 🎨 CANVA
     if(text.includes("canva")){
-        window.open("https://www.canva.com","_blank");
+        window.open("https://www.canva.com", "_blank");
         return "Apro Canva";
     }
 
-    // 💼 LINKEDIN
-    if(text.includes("linkedin")){
-        window.open("https://www.linkedin.com","_blank");
-        return "Apro LinkedIn";
+    if(text.includes("facebook")){
+        window.open("https://www.facebook.com", "_blank");
+        return "Apro Facebook";
     }
 
-    // 🌐 APRI GENERICO
-    if(text.startsWith("apri ")){
-        let sito = text.replace("apri ","").trim();
-
-        if(!sito.startsWith("http")){
-            sito = "https://" + sito;
-        }
-
-        window.open(sito, "_blank");
-        return "Apro " + sito;
+    if(text.includes("instagram")){
+        window.open("https://www.instagram.com", "_blank");
+        return "Apro Instagram";
     }
 
-    // 🎤 CIAO
-    if(text.includes("ciao")){
-        return "Ciao! Sono Oreste AI 👋";
-    }
-
-    // 🕒 ORA
-    if(text.includes("che ora è") || text.includes("ora")){
-        return "Sono le " + new Date().toLocaleTimeString();
-    }
-
-    // 🔎 CERCA
     if(text.startsWith("cerca")){
         let q = text.replace("cerca","").trim();
-        window.open("https://www.google.com/search?q=" + encodeURIComponent(q), "_blank");
+        window.open("https://www.google.com/search?q=" + encodeURIComponent(q));
         return "Cerco " + q;
     }
 
     return "Non ho capito il comando: " + text;
 }
 
-/* INVIA TESTO */
+/* INPUT TESTO */
 function ask(){
     let input = document.getElementById("input");
-    let text = input.value.trim();
+    let text = input.value;
 
     if(!text) return;
 
-    addMsg("user","🧑 " + text);
+    addMsg("user", "🧑 " + text);
 
     let response = handle(text);
 
-    addMsg("ai","🤖 " + response);
+    addMsg("ai", "🤖 " + response);
 
     speak(response);
 
@@ -196,42 +161,44 @@ function ask(){
 function voice(){
 
     const SpeechRecognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
+        window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if(!SpeechRecognition){
-        alert("Voce non supportata");
+        alert("Il browser non supporta la voce");
         return;
     }
 
     const recognition = new SpeechRecognition();
-
     recognition.lang = "it-IT";
     recognition.continuous = false;
     recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
 
-    addMsg("ai","🎤 Parla adesso...");
+    addMsg("ai", "🎤 Ti ascolto...");
 
     recognition.onresult = function(event){
 
         const text = event.results[0][0].transcript;
 
-        addMsg("user","🧑 " + text);
+        addMsg("user", "🧑 " + text);
 
         const response = handle(text);
 
-        addMsg("ai","🤖 " + response);
+        addMsg("ai", "🤖 " + response);
 
         speak(response);
     };
 
-    recognition.onerror = function(event){
-        addMsg("ai","⚠️ Errore: " + event.error);
+    recognition.onerror = function(e){
+        addMsg("ai", "⚠️ Errore: " + e.error);
     };
 
     recognition.start();
 }
+
+/* AVVIO */
+window.onload = function(){
+    addMsg("ai", "Ciao! Sono Oreste AI 👋");
+};
 
 </script>
 
