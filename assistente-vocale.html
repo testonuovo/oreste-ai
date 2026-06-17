@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+
+<title>Oreste AI - Assistente vocale italiano creato da Oreste De Chiara</title>
+
+<meta name="description" content="Oreste AI è un assistente vocale italiano online creato da Oreste De Chiara. Comandi vocali, ricerca web e automazioni gratuite.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Oreste De Chiara">
+
+<link rel="canonical" href="https://testonuovo.github.io/oreste-ai/">
+
+<meta property="og:title" content="Oreste AI - creato da Oreste De Chiara">
+<meta property="og:description" content="Assistente vocale italiano gratuito con comandi vocali e AI web.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://testonuovo.github.io/oreste-ai/">
+
+<style>
+body{
+    font-family: Arial;
+    background:#0a3d91;
+    color:white;
+    text-align:center;
+    margin:0;
+}
+
+h1{ margin-top:20px; }
+
+#chat{
+    width:90%;
+    max-width:600px;
+    margin:20px auto;
+    background:rgba(0,0,0,0.3);
+    padding:10px;
+    border-radius:10px;
+    min-height:300px;
+    text-align:left;
+}
+
+input{
+    width:70%;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+}
+
+button{
+    padding:10px 15px;
+    margin:5px;
+    border:none;
+    border-radius:10px;
+    background:red;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:darkred;
+}
+
+.msg{
+    margin:8px 0;
+    padding:8px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎤 Oreste AI</h1>
+
+<p>Assistente vocale creato da Oreste De Chiara</p>
+
+<input id="input" placeholder="Scrivi o parla...">
+<button onclick="ask()">Invia</button>
+<button onclick="voice()">🎤 Parla</button>
+
+<div id="chat"></div>
+
+<script>
+
+/* CHAT */
+function addMsg(type, text){
+    const chat = document.getElementById("chat");
+
+    const div = document.createElement("div");
+    div.className = "msg " + type;
+    div.textContent = text;
+
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+/* VOCE OUTPUT */
+function speak(text){
+    let msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "it-IT";
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
+}
+
+/* LOGICA */
+function handle(text){
+
+    text = text.toLowerCase();
+
+    if(text.includes("ciao")) return "Ciao! Sono Oreste AI 👋";
+    if(text.includes("ora")) return new Date().toLocaleTimeString();
+    if(text.includes("data")) return new Date().toLocaleDateString();
+
+    if(text.includes("google")){
+        window.open("https://www.google.com","_blank");
+        return "Apro Google";
+    }
+
+    if(text.includes("youtube")){
+        window.open("https://www.youtube.com","_blank");
+        return "Apro YouTube";
+    }
+
+    if(text.includes("canva")){
+        window.open("https://www.canva.com","_blank");
+        return "Apro Canva";
+    }
+
+    if(text.includes("facebook")){
+        window.open("https://www.facebook.com","_blank");
+        return "Apro Facebook";
+    }
+
+    if(text.includes("instagram")){
+        window.open("https://www.instagram.com","_blank");
+        return "Apro Instagram";
+    }
+
+    if(text.startsWith("cerca")){
+        let q = text.replace("cerca","").trim();
+        window.open("https://www.google.com/search?q="+encodeURIComponent(q));
+        return "Cerco " + q;
+    }
+
+    return "Non ho capito il comando";
+}
+
+/* INPUT */
+function ask(){
+    let input = document.getElementById("input");
+    let text = input.value.trim();
+
+    if(!text) return;
+
+    addMsg("user","🧑 " + text);
+
+    let res = handle(text);
+
+    addMsg("ai","🤖 " + res);
+
+    speak(res);
+
+    input.value = "";
+}
+
+/* VOCE */
+function voice(){
+
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if(!SR){
+        alert("Voce non supportata");
+        return;
+    }
+
+    let r = new SR();
+    r.lang = "it-IT";
+
+    addMsg("ai","🎤 Ti ascolto...");
+
+    r.onresult = (e) => {
+
+        let text = e.results[0][0].transcript;
+
+        addMsg("user","🧑 " + text);
+
+        let res = handle(text);
+
+        addMsg("ai","🤖 " + res);
+
+        speak(res);
+    };
+
+    r.start();
+}
+
+/* AVVIO */
+window.onload = function(){
+    addMsg("ai","Ciao! Sono Oreste AI 👋");
+};
+
+</script>
+
+</body>
+</html>
