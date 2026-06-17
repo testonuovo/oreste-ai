@@ -133,14 +133,14 @@ function playAudio(){
 function startAudio(){
     const music = document.getElementById("music");
 
-    music.volume = 0.5;
+    music.volume=1.0
 
     const playPromise = music.play();
 
     if (playPromise !== undefined) {
         playPromise
         .then(() => {
-            console.log("Audio partito");
+            consoloe.log("Audio attivato");
         })
         .catch(err => {
             alert("Bloccato dal browser: clicca di nuovo il bottone");
