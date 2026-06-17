@@ -5,11 +5,12 @@
 
 <title>Oreste AI - Assistente vocale italiano creato da Oreste De Chiara</title>
 
-<meta name="description" content="Oreste AI è un assistente vocale italiano online creato da Oreste De Chiara. Comandi vocali, ricerca web e automazioni gratuite.">
+<meta name="description" content="Oreste AI è un assistente vocale italiano online creato da Oreste De Chiara. Comandi vocali, ricerca web e automazioni gratuite nel browser.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Oreste De Chiara">
 
 <link rel="canonical" href="https://testonuovo.github.io/oreste-ai/">
+<link rel="icon" href="oreste-ai.png">
 
 <meta property="og:title" content="Oreste AI - creato da Oreste De Chiara">
 <meta property="og:description" content="Assistente vocale italiano gratuito con comandi vocali e AI web.">
@@ -25,7 +26,15 @@ body{
     margin:0;
 }
 
-h1{ margin-top:20px; }
+h1{
+    margin-top:20px;
+}
+
+nav a{
+    color:white;
+    margin:10px;
+    text-decoration:none;
+}
 
 #chat{
     width:90%;
@@ -68,26 +77,44 @@ button:hover{
 
 <body>
 
-<h1>🎤 Oreste AI</h1>
+<h1>🎤 Oreste AI - Assistente vocale creato da Oreste De Chiara</h1>
+
 <nav>
-<a href="index.html">🏠 Home</a>
-<a href="assistente-vocale.html">🎤 Assistente</a>
-<a href="chat.html">💬 Chat</a>
-<a href="motivazione.html">🌻 Motivazione</a>
-<a href="download.html">📥 Download</a>
-<a href="blog.html">📰 Blog</a>
-<a href="chi-siamo.html">👤 Chi siamo</a>
-<a href="contatti.html">📞 Contatti</a>
-<a href="dashboard.html">📊 Dashboard</a>
-<a href="os.html">🖥️ Oreste OS</a>
+<a href="index.html">Home</a>
+<a href="assistente-vocale.html">Assistente</a>
+<a href="chat.html">Chat</a>
+<a href="blog.html">Blog</a>
+<a href="chi-siamo.html">Chi siamo</a>
+<a href="contatti.html">Contatti</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="os.html">Oreste OS</a>
 </nav>
-<p>Assistente vocale creato da Oreste De Chiara</p>
+
+<p>Assistente vocale italiano creato da Oreste De Chiara</p>
 
 <input id="input" placeholder="Scrivi o parla...">
 <button onclick="ask()">Invia</button>
 <button onclick="voice()">🎤 Parla</button>
 
 <div id="chat"></div>
+
+<section>
+<h2>Oreste AI - Assistente vocale italiano</h2>
+
+<p>
+Oreste AI è un assistente vocale italiano creato da Oreste De Chiara.
+Permette di aprire siti web, fare ricerche e usare comandi vocali direttamente dal browser.
+</p>
+
+<p>
+Il progetto è gratuito e in continuo sviluppo con nuove funzioni.
+Non richiede installazione.
+</p>
+
+<p>
+Keyword: Oreste AI, assistente vocale italiano, creato da Oreste De Chiara, AI browser.
+</p>
+</section>
 
 <script>
 
@@ -111,14 +138,18 @@ function speak(text){
     speechSynthesis.speak(msg);
 }
 
-/* LOGICA */
+/* LOGICA COMANDI */
 function handle(text){
 
     text = text.toLowerCase();
 
     if(text.includes("ciao")) return "Ciao! Sono Oreste AI 👋";
-    if(text.includes("ora")) return new Date().toLocaleTimeString();
-    if(text.includes("data")) return new Date().toLocaleDateString();
+
+    if(text.includes("ora"))
+        return "Sono le " + new Date().toLocaleTimeString();
+
+    if(text.includes("data"))
+        return "Oggi è " + new Date().toLocaleDateString();
 
     if(text.includes("google")){
         window.open("https://www.google.com","_blank");
@@ -143,6 +174,12 @@ function handle(text){
     if(text.includes("instagram")){
         window.open("https://www.instagram.com","_blank");
         return "Apro Instagram";
+    }
+
+    if(text.includes("mare")){
+        const audio = new Audio("mare.mp3");
+        audio.play();
+        return "Attivo suono del mare 🌊";
     }
 
     if(text.startsWith("cerca")){
