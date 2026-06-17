@@ -130,10 +130,19 @@ a{
 <div class="wave wave2"></div>
 
 <!-- 🌊 SUONO MARE -->
-<audio controls loop>
-  <source src="https://actions.google.com/sounds/v1/ambiences/ocean_waves.ogg" type="audio/ogg">
+<audio id="music" loop preload="auto">
+  <source src="./music/mare.mp3" type="audio/mpeg">
 </audio>
 
+<button onclick="startAudio()">🌊 Attiva mare</button>
+
+<script>
+function startAudio(){
+    const music = document.getElementById("music");
+    music.volume = 0.5;
+    music.play();
+}
+</script>
 <h1>🌻 Motivazione - Oreste AI</h1>
 <nav>
 <a href="index.html">🏠 Home</a>
