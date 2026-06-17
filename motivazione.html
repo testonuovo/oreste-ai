@@ -2,17 +2,16 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Motivazione - Oreste AI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motivazione - Oreste AI</title>
 
 <style>
 body{
     margin:0;
-    font-family: Arial;
+    font-family:Arial;
     color:white;
     text-align:center;
     overflow-x:hidden;
-    transition: 1s;
 }
 
 /* 🌊 SFONDO */
@@ -20,38 +19,27 @@ body{
     position:fixed;
     width:100%;
     height:100%;
-    background: linear-gradient(to top, #0077be, #00c6ff, #87ceeb);
+    background:linear-gradient(to top,#0077be,#00c6ff,#87ceeb);
     z-index:-3;
-    animation: skyMove 10s infinite alternate;
 }
 
-@keyframes skyMove{
-    0% {filter: brightness(1);}
-    100% {filter: brightness(1.2);}
-}
-
-/* ☀️ SOLE CHE CAMMINA */
+/* ☀️ SOLE */
 .sun{
     position:fixed;
     top:60px;
     left:-120px;
     width:100px;
     height:100px;
-    background: yellow;
+    background:yellow;
     border-radius:50%;
     box-shadow:0 0 40px yellow;
+    animation:sunMove 20s linear infinite;
     z-index:-2;
-    animation: sunMove 20s linear infinite, sunPulse 3s ease-in-out infinite;
-}
-@keyframes sunMove{
-    0% {left:-120px;}
-    100% {left:110%;}
 }
 
-@keyframes sunPulse{
-    0% {transform: scale(1);}
-    50% {transform: scale(1.1);}
-    100% {transform: scale(1);}
+@keyframes sunMove{
+    0%{left:-120px;}
+    100%{left:110%;}
 }
 
 /* 🌊 ONDE */
@@ -61,28 +49,23 @@ body{
     left:0;
     width:200%;
     height:120px;
-    background: rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.15);
     border-radius:50%;
-    animation: waveMove 6s infinite linear;
+    animation:waveMove 6s linear infinite;
     z-index:-1;
 }
 
 .wave2{
-    bottom:-20px;
     opacity:0.5;
-    animation: waveMove 10s infinite linear reverse;
+    animation:waveMove 10s linear infinite reverse;
 }
 
 @keyframes waveMove{
-    0% {transform: translateX(0);}
-    100% {transform: translateX(-50%);}
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
 }
 
 /* CONTENUTO */
-h1{
-    margin-top:20px;
-}
-
 .container{
     width:90%;
     max-width:800px;
@@ -90,204 +73,96 @@ h1{
 }
 
 .card{
-    background: rgba(0,0,0,0.25);
+    background:rgba(0,0,0,0.25);
     padding:20px;
     margin:15px 0;
     border-radius:15px;
-    font-size:18px;
-    line-height:1.5;
-    transition: 1s;
 }
 
 button{
     padding:10px 15px;
     border:none;
     border-radius:10px;
-    cursor:pointer;
     background:red;
     color:white;
+    cursor:pointer;
     margin:5px;
-}
-
-button:hover{
-    background:darkred;
-}
-
-a{
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🌊 SFONDO -->
 <div class="sky"></div>
 <div class="sun"></div>
 <div class="wave"></div>
 <div class="wave wave2"></div>
 
-<!-- 🌊 SUONO MARE -->
-<audio id="music" preload="auto">
-  <source src="./music/mare.mp3" type="audio/mpeg">
-</audio>
-
-<button onclick="startAudio()">🌊 Attiva suono mare</button>
-
-<script>
-function startAudio(){
-    const music = document.getElementById("music");
-    music.volume = 0.5;
-
-    music.play().catch(err=>{
-        console.log("Bloccato dal browser:", err);
-    });
-}
-</script>
-
-<button onclick="startAudio()">🌊 Attiva mare</button>
-
-<script>
-function startAudio(){
-    const music = document.getElementById("music");
-    music.volume = 0.5;
-    music.play();
-}
-</script>
 <h1>🌻 Motivazione - Oreste AI</h1>
-<nav>
-<a href="index.html">🏠 Home</a>
-<a href="assistente-vocale.html">🎤 Assistente</a>
-<a href="chat.html">💬 Chat</a>
-<a href="motivazione.html">🌻 Motivazione</a>
-<a href="download.html">📥 Download</a>
-<a href="blog.html">📰 Blog</a>
-<a href="chi-siamo.html">👤 Chi siamo</a>
-<a href="contatti.html">📞 Contatti</a>
-<a href="dashboard.html">📊 Dashboard</a>
-<a href="os.html">🖥️ Oreste OS</a>
-</nav>
+
 <div class="container">
 
 <div class="card" id="frase">
-🌻 Premi un pulsante per iniziare
+Premi un pulsante 🌊
 </div>
 
 <button onclick="motivami()">💖 Motivami ora</button>
 <button onclick="nuovaFrase()">✨ Nuova frase</button>
-<button onclick="toggleMusic()">🎧 Suono mare</button>
-<button onclick="toggleMeditation()">🧘 Modalità meditazione</button>
-
-<div class="card">
-  <h2>🌻 Sorridi anche quando sei triste</h2>
-  <a href="https://www.youtube.com/shorts/WjHpxfvz4A0" target="_blank">▶ Guarda il video</a>
-</div>
-
-<div class="card">
-  <h2>💪 Non ti arrendere</h2>
-  <a href="https://www.youtube.com/shorts/8GSkkc4VjLU" target="_blank">▶ Guarda il video</a>
-</div>
+<button onclick="toggleAudio()">🌊 Suono mare</button>
 
 </div>
+
+<!-- 🎧 AUDIO (GITHUB READY) -->
+<audio id="music" loop preload="auto">
+    <source src="music/mare.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-
-let meditation = false;
-let interval = null;
 
 const frasi = [
 "Respira lentamente...",
 "Sei al sicuro.",
-"Lascia andare i pensieri.",
-"Sei nel presente.",
-"Ogni respiro ti calma.",
-"Non devi fare nulla adesso.",
-"Tutto è già abbastanza così com’è.",
+"Non ti arrendere.",
+"Ogni passo conta.",
 "La calma è dentro di te.",
-"Rilassa la mente...",
-"Sei qui, e va bene così.",
-"Non ti arrendere mai.",
-"Non ti arrendere mai,neanche quando è tutto finito,è un nuovo inizio."
+"Sei più forte di quanto pensi.",
+"Ogni giorno è un nuovo inizio.",
+"Puoi ricominciare quando vuoi.",
+"La serenità è dentro di te."
 ];
 
 function nuovaFrase(){
-    const i = Math.floor(Math.random() * frasi.length);
     const box = document.getElementById("frase");
-
-    box.style.opacity = 0;
-
-    setTimeout(()=>{
-        box.innerText = frasi[i];
-        box.style.opacity = 1;
-    },800);
+    const i = Math.floor(Math.random()*frasi.length);
+    box.innerText = frasi[i];
 }
 
 function motivami(){
     nuovaFrase();
-    speak(document.getElementById("frase").innerText);
+
+    let msg = new SpeechSynthesisUtterance(
+        document.getElementById("frase").innerText
+    );
+
+    msg.lang = "it-IT";
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
 }
 
-/* 🌊 MARE */
-function toggleMusic(){
-    const music = document.getElementById("music");
+/* 🌊 AUDIO FIX DEFINITIVO */
+function toggleAudio(){
 
-    if(!music){
-        alert("Audio non trovato!");
-        return;
-    }
+    const music = document.getElementById("music");
 
     music.volume = 0.5;
 
     if(music.paused){
-        music.play()
-        .then(()=>{
-            console.log("Audio partito");
-        })
-        .catch(err=>{
-            console.log("Errore audio:", err);
-            alert("Clicca di nuovo il bottone per attivare l'audio");
+        music.play().catch(err=>{
+            alert("Errore audio: " + err.message);
         });
-    } else {
+    }else{
         music.pause();
     }
-}
-/* 🧘 MEDITAZIONE */
-function toggleMeditation(){
-    const music = document.getElementById("music");
-
-    meditation = !meditation;
-
-    if(meditation){
-
-        // evita duplicazioni
-        clearInterval(interval);
-
-        music.play();
-        music.volume = 0.4;
-
-        interval = setInterval(()=>{
-            nuovaFrase();
-            speak(document.getElementById("frase").innerText);
-        }, 8000);
-
-        document.body.style.filter = "brightness(0.85) saturate(1.2)";
-
-    } else {
-        music.pause();
-        clearInterval(interval);
-        interval = null;
-        document.body.style.filter = "none";
-    }
-}
-/* 🔊 VOCE */
-function speak(text){
-    let msg = new SpeechSynthesisUtterance(text);
-    msg.lang = "it-IT";
-    msg.rate = 0.9;
-    speechSynthesis.cancel();
-    speechSynthesis.speak(msg);
 }
 
 window.onload = nuovaFrase;
