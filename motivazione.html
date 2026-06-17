@@ -185,8 +185,7 @@ function toggleAudio(){
 
     const music = document.getElementById("music");
 
-    music.volume = 0.5;
-
+    music.volume=1.0;
     if(music.paused){
         music.play().catch(err=>{
             alert("Errore audio: " + err.message);
