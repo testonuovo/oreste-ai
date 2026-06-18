@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motivazione - Oreste AI</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    color:white;
+    text-align:center;
+    overflow-x:hidden;
+}
+
+/* 🌊 SFONDO */
+.sky{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:linear-gradient(to top,#0077be,#00c6ff,#87ceeb);
+    z-index:-3;
+}
+
+.sun{
+    position:fixed;
+    top:60px;
+    left:-120px;
+    width:100px;
+    height:100px;
+    background:yellow;
+    border-radius:50%;
+    box-shadow:0 0 40px yellow;
+    animation:sunMove 20s linear infinite;
+    z-index:-2;
+}
+
+@keyframes sunMove{
+    0%{left:-120px;}
+    100%{left:110%;}
+}
+
+.wave{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:200%;
+    height:120px;
+    background:rgba(255,255,255,0.15);
+    border-radius:50%;
+    animation:waveMove 6s linear infinite;
+    z-index:-1;
+}
+
+.wave2{
+    opacity:0.5;
+    animation:waveMove 10s linear infinite reverse;
+}
+
+@keyframes waveMove{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+}
+
+.container{
+    width:90%;
+    max-width:800px;
+    margin:30px auto;
+}
+
+.card{
+    background:rgba(0,0,0,0.25);
+    padding:20px;
+    margin:15px 0;
+    border-radius:15px;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    background:red;
+    color:white;
+    cursor:pointer;
+    margin:5px;
+}
+a{
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sky"></div>
+<div class="sun"></div>
+<div class="wave"></div>
+<div class="wave wave2"></div>
+
+<h1>🌻 Motivazione - Oreste AI</h1>
+
+<div class="container">
+
+<div class="card" id="frase">
+Premi un pulsante 🌊
+</div>
+
+<button onclick="motivami()">💖 Motivami ora</button>
+<button onclick="nuovaFrase()">✨ Nuova frase</button>
+<button onclick="toggleAudio()">🌊 Suono mare</button>
+
+<audio id="music" preload="auto">
+  <source src="https://www.dropbox.com/scl/fi/k1yh855pre1jhhh0nk97z/mare.mp3?rlkey=ew3ixaqufzvmyt8xf0o3t9tgp&dl=1" type="audio/mpeg">
+</audio>
+
+<!-- 🎬 VIDEO -->
+ <div class="card">
+  <h2>🎬 Video Motivazionali</h2>
+</div>
+
+<div class="card">
+  <h3>Il silenzio è forza</h3>
+  <a href="https://www.youtube.com/shorts/0P1oNhdWL8Q" target="_blank">
+    ▶ Guarda il video
+  </a>
+</div>
+
+<div class="card">
+  <h3>💪Credi in te stesso</h3>
+  <a href="https://www.youtube.com/shorts/2CEJzlZR7gc" target="_blank">
+    ▶ Guarda il video
+  </a>
+</div>
+
+<div class="card">
+  <h3>🚀IL fuoco dentro</h3>
+  <a href="https://www.youtube.com/shorts/MGYU_zIlpoA" target="_blank">
+    ▶ Guarda il video
+  </a>
+</div> 
+
+  
+  
+  
+</div>
+
+<script>
+
+/* 🌻 FRASI */
+const frasi = [
+"Respira lentamente...",
+"Sei al sicuro.",
+"Non ti arrendere.",
+"Ogni passo conta.",
+"La calma è dentro di te.",
+"Sei più forte di quanto pensi.",
+"Ogni giorno è un nuovo inizio.",
+"Puoi ricominciare quando vuoi.",
+"La serenità è dentro di te.",
+"Non ti arrendere."
+];
+
+function nuovaFrase(){
+    const box = document.getElementById("frase");
+    const i = Math.floor(Math.random() * frasi.length);
+    box.innerText = frasi[i];
+}
+
+function motivami(){
+    nuovaFrase();
+
+    let msg = new SpeechSynthesisUtterance(
+        document.getElementById("frase").innerText
+    );
+
+    msg.lang = "it-IT";
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
+}
+
+/* 🌊 AUDIO */
+function toggleAudio(){
+
+    const music = document.getElementById("music");
+
+    music.volume = 0.5;
+
+    if(music.paused){
+        music.play().catch(err=>{
+            alert("Errore audio: " + err.message);
+        });
+    } else {
+        music.pause();
+    }
+}
+
+window.onload = nuovaFrase;
+
+</script>
+
+</body>
+</html>
