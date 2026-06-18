@@ -23,7 +23,6 @@ body{
     z-index:-3;
 }
 
-/* ☀️ SOLE */
 .sun{
     position:fixed;
     top:60px;
@@ -42,7 +41,6 @@ body{
     100%{left:110%;}
 }
 
-/* 🌊 ONDE */
 .wave{
     position:fixed;
     bottom:0;
@@ -65,7 +63,6 @@ body{
     100%{transform:translateX(-50%);}
 }
 
-/* CONTENUTO */
 .container{
     width:90%;
     max-width:800px;
@@ -108,29 +105,52 @@ Premi un pulsante 🌊
 
 <button onclick="motivami()">💖 Motivami ora</button>
 <button onclick="nuovaFrase()">✨ Nuova frase</button>
-<button onclick="playAudio()">🌊 Avvia mare</button>
-<audio id="music" controls>
+<button onclick="toggleAudio()">🌊 Suono mare</button>
+
+<audio id="music" preload="auto">
   <source src="https://www.dropbox.com/scl/fi/k1yh855pre1jhhh0nk97z/mare.mp3?rlkey=ew3ixaqufzvmyt8xf0o3t9tgp&dl=1" type="audio/mpeg">
 </audio>
 
+<!-- 🎬 VIDEO -->
+<div class="card">
+  <h2>🔥 Video motivazionale</h2>
+  <h2>🔥 Il silenzio è forza</h2>
+  <iframe width="100%" height="315"
+    src="https://www.youtube.com/shorts/0P1oNhdWL8Q"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
 </div>
 
+<h2>🔥 Video motivazionale</h2>
+<h2>🔥 Credi in te stesso</h2>
+  <iframe width="100%" height="315"
+    src="https://www.youtube.com/shorts/2CEJzlZR7gc"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+</div>
+
+  
+  <h2>🔥 Video motivazionale</h2>
+  <h2>🔥 IL fuoco dentro</h2>
+  <iframe width="100%" height="315"
+    src="https://www.youtube.com/shorts/MGYU_zIlpoA"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+</div>
+
+  
+
+  
+  
+  
+</div>
 
 <script>
-function playAudio(){
-    const music = document.getElementById("music");
-    music.volume = 0.5;
 
-    music.play().catch(err=>{
-        alert("Errore: " + err.message);
-    });
-}
-</script>
-
-
-
-
-
+/* 🌻 FRASI */
 const frasi = [
 "Respira lentamente...",
 "Sei al sicuro.",
@@ -140,12 +160,13 @@ const frasi = [
 "Sei più forte di quanto pensi.",
 "Ogni giorno è un nuovo inizio.",
 "Puoi ricominciare quando vuoi.",
-"La serenità è dentro di te."
+"La serenità è dentro di te.",
+"Non ti arrendere."
 ];
 
 function nuovaFrase(){
     const box = document.getElementById("frase");
-    const i = Math.floor(Math.random()*frasi.length);
+    const i = Math.floor(Math.random() * frasi.length);
     box.innerText = frasi[i];
 }
 
@@ -161,17 +182,18 @@ function motivami(){
     speechSynthesis.speak(msg);
 }
 
-/* 🌊 AUDIO FIX DEFINITIVO */
+/* 🌊 AUDIO */
 function toggleAudio(){
 
     const music = document.getElementById("music");
 
-    music.volume=0.5;
+    music.volume = 0.5;
+
     if(music.paused){
         music.play().catch(err=>{
             alert("Errore audio: " + err.message);
         });
-    }else{
+    } else {
         music.pause();
     }
 }
