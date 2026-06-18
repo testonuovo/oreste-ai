@@ -92,7 +92,11 @@ text-decoration:none;
 </head>
 
 <body>
+<audio id="bgMusic" loop>
+  <source src="./music/mare.mp3" type="audio/mpeg">
+</audio>
 
+<button onclick="toggleMusic()">🎵 Musica</button>
 <div class="sky"></div>
 <div class="sun"></div>
 <div class="wave"></div>
@@ -207,7 +211,20 @@ function toggleAudio(){
 }
 
 window.onload = nuovaFrase;
+function toggleMusic(){
+    const music = document.getElementById("bgMusic");
 
+    if(music.paused){
+        music.volume = 0.4;
+        music.play().then(()=>{
+            console.log("Musica avviata");
+        }).catch(err=>{
+            alert("Audio bloccato dal browser: " + err.message);
+        });
+    } else {
+        music.pause();
+    }
+}
 </script>
 
 </body>
