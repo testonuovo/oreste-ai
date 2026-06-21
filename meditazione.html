@@ -36,7 +36,6 @@ button{
     background:green;
     color:white;
     cursor:pointer;
-    font-size:16px;
 }
 
 button:hover{
@@ -49,7 +48,7 @@ button:hover{
     height:120px;
     margin:30px auto;
     border-radius:50%;
-    background:rgba(0, 200, 255, 0.5);
+    background:blue;
     animation:breathe 6s infinite;
 }
 
@@ -77,7 +76,7 @@ button:hover{
     <button onclick="stopMeditation()">⛔ Stop meditazione</button>
 
     <audio id="music" loop>
-        <source src="music/mare.mp3" type="audio/mpeg">
+        <source src="C:\Users\ADMiN\Downloads\mare.mp3" type="audio/mpeg">
     </audio>
 
 </div>
@@ -99,13 +98,14 @@ const frasi = [
 let meditationInterval = null;
 let index = 0;
 
-/* ▶️ AVVIA MEDITAZIONE */
+/* ▶️ AVVIA */
 function startMeditation(){
 
-    stopMeditation(); // evita doppio avvio
+    stopMeditation(); // sicurezza
 
     const music = document.getElementById("music");
     music.volume = 0.4;
+
     music.play().catch(()=>{});
 
     index = 0;
@@ -128,7 +128,7 @@ function startMeditation(){
     speechSynthesis.speak(msg);
 }
 
-/* ⛔ STOP MEDITAZIONE */
+/* ⛔ STOP */
 function stopMeditation(){
 
     // ferma timer
