@@ -9,7 +9,7 @@
 body{
     margin:0;
     font-family:Arial;
-    background:blue;
+    background: linear-gradient(to bottom, #001f3f, #0077be);
     color:white;
     text-align:center;
     overflow:hidden;
@@ -76,7 +76,7 @@ button:hover{
     <button onclick="stopMeditation()">⛔ Stop meditazione</button>
 
     <audio id="music" loop>
-        <source src="mare.mp3" type="audio/mpeg">
+        <source src="music/mare.mp3" type="audio/mpeg">
     </audio>
 
 </div>
@@ -85,7 +85,6 @@ button:hover{
 
 <script>
 
-/* 🌱 frasi meditazione */
 const frasi = [
 "Respira profondamente...",
 "Lascia andare la tensione...",
@@ -98,10 +97,9 @@ const frasi = [
 let meditationInterval = null;
 let index = 0;
 
-/* ▶️ AVVIA */
 function startMeditation(){
 
-    stopMeditation(); // sicurezza
+    stopMeditation();
 
     const music = document.getElementById("music");
     music.volume = 0.4;
@@ -121,26 +119,21 @@ function startMeditation(){
 
     }, 4000);
 
-    // voce iniziale
     let msg = new SpeechSynthesisUtterance("Inizia la meditazione. Respira lentamente.");
     msg.lang = "it-IT";
     speechSynthesis.cancel();
     speechSynthesis.speak(msg);
 }
 
-/* ⛔ STOP */
 function stopMeditation(){
 
-    // ferma timer
     clearInterval(meditationInterval);
     meditationInterval = null;
 
-    // ferma musica
     const music = document.getElementById("music");
     music.pause();
     music.currentTime = 0;
 
-    // ferma voce
     speechSynthesis.cancel();
 
     document.getElementById("text").innerText = "Meditazione fermata ⛔";
