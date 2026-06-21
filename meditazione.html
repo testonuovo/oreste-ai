@@ -2,64 +2,151 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Oreste AI - Menu</title>
+<title>Meditazione - Oreste AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
-    font-family:Arial;
-    background:#0a3d91;
-    color:white;
     margin:0;
-    text-align:center;
-}
-
-nav{
-    background:rgba(0,0,0,0.4);
-    padding:15px;
-}
-
-nav a{
+    font-family:Arial;
+    background: linear-gradient(to bottom, #001f3f, #0077be);
     color:white;
-    text-decoration:none;
+    text-align:center;
+    overflow:hidden;
+}
+
+.container{
+    margin-top:60px;
+    padding:20px;
+}
+
+.card{
+    background:rgba(0,0,0,0.3);
+    padding:20px;
+    border-radius:15px;
+    max-width:600px;
+    margin:auto;
+}
+
+button{
+    padding:12px 18px;
     margin:10px;
-    padding:8px 12px;
-    border-radius:8px;
-    background:rgba(255,255,255,0.1);
-    display:inline-block;
+    border:none;
+    border-radius:10px;
+    background:green;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
 }
 
-nav a:hover{
-    background:yellow;
-    color:black;
+button:hover{
+    background:darkgreen;
 }
 
-h1{
-    margin-top:30px;
+/* 🌊 animazione respiro */
+.circle{
+    width:120px;
+    height:120px;
+    margin:30px auto;
+    border-radius:50%;
+    background:rgba(0, 200, 255, 0.5);
+    animation:breathe 6s infinite;
+}
+
+@keyframes breathe{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.5);}
+    100%{transform:scale(1);}
 }
 </style>
-
 </head>
 
 <body>
 
-<h1>🎤 Oreste AI</h1>
+<h1>🧘 Meditazione - Oreste AI</h1>
 
-<nav>
-    <a href="index.html">🏠 Home</a>
-    <a href="assistente-vocale.html">🎤 Assistente</a>
-    <a href="chat.html">💬 Chat</a>
-    <a href="motivazione.html">🌻 Motivazione</a>
-    <a href="meditazione.html">🧘 Meditazione</a>
-    <a href="download.html">📥 Download</a>
-    <a href="blog.html">📰 Blog</a>
-    <a href="chi-siamo.html">👤 Chi siamo</a>
-    <a href="contatti.html">📞 Contatti</a>
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="os.html">🖥️ Oreste OS</a>
-    <a href="chi-ha-creato-oreste-ai.html">👨‍💻Chi creato Oreste AI</a>
-</nav>
+<div class="container">
 
-<p>Benvenuto in Oreste AI 🚀</p>
+<div class="card">
+
+    <p id="text">Premi "Avvia meditazione"</p>
+
+    <div class="circle"></div>
+
+    <button onclick="startMeditation()">🎧 Avvia meditazione</button>
+    <button onclick="stopMeditation()">⛔ Stop meditazione</button>
+
+    <audio id="music" loop>
+        <source src="music/mare.mp3" type="audio/mpeg">
+    </audio>
+
+</div>
+
+</div>
+
+<script>
+
+/* 🌱 frasi meditazione */
+const frasi = [
+"Respira profondamente...",
+"Lascia andare la tensione...",
+"Sei al sicuro...",
+"Resta nel presente...",
+"La mente si calma...",
+"Rilassati..."
+];
+
+let meditationInterval = null;
+let index = 0;
+
+/* ▶️ AVVIA MEDITAZIONE */
+function startMeditation(){
+
+    stopMeditation(); // evita doppio avvio
+
+    const music = document.getElementById("music");
+    music.volume = 0.4;
+    music.play().catch(()=>{});
+
+    index = 0;
+
+    meditationInterval = setInterval(() => {
+
+        document.getElementById("text").innerText = frasi[index];
+        index++;
+
+        if(index >= frasi.length){
+            index = 0;
+        }
+
+    }, 4000);
+
+    // voce iniziale
+    let msg = new SpeechSynthesisUtterance("Inizia la meditazione. Respira lentamente.");
+    msg.lang = "it-IT";
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
+}
+
+/* ⛔ STOP MEDITAZIONE */
+function stopMeditation(){
+
+    // ferma timer
+    clearInterval(meditationInterval);
+    meditationInterval = null;
+
+    // ferma musica
+    const music = document.getElementById("music");
+    music.pause();
+    music.currentTime = 0;
+
+    // ferma voce
+    speechSynthesis.cancel();
+
+    document.getElementById("text").innerText = "Meditazione fermata ⛔";
+}
+
+</script>
 
 </body>
 </html>
