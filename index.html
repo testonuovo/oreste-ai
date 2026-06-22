@@ -2,23 +2,9 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Oreste AI creato da Oreste De Chiara - assistente vocale italiano</title>
-
-<meta name="description" content="Oreste AI è un assistente vocale italiano online creato da Oreste De Chiara. Funziona nel browser senza installazione.">
-
-<meta name="robots" content="index, follow">
-
-<link rel="canonical" href="https://testonuovo.github.io/oreste-ai/">
-
-<!-- Open Graph -->
-<meta property="og:title" content="Oreste AI - creato da Oreste De Chiara">
-<meta property="og:description" content="Assistente vocale italiano gratuito con comandi vocali nel browser.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://testonuovo.github.io/oreste-ai/">
-<meta property="og:image" content="https://testonuovo.github.io/oreste-ai/oreste-ai.png">
+<title>Oreste AI</title>
 
 <style>
 body{
@@ -42,7 +28,6 @@ nav a{
     color:white;
     margin:5px;
     text-decoration:none;
-    display:inline-block;
 }
 
 #chat{
@@ -88,29 +73,16 @@ button:hover{
 
 <h1>🎤 Oreste AI</h1>
 
-<!-- NAV CORRETTO (UNO SOLO) -->
 <nav>
 <a href="index.html">🏠 Home</a>
 <a href="assistente.html">🎤 Assistente</a>
 <a href="chat.html">💬 Chat</a>
-<a href="motivazione.html">🌻 Motivazione</a>
 <a href="download.html">📥 Download</a>
-<a href="blog.html">📰 Blog</a>
-<a href="chi-siamo.html">👤 Chi siamo</a>
-<a href="contatti.html">📞 Contatti</a>
-<a href="dashboard.html">📊 Dashboard</a>
-<a href="os.html">🖥️ Oreste OS</a>
-<a href="meditazione.html">🧘 Meditazione</a>    
-<a href="chi-ha-creato-oreste-ai.html">👨‍💻 Chi ha creato Oreste AI</a>
+<a href="meditazione.html">🧘 Meditazione</a>
 </nav>
 
-<p>Oreste AI è stato creato da Oreste De Chiara.</p>
+<p>Assistente vocale nel browser</p>
 
-<p>Assistente vocale italiano front-end che funziona nel browser senza installazione.</p>
-
-<p>È un progetto di intelligenza artificiale web con comandi vocali e automazioni.</p>
-
-<!-- INPUT CHAT -->
 <input id="input" placeholder="Scrivi o parla...">
 
 <button onclick="ask()">Invia</button>
@@ -120,14 +92,29 @@ button:hover{
 
 <script>
 
+function add(type, text){
+    document.getElementById("chat").innerHTML +=
+    "<div class='msg'>"+type+": "+text+"</div>";
+}
+
+function speak(text){
+    let msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "it-IT";
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
+}
+
+/* 🧠 CUORE AI */
 function handle(text){
 
     text = text.toLowerCase();
 
+    // base
     if(text.includes("ciao")) return "Ciao! Sono Oreste AI";
     if(text.includes("ora")) return new Date().toLocaleTimeString();
     if(text.includes("data")) return new Date().toLocaleDateString();
 
+    // siti
     if(text.includes("google")){
         window.open("https://www.google.com","_blank");
         return "Apro Google";
@@ -143,21 +130,6 @@ function handle(text){
         return "Apro Canva";
     }
 
-    if(text.includes("facebook")){
-        window.open("https://www.facebook.com","_blank");
-        return "Apro Facebook";
-    }
-
-    if(text.includes("instagram")){
-        window.open("https://www.instagram.com","_blank");
-        return "Apro Instagram";
-    }
-
-    if(text.includes("notizie")){
-        window.open("https://news.google.com");
-        return "Apro le notizie";
-    }
-
     // 📥 DOWNLOAD PROGRAMMI
     if(text.startsWith("scarica")){
         let programma = text.replace("scarica","").trim();
@@ -170,7 +142,7 @@ function handle(text){
         return "Cerco download di " + programma;
     }
 
-    // 🚀 METEO (qualsiasi città)
+    // 🌤️ METEO
     if(text.startsWith("meteo")){
 
         let citta = text.replace("meteo","").trim();
@@ -190,19 +162,9 @@ function handle(text){
     return "Non ho capito il comando";
 }
 
-function add(type, text){
-    document.getElementById("chat").innerHTML +=
-    "<div class='msg'>"+type+": "+text+"</div>";
-}
-
-function speak(text){
-    let msg = new SpeechSynthesisUtterance(text);
-    msg.lang = "it-IT";
-    speechSynthesis.cancel();
-    speechSynthesis.speak(msg);
-}
-
+/* 📩 INPUT */
 function ask(){
+
     let input = document.getElementById("input");
     let text = input.value.trim();
     if(!text) return;
@@ -218,6 +180,7 @@ function ask(){
     input.value = "";
 }
 
+/* 🎤 VOCE */
 function voice(){
 
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
