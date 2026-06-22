@@ -75,13 +75,20 @@ button:hover{
 
 <nav>
 <a href="index.html">🏠 Home</a>
-<a href="assistente.html">🎤 Assistente</a>
+<a href="assistente-vocale.html">🎤 Assistente</a>
 <a href="chat.html">💬 Chat</a>
+<a href="motivazione.html">🌻 Motivazione</a>
 <a href="download.html">📥 Download</a>
+<a href="blog.html">📰 Blog</a>
+<a href="chi-siamo.html">👤 Chi siamo</a>
+<a href="contatti.html">📞 Contatti</a>
+<a href="dashboard.html">📊 Dashboard</a>
+<a href="os.html">🖥️ Oreste OS</a>
+<a href="chi-ha-creato-oreste-ai.html">👨‍💻 Creatore</a>
 <a href="meditazione.html">🧘 Meditazione</a>
 </nav>
 
-<p>Assistente vocale nel browser</p>
+<h2>Assistente vocale nel browser</h2>
 
 <input id="input" placeholder="Scrivi o parla...">
 
@@ -92,7 +99,7 @@ button:hover{
 
 <script>
 
-function add(type, text){
+function add(type,text){
     document.getElementById("chat").innerHTML +=
     "<div class='msg'>"+type+": "+text+"</div>";
 }
@@ -104,108 +111,250 @@ function speak(text){
     speechSynthesis.speak(msg);
 }
 
-/* 🧠 CUORE AI */
+/* MEMORIA */
+function salvaMemoria(t){
+    let m = localStorage.getItem("memoriaAI") || "";
+    localStorage.setItem("memoriaAI", m + t + "\n");
+}
+
+function leggiMemoria(){
+    return localStorage.getItem("memoriaAI") || "Nessuna memoria";
+}
+
+function cancellaMemoria(){
+    localStorage.removeItem("memoriaAI");
+}
+
+/* TIMER */
+let timer = null;
+let tempo = 0;
+
+function avviaTimer(sec){
+
+    if(timer) clearInterval(timer);
+
+    tempo = sec;
+
+    timer = setInterval(() => {
+
+        tempo--;
+
+        add("⏱️","Tempo: " + tempo + " sec");
+
+        if(tempo <= 0){
+            clearInterval(timer);
+            timer = null;
+            add("⏱️","Timer finito!");
+            speak("Timer terminato");
+        }
+
+    },1000);
+}
+function getNome(){
+    let mem = localStorage.getItem("memoriaAI") || "";
+
+    let righe = mem.split("\n");
+
+    for(let riga of righe){
+        if(riga.startsWith("Nome: ")){
+            return riga.replace("Nome: ","");
+        }
+    }
+
+    return null;
+}
+/* AI */
+let updateInterval = null;
+let percent = 0;
+
+function avviaAggiornamentoWindows(){
+
+    if(updateInterval){
+        clearInterval(updateInterval);
+    }
+
+    percent = 0;
+
+    add("🪟", "Avvio aggiornamenti di Windows...");
+
+    updateInterval = setInterval(() => {
+
+        percent += Math.floor(Math.random() * 10) + 1;
+
+        if(percent >= 100){
+            percent = 100;
+            clearInterval(updateInterval);
+            updateInterval = null;
+
+            add("🪟", "Aggiornamento completato!");
+            speak("Aggiornamento Windows completato");
+            return;
+        }
+
+        add("🪟", "Aggiornamento Windows: " + percent + "%");
+
+    }, 1000);
+}
 function handle(text){
 
     text = text.toLowerCase();
 
-    // base
-    if(text.includes("ciao")) return "Ciao! Sono Oreste AI";
-    if(text.includes("ora")) return new Date().toLocaleTimeString();
-    if(text.includes("data")) return new Date().toLocaleDateString();
+    /* BASE */
+    if(text.includes("ciao")){
+    let nome = getNome();
 
-    // siti
+    if(nome){
+        return "Ciao " + nome + "! Sono Oreste AI.";
+    }
+
+    return "Ciao! Come ti chiami?";
+}
+
+if(text.includes("ora")){
+    return "Sono le " + new Date().toLocaleTimeString();
+}
+
+if(text.includes("data")){
+    return "Oggi è " + new Date().toLocaleDateString();
+}
+
+if(text.startsWith("mi chiamo")){
+    let nome = text.replace("mi chiamo","").trim();
+
+    salvaMemoria("Nome: " + nome);
+
+    return "Piacere di conoscerti " + nome + "! Ti ricorderò.";
+}
+
+    /* MEMORIA */
+    if(text.startsWith("ricorda")){
+        let c = text.replace("ricorda","").trim();
+        salvaMemoria(c);
+        return "Ricordo salvato";
+    }
+
+    if(text.includes("cosa ricordi"))
+        return leggiMemoria();
+
+    if(text.includes("cancella memoria")){
+        cancellaMemoria();
+        return "Memoria cancellata";
+    }
+
+    /* SITI - FIX IMPORTANTE */
     if(text.includes("google")){
-        window.open("https://www.google.com","_blank");
+        window.open("https://google.com","_blank");
         return "Apro Google";
     }
 
     if(text.includes("youtube")){
-        window.open("https://www.youtube.com","_blank");
+        window.open("https://youtube.com","_blank");
         return "Apro YouTube";
     }
 
     if(text.includes("canva")){
-        window.open("https://www.canva.com","_blank");
+        window.open("https://canva.com","_blank");
         return "Apro Canva";
     }
 
-    // 📥 DOWNLOAD PROGRAMMI
+    if(text.includes("facebook")){
+        window.open("https://facebook.com","_blank");
+        return "Apro Facebook";
+    }
+
+    if(text.includes("instagram")){
+        window.open("https://instagram.com","_blank");
+        return "Apro Instagram";
+    }
+if(text.includes("aggiorna windows") || text.includes("windows update")){
+    avviaAggiornamentoWindows();
+    return "Avvio aggiornamenti di Windows...";
+}
+
+if(text.includes("scarica aggiornamenti windows")){
+    window.open("https://www.microsoft.com/software-download/windows10", "_blank");
+    return " Scarico gli aggiornamenti windows";
+}
+
+    /* DOWNLOAD */
     if(text.startsWith("scarica")){
-        let programma = text.replace("scarica","").trim();
-
-        window.open(
-            "https://www.google.com/search?q=download+" + encodeURIComponent(programma),
-            "_blank"
-        );
-
-        return "Scarico" + programma;
+        let p = text.replace("scarica","").trim();
+        window.open("https://google.com/search?q=download+"+encodeURIComponent(p),"_blank");
+        return "Cerco download di " + p;
     }
 
-    // 🌤️ METEO
+    /* METEO */
     if(text.startsWith("meteo")){
+        let c = text.replace("meteo","").trim();
+        if(!c) c = "roma";
 
-        let citta = text.replace("meteo","").trim();
-
-        if(!citta){
-            citta = "roma";
-        }
-
-        window.open(
-            "https://www.google.com/search?q=meteo+" + encodeURIComponent(citta),
-            "_blank"
-        );
-
-        return "Apro il meteo di " + citta;
+        window.open("https://google.com/search?q=meteo+"+encodeURIComponent(c),"_blank");
+        return "Apro meteo di " + c;
     }
 
-    return "Non ho capito il comando";
+    /* TIMER */
+    if(text.startsWith("timer")){
+        let sec = parseInt(text.replace("timer","").trim());
+
+        if(isNaN(sec))
+            return "Scrivi: timer 10";
+
+        avviaTimer(sec);
+        return "Timer avviato per " + sec + " secondi";
+    }
+
+    if(text.startsWith("crea apk")){
+
+       let sito = text.replace("crea apk","").trim();
+
+    window.open(
+        "https://www.pwabuilder.com/",
+        "_blank"
+    );
+
+    return " Creo l'APK " + sito
 }
 
-/* 📩 INPUT */
+    return "Non ho capito";
+
+    
+}
+
+/* INPUT */
 function ask(){
+    let i = document.getElementById("input");
+    let t = i.value;
+    if(!t) return;
 
-    let input = document.getElementById("input");
-    let text = input.value.trim();
-    if(!text) return;
+    add("🧑",t);
 
-    add("🧑", text);
+    let r = handle(t);
 
-    let res = handle(text);
+    add("🤖",r);
+    speak(r);
 
-    add("🤖", res);
-
-    speak(res);
-
-    input.value = "";
+    i.value="";
 }
 
-/* 🎤 VOCE */
+/* VOCE */
 function voice(){
-
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    if(!SR){
-        alert("Voce non supportata");
-        return;
-    }
+    if(!SR) return alert("Non supportato");
 
     let r = new SR();
-    r.lang = "it-IT";
+    r.lang="it-IT";
 
-    add("🤖", "🎤 Ti ascolto...");
+    add("🤖","🎤 ascolto...");
 
-    r.onresult = function(e){
+    r.onresult = e=>{
+        let t = e.results[0][0].transcript;
 
-        let text = e.results[0][0].transcript;
+        add("🧑",t);
 
-        add("🧑", text);
+        let r2 = handle(t);
 
-        let res = handle(text);
-
-        add("🤖", res);
-
-        speak(res);
+        add("🤖",r2);
+        speak(r2);
     };
 
     r.start();
