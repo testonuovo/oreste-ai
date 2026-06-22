@@ -175,6 +175,46 @@ function handle(text){
         window.open("https://news.google.com");
         return "Apro le notizie";
     }
+/* 📥 DOWNLOAD BASE */
+    if(text.startsWith("scarica")){
+        let programma = text.replace("scarica","").trim();
+        window.open(
+            "https://www.google.com/search?q=download+" + encodeURIComponent(programma),
+            "_blank"
+        );
+        return "Scarico " + programma;
+    }
+
+    /* 🚀 DOWNLOAD PROGRAMMA SPECIFICO */
+    if(text.startsWith("scarica programma")){
+        let programma = text.replace("scarica programma","").trim();
+
+        let link = "https://www.google.com/search?q=download+" + encodeURIComponent(programma);
+
+        window.open(link, "_blank");
+
+        return "SCarico " + programma;
+    }
+
+    /* 🌤️ METEO */
+    if(text.startsWith("meteo")){
+
+        let citta = text.replace("meteo","").trim();
+
+        if(!citta){
+            citta = "roma";
+        }
+
+        window.open(
+            "https://www.google.com/search?q=meteo+" + encodeURIComponent(citta),
+            "_blank"
+        );
+
+        return "Apro il meteo di " + citta;
+    }
+
+    return "Non ho capito il comando";
+}
 
     return "Non ho capito il comando";
 }
