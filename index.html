@@ -120,18 +120,6 @@ button:hover{
 
 <script>
 
-function add(type, text){
-    document.getElementById("chat").innerHTML +=
-    "<div class='msg'>"+type+": "+text+"</div>";
-}
-
-function speak(text){
-    let msg = new SpeechSynthesisUtterance(text);
-    msg.lang = "it-IT";
-    speechSynthesis.cancel();
-    speechSynthesis.speak(msg);
-}
-
 function handle(text){
 
     text = text.toLowerCase();
@@ -165,38 +153,24 @@ function handle(text){
         return "Apro Instagram";
     }
 
-    if(text.startsWith("cerca")){
-        let q = text.replace("cerca","").trim();
-        window.open("https://www.google.com/search?q="+encodeURIComponent(q));
-        return "Cerco " + q;
-    }
-
     if(text.includes("notizie")){
         window.open("https://news.google.com");
         return "Apro le notizie";
     }
-/* 📥 DOWNLOAD BASE */
+
+    // 📥 DOWNLOAD PROGRAMMI
     if(text.startsWith("scarica")){
         let programma = text.replace("scarica","").trim();
+
         window.open(
             "https://www.google.com/search?q=download+" + encodeURIComponent(programma),
             "_blank"
         );
-        return "Scarico " + programma;
+
+        return "Cerco download di " + programma;
     }
 
-    /* 🚀 DOWNLOAD PROGRAMMA SPECIFICO */
-    if(text.startsWith("scarica programma")){
-        let programma = text.replace("scarica programma","").trim();
-
-        let link = "https://www.google.com/search?q=download+" + encodeURIComponent(programma);
-
-        window.open(link, "_blank");
-
-        return "SCarico " + programma;
-    }
-
-    /* 🌤️ METEO */
+    // 🚀 METEO (qualsiasi città)
     if(text.startsWith("meteo")){
 
         let citta = text.replace("meteo","").trim();
@@ -216,7 +190,16 @@ function handle(text){
     return "Non ho capito il comando";
 }
 
-    return "Non ho capito il comando";
+function add(type, text){
+    document.getElementById("chat").innerHTML +=
+    "<div class='msg'>"+type+": "+text+"</div>";
+}
+
+function speak(text){
+    let msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "it-IT";
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
 }
 
 function ask(){
@@ -240,14 +223,12 @@ function voice(){
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if(!SR){
-        alert("Voce non supportata nel browser");
+        alert("Voce non supportata");
         return;
     }
 
     let r = new SR();
     r.lang = "it-IT";
-    r.continuous = false;
-    r.interimResults = false;
 
     add("🤖", "🎤 Ti ascolto...");
 
@@ -262,10 +243,6 @@ function voice(){
         add("🤖", res);
 
         speak(res);
-    };
-
-    r.onerror = function(e){
-        add("🤖", "Errore voce: " + e.error);
     };
 
     r.start();
