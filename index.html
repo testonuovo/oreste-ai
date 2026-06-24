@@ -174,7 +174,33 @@ function openSite(text){
 
     return null;
 }
+async function meteo(citta){
+    try{
+        let geo = await fetch(
+            "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(citta)
+        );
+        let g = await geo.json();
 
+        if(!g.results || g.results.length === 0)
+            return "❌ Città non trovata";
+
+        let lat = g.results[0].latitude;
+        let lon = g.results[0].longitude;
+        let name = g.results[0].name;
+
+        let m = await fetch(
+            "https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current_weather=true"
+        );
+
+        let d = await m.json();
+        let w = d.current_weather;
+
+        return `🌤️ ${name}: ${w.temperature}°C | vento ${w.windspeed} km/h`;
+
+    }catch(e){
+        return "❌ Errore meteo";
+    }
+}
 /* ================= CALENDARIO ================= */
 let date = new Date();
 const mesi = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
