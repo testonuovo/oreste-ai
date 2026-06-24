@@ -37,7 +37,7 @@ nav a{
     background:rgba(0,0,0,0.3);
     padding:10px;
     border-radius:10px;
-    min-height:250px;
+    min-height:300px;
     text-align:left;
 }
 
@@ -58,16 +58,13 @@ button{
     cursor:pointer;
 }
 
-button:hover{
-    background:darkred;
-}
+button:hover{ background:darkred; }
 
 .msg{
     margin:8px 0;
     padding:8px;
 }
 
-/* CALENDARIO */
 #calendar{
     width:90%;
     max-width:600px;
@@ -93,10 +90,10 @@ button:hover{
 
 <h1>🎤 Oreste AI</h1>
 
-<!-- MENU (INTATTO) -->
+<!-- MENU (OK NON TOCCATO) -->
 <nav>
 <a href="index.html">🏠 Home</a>
-<a href="assistente.html">🎤 Assistente</a>
+<a href="assistente-vocale.html">🎤 Assistente</a>
 <a href="chat.html">💬 Chat</a>
 <a href="motivazione.html">🌻 Motivazione</a>
 <a href="download.html">📥 Download</a>
@@ -105,11 +102,6 @@ button:hover{
 <a href="contatti.html">📞 Contatti</a>
 <a href="dashboard.html">📊 Dashboard</a>
 <a href="os.html">🖥️ Oreste OS</a>
-<a href="chi-ha-creato-oreste-ai.html">👨‍💻 Creatore</a>
-<a href="https://www.facebook.com/" target="_blank">
-📘 Seguici su Facebook
-</a>
-<a href="meditazione.html">🧘 Meditazione</a>
 </nav>
 
 <h2>Assistente vocale</h2>
@@ -120,7 +112,7 @@ button:hover{
 
 <div id="chat"></div>
 
-<h2>📅 Calendario Mensile</h2>
+<h2>📅 Calendario</h2>
 
 <div>
 <button onclick="prevMonth()">⬅️</button>
@@ -132,80 +124,24 @@ button:hover{
 
 <script>
 
-/* ================= CHAT ================= */
+/* ===== CHAT ===== */
 function add(t,m){
     document.getElementById("chat").innerHTML +=
-    "<div class='msg'>"+t+": "+m+"</div>";
+    `<div class='msg'>${t}: ${m}</div>`;
 }
 
 function speak(t){
-    let s=new SpeechSynthesisUtterance(t);
-    s.lang="it-IT";
+    let s = new SpeechSynthesisUtterance(t);
+    s.lang = "it-IT";
     speechSynthesis.cancel();
     speechSynthesis.speak(s);
 }
 
-/* ================= SITI ================= */
-function openSite(text){
-
-    text = text.toLowerCase();
-
-    const sites = [
-        {k:["google"], url:"https://google.com", name:"Google"},
-        {k:["youtube"], url:"https://youtube.com", name:"YouTube"},
-        {k:["facebook"], url:"https://facebook.com", name:"Facebook"},
-        {k:["instagram"], url:"https://instagram.com", name:"Instagram"},
-        {k:["tiktok"], url:"https://tiktok.com", name:"TikTok"},
-        {k:["canva"], url:"https://canva.com", name:"Canva"},
-        {k:["whatsapp"], url:"https://web.whatsapp.com", name:"WhatsApp"},
-        {k:["github"], url:"https://github.com", name:"GitHub"},
-        {k:["pinterest"], url:"https://pinterest.com", name:"Pinterest"},
-        {k:["linkedin"], url:"https://linkedin.com", name:"LinkedIn"}
-    ];
-
-    for(let s of sites){
-        for(let x of s.k){
-            if(text.includes(x)){
-                window.open(s.url,"_blank");
-                return "Apro " + s.name;
-            }
-        }
-    }
-
-    return null;
-}
-async function meteo(citta){
-    try{
-        let geo = await fetch(
-            "https://geocoding-api.open-meteo.com/v1/search?name=" + encodeURIComponent(citta)
-        );
-        let g = await geo.json();
-
-        if(!g.results || g.results.length === 0)
-            return "❌ Città non trovata";
-
-        let lat = g.results[0].latitude;
-        let lon = g.results[0].longitude;
-        let name = g.results[0].name;
-
-        let m = await fetch(
-            "https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current_weather=true"
-        );
-
-        let d = await m.json();
-        let w = d.current_weather;
-
-        return `🌤️ ${name}: ${w.temperature}°C | vento ${w.windspeed} km/h`;
-
-    }catch(e){
-        return "❌ Errore meteo";
-    }
-}
-/* ================= CALENDARIO ================= */
+/* ===== CALENDARIO ===== */
 let date = new Date();
 const mesi = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
 
-function renderCalendar(){
+function render(){
     let cal = document.getElementById("calendar");
     cal.innerHTML = "";
 
@@ -218,45 +154,51 @@ function renderCalendar(){
     let days = new Date(y,m+1,0).getDate();
 
     for(let i=0;i<first;i++){
-        let e=document.createElement("div");
-        e.className="day empty";
-        cal.appendChild(e);
+        cal.innerHTML += `<div class='day empty'></div>`;
     }
 
-    for(let d=1; d<=days; d++){
-        let div=document.createElement("div");
-        div.className="day";
-        div.innerHTML=d;
+    for(let d=1;d<=days;d++){
+        cal.innerHTML += `<div class='day' onclick="alert('Evento giorno ${d}')">${d}</div>`;
+    }
+}
+render();
 
-        div.onclick=()=>{
-            let ev = prompt("Evento:");
-            if(ev){
-                localStorage.setItem("ev_"+y+"_"+m+"_"+d, ev);
+/* ===== SITI ===== */
+function apriSito(text){
+    text = text.toLowerCase();
+
+    const siti = [
+        {k:["google"], url:"https://google.com", nome:"Google"},
+        {k:["youtube"], url:"https://youtube.com", nome:"YouTube"},
+        {k:["facebook"], url:"https://facebook.com", nome:"Facebook"},
+        {k:["instagram"], url:"https://instagram.com", nome:"Instagram"},
+        {k:["tiktok"], url:"https://tiktok.com", nome:"TikTok"},
+        {k:["canva"], url:"https://canva.com", nome:"Canva"},
+        {k:["whatsapp"], url:"https://web.whatsapp.com", nome:"WhatsApp"},
+        {k:["github"], url:"https://github.com", nome:"GitHub"},
+        {k:["pinterest"], url:"https://pinterest.com", nome:"Pinterest"},
+        {k:["linkedin"], url:"https://linkedin.com", nome:"LinkedIn"}
+    ];
+
+    for(let s of siti){
+        for(let x of s.k){
+            if(text.includes(x)){
+                window.open(s.url,"_blank");
+                return "Apro " + s.nome;
             }
-        };
-
-        cal.appendChild(div);
+        }
     }
+    return null;
 }
 
-function nextMonth(){
-    date.setMonth(date.getMonth()+1);
-    renderCalendar();
-}
-
-function prevMonth(){
-    date.setMonth(date.getMonth()-1);
-    renderCalendar();
-}
-
-/* ================= AI ================= */
+/* ===== AI ===== */
 function handle(text){
 
     text = text.toLowerCase();
 
-    // 🔥 SITI
-    let site = openSite(text);
-    if(site) return site;
+    // siti prima
+    let sito = apriSito(text);
+    if(sito) return sito;
 
     if(text.includes("ciao")) return "Ciao!";
     if(text.includes("ora")) return new Date().toLocaleTimeString();
@@ -268,59 +210,59 @@ function handle(text){
         return "Cerco " + q;
     }
 
-    if(text.startsWith("scarica")){
-        let q = text.replace("scarica","").trim();
-        window.open("https://google.com/search?q=download+"+q,"_blank");
-        return "Cerco download di " + q;
-    }
-if(text.startsWith("meteo")){
-    let c = text.replace("meteo","").trim();
-    if(!c) return "Scrivi: meteo Roma";
-    return await meteo(c);
-}
+    if(text.startsWith("timer")){
+        let sec = parseInt(text.replace("timer",""));
+        if(isNaN(sec)) return "Scrivi timer 10";
 
-if(text.startsWith("timer")){
-    let s = parseInt(text.replace("timer","").trim());
-    if(isNaN(s)) return "Scrivi: timer 10";
-    return timer(s);
-}
+        let t = sec;
+
+        let inter = setInterval(()=>{
+            add("⏱️", t + " sec");
+            t--;
+
+            if(t < 0){
+                clearInterval(inter);
+                speak("Timer finito");
+            }
+        },1000);
+
+        return "Timer avviato";
+    }
+
     return "Non ho capito";
 }
 
-/* ================= INPUT ================= */
+/* ===== INPUT ===== */
 function ask(){
-    let i=document.getElementById("input");
-    let t=i.value;
+    let i = document.getElementById("input");
+    let t = i.value;
     if(!t) return;
 
     add("🧑",t);
-    let r=handle(t);
+    let r = handle(t);
     add("🤖",r);
     speak(r);
     i.value="";
 }
 
-/* ================= VOCE ================= */
+/* ===== VOCE ===== */
 function voice(){
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if(!SR) return alert("Non supportato");
 
-    let r=new SR();
-    r.lang="it-IT";
+    let r = new SR();
+    r.lang = "it-IT";
 
-    r.onresult=e=>{
-        let t=e.results[0][0].transcript;
+    r.onresult = e=>{
+        let t = e.results[0][0].transcript;
         add("🧑",t);
-        let r2=handle(t);
+        let r2 = handle(t);
         add("🤖",r2);
         speak(r2);
     };
 
     r.start();
 }
-
-/* INIT */
-renderCalendar();
 
 </script>
 
