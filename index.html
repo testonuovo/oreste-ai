@@ -349,6 +349,88 @@ function apriSito(text){
 }
 let sito = apriSito(text);
 if(sito) return sito;
+/ ======================
+    // 🔍 RICERCA
+    // ======================
+    if(text.startsWith("cerca")){
+        let q = text.replace("cerca","").trim();
+        window.open("https://google.com/search?q=" + encodeURIComponent(q), "_blank");
+        return "Cerco " + q;
+    }
+
+    // ======================
+    // 🌤️ METEO
+    // ======================
+    if(text.startsWith("meteo")){
+        let c = text.replace("meteo","").trim();
+        if(!c) return "Scrivi: meteo Roma";
+        return await meteo(c);
+    }
+
+    // ======================
+    // ⏰ SVEGLIA
+    // ======================
+    if(text.startsWith("sveglia")){
+        return sveglia(text.replace("sveglia","").trim());
+    }
+
+    // ======================
+    // ⏱️ TIMER
+    // ======================
+    if(text.startsWith("timer")){
+        let s = parseInt(text.replace("timer",""));
+        if(isNaN(s)) return "Scrivi: timer 10";
+
+        let t = s;
+        let timer = setInterval(()=>{
+            t--;
+            add("⏱️", t + " sec");
+
+            if(t <= 0){
+                clearInterval(timer);
+                speak("Timer terminato");
+                add("⏱️","FINE!");
+            }
+        },1000);
+
+        return "Timer avviato per " + s + " secondi";
+    }
+
+    return "Non ho capito il comando";
+}
+/* ================= INPUT ================= */
+async function ask(){
+    let i=document.getElementById("input");
+    let t=i.value;
+    if(!t) return;
+
+    add("🧑",t);
+    let r=await handle(t);
+    add("🤖",r);
+    speak(r);
+    i.value="";
+}
+
+/* ================= VOCE ================= */
+function voice(){
+    let SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!SR) return alert("Non supportato");
+
+    let r=new SR();
+    r.lang="it-IT";
+
+    r.onresult=async e=>{
+        let t=e.results[0][0].transcript;
+        add("🧑",t);
+        let r2=await handle(t);
+        add("🤖",r2);
+        speak(r2);
+    };
+
+    r.start();
+}
+
+</script>
 
 function handle(text){
 
