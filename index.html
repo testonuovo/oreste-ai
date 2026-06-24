@@ -19,8 +19,8 @@ h1{ margin-top:20px; }
 nav{
     background: rgba(0,0,0,0.4);
     padding: 12px;
-    border-radius: 10px;
     margin: 10px;
+    border-radius: 10px;
 }
 
 nav a{
@@ -36,7 +36,7 @@ nav a{
     background:rgba(0,0,0,0.3);
     padding:10px;
     border-radius:10px;
-    min-height:250px;
+    min-height:200px;
     text-align:left;
 }
 
@@ -59,28 +59,7 @@ button{
 
 button:hover{ background:darkred; }
 
-.msg{
-    margin:8px 0;
-    padding:8px;
-}
-
-#calendar{
-    width:90%;
-    max-width:600px;
-    margin:20px auto;
-    display:grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap:5px;
-}
-
-.day{
-    background: rgba(255,255,255,0.1);
-    padding:10px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.empty{ background:transparent; }
+.msg{ margin:8px 0; padding:8px; }
 </style>
 </head>
 
@@ -92,11 +71,7 @@ button:hover{ background:darkred; }
 <a href="index.html">🏠 Home</a>
 <a href="assistente-vocale.html">🎤 Assistente</a>
 <a href="chat.html">💬 Chat</a>
-<a href="motivazione.html">🌻 Motivazione</a>
 <a href="download.html">📥 Download</a>
-<a href="blog.html">📰 Blog</a>
-<a href="contatti.html">📞 Contatti</a>
-<a href="dashboard.html">📊 Dashboard</a>
 </nav>
 
 <h2>Assistente vocale</h2>
@@ -106,9 +81,6 @@ button:hover{ background:darkred; }
 <button onclick="voice()">🎤 Parla</button>
 
 <div id="chat"></div>
-
-<h2>📅 Calendario</h2>
-<div id="calendar"></div>
 
 <script>
 
@@ -123,14 +95,6 @@ function speak(t){
     s.lang = "it-IT";
     speechSynthesis.cancel();
     speechSynthesis.speak(s);
-}
-
-/* ================= MEMORIA ================= */
-function salvaNome(n){
-    localStorage.setItem("nomeAI", n);
-}
-function getNome(){
-    return localStorage.getItem("nomeAI");
 }
 
 /* ================= SITI ================= */
@@ -159,7 +123,6 @@ function apriSito(text){
             }
         }
     }
-
     return null;
 }
 
@@ -167,7 +130,7 @@ function apriSito(text){
 async function meteo(citta){
 
     try{
-        let g = await fetch("https://geocoding-api.open-meteo.com/v1/search?name=" + citta);
+        let g = await fetch("https://geocoding-api.open-meteo.com/v1/search?name="+citta);
         let geo = await g.json();
 
         if(!geo.results) return "Città non trovata";
@@ -179,8 +142,7 @@ async function meteo(citta){
         let data = await w.json();
 
         return "🌤️ " + geo.results[0].name + ": " + data.current_weather.temperature + "°C";
-    }
-    catch(e){
+    }catch(e){
         return "Errore meteo";
     }
 }
@@ -197,19 +159,18 @@ function timer(sec){
 
     let t = sec;
 
-    timerInterval = setInterval(() => {
+    timerInterval = setInterval(()=>{
 
         add("⏱️", t + " sec");
 
-        if(t <= 0){
+        t--;
+
+        if(t < 0){
             clearInterval(timerInterval);
             timerInterval = null;
             speak("Timer terminato");
             add("⏱️","FINE!");
-            return;
         }
-
-        t--;
 
     },1000);
 
@@ -238,20 +199,18 @@ function sveglia(orario){
         alert("SVEGLIA!");
     }, diff);
 
-    return "Sveglia impostata";
+    return "Sveglia impostata per " + orario;
 }
-function Scarica(nome){
-    window.open("https://google.com/search?q=download+" + encodeURIComponent(nome), "_blank");
-    return "Scarico " + nome;
+
+/* ================= DOWNLOAD PROGRAMMI ================= */
+function scaricaProgramma(nome){
+    window.open(
+        "https://www.google.com/search?q=download+" + encodeURIComponent(nome),
+        "_blank"
+    );
+    return "Cerco il download di " + nome;
 }
-    function Scarica(url){
-    let b = document.createElement("b);
-    b.href = url;
-    b.download = "";
-    document.body.appendChild(b);
-    b.click();
-    document.body.removeChild(b);
-}
+
 /* ================= AI ================= */
 async function handle(text){
 
@@ -282,41 +241,23 @@ async function handle(text){
         window.open("https://google.com/search?q="+q,"_blank");
         return "Cerco " + q;
     }
-function scaricaProgramma(nome){
-    window.open("https://google.com/search?q=download+" + encodeURIComponent(nome), "_blank");
-    return "Cerco il download di " + nome;
-}
-    function Scarica{
-    let b = document.createElement("b");
-    b.href = url;
-    b.download = "";
-    document.body.appendChild(b);
-    b.click();
-    document.body.removeChild(b);
-}
-  if(text.startsWith("scarica")){
-    let app = text.replace("scarica","").trim();
 
-    window.open(
-        "https://www.google.com/search?q=download+" + encodeURIComponent(app),
-        "_blank"
-    );
+    if(text.startsWith("scarica")){
+        let app = text.replace("scarica","").trim();
+        return scaricaProgramma(app);
+    }
 
-    return "Scarico " + app;
-}  
     return "Non ho capito";
 }
 
 /* ================= INPUT ================= */
-async function ask(){
+function ask(){
     let i = document.getElementById("input");
     let t = i.value;
     if(!t) return;
 
     add("🧑",t);
-
-    let r = await handle(t);
-
+    let r = handle(t);
     add("🤖",r);
     speak(r);
 
@@ -331,10 +272,10 @@ function voice(){
     let r = new SR();
     r.lang="it-IT";
 
-    r.onresult = async e=>{
+    r.onresult = e=>{
         let t = e.results[0][0].transcript;
         add("🧑",t);
-        let r2 = await handle(t);
+        let r2 = handle(t);
         add("🤖",r2);
         speak(r2);
     };
