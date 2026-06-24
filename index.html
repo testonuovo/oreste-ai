@@ -286,13 +286,13 @@ function scaricaProgramma(nome){
     window.open("https://google.com/search?q=download+" + encodeURIComponent(nome), "_blank");
     return "Cerco il download di " + nome;
 }
-    function scaricaFile(url){
-    let a = document.createElement("a");
-    a.href = url;
-    a.download = "";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    function Scarica{
+    let b = document.createElement("b");
+    b.href = url;
+    b.download = "";
+    document.body.appendChild(b);
+    b.click();
+    document.body.removeChild(b);
 }
   if(text.startsWith("scarica")){
     let app = text.replace("scarica","").trim();
