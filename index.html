@@ -273,7 +273,17 @@ function handle(text){
         window.open("https://google.com/search?q=download+"+q,"_blank");
         return "Cerco download di " + q;
     }
+if(text.startsWith("meteo")){
+    let c = text.replace("meteo","").trim();
+    if(!c) return "Scrivi: meteo Roma";
+    return await meteo(c);
+}
 
+if(text.startsWith("timer")){
+    let s = parseInt(text.replace("timer","").trim());
+    if(isNaN(s)) return "Scrivi: timer 10";
+    return timer(s);
+}
     return "Non ho capito";
 }
 
