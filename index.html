@@ -143,6 +143,44 @@ function speak(t){
     speechSynthesis.cancel();
     speechSynthesis.speak(s);
 }
+/* ================= CALENDARIO ================= */
+let date=new Date();
+const mesi=["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
+
+function render(){
+    let cal=document.getElementById("calendar");
+    cal.innerHTML="";
+
+    let y=date.getFullYear();
+    let m=date.getMonth();
+
+    document.getElementById("monthTitle").innerText=mesi[m]+" "+y;
+
+    let first=new Date(y,m,1).getDay();
+    let days=new Date(y,m+1,0).getDate();
+
+    for(let i=0;i<first;i++){
+        let e=document.createElement("div");
+        e.className="day empty";
+        cal.appendChild(e);
+    }
+
+    for(let d=1;d<=days;d++){
+        let div=document.createElement("div");
+        div.className="day";
+        div.innerHTML=d;
+
+        div.onclick=()=>{
+            let ev=prompt("Evento:");
+            if(ev){
+                salvaEvento(y+"-"+(m+1)+"-"+d+": "+ev);
+                render();
+            }
+        };
+
+        cal.appendChild(div);
+    }
+}
 
 /* ================= SITI ================= */
 function apriSito(text){
