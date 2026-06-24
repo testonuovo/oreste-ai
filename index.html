@@ -14,6 +14,8 @@ body{
     margin:0;
 }
 
+h1{ margin-top:20px; }
+
 nav{
     background:rgba(0,0,0,0.4);
     padding:10px;
@@ -58,6 +60,21 @@ button{
 button:hover{ background:darkred; }
 
 .msg{ margin:6px 0; }
+
+#calendar{
+    width:90%;
+    max-width:600px;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap:5px;
+}
+
+.day{
+    background:rgba(255,255,255,0.1);
+    padding:8px;
+    border-radius:8px;
+}
 </style>
 </head>
 
@@ -65,17 +82,22 @@ button:hover{ background:darkred; }
 
 <h1>🎤 Oreste AI</h1>
 
+<!-- MENU -->
 <nav>
 <a href="#">Home</a>
-<a href="#">Assistente</a>
 <a href="#">Chat</a>
+<a href="#">Assistente</a>
+<a href="#">Download</a>
 </nav>
 
-<input id="input" placeholder="Scrivi comando...">
+<input id="input" placeholder="Scrivi o parla...">
 <button onclick="ask()">Invia</button>
 <button onclick="voice()">🎤</button>
 
 <div id="chat"></div>
+
+<h2>📅 Calendario</h2>
+<div id="calendar"></div>
 
 <script>
 
@@ -93,84 +115,86 @@ function speak(text){
 }
 
 /* ================= SITI ================= */
-function openSite(t){
+function openSite(text){
 
-    t = t.toLowerCase();
+    text = text.toLowerCase();
 
-    const sites = [
-        ["google","https://google.com","Google"],
-        ["youtube","https://youtube.com","YouTube"],
-        ["facebook","https://facebook.com","Facebook"],
-        ["instagram","https://instagram.com","Instagram"],
-        ["github","https://github.com","GitHub"],
-        ["canva","https://canva.com","Canva"],
-        ["pinterest","https://pinterest.com","Pinterest"],
-        ["linkedin","https://linkedin.com","LinkedIn"]
-    ];
+    const sites = {
+        google:"https://google.com",
+        youtube:"https://youtube.com",
+        facebook:"https://facebook.com",
+        instagram:"https://instagram.com",
+        github:"https://github.com",
+        canva:"https://canva.com",
+        pinterest:"https://pinterest.com",
+        linkedin:"https://linkedin.com"
+    };
 
-    for(let s of sites){
-        if(t.includes(s[0])){
-            window.open(s[1],"_blank");
-            return "Apro " + s[2];
+    for(let k in sites){
+        if(text.includes(k)){
+            window.open(sites[k],"_blank");
+            return "Apro " + k;
         }
     }
+
     return null;
 }
 
-/* ================= METEO (FIX DEFINITIVO) ================= */
-function meteo(city){
+/* ================= METEO ================= */
+async function meteo(city){
 
-    return fetch("https://geocoding-api.open-meteo.com/v1/search?name="+city)
-    .then(r => r.json())
-    .then(geo => {
+    try{
+        let g = await fetch("https://geocoding-api.open-meteo.com/v1/search?name="+city);
+        let geo = await g.json();
 
         if(!geo.results) return "Città non trovata";
 
         let lat = geo.results[0].latitude;
         let lon = geo.results[0].longitude;
 
-        return fetch(
+        let w = await fetch(
             "https://api.open-meteo.com/v1/forecast?latitude="+lat+
             "&longitude="+lon+"&current_weather=true"
-        )
-        .then(r => r.json())
-        .then(data => {
-            return "🌤️ " + geo.results[0].name + ": " +
-            data.current_weather.temperature + "°C";
-        });
+        );
 
-    })
-    .catch(()=> "Errore meteo");
+        let data = await w.json();
+
+        return "🌤️ " + geo.results[0].name + ": " +
+               data.current_weather.temperature + "°C";
+
+    }catch(e){
+        return "Errore meteo";
+    }
 }
 
 /* ================= TIMER ================= */
-let timerInterval = null;
+let timer = null;
 
-function timer(sec){
+function startTimer(sec){
 
     sec = parseInt(sec);
     if(isNaN(sec)) return "Scrivi: timer 10";
 
     let t = sec;
 
-    if(timerInterval) clearInterval(timerInterval);
+    if(timer) clearInterval(timer);
 
-    timerInterval = setInterval(()=>{
+    timer = setInterval(()=>{
 
         add("⏱️", t + " sec");
 
         t--;
 
         if(t < 0){
-            clearInterval(timerInterval);
-            timerInterval = null;
+            clearInterval(timer);
+            timer = null;
             add("⏱️","FINITO!");
             speak("Timer terminato");
         }
 
     },1000);
 
-    return "Timer avviato per " + sec + " secondi";
+    return "Timer avviato";
 }
 
 /* ================= SVEGLIA ================= */
@@ -189,13 +213,12 @@ function sveglia(time){
     setTimeout(()=>{
         add("⏰","SVEGLIA!");
         speak("Sveglia!");
-        alert("SVEGLIA!");
     },diff);
 
     return "Sveglia impostata";
 }
 
-/* ================= DOWNLOAD PROGRAMMI ================= */
+/* ================= DOWNLOAD ================= */
 function scarica(app){
 
     window.open(
@@ -219,12 +242,11 @@ async function handle(text){
     if(text.includes("data")) return new Date().toLocaleDateString();
 
     if(text.startsWith("meteo")){
-        let city = text.replace("meteo","").trim();
-        return await meteo(city);
+        return await meteo(text.replace("meteo","").trim());
     }
 
     if(text.startsWith("timer")){
-        return timer(text.replace("timer","").trim());
+        return startTimer(text.replace("timer","").trim());
     }
 
     if(text.startsWith("sveglia")){
@@ -253,7 +275,7 @@ async function ask(){
 
     add("🧑",t);
 
-    let r = await handle(t);   // 🔥 IMPORTANTISSIMO FIX
+    let r = await handle(t);
 
     add("🤖",r);
     speak(r);
@@ -275,7 +297,7 @@ function voice(){
 
         add("🧑",t);
 
-        let r2 = await handle(t);   // 🔥 FIX DEFINITIVO
+        let r2 = await handle(t);
 
         add("🤖",r2);
         speak(r2);
