@@ -37,7 +37,7 @@ nav a{
     background:rgba(0,0,0,0.3);
     padding:10px;
     border-radius:10px;
-    min-height:300px;
+    min-height:250px;
     text-align:left;
 }
 
@@ -67,6 +67,7 @@ button:hover{
     padding:8px;
 }
 
+/* CALENDARIO */
 #calendar{
     width:90%;
     max-width:600px;
@@ -84,6 +85,7 @@ button:hover{
 }
 
 .empty{ background:transparent; }
+
 </style>
 </head>
 
@@ -91,7 +93,7 @@ button:hover{
 
 <h1>🎤 Oreste AI</h1>
 
-<!-- MENU (OK NON TOCCATO) -->
+<!-- MENU (INTATTO) -->
 <nav>
 <a href="index.html">🏠 Home</a>
 <a href="assistente-vocale.html">🎤 Assistente</a>
@@ -114,6 +116,16 @@ button:hover{
 <button onclick="voice()">🎤 Parla</button>
 
 <div id="chat"></div>
+
+<h2>📅 Calendario Mensile</h2>
+
+<div>
+<button onclick="prevMonth()">⬅️</button>
+<span id="monthTitle"></span>
+<button onclick="nextMonth()">➡️</button>
+</div>
+
+<div id="calendar"></div>
 
 <script>
 
@@ -160,12 +172,60 @@ function openSite(text){
     return null;
 }
 
+/* ================= CALENDARIO ================= */
+let date = new Date();
+const mesi = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
+
+function renderCalendar(){
+    let cal = document.getElementById("calendar");
+    cal.innerHTML = "";
+
+    let y = date.getFullYear();
+    let m = date.getMonth();
+
+    document.getElementById("monthTitle").innerText = mesi[m] + " " + y;
+
+    let first = new Date(y,m,1).getDay();
+    let days = new Date(y,m+1,0).getDate();
+
+    for(let i=0;i<first;i++){
+        let e=document.createElement("div");
+        e.className="day empty";
+        cal.appendChild(e);
+    }
+
+    for(let d=1; d<=days; d++){
+        let div=document.createElement("div");
+        div.className="day";
+        div.innerHTML=d;
+
+        div.onclick=()=>{
+            let ev = prompt("Evento:");
+            if(ev){
+                localStorage.setItem("ev_"+y+"_"+m+"_"+d, ev);
+            }
+        };
+
+        cal.appendChild(div);
+    }
+}
+
+function nextMonth(){
+    date.setMonth(date.getMonth()+1);
+    renderCalendar();
+}
+
+function prevMonth(){
+    date.setMonth(date.getMonth()-1);
+    renderCalendar();
+}
+
 /* ================= AI ================= */
 function handle(text){
 
     text = text.toLowerCase();
 
-    // 🔥 PRIMA I SITI
+    // 🔥 SITI
     let site = openSite(text);
     if(site) return site;
 
@@ -181,7 +241,7 @@ function handle(text){
 
     if(text.startsWith("scarica")){
         let q = text.replace("scarica","").trim();
-        window.open("https://www.google.com/search?q=download+"+q,"_blank");
+        window.open("https://google.com/search?q=download+"+q,"_blank");
         return "Cerco download di " + q;
     }
 
@@ -203,7 +263,7 @@ function ask(){
 
 /* ================= VOCE ================= */
 function voice(){
-    const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if(!SR) return alert("Non supportato");
 
     let r=new SR();
@@ -219,6 +279,9 @@ function voice(){
 
     r.start();
 }
+
+/* INIT */
+renderCalendar();
 
 </script>
 
