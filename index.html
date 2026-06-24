@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Oreste AI</title>
 
 <style>
@@ -12,6 +13,15 @@ body{
     color:white;
     text-align:center;
     margin:0;
+}
+
+h1{ margin-top:20px; }
+
+nav{
+    background: rgba(0,0,0,0.4);
+    padding: 12px;
+    border-radius: 10px;
+    margin: 10px;
 }
 
 nav a{
@@ -27,7 +37,7 @@ nav a{
     background:rgba(0,0,0,0.3);
     padding:10px;
     border-radius:10px;
-    min-height:200px;
+    min-height:300px;
     text-align:left;
 }
 
@@ -35,15 +45,16 @@ input{
     width:70%;
     padding:10px;
     border-radius:10px;
+    border:none;
 }
 
 button{
-    padding:10px;
+    padding:10px 15px;
     margin:5px;
-    background:red;
-    color:white;
     border:none;
     border-radius:10px;
+    background:red;
+    color:white;
     cursor:pointer;
 }
 </style>
@@ -53,6 +64,22 @@ button{
 
 <h1>🎤 Oreste AI</h1>
 
+<!-- MENU SEMPRE PRESENTE ✔ -->
+<nav>
+<a href="index.html">🏠 Home</a>
+<a href="assistente-vocale.html">🎤 Assistente</a>
+<a href="chat.html">💬 Chat</a>
+<a href="motivazione.html">🌻 Motivazione</a>
+<a href="download.html">📥 Download</a>
+<a href="blog.html">📰 Blog</a>
+<a href="chi-siamo.html">👤 Chi siamo</a>
+<a href="contatti.html">📞 Contatti</a>
+<a href="dashboard.html">📊 Dashboard</a>
+<a href="os.html">🖥️ Oreste OS</a>
+</nav>
+
+<h2>Assistente vocale</h2>
+
 <input id="input" placeholder="Scrivi o parla...">
 <button onclick="ask()">Invia</button>
 <button onclick="voice()">🎤 Parla</button>
@@ -61,37 +88,42 @@ button{
 
 <script>
 
-/* CHAT */
+/* ================= CHAT ================= */
 function add(t,m){
-    document.getElementById("chat").innerHTML += `<div>${t}: ${m}</div>`;
+    document.getElementById("chat").innerHTML +=
+    "<div><b>"+t+":</b> "+m+"</div>";
 }
 
 function speak(t){
     let s = new SpeechSynthesisUtterance(t);
-    s.lang = "it-IT";
+    s.lang="it-IT";
+    speechSynthesis.cancel();
     speechSynthesis.speak(s);
 }
 
-/* APERTURA SITI */
-function openSite(text){
+/* ================= SITI ================= */
+function apriSito(text){
 
     text = text.toLowerCase();
 
-    const sites = [
-        {k:["google"], url:"https://google.com", name:"Google"},
-        {k:["youtube"], url:"https://youtube.com", name:"YouTube"},
-        {k:["facebook"], url:"https://facebook.com", name:"Facebook"},
-        {k:["instagram"], url:"https://instagram.com", name:"Instagram"},
-        {k:["pinterest"], url:"https://pinterest.com", name:"Pinterest"},
-        {k:["linkedin"], url:"https://linkedin.com", name:"LinkedIn"},
-        {k:["github"], url:"https://github.com", name:"GitHub"}
+    const siti = [
+        {k:["google"], url:"https://google.com", nome:"Google"},
+        {k:["youtube"], url:"https://youtube.com", nome:"YouTube"},
+        {k:["facebook"], url:"https://facebook.com", nome:"Facebook"},
+        {k:["instagram"], url:"https://instagram.com", nome:"Instagram"},
+        {k:["tiktok"], url:"https://tiktok.com", nome:"TikTok"},
+        {k:["canva"], url:"https://canva.com", nome:"Canva"},
+        {k:["whatsapp"], url:"https://web.whatsapp.com", nome:"WhatsApp"},
+        {k:["github"], url:"https://github.com", nome:"GitHub"},
+        {k:["pinterest"], url:"https://pinterest.com", nome:"Pinterest"},
+        {k:["linkedin"], url:"https://linkedin.com", nome:"LinkedIn"}
     ];
 
-    for(let s of sites){
-        for(let key of s.k){
-            if(text.includes(key)){
+    for(let s of siti){
+        for(let x of s.k){
+            if(text.includes(x)){
                 window.open(s.url,"_blank");
-                return "Apro " + s.name;
+                return "Apro " + s.nome;
             }
         }
     }
@@ -99,24 +131,18 @@ function openSite(text){
     return null;
 }
 
-/* WINDOWS UPDATE SIMULATO */
-function windowsUpdate(){
-    window.open("https://www.microsoft.com/software-download/windows10","_blank");
-    return "Apro aggiornamenti Windows ufficiali";
-}
-
-/* HANDLE PRINCIPALE */
-async function handle(text){
+/* ================= AI ================= */
+function handle(text){
 
     text = text.toLowerCase();
 
-    /* siti */
-    let site = openSite(text);
-    if(site) return site;
+    // 🔥 APERTURA SITI (IMPORTANTE)
+    let sito = apriSito(text);
+    if(sito) return sito;
 
-    if(text.includes("windows update") || text.includes("aggiorna windows")){
-        return windowsUpdate();
-    }
+    if(text.includes("ciao")) return "Ciao!";
+    if(text.includes("ora")) return new Date().toLocaleTimeString();
+    if(text.includes("data")) return new Date().toLocaleDateString();
 
     if(text.startsWith("cerca")){
         let q = text.replace("cerca","").trim();
@@ -124,48 +150,40 @@ async function handle(text){
         return "Cerco " + q;
     }
 
-    if(text.includes("ora")){
-        return new Date().toLocaleTimeString();
-    }
-
-    if(text.includes("data")){
-        return new Date().toLocaleDateString();
+    if(text.startsWith("scarica")){
+        let q = text.replace("scarica","").trim();
+        window.open("https://google.com/search?q=download+"+q,"_blank");
+        return "Cerco download di " + q;
     }
 
     return "Non ho capito";
 }
 
-/* INPUT */
-async function ask(){
+/* ================= INPUT ================= */
+function ask(){
     let i = document.getElementById("input");
     let t = i.value;
     if(!t) return;
 
     add("🧑",t);
-
-    let r = await handle(t);
-
+    let r = handle(t);
     add("🤖",r);
     speak(r);
-
     i.value="";
 }
 
-/* VOCE */
+/* ================= VOCE ================= */
 function voice(){
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if(!SR) return alert("Non supportato");
 
     let r = new SR();
-    r.lang = "it-IT";
+    r.lang="it-IT";
 
-    r.onresult = async e => {
+    r.onresult = e=>{
         let t = e.results[0][0].transcript;
-
         add("🧑",t);
-
-        let r2 = await handle(t);
-
+        let r2 = handle(t);
         add("🤖",r2);
         speak(r2);
     };
