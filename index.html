@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Oreste AI</title>
 
 <style>
@@ -37,7 +36,7 @@ nav a{
     background:rgba(0,0,0,0.3);
     padding:10px;
     border-radius:10px;
-    min-height:300px;
+    min-height:250px;
     text-align:left;
 }
 
@@ -82,7 +81,6 @@ button:hover{ background:darkred; }
 }
 
 .empty{ background:transparent; }
-
 </style>
 </head>
 
@@ -90,7 +88,6 @@ button:hover{ background:darkred; }
 
 <h1>🎤 Oreste AI</h1>
 
-<!-- MENU (OK NON TOCCATO) -->
 <nav>
 <a href="index.html">🏠 Home</a>
 <a href="assistente-vocale.html">🎤 Assistente</a>
@@ -98,10 +95,8 @@ button:hover{ background:darkred; }
 <a href="motivazione.html">🌻 Motivazione</a>
 <a href="download.html">📥 Download</a>
 <a href="blog.html">📰 Blog</a>
-<a href="chi-siamo.html">👤 Chi siamo</a>
 <a href="contatti.html">📞 Contatti</a>
 <a href="dashboard.html">📊 Dashboard</a>
-<a href="os.html">🖥️ Oreste OS</a>
 </nav>
 
 <h2>Assistente vocale</h2>
@@ -113,21 +108,14 @@ button:hover{ background:darkred; }
 <div id="chat"></div>
 
 <h2>📅 Calendario</h2>
-
-<div>
-<button onclick="prevMonth()">⬅️</button>
-<span id="monthTitle"></span>
-<button onclick="nextMonth()">➡️</button>
-</div>
-
 <div id="calendar"></div>
 
 <script>
 
-/* ===== CHAT ===== */
+/* ================= CHAT ================= */
 function add(t,m){
     document.getElementById("chat").innerHTML +=
-    `<div class='msg'>${t}: ${m}</div>`;
+    "<div class='msg'>"+t+": "+m+"</div>";
 }
 
 function speak(t){
@@ -137,34 +125,17 @@ function speak(t){
     speechSynthesis.speak(s);
 }
 
-/* ===== CALENDARIO ===== */
-let date = new Date();
-const mesi = ["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
-
-function render(){
-    let cal = document.getElementById("calendar");
-    cal.innerHTML = "";
-
-    let y = date.getFullYear();
-    let m = date.getMonth();
-
-    document.getElementById("monthTitle").innerText = mesi[m] + " " + y;
-
-    let first = new Date(y,m,1).getDay();
-    let days = new Date(y,m+1,0).getDate();
-
-    for(let i=0;i<first;i++){
-        cal.innerHTML += `<div class='day empty'></div>`;
-    }
-
-    for(let d=1;d<=days;d++){
-        cal.innerHTML += `<div class='day' onclick="alert('Evento giorno ${d}')">${d}</div>`;
-    }
+/* ================= MEMORIA ================= */
+function salvaNome(n){
+    localStorage.setItem("nomeAI", n);
 }
-render();
+function getNome(){
+    return localStorage.getItem("nomeAI");
+}
 
-/* ===== SITI ===== */
+/* ================= SITI ================= */
 function apriSito(text){
+
     text = text.toLowerCase();
 
     const siti = [
@@ -188,15 +159,93 @@ function apriSito(text){
             }
         }
     }
+
     return null;
 }
 
-/* ===== AI ===== */
-function handle(text){
+/* ================= METEO ================= */
+async function meteo(citta){
+
+    try{
+        let g = await fetch("https://geocoding-api.open-meteo.com/v1/search?name=" + citta);
+        let geo = await g.json();
+
+        if(!geo.results) return "Città non trovata";
+
+        let lat = geo.results[0].latitude;
+        let lon = geo.results[0].longitude;
+
+        let w = await fetch("https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current_weather=true");
+        let data = await w.json();
+
+        return "🌤️ " + geo.results[0].name + ": " + data.current_weather.temperature + "°C";
+    }
+    catch(e){
+        return "Errore meteo";
+    }
+}
+
+/* ================= TIMER ================= */
+let timerInterval = null;
+
+function timer(sec){
+
+    sec = parseInt(sec);
+    if(isNaN(sec)) return "Scrivi: timer 10";
+
+    if(timerInterval) clearInterval(timerInterval);
+
+    let t = sec;
+
+    timerInterval = setInterval(() => {
+
+        add("⏱️", t + " sec");
+
+        if(t <= 0){
+            clearInterval(timerInterval);
+            timerInterval = null;
+            speak("Timer terminato");
+            add("⏱️","FINE!");
+            return;
+        }
+
+        t--;
+
+    },1000);
+
+    return "Timer avviato per " + sec + " secondi";
+}
+
+/* ================= SVEGLIA ================= */
+let svegliaTimer = null;
+
+function sveglia(orario){
+
+    let [h,m] = orario.split(":").map(Number);
+    let now = new Date();
+    let s = new Date();
+    s.setHours(h,m,0);
+
+    let diff = s - now;
+
+    if(diff < 0) return "Orario passato";
+
+    if(svegliaTimer) clearTimeout(svegliaTimer);
+
+    svegliaTimer = setTimeout(()=>{
+        add("⏰","SVEGLIA!");
+        speak("Sveglia!");
+        alert("SVEGLIA!");
+    }, diff);
+
+    return "Sveglia impostata";
+}
+
+/* ================= AI ================= */
+async function handle(text){
 
     text = text.toLowerCase();
 
-    // siti prima
     let sito = apriSito(text);
     if(sito) return sito;
 
@@ -204,59 +253,56 @@ function handle(text){
     if(text.includes("ora")) return new Date().toLocaleTimeString();
     if(text.includes("data")) return new Date().toLocaleDateString();
 
+    if(text.startsWith("meteo")){
+        let c = text.replace("meteo","").trim();
+        return await meteo(c);
+    }
+
+    if(text.startsWith("timer")){
+        return timer(text.replace("timer","").trim());
+    }
+
+    if(text.startsWith("sveglia")){
+        return sveglia(text.replace("sveglia","").trim());
+    }
+
     if(text.startsWith("cerca")){
         let q = text.replace("cerca","").trim();
         window.open("https://google.com/search?q="+q,"_blank");
         return "Cerco " + q;
     }
 
-    if(text.startsWith("timer")){
-        let sec = parseInt(text.replace("timer",""));
-        if(isNaN(sec)) return "Scrivi timer 10";
-
-        let t = sec;
-
-        let inter = setInterval(()=>{
-            add("⏱️", t + " sec");
-            t--;
-
-            if(t < 0){
-                clearInterval(inter);
-                speak("Timer finito");
-            }
-        },1000);
-
-        return "Timer avviato";
-    }
-
     return "Non ho capito";
 }
 
-/* ===== INPUT ===== */
-function ask(){
+/* ================= INPUT ================= */
+async function ask(){
     let i = document.getElementById("input");
     let t = i.value;
     if(!t) return;
 
     add("🧑",t);
-    let r = handle(t);
+
+    let r = await handle(t);
+
     add("🤖",r);
     speak(r);
+
     i.value="";
 }
 
-/* ===== VOCE ===== */
+/* ================= VOCE ================= */
 function voice(){
-    let SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if(!SR) return alert("Non supportato");
 
     let r = new SR();
-    r.lang = "it-IT";
+    r.lang="it-IT";
 
-    r.onresult = e=>{
+    r.onresult = async e=>{
         let t = e.results[0][0].transcript;
         add("🧑",t);
-        let r2 = handle(t);
+        let r2 = await handle(t);
         add("🤖",r2);
         speak(r2);
     };
