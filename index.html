@@ -240,7 +240,18 @@ function sveglia(orario){
 
     return "Sveglia impostata";
 }
-
+function scaricaProgramma(nome){
+    window.open("https://google.com/search?q=download+" + encodeURIComponent(nome), "_blank");
+    return "Cerco il download di " + nome;
+}
+    function scaricaFile(url){
+    let a = document.createElement("a");
+    a.href = url;
+    a.download = "";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
 /* ================= AI ================= */
 async function handle(text){
 
@@ -283,6 +294,16 @@ function scaricaProgramma(nome){
     a.click();
     document.body.removeChild(a);
 }
+  if(text.startsWith("scarica")){
+    let app = text.replace("scarica","").trim();
+
+    window.open(
+        "https://www.google.com/search?q=download+" + encodeURIComponent(app),
+        "_blank"
+    );
+
+    return "Cerco il download di " + app;
+}  
     return "Non ho capito";
 }
 
