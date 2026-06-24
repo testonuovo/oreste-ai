@@ -14,20 +14,7 @@ body{
     margin:0;
 }
 
-h1{ margin-top:20px; }
-
-nav{
-    background:rgba(0,0,0,0.4);
-    padding:10px;
-    margin:10px;
-    border-radius:10px;
-}
-
-nav a{
-    color:white;
-    margin:6px;
-    text-decoration:none;
-}
+nav a{ color:white; margin:5px; text-decoration:none; }
 
 #chat{
     width:90%;
@@ -40,40 +27,16 @@ nav a{
     text-align:left;
 }
 
-input{
-    width:70%;
-    padding:10px;
-    border-radius:10px;
-    border:none;
-}
-
-button{
+input,button{
     padding:10px;
     margin:5px;
-    border:none;
-    border-radius:10px;
+}
+button{
     background:red;
     color:white;
-    cursor:pointer;
-}
-
-button:hover{ background:darkred; }
-
-.msg{ margin:6px 0; }
-
-#calendar{
-    width:90%;
-    max-width:600px;
-    margin:20px auto;
-    display:grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap:5px;
-}
-
-.day{
-    background:rgba(255,255,255,0.1);
-    padding:8px;
+    border:none;
     border-radius:8px;
+    cursor:pointer;
 }
 </style>
 </head>
@@ -82,92 +45,78 @@ button:hover{ background:darkred; }
 
 <h1>🎤 Oreste AI</h1>
 
-<!-- MENU -->
 <nav>
 <a href="#">Home</a>
 <a href="#">Chat</a>
 <a href="#">Assistente</a>
-<a href="#">Download</a>
 </nav>
 
-<input id="input" placeholder="Scrivi o parla...">
+<input id="input" placeholder="Scrivi...">
 <button onclick="ask()">Invia</button>
 <button onclick="voice()">🎤</button>
 
 <div id="chat"></div>
 
-<h2>📅 Calendario</h2>
-<div id="calendar"></div>
-
 <script>
 
-/* ================= CHAT ================= */
-function add(who,text){
-    document.getElementById("chat").innerHTML +=
-    `<div class="msg"><b>${who}:</b> ${text}</div>`;
+/* CHAT */
+function add(w,t){
+    document.getElementById("chat").innerHTML += `<div><b>${w}:</b> ${t}</div>`;
 }
 
-function speak(text){
-    let s = new SpeechSynthesisUtterance(text);
+function speak(t){
+    let s = new SpeechSynthesisUtterance(t);
     s.lang = "it-IT";
     speechSynthesis.cancel();
     speechSynthesis.speak(s);
 }
 
-/* ================= SITI ================= */
-function openSite(text){
+/* SITI */
+function openSite(t){
+    t = t.toLowerCase();
 
-    text = text.toLowerCase();
-
-    const sites = {
+    const s = {
         google:"https://google.com",
         youtube:"https://youtube.com",
         facebook:"https://facebook.com",
-        instagram:"https://instagram.com",
-        github:"https://github.com",
-        canva:"https://canva.com",
-        pinterest:"https://pinterest.com",
-        linkedin:"https://linkedin.com"
+        instagram:"https://instagram.com"
     };
 
-    for(let k in sites){
-        if(text.includes(k)){
-            window.open(sites[k],"_blank");
+    for(let k in s){
+        if(t.includes(k)){
+            window.open(s[k],"_blank");
             return "Apro " + k;
         }
     }
-
     return null;
 }
 
-/* ================= METEO ================= */
+/* METEO (SICURO) */
 async function meteo(city){
-
     try{
         let g = await fetch("https://geocoding-api.open-meteo.com/v1/search?name="+city);
-        let geo = await g.json();
+        let j = await g.json();
 
-        if(!geo.results) return "Città non trovata";
+        if(!j.results) return "Città non trovata";
 
-        let lat = geo.results[0].latitude;
-        let lon = geo.results[0].longitude;
+        let lat = j.results[0].latitude;
+        let lon = j.results[0].longitude;
 
         let w = await fetch(
             "https://api.open-meteo.com/v1/forecast?latitude="+lat+
             "&longitude="+lon+"&current_weather=true"
         );
 
-        let data = await w.json();
+        let d = await w.json();
 
-        return "🌤️ " + geo.results[0].name + ": " +
-               data.current_weather.temperature + "°C";
+        return "🌤️ " + j.results[0].name + ": " + d.current_weather.temperature + "°C";
 
-    }catch(e){
+    } catch(e){
         return "Errore meteo";
     }
 }
 
-/* ================= TIMER ================= */
+/* TIMER */
 let timer = null;
 
 function startTimer(sec){
@@ -188,8 +137,8 @@ function startTimer(sec){
         if(t < 0){
             clearInterval(timer);
             timer = null;
-            add("⏱️","FINITO!");
-            speak("Timer terminato");
+            speak("Timer finito");
+            add("⏱️","FINITO");
         }
 
     },1000);
@@ -197,39 +146,7 @@ function startTimer(sec){
     return "Timer avviato";
 }
 
-/* ================= SVEGLIA ================= */
-function sveglia(time){
-
-    let [h,m] = time.split(":").map(Number);
-
-    let now = new Date();
-    let s = new Date();
-    s.setHours(h,m,0);
-
-    let diff = s - now;
-
-    if(diff < 0) return "Orario passato";
-
-    setTimeout(()=>{
-        add("⏰","SVEGLIA!");
-        speak("Sveglia!");
-    },diff);
-
-    return "Sveglia impostata";
-}
-
-/* ================= DOWNLOAD ================= */
-function scarica(app){
-
-    window.open(
-        "https://www.google.com/search?q=download+"+encodeURIComponent(app),
-        "_blank"
-    );
-
-    return "Cerco download di " + app;
-}
-
-/* ================= AI ================= */
+/* AI */
 async function handle(text){
 
     text = text.toLowerCase();
@@ -249,26 +166,11 @@ async function handle(text){
         return startTimer(text.replace("timer","").trim());
     }
 
-    if(text.startsWith("sveglia")){
-        return sveglia(text.replace("sveglia","").trim());
-    }
-
-    if(text.startsWith("scarica")){
-        return scarica(text.replace("scarica","").trim());
-    }
-
-    if(text.startsWith("cerca")){
-        let q = text.replace("cerca","").trim();
-        window.open("https://google.com/search?q="+q,"_blank");
-        return "Cerco " + q;
-    }
-
     return "Non ho capito";
 }
 
-/* ================= INPUT ================= */
+/* INPUT */
 async function ask(){
-
     let i = document.getElementById("input");
     let t = i.value;
     if(!t) return;
@@ -283,9 +185,8 @@ async function ask(){
     i.value="";
 }
 
-/* ================= VOCE ================= */
+/* VOCE */
 function voice(){
-
     let SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if(!SR) return alert("Non supportato");
 
