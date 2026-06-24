@@ -14,7 +14,20 @@ body{
     margin:0;
 }
 
-nav a{ color:white; margin:5px; text-decoration:none; }
+h1{ margin-top:20px; }
+
+nav{
+    background: rgba(0,0,0,0.4);
+    padding: 12px;
+    margin:10px;
+    border-radius:10px;
+}
+
+nav a{
+    color:white;
+    margin:5px;
+    text-decoration:none;
+}
 
 #chat{
     width:90%;
@@ -23,24 +36,31 @@ nav a{ color:white; margin:5px; text-decoration:none; }
     background:rgba(0,0,0,0.3);
     padding:10px;
     border-radius:10px;
-    min-height:200px;
+    min-height:250px;
     text-align:left;
 }
+
 input{
-    width:85%;
-    max-width:700px;
+    width:80%;
     padding:15px;
-    font-size:20px;
-    border-radius:12px;
+    font-size:18px;
+    border-radius:10px;
     border:none;
 }
 
 button{
+    padding:10px 15px;
+    margin:5px;
+    border:none;
+    border-radius:10px;
     background:red;
     color:white;
-    border:none;
-    border-radius:8px;
     cursor:pointer;
+}
+button:hover{ background:darkred; }
+
+.msg{
+    margin:5px 0;
 }
 </style>
 </head>
@@ -49,9 +69,10 @@ button{
 
 <h1>🎤 Oreste AI</h1>
 
+<!-- MENU COMPLETO -->
 <nav>
 <a href="index.html">🏠 Home</a>
-<a href="assistente.html">🎤 Assistente</a>
+<a href="assistente-vocale.html">🎤 Assistente</a>
 <a href="chat.html">💬 Chat</a>
 <a href="motivazione.html">🌻 Motivazione</a>
 <a href="download.html">📥 Download</a>
@@ -72,9 +93,10 @@ button{
 
 <script>
 
-/* CHAT */
+/* ================= CHAT ================= */
 function add(w,t){
-    document.getElementById("chat").innerHTML += `<div><b>${w}:</b> ${t}</div>`;
+    document.getElementById("chat").innerHTML +=
+    "<div class='msg'><b>"+w+":</b> "+t+"</div>";
 }
 
 function speak(t){
@@ -84,27 +106,32 @@ function speak(t){
     speechSynthesis.speak(s);
 }
 
-/* SITI */
+/* ================= SITI ================= */
 function openSite(t){
     t = t.toLowerCase();
 
-    const s = {
+    const sites = {
         google:"https://google.com",
         youtube:"https://youtube.com",
         facebook:"https://facebook.com",
-        instagram:"https://instagram.com"
+        instagram:"https://instagram.com",
+        tiktok:"https://tiktok.com",
+        canva:"https://canva.com",
+        github:"https://github.com",
+        linkedin:"https://linkedin.com",
+        pinterest:"https://pinterest.com"
     };
 
-    for(let k in s){
+    for(let k in sites){
         if(t.includes(k)){
-            window.open(s[k],"_blank");
+            window.open(sites[k],"_blank");
             return "Apro " + k;
         }
     }
     return null;
 }
 
-/* METEO (SICURO) */
+/* ================= METEO ================= */
 async function meteo(city){
     try{
         let g = await fetch("https://geocoding-api.open-meteo.com/v1/search?name="+city);
@@ -124,12 +151,12 @@ async function meteo(city){
 
         return "🌤️ " + j.results[0].name + ": " + d.current_weather.temperature + "°C";
 
-    } catch(e){
+    }catch(e){
         return "Errore meteo";
     }
 }
 
-/* TIMER */
+/* ================= TIMER ================= */
 let timer = null;
 
 function startTimer(sec){
@@ -142,7 +169,6 @@ function startTimer(sec){
     if(timer) clearInterval(timer);
 
     timer = setInterval(()=>{
-
         add("⏱️", t + " sec");
 
         t--;
@@ -150,16 +176,50 @@ function startTimer(sec){
         if(t < 0){
             clearInterval(timer);
             timer = null;
-            speak("Timer finito");
+            speak("Timer terminato");
             add("⏱️","FINITO");
         }
 
     },1000);
 
-    return "Timer avviato";
+    return "Timer avviato per " + sec + " secondi";
 }
 
-/* AI */
+/* ================= SVEGLIA ================= */
+let svegliaTimer = null;
+
+function sveglia(orario){
+
+    let [h,m] = orario.split(":").map(Number);
+    let now = new Date();
+    let s = new Date();
+    s.setHours(h,m,0);
+
+    let diff = s - now;
+
+    if(diff < 0) return "Orario passato";
+
+    if(svegliaTimer) clearTimeout(svegliaTimer);
+
+    svegliaTimer = setTimeout(()=>{
+        add("⏰","SVEGLIA!");
+        speak("Sveglia!");
+        alert("SVEGLIA!");
+    },diff);
+
+    return "Sveglia impostata per " + orario;
+}
+
+/* ================= SCARICA PROGRAMMI ================= */
+function scaricaProgramma(nome){
+    window.open(
+        "https://www.google.com/search?q=download+" + encodeURIComponent(nome),
+        "_blank"
+    );
+    return "Cerco download di " + nome;
+}
+
+/* ================= AI ================= */
 async function handle(text){
 
     text = text.toLowerCase();
@@ -179,10 +239,25 @@ async function handle(text){
         return startTimer(text.replace("timer","").trim());
     }
 
+    if(text.startsWith("sveglia")){
+        return sveglia(text.replace("sveglia","").trim());
+    }
+
+    if(text.startsWith("cerca")){
+        let q = text.replace("cerca","").trim();
+        window.open("https://google.com/search?q="+q,"_blank");
+        return "Cerco " + q;
+    }
+
+    if(text.startsWith("scarica")){
+        let app = text.replace("scarica","").trim();
+        return scaricaProgramma(app);
+    }
+
     return "Non ho capito";
 }
 
-/* INPUT */
+/* ================= INPUT ================= */
 async function ask(){
     let i = document.getElementById("input");
     let t = i.value;
@@ -198,7 +273,7 @@ async function ask(){
     i.value="";
 }
 
-/* VOCE */
+/* ================= VOCE ================= */
 function voice(){
     let SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if(!SR) return alert("Non supportato");
