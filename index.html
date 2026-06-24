@@ -96,6 +96,66 @@ button:hover{
 <button onclick="voice()">🎤 Parla</button>
 
 <div id="chat"></div>
+<h2>📅 Calendario Mensile</h2>
+
+<div>
+<button onclick="prevMonth()">⬅️</button>
+<span id="monthTitle"></span>
+<button onclick="nextMonth()">➡️</button>
+</div>
+
+<div id="calendar"></div>
+
+<script>
+
+/* ================= CHAT ================= */
+function add(t,m){
+    document.getElementById("chat").innerHTML +=
+    "<div class='msg'>"+t+": "+m+"</div>";
+}
+
+function speak(t){
+    let s=new SpeechSynthesisUtterance(t);
+    s.lang="it-IT";
+    speechSynthesis.cancel();
+    speechSynthesis.speak(s);
+}
+
+/* ================= MEMORIA ================= */
+function salvaNome(n){ localStorage.setItem("nomeAI", n); }
+function getNome(){ return localStorage.getItem("nomeAI"); }
+
+/* ================= EVENTI ================= */
+function salvaEvento(ev){
+    let arr=JSON.parse(localStorage.getItem("eventiAI")||"[]");
+    arr.push(ev);
+    localStorage.setItem("eventiAI",JSON.stringify(arr));
+}
+
+/* ================= SVEGLIA ================= */
+let svegliaTimer=null;
+
+function sveglia(orario){
+    let [h,m]=orario.split(":").map(Number);
+    if(isNaN(h)||isNaN(m)) return "Formato 7:30";
+
+    let now=new Date();
+    let s=new Date();
+    s.setHours(h,m,0);
+
+    let diff=s-now;
+    if(diff<0) return "Orario passato";
+
+    if(svegliaTimer) clearTimeout(svegliaTimer);
+
+    svegliaTimer=setTimeout(()=>{
+        add("⏰","SVEGLIA!");
+        speak("Sveglia!");
+        alert("SVEGLIA!");
+    },diff);
+
+    return "Sveglia impostata per " + orario;
+}
 
 <script>
 
@@ -166,6 +226,60 @@ function getNome(){
 /* AI */
 let updateInterval = null;
 let percent = 0;
+/* ================= METEO ================= */
+async function meteo(citta){
+    let geo=await fetch("https://geocoding-api.open-meteo.com/v1/search?name="+citta);
+    let g=await geo.json();
+
+    if(!g.results) return "Città non trovata";
+
+    let lat=g.results[0].latitude;
+    let lon=g.results[0].longitude;
+
+    let m=await fetch("https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current_weather=true");
+    let d=await m.json();
+
+    return "🌤️ "+g.results[0].name+": "+d.current_weather.temperature+"°C";
+}
+
+/* ================= CALENDARIO ================= */
+let date=new Date();
+const mesi=["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
+
+function render(){
+    let cal=document.getElementById("calendar");
+    cal.innerHTML="";
+
+    let y=date.getFullYear();
+    let m=date.getMonth();
+
+    document.getElementById("monthTitle").innerText=mesi[m]+" "+y;
+
+    let first=new Date(y,m,1).getDay();
+    let days=new Date(y,m+1,0).getDate();
+
+    for(let i=0;i<first;i++){
+        let e=document.createElement("div");
+        e.className="day empty";
+        cal.appendChild(e);
+    }
+
+    for(let d=1;d<=days;d++){
+        let div=document.createElement("div");
+        div.className="day";
+        div.innerHTML=d;
+
+        div.onclick=()=>{
+            let ev=prompt("Evento:");
+            if(ev){
+                salvaEvento(y+"-"+(m+1)+"-"+d+": "+ev);
+                render();
+            }
+        };
+
+        cal.appendChild(div);
+    }
+}
 
 function avviaAggiornamentoWindows(){
 
@@ -194,7 +308,48 @@ function avviaAggiornamentoWindows(){
         add("🪟", "Aggiornamento Windows: " + percent + "%");
 
     }, 1000);
+}function normalizza(t){
+    return t
+        .toLowerCase()
+        .replaceAll(" ", "")
+        .replaceAll("su","")
+        .replaceAll("vai","")
+        .replaceAll("apri","")
+        .trim();
 }
+render();
+function apriSito(text){
+
+    let t = normalizza(text);
+
+    const siti = [
+        {keys:["google"], url:"https://google.com", nome:"Google"},
+        {keys:["youtube","you tube"], url:"https://youtube.com", nome:"YouTube"},
+        {keys:["facebook"], url:"https://facebook.com", nome:"Facebook"},
+        {keys:["instagram"], url:"https://instagram.com", nome:"Instagram"},
+        {keys:["tiktok"], url:"https://tiktok.com", nome:"TikTok"},
+        {keys:["canva"], url:"https://canva.com", nome:"Canva"},
+        {keys:["whatsapp"], url:"https://web.whatsapp.com", nome:"WhatsApp Web"},
+        {keys:["github"], url:"https://github.com", nome:"GitHub"},
+        {keys:["gmail","email"], url:"https://mail.google.com", nome:"Gmail"},
+        {keys:["pinterest"], url:"https://pinterest.com", nome:"Pinterest"},
+        {keys:["linkedin"], url:"https://linkedin.com", nome:"LinkedIn"}
+    ];
+
+    for(let s of siti){
+        for(let k of s.keys){
+            if(t.includes(k)){
+                window.open(s.url, "_blank");
+                return "Apro " + s.nome;
+            }
+        }
+    }
+
+    return null;
+}
+let sito = apriSito(text);
+if(sito) return sito;
+
 function handle(text){
 
     text = text.toLowerCase();
