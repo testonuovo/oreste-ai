@@ -57,6 +57,15 @@ button{
     color:white;
     cursor:pointer;
 }
+
+button:hover{
+    background:darkred;
+}
+
+.msg{
+    margin:8px 0;
+    padding:8px;
+}
 </style>
 </head>
 
@@ -64,7 +73,7 @@ button{
 
 <h1>🎤 Oreste AI</h1>
 
-<!-- MENU SEMPRE PRESENTE ✔ -->
+<!-- 🔥 MENU ORIGINALE (NON MODIFICATO) -->
 <nav>
 <a href="index.html">🏠 Home</a>
 <a href="assistente-vocale.html">🎤 Assistente</a>
@@ -76,6 +85,8 @@ button{
 <a href="contatti.html">📞 Contatti</a>
 <a href="dashboard.html">📊 Dashboard</a>
 <a href="os.html">🖥️ Oreste OS</a>
+<a href="chi-ha-creato-oreste-ai.html">👨‍💻 Creatore</a>
+<a href="meditazione.html">🧘 Meditazione</a>
 </nav>
 
 <h2>Assistente vocale</h2>
@@ -91,7 +102,7 @@ button{
 /* ================= CHAT ================= */
 function add(t,m){
     document.getElementById("chat").innerHTML +=
-    "<div><b>"+t+":</b> "+m+"</div>";
+    "<div class='msg'>"+t+": "+m+"</div>";
 }
 
 function speak(t){
@@ -113,7 +124,7 @@ function apriSito(text){
         {k:["instagram"], url:"https://instagram.com", nome:"Instagram"},
         {k:["tiktok"], url:"https://tiktok.com", nome:"TikTok"},
         {k:["canva"], url:"https://canva.com", nome:"Canva"},
-        {k:["whatsapp"], url:"https://web.whatsapp.com", nome:"WhatsApp"},
+        {k:["whatsapp"], url:"https://web.whatsapp.com", nome:"WhatsApp Web"},
         {k:["github"], url:"https://github.com", nome:"GitHub"},
         {k:["pinterest"], url:"https://pinterest.com", nome:"Pinterest"},
         {k:["linkedin"], url:"https://linkedin.com", nome:"LinkedIn"}
@@ -136,7 +147,7 @@ function handle(text){
 
     text = text.toLowerCase();
 
-    // 🔥 APERTURA SITI (IMPORTANTE)
+    // 🔥 SITI PRIMA
     let sito = apriSito(text);
     if(sito) return sito;
 
