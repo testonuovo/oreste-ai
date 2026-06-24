@@ -66,7 +66,7 @@ button:hover{
     margin:8px 0;
     padding:8px;
 }
-/* CALENDARIO */
+
 #calendar{
     width:90%;
     max-width:600px;
@@ -84,13 +84,6 @@ button:hover{
 }
 
 .empty{ background:transparent; }
-
-.event{
-    font-size:10px;
-    color:yellow;
-}
-</style>
-    
 </style>
 </head>
 
@@ -98,7 +91,7 @@ button:hover{
 
 <h1>🎤 Oreste AI</h1>
 
-<!-- 🔥 MENU ORIGINALE (NON MODIFICATO) -->
+<!-- MENU (OK NON TOCCATO) -->
 <nav>
 <a href="index.html">🏠 Home</a>
 <a href="assistente-vocale.html">🎤 Assistente</a>
@@ -121,13 +114,6 @@ button:hover{
 <button onclick="voice()">🎤 Parla</button>
 
 <div id="chat"></div>
-<div>
-<button onclick="prevMonth()">⬅️</button>
-<span id="monthTitle"></span>
-<button onclick="nextMonth()">➡️</button>
-</div>
-
-<div id="calendar"></div>
 
 <script>
 
@@ -138,73 +124,35 @@ function add(t,m){
 }
 
 function speak(t){
-    let s = new SpeechSynthesisUtterance(t);
+    let s=new SpeechSynthesisUtterance(t);
     s.lang="it-IT";
     speechSynthesis.cancel();
     speechSynthesis.speak(s);
 }
-/* ================= CALENDARIO ================= */
-let date=new Date();
-const mesi=["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
-
-function render(){
-    let cal=document.getElementById("calendar");
-    cal.innerHTML="";
-
-    let y=date.getFullYear();
-    let m=date.getMonth();
-
-    document.getElementById("monthTitle").innerText=mesi[m]+" "+y;
-
-    let first=new Date(y,m,1).getDay();
-    let days=new Date(y,m+1,0).getDate();
-
-    for(let i=0;i<first;i++){
-        let e=document.createElement("div");
-        e.className="day empty";
-        cal.appendChild(e);
-    }
-
-    for(let d=1;d<=days;d++){
-        let div=document.createElement("div");
-        div.className="day";
-        div.innerHTML=d;
-
-        div.onclick=()=>{
-            let ev=prompt("Evento:");
-            if(ev){
-                salvaEvento(y+"-"+(m+1)+"-"+d+": "+ev);
-                render();
-            }
-        };
-
-        cal.appendChild(div);
-    }
-}
 
 /* ================= SITI ================= */
-function apriSito(text){
+function openSite(text){
 
     text = text.toLowerCase();
 
-    const siti = [
-        {k:["google"], url:"https://google.com", nome:"Google"},
-        {k:["youtube"], url:"https://youtube.com", nome:"YouTube"},
-        {k:["facebook"], url:"https://facebook.com", nome:"Facebook"},
-        {k:["instagram"], url:"https://instagram.com", nome:"Instagram"},
-        {k:["tiktok"], url:"https://tiktok.com", nome:"TikTok"},
-        {k:["canva"], url:"https://canva.com", nome:"Canva"},
-        {k:["whatsapp"], url:"https://web.whatsapp.com", nome:"WhatsApp Web"},
-        {k:["github"], url:"https://github.com", nome:"GitHub"},
-        {k:["pinterest"], url:"https://pinterest.com", nome:"Pinterest"},
-        {k:["linkedin"], url:"https://linkedin.com", nome:"LinkedIn"}
+    const sites = [
+        {k:["google"], url:"https://google.com", name:"Google"},
+        {k:["youtube"], url:"https://youtube.com", name:"YouTube"},
+        {k:["facebook"], url:"https://facebook.com", name:"Facebook"},
+        {k:["instagram"], url:"https://instagram.com", name:"Instagram"},
+        {k:["tiktok"], url:"https://tiktok.com", name:"TikTok"},
+        {k:["canva"], url:"https://canva.com", name:"Canva"},
+        {k:["whatsapp"], url:"https://web.whatsapp.com", name:"WhatsApp"},
+        {k:["github"], url:"https://github.com", name:"GitHub"},
+        {k:["pinterest"], url:"https://pinterest.com", name:"Pinterest"},
+        {k:["linkedin"], url:"https://linkedin.com", name:"LinkedIn"}
     ];
 
-    for(let s of siti){
+    for(let s of sites){
         for(let x of s.k){
             if(text.includes(x)){
                 window.open(s.url,"_blank");
-                return "Apro " + s.nome;
+                return "Apro " + s.name;
             }
         }
     }
@@ -217,9 +165,9 @@ function handle(text){
 
     text = text.toLowerCase();
 
-    // 🔥 SITI PRIMA
-    let sito = apriSito(text);
-    if(sito) return sito;
+    // 🔥 PRIMA I SITI
+    let site = openSite(text);
+    if(site) return site;
 
     if(text.includes("ciao")) return "Ciao!";
     if(text.includes("ora")) return new Date().toLocaleTimeString();
@@ -233,7 +181,7 @@ function handle(text){
 
     if(text.startsWith("scarica")){
         let q = text.replace("scarica","").trim();
-        window.open("https://google.com/search?q=download+"+q,"_blank");
+        window.open("https://www.google.com/search?q=download+"+q,"_blank");
         return "Cerco download di " + q;
     }
 
@@ -242,12 +190,12 @@ function handle(text){
 
 /* ================= INPUT ================= */
 function ask(){
-    let i = document.getElementById("input");
-    let t = i.value;
+    let i=document.getElementById("input");
+    let t=i.value;
     if(!t) return;
 
     add("🧑",t);
-    let r = handle(t);
+    let r=handle(t);
     add("🤖",r);
     speak(r);
     i.value="";
@@ -255,16 +203,16 @@ function ask(){
 
 /* ================= VOCE ================= */
 function voice(){
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
     if(!SR) return alert("Non supportato");
 
-    let r = new SR();
+    let r=new SR();
     r.lang="it-IT";
 
-    r.onresult = e=>{
-        let t = e.results[0][0].transcript;
+    r.onresult=e=>{
+        let t=e.results[0][0].transcript;
         add("🧑",t);
-        let r2 = handle(t);
+        let r2=handle(t);
         add("🤖",r2);
         speak(r2);
     };
