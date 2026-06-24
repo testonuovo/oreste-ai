@@ -79,7 +79,7 @@ button:hover{ background:darkred; }
 
 <script>
 
-/* CHAT */
+/* ================= CHAT ================= */
 function add(who,text){
     document.getElementById("chat").innerHTML +=
     `<div class="msg"><b>${who}:</b> ${text}</div>`;
@@ -92,7 +92,7 @@ function speak(text){
     speechSynthesis.speak(s);
 }
 
-/* SITI */
+/* ================= SITI ================= */
 function openSite(t){
 
     t = t.toLowerCase();
@@ -117,56 +117,63 @@ function openSite(t){
     return null;
 }
 
-/* METEO (FUNZIONANTE) */
-async function meteo(city){
+/* ================= METEO (FIX DEFINITIVO) ================= */
+function meteo(city){
 
-    if(!city) return "Scrivi: meteo Roma";
+    return fetch("https://geocoding-api.open-meteo.com/v1/search?name="+city)
+    .then(r => r.json())
+    .then(geo => {
 
-    let g = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`);
-    let geo = await g.json();
+        if(!geo.results) return "Città non trovata";
 
-    if(!geo.results) return "Città non trovata";
+        let lat = geo.results[0].latitude;
+        let lon = geo.results[0].longitude;
 
-    let lat = geo.results[0].latitude;
-    let lon = geo.results[0].longitude;
+        return fetch(
+            "https://api.open-meteo.com/v1/forecast?latitude="+lat+
+            "&longitude="+lon+"&current_weather=true"
+        )
+        .then(r => r.json())
+        .then(data => {
+            return "🌤️ " + geo.results[0].name + ": " +
+            data.current_weather.temperature + "°C";
+        });
 
-    let w = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
-    let data = await w.json();
-
-    return `🌤️ ${geo.results[0].name}: ${data.current_weather.temperature}°C`;
+    })
+    .catch(()=> "Errore meteo");
 }
 
-/* TIMER */
-let timer = null;
+/* ================= TIMER ================= */
+let timerInterval = null;
 
-function startTimer(sec){
+function timer(sec){
 
     sec = parseInt(sec);
     if(isNaN(sec)) return "Scrivi: timer 10";
 
     let t = sec;
 
-    if(timer) clearInterval(timer);
+    if(timerInterval) clearInterval(timerInterval);
 
-    timer = setInterval(()=>{
+    timerInterval = setInterval(()=>{
 
         add("⏱️", t + " sec");
 
         t--;
 
         if(t < 0){
-            clearInterval(timer);
-            timer = null;
+            clearInterval(timerInterval);
+            timerInterval = null;
             add("⏱️","FINITO!");
             speak("Timer terminato");
         }
 
     },1000);
 
-    return "Timer avviato";
+    return "Timer avviato per " + sec + " secondi";
 }
 
-/* SVEGLIA */
+/* ================= SVEGLIA ================= */
 function sveglia(time){
 
     let [h,m] = time.split(":").map(Number);
@@ -188,13 +195,18 @@ function sveglia(time){
     return "Sveglia impostata";
 }
 
-/* DOWNLOAD PROGRAMMI */
-function scarica(nome){
-    window.open("https://www.google.com/search?q=download+"+encodeURIComponent(nome),"_blank");
-    return "Cerco download di " + nome;
+/* ================= DOWNLOAD PROGRAMMI ================= */
+function scarica(app){
+
+    window.open(
+        "https://www.google.com/search?q=download+"+encodeURIComponent(app),
+        "_blank"
+    );
+
+    return "Cerco download di " + app;
 }
 
-/* AI */
+/* ================= AI ================= */
 async function handle(text){
 
     text = text.toLowerCase();
@@ -207,15 +219,20 @@ async function handle(text){
     if(text.includes("data")) return new Date().toLocaleDateString();
 
     if(text.startsWith("meteo")){
-        return await meteo(text.replace("meteo","").trim());
+        let city = text.replace("meteo","").trim();
+        return await meteo(city);
     }
 
     if(text.startsWith("timer")){
-        return startTimer(text.replace("timer","").trim());
+        return timer(text.replace("timer","").trim());
     }
 
     if(text.startsWith("sveglia")){
         return sveglia(text.replace("sveglia","").trim());
+    }
+
+    if(text.startsWith("scarica")){
+        return scarica(text.replace("scarica","").trim());
     }
 
     if(text.startsWith("cerca")){
@@ -224,14 +241,10 @@ async function handle(text){
         return "Cerco " + q;
     }
 
-    if(text.startsWith("scarica")){
-        return scarica(text.replace("scarica","").trim());
-    }
-
     return "Non ho capito";
 }
 
-/* INPUT */
+/* ================= INPUT ================= */
 async function ask(){
 
     let i = document.getElementById("input");
@@ -240,7 +253,7 @@ async function ask(){
 
     add("🧑",t);
 
-    let r = await handle(t);
+    let r = await handle(t);   // 🔥 IMPORTANTISSIMO FIX
 
     add("🤖",r);
     speak(r);
@@ -248,7 +261,7 @@ async function ask(){
     i.value="";
 }
 
-/* VOCE */
+/* ================= VOCE ================= */
 function voice(){
 
     let SR = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -259,9 +272,10 @@ function voice(){
 
     r.onresult = async e=>{
         let t = e.results[0][0].transcript;
+
         add("🧑",t);
 
-        let r2 = await handle(t);
+        let r2 = await handle(t);   // 🔥 FIX DEFINITIVO
 
         add("🤖",r2);
         speak(r2);
