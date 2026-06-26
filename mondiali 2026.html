@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mondiali 2026 - Oreste AI</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:blue;
+    color:white;
+    text-align:center;
+}
+
+nav{
+    background:#082d6b;
+    padding:15px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:8px;
+}
+
+.container{
+    width:90%;
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:rgba(255,255,255,.1);
+    border-radius:12px;
+    padding:20px;
+    margin-top:20px;
+}
+
+button{
+    padding:19px 20px;
+    border:none;
+    border-radius:8px;
+    background:red;
+    color:white;
+    cursor:pointer;
+    margin:10px;
+}
+
+iframe{
+    width:100%;
+    height:600px;
+    border:none;
+    border-radius:12px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">🏠 Home</a>
+<a href="assistente-vocale.html">🎤 Assistente</a>
+<a href="chat.html">💬 Chat</a>
+<a href="mondiali2026.html">🏆 Mondiali 2026</a>
+</nav>
+
+<div class="container">
+
+<h1>🏆 Mondiali FIFA 2026</h1>
+
+<div class="card">
+
+<h2>Risultati e Calendario</h2>
+
+<p>Clicca il pulsante per consultare risultati, calendario e classifiche aggiornate.</p>
+
+<button onclick="risultati()">
+⚽ Apri Mondiali 2026
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Partite in diretta</h2>
+
+<p>
+Le partite possono essere viste solo tramite i broadcaster ufficiali.
+</p>
+
+<button onclick="youtube()">
+▶️ Highlights YouTube
+</button>
+
+<button onclick="fifa()">
+🌍 FIFA.com
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function risultati(){
+window.open("https://www.fifa.com/fifaplus/en/tournaments/mens/worldcup","_blank");
+}
+
+function fifa(){
+window.open("https://www.fifa.com","_blank");
+}
+
+function youtube(){
+window.open("https://www.youtube.com/@FIFA","_blank");
+}
+
+</script>
+
+</body>
+</html>
