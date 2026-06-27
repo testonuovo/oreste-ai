@@ -78,17 +78,14 @@ border-radius:19px;
 <body>
 
 <nav>
-<a href="index.html">🏠 Home</a>
-<a href="assistente.html">🎤 Assistente</a>
-<a href="chat.html">💬 Chat</a>
-<a href="motivazione.html">🌻 Motivazione</a>
-<a href="download.html">📥 Download</a>
-<a href="blog.html">📰 Blog</a>
-<a href="chi-siamo.html">👤 Chi siamo</a>
-<a href="contatti.html">📞 Contatti</a>
-<a href="dashboard.html">📊 Dashboard</a>
-<a href="os.html">🖥️ Oreste OS</a>
-<a href="chi-ha-creato-oreste-ai.html">👨‍💻 Creatore</a>
+<a href="index.html">Home</a>
+<a href="assistente.html">Assistente</a>
+<a href="download.html">Download</a>
+<a href="blog.html">Blog</a>
+<a href="chi-siamo.html">Chi siamo</a>
+<a href="contatti.html">Contatti</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="os.html">Oreste OS</a>
 </nav>
 
 <div id="stage">
@@ -118,7 +115,8 @@ src="https://i.ibb.co/wHZ8KG6/logo.jpg">
 
 <button onclick="sum()">+</button>
 <button onclick="sub()">-</button>
-
+<button onclick="mul()">*</button>
+<button onclick="div()">/</button>
 <p id="res"></p>
 </div>
 
@@ -190,7 +188,26 @@ let bVal = document.getElementById("b").value;
 document.getElementById("res").innerText =
 Number(aVal) - Number(bVal);
 }
+function mul(){
+let aVal = document.getElementById("a").value;
+let bVal = document.getElementById("b").value;
 
+document.getElementById("res").innerText =
+Number(aVal) * Number(bVal);
+}
+
+function div(){
+let aVal = document.getElementById("a").value;
+let bVal = document.getElementById("b").value;
+
+if(Number(bVal) === 0){
+document.getElementById("res").innerText = "Errore: divisione per 0";
+return;
+}
+
+document.getElementById("res").innerText =
+Number(aVal) / Number(bVal);
+}
 /* BROWSER */
 function go(){
 let u = document.getElementById("url").value;
