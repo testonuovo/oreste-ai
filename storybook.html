@@ -55,7 +55,212 @@ style="background: rgba(255,255,255,0.6);
 backdrop-filter: blur(6px);
 border-radius: 20px;
 box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
- <body data-template-id="__page-root" class="w-full min-h-screen flex items-center justify-center" style="background: linear-gradient(rgb(253, 246, 227), rgb(245, 230, 200));">
+ <body data-template-id="__page-root" class="w-full min-h-screen flex items-center justify-center" style="background: linear-gradient(rgb(253, 246, 227), rgb(245, 230, 200));"><!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storybook Oreste AI</title>
+
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+<style>
+body { font-family: 'Alegreya', serif; }
+
+.page {
+    display: none;
+    opacity: 0;
+    transform: scale(0.98);
+    transition: all 0.6s ease;
+}
+
+.page.active {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+    animation: fadePage 0.6s ease;
+}
+
+@keyframes fadePage {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d4c5a9;
+}
+
+.dot.active {
+    background: #5c3d2e;
+}
+
+.canva-image {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.canva-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.book {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+</style>
+
+</head>
+
+<body style="background: linear-gradient(rgb(253,246,227), rgb(245,230,200));">
+<a href="storybook.html">📚 Storybook</a>
+<main class="w-full max-w-3xl mx-auto p-6 sm:p-10 book">
+
+<!-- COVER -->
+<div class="page active flex-col items-center text-center gap-6" data-page="0">
+<h1 style="font-family:Playfair Display;font-size:48px;font-weight:900;">Oreste AI</h1>
+<p style="font-size:20px;">La storia di un assistente vocale tutto italiano</p>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page flex-col items-center text-center gap-5" data-page="1">
+<p class="canva-text">Era una mattina come tante. Il sole entrava dalla finestra della cucina...</p>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page flex-col items-center text-center gap-5" data-page="2">
+<p class="canva-text">«Buongiorno! Sono Oreste AI, il tuo assistente vocale.»</p>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page flex-col items-center text-center gap-5" data-page="3">
+<p class="canva-text">Oreste aiutava la famiglia con le attività quotidiane.</p>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page flex-col items-center text-center gap-5" data-page="4">
+<p class="canva-text">La sera la piccola Sofia chiedeva una storia.</p>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page flex-col items-center text-center gap-5" data-page="5">
+<p class="canva-text">Oreste AI non era solo tecnologia. Era una voce familiare.</p>
+</div>
+
+<!-- CONTROLLI -->
+<div class="flex justify-center gap-4 mt-6">
+<button onclick="leggiStoria()">🔊 Leggi tutto</button>
+<button onclick="fermaVoce()">🔇 Stop</button>
+</div>
+
+<!-- NAV -->
+<div class="flex justify-center gap-6 mt-6">
+<button id="prev">← Indietro</button>
+<div id="dots"></div>
+<button id="next">Avanti →</button>
+</div>
+
+</main>
+
+<script>
+
+const pages = document.querySelectorAll('.page');
+const totalPages = pages.length;
+let current = 0;
+
+const dotsContainer = document.getElementById('dots');
+
+/* DOTS */
+for (let i = 0; i < totalPages; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dotsContainer.appendChild(dot);
+}
+
+/* NAVIGAZIONE */
+function goTo(n) {
+
+    pages[current].classList.remove('active');
+    current = n;
+    pages[current].classList.add('active');
+
+    document.querySelectorAll('.dot')
+        .forEach((d, i) => d.classList.toggle('active', i === current));
+
+    parlaPagina();
+}
+
+/* BOTTONI */
+document.getElementById('prev').onclick = () => {
+    if (current > 0) goTo(current - 1);
+};
+
+document.getElementById('next').onclick = () => {
+    if (current < totalPages - 1) goTo(current + 1);
+};
+
+/* ===== VOCE ===== */
+
+let speaking = false;
+
+function parla(testo) {
+
+    if (speaking) return;
+
+    speechSynthesis.cancel();
+
+    const u = new SpeechSynthesisUtterance(testo);
+
+    u.lang = "it-IT";
+    u.rate = 1;
+
+    u.onstart = () => speaking = true;
+    u.onend = () => speaking = false;
+
+    speechSynthesis.speak(u);
+}
+
+/* LEGGE PAGINA */
+function parlaPagina() {
+    const testo = pages[current].querySelector(".canva-text").innerText;
+    parla(testo);
+}
+
+/* LEGGE TUTTA LA STORIA */
+function leggiStoria() {
+
+    let testo = "";
+    document.querySelectorAll(".canva-text")
+        .forEach(p => testo += p.innerText + " ");
+
+    parla(testo);
+}
+
+/* STOP */
+function fermaVoce() {
+    speechSynthesis.cancel();
+}
+
+/* START */
+window.onload = () => {
+
+    parla("Benvenuto nello Storybook di Oreste AI");
+
+    setTimeout(() => {
+        parlaPagina();
+    }, 2500);
+
+};
+
+</script>
+
+</body>
+</html>
   <main class="w-full max-w-3xl mx-auto p-4 sm:p-8"><!-- Cover -->
    <div class="page active flex-col items-center text-center gap-6" data-page="0">
     <h1 data-template-id="cover-title" class="canva-text font-bold" style="font-family: &quot;Playfair Display&quot;, serif; color: rgb(59, 31, 14); font-weight: 900; font-style: normal; font-size: 48px;">Oreste AI</h1>
