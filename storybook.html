@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="it"><head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storybook Oreste AI</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&amp;family=Playfair+Display:wght@700;900&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+        body { font-family: 'Alegreya', serif; }
+        .page { display: none; opacity: 0; transition: opacity 0.5s ease; }
+        .page.active { display: flex; opacity: 1; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: #d4c5a9; transition: background 0.3s; }
+        .dot.active { background: #5c3d2e; }
+        .page {
+    display: none;
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.page.active {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+}
+.page.active {
+    animation: fadePage 0.6s ease;
+}
+
+@keyframes fadePage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.canva-image {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.canva-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+    </style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+<main class="w-full max-w-3xl mx-auto p-6 sm:p-10"
+style="background: rgba(255,255,255,0.6); 
+backdrop-filter: blur(6px);
+border-radius: 20px;
+box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
+ <body data-template-id="__page-root" class="w-full min-h-screen flex items-center justify-center" style="background: linear-gradient(rgb(253, 246, 227), rgb(245, 230, 200));">
+  <main class="w-full max-w-3xl mx-auto p-4 sm:p-8"><!-- Cover -->
+   <div class="page active flex-col items-center text-center gap-6" data-page="0">
+    <h1 data-template-id="cover-title" class="canva-text font-bold" style="font-family: &quot;Playfair Display&quot;, serif; color: rgb(59, 31, 14); font-weight: 900; font-style: normal; font-size: 48px;">Oreste AI</h1>
+    <p data-template-id="cover-subtitle" class="canva-text italic" style="color: rgb(107, 66, 38); font-weight: 400; font-style: italic; font-size: 20px;">La storia di un assistente vocale tutto italiano</p><img data-template-id="cover-image" class="canva-image w-full max-w-md rounded-2xl shadow-xl" loading="lazy" src="https://images.pexels.com/photos/36847299/pexels-photo-36847299.png?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Cute yellow robot character with a futuristic design on an orange background.">
+   </div><!-- Page 1 -->
+   <div class="page flex-col items-center text-center gap-5" data-page="1"><img data-template-id="page1-image" class="canva-image w-full max-w-md rounded-2xl shadow-lg" loading="lazy" src="https://images.pexels.com/photos/10886638/pexels-photo-10886638.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Warm sunlight illuminates a small kitchen in a Budapest apartment, capturing a cozy atmosphere.">
+    <p data-template-id="page1-text" class="canva-text max-w-lg text-lg leading-relaxed" style="color: rgb(59, 31, 14); font-weight: 400; font-style: normal; font-size: 18px;">Era una mattina come tante. Il sole entrava dalla finestra della cucina, e il profumo del caffè riempiva la stanza. Ma quel giorno, qualcosa di nuovo si accese sul tavolo…</p>
+   </div><!-- Page 2 -->
+   <div class="page flex-col items-center text-center gap-5" data-page="2"><img data-template-id="page2-image" class="canva-image w-full max-w-md rounded-2xl shadow-lg" loading="lazy" src="https://images.pexels.com/photos/4790266/pexels-photo-4790266.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A modern smart speaker sits on a wooden table in a cozy, minimalist living room setting.">
+    <p data-template-id="page2-text" class="canva-text max-w-lg text-lg leading-relaxed" style="color: rgb(59, 31, 14); font-weight: 400; font-style: normal; font-size: 18px;">«Buongiorno! Sono Oreste AI, il tuo assistente vocale. Come posso aiutarti oggi?» La voce era calda, gentile, con un accento che sapeva di casa.</p>
+   </div><!-- Page 3 -->
+   <div class="page flex-col items-center text-center gap-5" data-page="3"><img data-template-id="page3-image" class="canva-image w-full max-w-md rounded-2xl shadow-lg" loading="lazy" src="https://images.pexels.com/photos/6073640/pexels-photo-6073640.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A mother and daughter enjoy cooking a pasta meal together in a modern kitchen.">
+    <p data-template-id="page3-text" class="canva-text max-w-lg text-lg leading-relaxed" style="color: rgb(59, 31, 14); font-weight: 400; font-style: normal; font-size: 18px;">Oreste AI aiutava con le ricette della nonna, ricordava gli appuntamenti e raccontava barzellette. Tutta la famiglia lo adorava già.</p>
+   </div><!-- Page 4 -->
+   <div class="page flex-col items-center text-center gap-5" data-page="4"><img data-template-id="page4-image" class="canva-image w-full max-w-md rounded-2xl shadow-lg" loading="lazy" src="https://images.pexels.com/photos/7494466/pexels-photo-7494466.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A child reading a book by a glowing lamp at night, creating a cozy ambiance.">
+    <p data-template-id="page4-text" class="canva-text max-w-lg text-lg leading-relaxed" style="color: rgb(59, 31, 14); font-weight: 400; font-style: normal; font-size: 18px;">La sera, prima di dormire, la piccola Sofia sussurrava: «Oreste AI, raccontami una storia.» E lui, con voce dolce, iniziava: «C'era una volta, in un paese lontano…»</p>
+   </div><!-- Page 5 -->
+   <div class="page flex-col items-center text-center gap-5" data-page="5"><img data-template-id="page5-image" class="canva-image w-full max-w-md rounded-2xl shadow-lg" loading="lazy" src="https://images.pexels.com/photos/28539700/pexels-photo-28539700.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Breathtaking sunrise over fog-covered hills in San Gimignano, Tuscany, Italy.">
+    <p data-template-id="page5-text" class="canva-text max-w-lg text-lg leading-relaxed" style="color: rgb(59, 31, 14); font-weight: 400; font-style: normal; font-size: 18px;">Oreste AI non era solo tecnologia. Era un amico, una voce familiare nel cuore di ogni giornata. Perché le cose migliori parlano la nostra lingua. Fine.</p>
+   </div><!-- Navigation -->
+   <nav class="flex items-center justify-center gap-6 mt-8" aria-label="Navigazione pagine"><button id="prev-btn" data-template-id="prev-button" class="canva-button px-4 py-2 rounded-full font-semibold disabled:opacity-30" disabled="" aria-label="Pagina precedente" style="background: rgb(212, 197, 169); color: rgb(59, 31, 14); font-weight: 600; font-style: normal; font-size: 18px;">← Indietro</button>
+    <div id="dots" class="flex gap-2" aria-hidden="true"></div><button id="next-btn" data-template-id="next-button" class="canva-button px-4 py-2 rounded-full font-semibold" aria-label="Pagina successiva" style="background: rgb(92, 61, 46); color: rgb(253, 246, 227); font-weight: 600; font-style: normal; font-size: 18px;">Avanti →</button>
+   </nav>
+  </main>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script>
+        const pages = document.querySelectorAll('.page');
+        const totalPages = pages.length;
+        let current = 0;
+        const dotsContainer = document.getElementById('dots');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dotsContainer.appendChild(dot);
+        }
+
+        function goTo(idx) {
+            pages[current].classList.remove('active');
+            current = idx;
+            pages[current].classList.add('active');
+            dotsContainer.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+            prevBtn.disabled = current === 0;
+            nextBtn.disabled = current === totalPages - 1;
+        }
+
+        prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
+        nextBtn.addEventListener('click', () => { if (current < totalPages - 1) goTo(current + 1); });
+
+        lucide.createIcons();
+/* ===== VOCE ORESTE AI ===== */
+
+function parlaPagina() {
+
+    speechSynthesis.cancel();
+
+    const testo = pages[current]
+        .querySelector(".canva-text")
+        .innerText;
+
+    const voce = new SpeechSynthesisUtterance(testo);
+
+    voce.lang = "it-IT";
+    voce.rate = 1;
+    voce.pitch = 1;
+    voce.volume = 1;
+
+    speechSynthesis.speak(voce);
+}
+
+function benvenuto() {
+
+    const intro = new SpeechSynthesisUtterance(
+        "Benvenuto nello Storybook di Oreste AI. Premi Avanti per iniziare la storia."
+    );
+
+    intro.lang = "it-IT";
+
+    speechSynthesis.speak(intro);
+}
+function goTo(idx) {
+
+    pages[current].classList.remove('active');
+
+    current = idx;
+
+    pages[current].classList.add('active');
+
+    dotsContainer.querySelectorAll('.dot')
+        .forEach((d, i) => d.classList.toggle('active', i === current));
+
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === totalPages - 1;
+
+    parlaPagina();
+
+}
+window.onload = () => {
+
+    benvenuto();
+
+};
+
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1223fe707a53128',t:'MTc4MjU0MDIxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body></html>
