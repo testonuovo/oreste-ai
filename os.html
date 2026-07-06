@@ -14,11 +14,11 @@ color:white;
 text-align:center;
 }
 
+/* NAV */
 nav{
 background:blue;
 padding:10px;
 }
-
 nav a{
 color:white;
 text-decoration:none;
@@ -26,6 +26,7 @@ margin:10px;
 font-weight:bold;
 }
 
+/* BUTTON */
 button{
 padding:8px;
 border:none;
@@ -36,41 +37,51 @@ cursor:pointer;
 margin:4px;
 }
 
+/* CARD */
 .card{
 background:#1e3a8a;
 padding:15px;
 border-radius:10px;
-max-width:600px;
+max-width:700px;
 margin:20px auto;
 }
 
+/* AVATAR AREA */
 #stage{
 display:flex;
 justify-content:center;
 gap:40px;
 margin:20px;
+align-items:center;
 }
 
 .character{
-width:120px;
+width:140px;
 border-radius:50%;
 transition:0.3s;
 }
 
 .speaking{
-transform:scale(1.2);
-box-shadow:0 0 20px cyan;
+transform:scale(1.15);
+box-shadow:0 0 25px cyan;
 }
 
+/* APP */
 .app{
 display:none;
 margin-top:20px;
 }
 
-input{
+input, textarea{
 padding:6px;
 margin:4px;
-border-radius:19px;
+border-radius:10px;
+border:none;
+}
+
+textarea{
+width:95%;
+height:220px;
 }
 </style>
 </head>
@@ -78,45 +89,51 @@ border-radius:19px;
 <body>
 
 <nav>
-<a href="index.html">🏠 Home</a>
-<a href="assistente.html">🎤 Assistente</a>
-<a href="chat.html">💬 Chat</a>
-<a href="motivazione.html">🌻 Motivazione</a>
-<a href="download.html">📥 Download</a>
-<a href="blog.html">📰 Blog</a>
-<a href="chi-siamo.html">👤 Chi siamo</a>
-<a href="contatti.html">📞 Contatti</a>
-<a href="dashboard.html">📊 Dashboard</a>
-<a href="os.html">🖥️ Oreste OS</a>
-<a href="chi-ha-creato-oreste-ai.html">👨‍💻 Creatore</a>
-<a href="meditazione.html">🧘 Meditazione</a>
-<a href="mondiali2026.html">🏆 Mondiali 2026</a>
-<a href="storybook.html">📚 Storybook</a>
-<a href="storia.html">📖 La Storia</a>
+<a href="#">Home</a>
+<a href="#">Oreste OS</a>
 </nav>
 
+<!-- 🧠 AVATAR ORESTE -->
 <div id="stage">
 <img id="oreste" class="character"
-src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png">
+src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png" alt="Oreste AI">
 
 <img id="virus" class="character"
-src="https://i.ibb.co/wHZ8KG6/logo.jpg">
+src="https://i.ibb.co/wHZ8KG6/logo.jpg" alt="System">
 </div>
 
 <h1>🖥️ Oreste OS</h1>
 
 <div class="card">
 
-<button onclick="app('calc')">Calcolatrice</button>
-<button onclick="app('browser')">Oreste Os Browser</button>
-<button onclick="app('antivirus')">Antivirus</button>
+<button onclick="app('calc')">🧮 Calcolatrice</button>
+<button onclick="app('browser')">🌐 Browser</button>
+<button onclick="app('antivirus')">🛡 Antivirus</button>
+<button onclick="app('note')">📝 Blocco Note</button>
+
+<!-- 📝 NOTE -->
+<div id="note" class="app">
+<h3>📝 Blocco Note</h3>
+
+<textarea id="noteText"></textarea>
+
+<br>
+
+<button onclick="saveNote()">💾 Salva</button>
+<button onclick="loadNote()">📂 Carica</button>
+<button onclick="copyNote()">📋 Copia</button>
+<button onclick="downloadNote()">📥 Scarica</button>
+<button onclick="clearNote()">🗑 Cancella</button>
+
+<p id="noteStatus"></p>
+</div>
 
 <!-- CALC -->
 <div id="calc" class="app">
 <h3>Calcolatrice</h3>
 
-<input id="a" type="number" placeholder="numero 1">
-<input id="b" type="number" placeholder="numero 2">
+<input id="a" type="number">
+<input id="b" type="number">
 
 <br>
 
@@ -124,14 +141,15 @@ src="https://i.ibb.co/wHZ8KG6/logo.jpg">
 <button onclick="sub()">-</button>
 <button onclick="mul()">*</button>
 <button onclick="div()">/</button>
+
 <p id="res"></p>
 </div>
 
 <!-- BROWSER -->
 <div id="browser" class="app">
-<h3>Oreste OS Browser</h3>
+<h3>Browser</h3>
 
-<input id="url" placeholder="google.com">
+<input id="url">
 <button onclick="go()">Vai</button>
 </div>
 
@@ -147,7 +165,7 @@ src="https://i.ibb.co/wHZ8KG6/logo.jpg">
 
 <script>
 
-/* SPEECH + AVATAR SAFE */
+/* 🎙 VOCE + AVATAR */
 function speak(t){
 
 const oreste = document.getElementById("oreste");
@@ -156,96 +174,94 @@ const virus = document.getElementById("virus");
 let u = new SpeechSynthesisUtterance(t);
 u.lang = "it-IT";
 
-u.onstart = ()=>{
-oreste?.classList.add("speaking");
-virus?.classList.add("speaking");
+u.onstart = () => {
+oreste.classList.add("speaking");
+virus.classList.add("speaking");
 };
 
-u.onend = ()=>{
-oreste?.classList.remove("speaking");
-virus?.classList.remove("speaking");
+u.onend = () => {
+oreste.classList.remove("speaking");
+virus.classList.remove("speaking");
 };
 
 speechSynthesis.cancel();
 speechSynthesis.speak(u);
 }
 
-/* APPS SWITCH */
+/* APP SWITCH */
 function app(id){
+document.querySelectorAll(".app").forEach(a => a.style.display = "none");
+const el = document.getElementById(id);
 
-document.querySelectorAll(".app")
-.forEach(a => a.style.display = "none");
-
-document.getElementById(id).style.display = "block";
+if(el){
+el.style.display = "block";
+speak("Apro " + id);
+}
 }
 
 /* CALCOLATRICE */
-function sum(){
-let aVal = document.getElementById("a").value;
-let bVal = document.getElementById("b").value;
-
-document.getElementById("res").innerText =
-Number(aVal) + Number(bVal);
-}
-
-function sub(){
-let aVal = document.getElementById("a").value;
-let bVal = document.getElementById("b").value;
-
-document.getElementById("res").innerText =
-Number(aVal) - Number(bVal);
-}
-function mul(){
-let aVal = document.getElementById("a").value;
-let bVal = document.getElementById("b").value;
-
-document.getElementById("res").innerText =
-Number(aVal) * Number(bVal);
-}
-
+function sum(){ res.innerText = Number(a.value)+Number(b.value); }
+function sub(){ res.innerText = Number(a.value)-Number(b.value); }
+function mul(){ res.innerText = Number(a.value)*Number(b.value); }
 function div(){
-let aVal = document.getElementById("a").value;
-let bVal = document.getElementById("b").value;
-
-if(Number(bVal) === 0){
-document.getElementById("res").innerText = "Errore: divisione per 0";
-return;
+if(Number(b.value)==0){ res.innerText="Errore"; return; }
+res.innerText = Number(a.value)/Number(b.value);
 }
 
-document.getElementById("res").innerText =
-Number(aVal) / Number(bVal);
-}
 /* BROWSER */
 function go(){
-let u = document.getElementById("url").value;
-
-if(!u.startsWith("http")){
-u = "https://" + u;
-}
-
+let u = url.value;
+if(!u.startsWith("http")) u="https://"+u;
 window.open(u,"_blank");
 }
 
 /* ANTIVIRUS */
 function scan(){
-
-document.getElementById("status").innerText = "Scansione...";
-
+status.innerText="Scansione...";
 setTimeout(()=>{
-
-let r = Math.random() > 0.5
-? "Virus rilevato"
-: "Sistema pulito";
-
-document.getElementById("status").innerText = r;
+let r=Math.random()>0.5?"Virus rilevato":"Sistema pulito";
+status.innerText=r;
 speak(r);
-
 },1200);
+}
 
+/* NOTE */
+function saveNote(){
+localStorage.setItem("oreste_note", noteText.value);
+noteStatus.innerText="💾 Documento salvato";
+speak("Documento salvato");
+}
+
+function loadNote(){
+noteText.value = localStorage.getItem("oreste_note") || "";
+noteStatus.innerText="📂 Documento caricato";
+speak("Documento caricato");
+}
+
+function clearNote(){
+localStorage.removeItem("oreste_note");
+noteText.value="";
+noteStatus.innerText="🗑 Documento eliminato";
+speak("Documento eliminato");
+}
+
+function copyNote(){
+navigator.clipboard.writeText(noteText.value);
+noteStatus.innerText="📋 Documento copiato";
+speak("Documento copiato");
+}
+
+function downloadNote(){
+const blob = new Blob([noteText.value],{type:"text/plain"});
+const a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="note-oreste.txt";
+a.click();
+speak("Download effettuato");
 }
 
 /* START */
-window.onload = ()=>{
+window.onload=()=>{
 speak("Benvenuto in Oreste OS");
 };
 
