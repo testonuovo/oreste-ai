@@ -278,8 +278,9 @@ async function handle(text){
 
     if(text.includes("ciao")) return "Ciao!";
     if(text.includes("ora")) return new Date().toLocaleTimeString();
+    if(text.includes("che ore sono") return new Date().toLocaleTimeString();
     if(text.includes("data")) return new Date().toLocaleDateString();
-
+    if(text.includes("che giorno è oggi")) new Date().toLocaleTimeString();
     if(text.startsWith("meteo")){
         return await meteo(text.replace("meteo","").trim());
     }
