@@ -323,13 +323,28 @@ async function ask(){
 
 /* ================= VOCE ================= */
 function voice(){
+
     let SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if(!SR) return alert("Non supportato");
+
+    if(!SR){
+        alert("Il riconoscimento vocale non è supportato da questo browser. Usa Google Chrome.");
+        return;
+    }
 
     let r = new SR();
+
     r.lang = "it-IT";
+    r.continuous = false;
+    r.interimResults = false;
+
+
+    r.onstart = ()=>{
+        add("🎤","Ascolto attivo... parla ora");
+    };
+
 
     r.onresult = async e=>{
+
         let t = e.results[0][0].transcript;
 
         add("🧑",t);
@@ -337,10 +352,22 @@ function voice(){
         let r2 = await handle(t);
 
         add("🤖",r2);
+
         speak(r2);
     };
 
+
+    r.onerror = e=>{
+
+        if(e.error=="not-allowed"){
+            add("⚠️","Permesso microfono negato. Abilita il microfono nelle impostazioni di Chrome.");
+        }
+
+    };
+
+
     r.start();
+
 }
 
 </script>
