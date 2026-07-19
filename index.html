@@ -293,7 +293,7 @@ async function handle(text){
         return sveglia(text.replace("sveglia","").trim());
     }
 
-    if(text.startsWith("cerca")){
+if(text.startsWith("cerca")){
     let q = text.replace("cerca","").trim();
     window.open("https://google.com/search?q="+q,"_blank");
     return "Cerco " + q;
@@ -304,12 +304,7 @@ if(text.includes("finale mondiali 2026 spagna argentina")){
 
     window.open("https://www.raiplay.it/", "_blank");
 
-    return "Apro la pagina per vedere la finale Mondiali 2026 Spagna Argentina";
-}
-
-    window.open("https://www.raiplay.it/", "_blank");
-
-    return "Apro la pagina per vedere la finale Mondiali 2026 Spagna Argentina";
+   return "Apro la finale Spagna Argentina";
 }
 
 
