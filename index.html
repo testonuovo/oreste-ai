@@ -298,21 +298,16 @@ async function handle(text){
         window.open("https://google.com/search?q="+q,"_blank");
         return "Cerco " + q;
     }
-
-    if(text.startsWith("scarica")){
+    
+    if(text.startsWith("trova")){
+         let q =text.replace("cerca","").trim();
+         window.open("https://google.com/search?q="+q,"_blank");
         let app = text.replace("scarica","").trim();
+         return "Trova " + q;
+    }
+    if(text.startsWith("scarica")){
         return scaricaProgramma(app);
     }
-if(text.startsWith("aggiungi attività")){
-
-    let att = text.replace("aggiungi attività","").trim();
-
-    if(att==""){
-        return "Dimmi quale attività aggiungere";
-    }
-
-    return aggiungiAttivita(att);
-}
 
 
 
