@@ -299,14 +299,20 @@ async function handle(text){
         return "Cerco " + q;
     }
       window.open("https://www.raiplay.it/"
-   if(text.startsWith("finale mondiali 2026 spagna argentina")){
-        "_blank");
-  return "Apro finale mondiali 2026 spagna argentina";
-   let app = text.replace("scarica","").trim();
-   }   
-    if(text.startsWith("scarica")){
-        return scaricaProgramma(app);
-    }
+   if(text.includes("finale mondiali 2026 spagna argentina")){
+
+    window.open("https://www.raiplay.it/", "_blank");
+
+    return "Apro la pagina per vedere la finale Mondiali 2026 Spagna Argentina";
+}
+
+
+if(text.startsWith("scarica")){
+
+    let app = text.replace("scarica","").trim();
+
+    return scaricaProgramma(app);
+}
 
 
 
