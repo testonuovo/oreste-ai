@@ -299,11 +299,7 @@ async function handle(text){
         return "Cerco " + q;
     }
     
-    if(text.startsWith("trova")){
-         let q =text.replace("trova","").trim();
-         window.open("https://google.com/search?q="+q,"_blank");
-         return "Trovo " + q;
-    }
+   
     let app = text.replace("scarica","").trim();
     if(text.startsWith("scarica")){
         return scaricaProgramma(app);
