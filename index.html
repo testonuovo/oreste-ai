@@ -128,7 +128,6 @@ button:hover{ background:darkred; }
 
 <div id="chat"></div>
 <div class="card">
-<div class="card">
 
 <h2>✅ Lista attività</h2>
 
@@ -303,10 +302,13 @@ function mostraAttivita(){
     let lista = JSON.parse(localStorage.getItem("attivita")) || [];
 
     if(lista.length === 0){
+
         return "Non hai attività salvate";
+
     }
 
     return "Le tue attività sono: " + lista.join(", ");
+
 }
 
 
@@ -315,6 +317,7 @@ function cancellaAttivita(){
     localStorage.removeItem("attivita");
 
     return "Ho cancellato tutte le attività";
+
 }
 /* ================= AI ================= */
 async function handle(text){
@@ -354,38 +357,7 @@ async function handle(text){
 
     return "Non ho capito";
 }
-/* ================= LISTA ATTIVITÀ ================= */
 
-functionAggiungiAttività(testo){
-
-    let lista = JSON.parse(localStorage.getItem("attivita")) || [];
-
-    lista.push(testo);
-
-    localStorage.setItem("attivita", JSON.stringify(lista));
-
-    return "Ho aggiunto l'attività: " + testo;
-}
-
-
-function MostraAttività(){
-
-    let lista = JSON.parse(localStorage.getItem("attivita")) || [];
-
-    if(lista.length === 0){
-        return "Non hai attività salvate";
-    }
-
-    return "Le tue attività sono: " + lista.join(", ");
-}
-
-
-  function cancellaAttività(){
-
-    localStorage.removeItem("attivita");
-
-    return "Ho cancellato tutte le attività";
-}
 /* ================= INPUT ================= */
 async function ask(){
     let i = document.getElementById("input");
