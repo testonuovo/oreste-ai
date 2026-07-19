@@ -4,11 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Oreste AI-assistente vocale italiano gratis</title>
 
 <meta name="description" content="Oreste AI è un assistente vocale italiano nel browser senza installazione.">
@@ -143,7 +138,7 @@ button:hover{ background:darkred; }
 "Cancella attività"
 </div>
 
-</div>
+
 <h2>📱 Utilizzo da smartphone</h2>
 
 <p>
@@ -353,7 +348,30 @@ async function handle(text){
         let app = text.replace("scarica","").trim();
         return scaricaProgramma(app);
     }
+if(text.startsWith("aggiungi attività")){
 
+    let att = text.replace("aggiungi attività","").trim();
+
+    if(att==""){
+        return "Dimmi quale attività aggiungere";
+    }
+
+    return aggiungiAttivita(att);
+}
+
+
+if(text.includes("mostra attività")){
+
+    return mostraAttivita();
+
+}
+
+
+if(text.includes("cancella attività")){
+
+    return cancellaAttivita();
+
+}
 
     return "Non ho capito";
 }
