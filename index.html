@@ -329,27 +329,27 @@ if(text.startsWith("aggiungi attività")){
         return "Dimmi quale attività aggiungere";
     }
 
-    return aggiungiAttivita(att);
+    return aggiungi(att);
 }
 
 
 if(text.includes("mostra attività")){
 
-    return mostraAttivita();
+   return mostra()
 
 }
 
 
 if(text.includes("cancella attività")){
 
-    return cancellaAttivita();
+   return cancella();
 
 }
     return "Non ho capito";
 }
 /* ================= LISTA ATTIVITÀ ================= */
 
-function aggiungiAttivita(testo){
+function Aggiungi(testo){
 
     let lista = JSON.parse(localStorage.getItem("attivita")) || [];
 
@@ -361,7 +361,7 @@ function aggiungiAttivita(testo){
 }
 
 
-function mostraAttivita(){
+function Mostra(){
 
     let lista = JSON.parse(localStorage.getItem("attivita")) || [];
 
@@ -373,7 +373,7 @@ function mostraAttivita(){
 }
 
 
-function cancellaAttivita(){
+function cancella(){
 
     localStorage.removeItem("attivita");
 
