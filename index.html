@@ -350,7 +350,30 @@ async function handle(text){
         let app = text.replace("scarica","").trim();
         return scaricaProgramma(app);
     }
+if(text.startsWith("aggiungi attività")){
 
+    let att = text.replace("aggiungi attività","").trim();
+
+    if(att === ""){
+        return "Dimmi quale attività aggiungere";
+    }
+
+    return aggiungi(att);
+}
+
+
+if(text.includes("mostra attività")){
+
+   return mostra()
+
+}
+
+
+if(text.includes("cancella attività")){
+
+   return cancella();
+
+}
 
     return "Non ho capito";
 }
