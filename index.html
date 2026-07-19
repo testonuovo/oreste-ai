@@ -122,21 +122,7 @@ button:hover{ background:darkred; }
 <button onclick="voice()">🎤 Parla</button>
 
 <div id="chat"></div>
-<div class="card">
 
-<h2>✅ Lista attività</h2>
-
-<div class="comando">
-"Aggiungi attività comprare il pane"
-</div>
-
-<div class="comando">
-"Mostra attività"
-</div>
-
-<div class="comando">
-"Cancella attività"
-</div>
 
 
 <h2>📱 Utilizzo da smartphone</h2>
@@ -280,40 +266,9 @@ function scaricaProgramma(nome){
 }
 /* ================= LISTA ATTIVITÀ ================= */
 
-function aggiungiAttivita(testo){
-
-    let lista = JSON.parse(localStorage.getItem("attivita")) || [];
-
-    lista.push(testo);
-
-    localStorage.setItem("attivita", JSON.stringify(lista));
-
-    return "Ho aggiunto l'attività: " + testo;
-}
 
 
-function mostraAttivita(){
 
-    let lista = JSON.parse(localStorage.getItem("attivita")) || [];
-
-    if(lista.length === 0){
-
-        return "Non hai attività salvate";
-
-    }
-
-    return "Le tue attività sono: " + lista.join(", ");
-
-}
-
-
-function cancellaAttivita(){
-
-    localStorage.removeItem("attivita");
-
-    return "Ho cancellato tutte le attività";
-
-}
 /* ================= AI ================= */
 async function handle(text){
 
@@ -360,18 +315,7 @@ if(text.startsWith("aggiungi attività")){
 }
 
 
-if(text.includes("mostra attività")){
 
-    return mostraAttivita();
-
-}
-
-
-if(text.includes("cancella attività")){
-
-    return cancellaAttivita();
-
-}
 
     return "Non ho capito";
 }
