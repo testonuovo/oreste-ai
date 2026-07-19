@@ -349,7 +349,7 @@ if(text.includes("cancella attività")){
 }
 /* ================= LISTA ATTIVITÀ ================= */
 
-function Aggiungi(testo){
+functionAggiungiAttività(testo){
 
     let lista = JSON.parse(localStorage.getItem("attivita")) || [];
 
@@ -361,7 +361,7 @@ function Aggiungi(testo){
 }
 
 
-function Mostra(){
+function MostraAttività(){
 
     let lista = JSON.parse(localStorage.getItem("attivita")) || [];
 
@@ -373,7 +373,7 @@ function Mostra(){
 }
 
 
-function cancella(){
+  function cancellaAttività(){
 
     localStorage.removeItem("attivita");
 
