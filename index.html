@@ -299,8 +299,7 @@ async function handle(text){
         return "Cerco " + q;
     }
     
-   
-    let app = text.replace("scarica","").trim();
+   let app = text.replace("scarica","").trim();
     if(text.startsWith("scarica")){
         return scaricaProgramma(app);
     }
