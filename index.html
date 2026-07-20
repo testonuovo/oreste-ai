@@ -324,11 +324,15 @@ if(text.includes("vicino contursi")){
 
     return "vicino contursi";
 } 
-if(text.includes("scarica Oreste AI")){
+if(text.includes("scarica oreste ai") ||
+   text.includes("download oreste ai")){
 
-  window.open("https://testonuovo.github.io/oreste-ai/", "_blank");
+    window.open(
+    "https://testonuovo.github.io/oreste-ai/download.html",
+    "_blank"
+    );
 
-  return "scarico oreste ai";
+    return "Apro la pagina download di Oreste AI";
 }
 if(text.startsWith("scarica")){
 
