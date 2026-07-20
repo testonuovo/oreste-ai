@@ -333,7 +333,7 @@ window.open(url,"_blank");
 
 addHistory(text);
 
-let nomeVoce = text
+let voce = text
 .replace("https://","")
 .replace("http://","")
 .replace("www.","")
@@ -341,7 +341,7 @@ let nomeVoce = text
 .replace(".it","")
 .replace(".org","");
 
-speak("Apro " + nomeVoce);
+speak("Apro" +voce);
 
 }
 
