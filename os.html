@@ -333,8 +333,15 @@ window.open(url,"_blank");
 
 addHistory(text);
 
+let nomeVoce = text
+.replace("https://","")
+.replace("http://","")
+.replace("www.","")
+.replace(".com","")
+.replace(".it","")
+.replace(".org","");
 
-speak("Apro " + text);
+speak("Apro " + nomeVoce);
 
 }
 
