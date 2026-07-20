@@ -307,7 +307,12 @@ if(text.includes("finale mondiali 2026 spagna argentina")){
    return "Apro la finale Spagna Argentina";
 }
 
+if(text.includes("chi ha vinto i mondiali 2026") ||
+   text.includes("campione del mondo 2026") ||
+   text.includes("finale spagna argentina")){
 
+    return "La Spagna ha vinto i Mondiali 2026 battendo l'Argentina per 1 a 0 ed è Campione del Mondo.";
+}
 if(text.startsWith("scarica")){
 
     let app = text.replace("scarica","").trim();
