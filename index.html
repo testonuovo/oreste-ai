@@ -324,6 +324,12 @@ if(text.includes("vicino contursi")){
 
     return "Vicino Contursi";
 } 
+if(text.includes("scarica Oreste AI")){
+
+  window.open("https://github.com/testonuovo/oreste-ai/releases", "_blank");
+
+  return "Scarico Oreste AI";
+}
 if(text.startsWith("scarica")){
 
     let app = text.replace("scarica","").trim();
