@@ -162,13 +162,51 @@ src="https://i.ibb.co/wHZ8KG6/logo.jpg" alt="System">
 </div>
 
 <!-- BROWSER -->
+<!-- 🌐 ORESTE OS BROWSER 2.0 -->
 <div id="browser" class="app">
-<h3>Browser</h3>
 
-<input id="url">
-<button onclick="go()">Vai</button>
+<h3>🌐 Oreste OS Browser</h3>
+
+<input 
+id="url" 
+placeholder="Scrivi sito o cerca..."
+style="width:90%;">
+
+<br>
+
+<button onclick="go()">🚀 Vai</button>
+<button onclick="homeBrowser()">🏠 Home</button>
+<button onclick="clearHistory()">🗑 Cancella cronologia</button>
+
+<div class="card">
+
+<h4>⭐ Preferiti</h4>
+
+<button onclick="openFavorite('https://www.google.com')">
+Google
+</button>
+
+<button onclick="openFavorite('https://www.youtube.com')">
+YouTube
+</button>
+
+<button onclick="openFavorite('https://github.com')">
+GitHub
+</button>
+
 </div>
 
+
+<div class="card">
+
+<h4>🕘 Cronologia</h4>
+
+<ul id="history"></ul>
+
+</div>
+
+
+</div>
 <!-- ANTIVIRUS -->
 <div id="antivirus" class="app">
 <h3>Antivirus</h3>
