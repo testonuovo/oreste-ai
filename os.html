@@ -263,11 +263,170 @@ res.innerText = Number(a.value)/Number(b.value);
 }
 
 /* BROWSER */
+/* 🌐 ORESTE OS BROWSER 2.0 */
+
+let historyList = JSON.parse(
+localStorage.getItem("oreste_history")
+) || [];
+
+
 function go(){
-let u = url.value;
-if(!u.startsWith("http")) u="https://"+u;
-window.open(u,"_blank");
+
+let text = document.getElementById("url").value.trim();
+
+if(!text) return;
+
+
+let url;
+
+
+/* Siti conosciuti */
+
+const sites = {
+
+google:"https://www.google.com",
+
+youtube:"https://www.youtube.com",
+
+github:"https://github.com",
+
+facebook:"https://facebook.com",
+
+instagram:"https://instagram.com",
+
+linkedin:"https://linkedin.com"
+
+};
+
+
+if(sites[text.toLowerCase()]){
+
+url = sites[text.toLowerCase()];
+
 }
+
+else if(text.includes(".") && !text.includes(" ")){
+
+if(!text.startsWith("http")){
+
+url="https://"+text;
+
+}else{
+
+url=text;
+
+}
+
+}
+
+else{
+
+url=
+"https://www.google.com/search?q="
++encodeURIComponent(text);
+
+}
+
+
+window.open(url,"_blank");
+
+
+addHistory(text);
+
+
+speak("Apro " + text);
+
+}
+
+
+
+function addHistory(item){
+
+historyList.unshift(item);
+
+
+if(historyList.length>10){
+
+historyList.pop();
+
+}
+
+
+localStorage.setItem(
+"oreste_history",
+JSON.stringify(historyList)
+);
+
+
+showHistory();
+
+}
+
+
+
+function showHistory(){
+
+let box=document.getElementById("history");
+
+
+if(!box)return;
+
+
+box.innerHTML="";
+
+
+historyList.forEach(x=>{
+
+box.innerHTML +=
+"<li>"+x+"</li>";
+
+});
+
+
+}
+
+
+
+function clearHistory(){
+
+historyList=[];
+
+localStorage.removeItem(
+"oreste_history"
+);
+
+showHistory();
+
+speak("Cronologia cancellata");
+
+}
+
+
+
+function openFavorite(url){
+
+window.open(url,"_blank");
+
+speak("Apro preferito");
+
+}
+
+
+
+function homeBrowser(){
+
+document.getElementById("url").value="";
+
+speak("Browser pronto");
+
+}
+
+
+
+window.addEventListener(
+"load",
+showHistory
+);
 
 /* ANTIVIRUS */
 function scan(){
