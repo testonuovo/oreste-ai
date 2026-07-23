@@ -544,7 +544,24 @@ return "Sveglia impostata alle "+orario;
 
 
 }
+/* ================= SCARICAMENTO PROGRAMMI ================= */
 
+function scaricaProgramma(nome){
+
+    nome = nome.trim();
+
+    if(!nome){
+        return "Dimmi quale programma vuoi scaricare";
+    }
+
+    let ricerca = 
+    "https://www.google.com/search?q=download+" 
+    + encodeURIComponent(nome);
+
+    window.open(ricerca,"_blank");
+
+    return "Cerco il download di " + nome;
+}
 
 
 /* ================= AI ================= */
