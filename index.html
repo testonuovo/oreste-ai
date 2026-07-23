@@ -220,268 +220,551 @@ margin:8px 0;
 </nav>
 
 <input id="input" placeholder="Scrivi o parla...">
+
 <button onclick="ask()">Invia</button>
+
 <button onclick="voice()">🎤 Parla</button>
+
 
 <div id="chat"></div>
 
 
-
-<h2>📱 Utilizzo da smartphone</h2>
-
-<p>
-Oreste AI può essere utilizzato anche da smartphone tramite browser.
-</p>
-
-<p>
-Per il corretto funzionamento dei comandi vocali è consigliato utilizzare Google Chrome, 
-che supporta la tecnologia Web Speech API per il riconoscimento della voce.
-</p>
-
-
 <script>
 
+
 /* ================= CHAT ================= */
+
+
 function add(w,t){
-    document.getElementById("chat").innerHTML +=
-    "<div class='msg'><b>"+w+":</b> "+t+"</div>";
+
+document.getElementById("chat").innerHTML +=
+
+"<div class='msg'><b>"+w+":</b> "+t+"</div>";
+
 }
+
+
 
 function speak(t){
-    let s = new SpeechSynthesisUtterance(t);
-    s.lang = "it-IT";
-    speechSynthesis.cancel();
-    speechSynthesis.speak(s);
+
+let s = new SpeechSynthesisUtterance(t);
+
+s.lang="it-IT";
+
+speechSynthesis.cancel();
+
+speechSynthesis.speak(s);
+
 }
 
-/* ================= SITI ================= */
+
+
+/* ================= APERTURA SITI ================= */
+
+
 function openSite(t){
-    t = t.toLowerCase();
 
-    const sites = {
-        google:"https://google.com",
-        youtube:"https://youtube.com",
-        facebook:"https://facebook.com",
-        instagram:"https://instagram.com",
-        tiktok:"https://tiktok.com",
-        canva:"https://canva.com",
-        github:"https://github.com",
-        linkedin:"https://linkedin.com",
-        pinterest:"https://pinterest.com"
-       };
+t=t.toLowerCase();
 
-    for(let k in sites){
-        if(t.includes(k)){
-            window.open(sites[k],"_blank");
-            return "Apro " + k;
-        }
-    }
-    return null;
+
+const sites={
+
+google:"https://google.com",
+
+youtube:"https://youtube.com",
+
+facebook:"https://facebook.com",
+
+instagram:"https://instagram.com",
+
+tiktok:"https://tiktok.com",
+
+canva:"https://canva.com",
+
+github:"https://github.com",
+
+linkedin:"https://linkedin.com",
+
+pinterest:"https://pinterest.com"
+
+};
+
+
+for(let k in sites){
+
+if(t.includes(k)){
+
+window.open(sites[k],"_blank");
+
+return "Apro "+k;
+
 }
+
+}
+
+
+return null;
+
+}
+
+
 
 /* ================= METEO ================= */
+
+
 async function meteo(city){
-    try{
-        let g = await fetch("https://geocoding-api.open-meteo.com/v1/search?name="+city);
-        let j = await g.json();
 
-        if(!j.results) return "Città non trovata";
+try{
 
-        let lat = j.results[0].latitude;
-        let lon = j.results[0].longitude;
 
-        let w = await fetch(
-            "https://api.open-meteo.com/v1/forecast?latitude="+lat+
-            "&longitude="+lon+"&current_weather=true"
-        );
+let g=await fetch(
 
-        let d = await w.json();
+"https://geocoding-api.open-meteo.com/v1/search?name="+city
 
-        return "🌤️ " + j.results[0].name + ": " + d.current_weather.temperature + "°C";
+);
 
-    }catch(e){
-        return "Errore meteo";
-    }
+
+let j=await g.json();
+
+
+if(!j.results)
+
+return "Città non trovata";
+
+
+let lat=j.results[0].latitude;
+
+let lon=j.results[0].longitude;
+
+
+
+let w=await fetch(
+
+"https://api.open-meteo.com/v1/forecast?latitude="+lat+
+
+"&longitude="+lon+
+
+"&current_weather=true"
+
+);
+
+
+let d=await w.json();
+
+
+return "🌤️ "+j.results[0].name+
+
+": "+d.current_weather.temperature+"°C";
+
+
 }
 
+catch(e){
+
+return "Errore meteo";
+
+}
+
+}
+
+
+
 /* ================= TIMER ================= */
-let timer = null;
+
+
+let timer=null;
+
 
 function startTimer(sec){
 
-    sec = parseInt(sec);
-    if(isNaN(sec)) return "Scrivi: timer 10";
 
-    let t = sec;
+sec=parseInt(sec);
 
-    if(timer) clearInterval(timer);
 
-    timer = setInterval(()=>{
-        add("⏱️", t + " sec");
+if(isNaN(sec))
 
-        t--;
+return "Scrivi timer seguito dai secondi";
 
-        if(t < 0){
-            clearInterval(timer);
-            timer = null;
-            speak("Timer terminato");
-            add("⏱️","FINITO");
-        }
 
-    },1000);
+let t=sec;
 
-    return "Timer avviato per " + sec + " secondi";
+
+if(timer)
+
+clearInterval(timer);
+
+
+
+timer=setInterval(()=>{
+
+
+add("⏱️",t+" secondi");
+
+
+t--;
+
+
+if(t<0){
+
+
+clearInterval(timer);
+
+timer=null;
+
+
+speak("Timer terminato");
+
+
+add("⏱️","FINITO");
+
+
 }
 
+
+},1000);
+
+
+
+return "Timer avviato per "+sec+" secondi";
+
+
+}
+
+
+
 /* ================= SVEGLIA ================= */
-let svegliaTimer = null;
+
+
+let svegliaTimer=null;
+
 
 function sveglia(orario){
 
-    let [h,m] = orario.split(":").map(Number);
-    let now = new Date();
-    let s = new Date();
-    s.setHours(h,m,0);
 
-    let diff = s - now;
+let parti=orario.split(":");
 
-    if(diff < 0) return "Orario passato";
 
-    if(svegliaTimer) clearTimeout(svegliaTimer);
+let h=parseInt(parti[0]);
 
-    svegliaTimer = setTimeout(()=>{
-        add("⏰","SVEGLIA!");
-        speak("Sveglia!");
-        alert("SVEGLIA!");
-    },diff);
+let m=parseInt(parti[1]);
 
-    return "Sveglia impostata per " + orario;
+
+let ora=new Date();
+
+let sveglia=new Date();
+
+
+sveglia.setHours(h,m,0);
+
+
+
+let diff=sveglia-ora;
+
+
+if(diff<0)
+
+return "Orario passato";
+
+
+
+if(svegliaTimer)
+
+clearTimeout(svegliaTimer);
+
+
+
+svegliaTimer=setTimeout(()=>{
+
+
+add("⏰","SVEGLIA!");
+
+speak("Sveglia!");
+
+alert("SVEGLIA!");
+
+},diff);
+
+
+
+return "Sveglia impostata alle "+orario;
+
+
 }
-
-/* ================= SCARICA PROGRAMMI ================= */
-function scaricaProgramma(nome){
-    window.open(
-        "https://www.google.com/search?q=download+" + encodeURIComponent(nome),
-        "_blank"
-    );
-    return "Cerco download di " + nome;
-}
-/* ================= LISTA ATTIVITÀ ================= */
-
 
 
 
 /* ================= AI ================= */
+
+
 async function handle(text){
 
-    text = text.toLowerCase();
 
-    let site = openSite(text);
-    if(site) return site;
+text=text.toLowerCase();
 
-    if(text.includes("ciao")) return "Ciao!";
-    if(text.includes("ora")) return new Date().toLocaleTimeString();
-    if(text.includes("data")) return new Date().toLocaleDateString();
-    
-    if(text.startsWith("meteo")){
-        return await meteo(text.replace("meteo","").trim());
-    }
 
-    if(text.startsWith("timer")){
-        return startTimer(text.replace("timer","").trim());
-    }
 
-    if(text.startsWith("sveglia")){
-        return sveglia(text.replace("sveglia","").trim());
-    }
+let site=openSite(text);
+
+
+if(site)
+
+return site;
+
+
+
+if(text.includes("ciao"))
+
+return "Ciao! Sono Oreste AI";
+
+
+
+if(text.includes("ora"))
+
+return new Date().toLocaleTimeString();
+
+
+
+if(text.includes("data"))
+
+return new Date().toLocaleDateString();
+
+
+
+if(text.startsWith("meteo")){
+
+
+return await meteo(
+
+text.replace("meteo","").trim()
+
+);
+
+
+}
+
+
+
+if(text.startsWith("timer")){
+
+
+return startTimer(
+
+text.replace("timer","").trim()
+
+);
+
+
+}
+
+
+
+if(text.startsWith("sveglia")){
+
+
+return sveglia(
+
+text.replace("sveglia","").trim()
+
+);
+
+
+}
+
+
+
+/* Ricerca Google */
+
 
 if(text.startsWith("cerca")){
-    let q = text.replace("cerca","").trim();
-    window.open("https://google.com/search?q="+q,"_blank");
-    return "Cerco " + q;
+
+
+let q=text.replace("cerca","").trim();
+
+
+window.open(
+
+"https://www.google.com/search?q="+encodeURIComponent(q),
+
+"_blank"
+
+);
+
+
+return "Cerco "+q;
+
+
 }
 
 
-if(text.includes("finale mondiali 2026 spagna argentina")){
 
-    window.open("https://www.raiplay.it/", "_blank");
+/* Mondiali */
 
-   return "Apro la finale Spagna Argentina";
-}
 
 if(text.includes("chi ha vinto i mondiali 2026") ||
-   text.includes("campione del mondo 2026") ||
-   text.includes("finale spagna argentina")||
-   text.includes("chi ha vinto i mondiali")||
-   text.includes("vincitore mondiali 2026")){
 
-    return "La Spagna ha vinto i Mondiali 2026 battendo l'Argentina per 1 a 0 ed è Campione del Mondo.";
+text.includes("campione del mondo 2026")){
+
+
+return "La Spagna ha vinto i Mondiali 2026 ed è Campione del Mondo.";
+
+
 }
-if(text.includes("vicino contursi")){
 
-    window.open("https://youtu.be/r5gGcrJJn_0", "_blank");
 
-    return "vicino contursi";
-} 
+
+/* Download Oreste AI */
+
+
 if(text.includes("scarica oreste ai") ||
-   text.includes("download oreste ai")){
 
-    window.open(
-    "https://testonuovo.github.io/oreste-ai/download.html",
-    "_blank"
-    );
-
-    return "scarico oreste ai";
-}
-if(text.startsWith("scarica")){
-
-    let app = text.replace("scarica","").trim();
-
-    return scaricaProgramma(app);
-}
+text.includes("download oreste ai")){
 
 
+window.open(
+
+"download.html",
+
+"_blank"
+
+);
 
 
-    return "Non ho capito";
+return "Apro la pagina download di Oreste AI";
+
+
 }
 
-/* ================= INPUT ================= */
+
+
+return "Non ho capito";
+
+
+}
+
+
+
+/* ================= INVIO ================= */
+
+
 async function ask(){
-    let i = document.getElementById("input");
-    let t = i.value;
-    if(!t) return;
 
-    add("🧑",t);
 
-    let r = await handle(t);
+let i=document.getElementById("input");
 
-    add("🤖",r);
-    speak(r);
 
-    i.value="";
+let t=i.value;
+
+
+if(!t)
+
+return;
+
+
+
+add("🧑",t);
+
+
+
+let r=await handle(t);
+
+
+
+add("🤖",r);
+
+
+
+speak(r);
+
+
+
+i.value="";
+
+
 }
 
-/* ================= VOCE ================= */
+
+
+/* ================= RICONOSCIMENTO VOCALE ================= */
+
+
 function voice(){
 
-    let SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-    if(!SR){
-        alert("Il riconoscimento vocale non è supportato da questo browser. Usa Google Chrome.");
-        return;
-    }
+let SR=
 
-    let r = new SR();
+window.SpeechRecognition ||
 
-    r.lang = "it-IT";
-    r.continuous = false;
-    r.interimResults = false;
+window.webkitSpeechRecognition;
 
 
-    r.onstart = ()=>{
-        add("🎤","Ascolto attivo... parla ora");
-    };
+
+if(!SR){
+
+alert(
+
+"Usa Google Chrome per il riconoscimento vocale"
+
+);
+
+return;
+
+}
+
+
+
+let r=new SR();
+
+
+
+r.lang="it-IT";
+
+r.continuous=false;
+
+r.interimResults=false;
+
+
+
+r.onstart=function(){
+
+add("🎤","Ascolto attivo...");
+
+};
+
+
+
+r.onresult=async function(e){
+
+
+let testo=e.results[0][0].transcript;
+
+
+
+add("🧑",testo);
+
+
+
+let risposta=await handle(testo);
+
+
+
+add("🤖",risposta);
+
+
+
+speak(risposta);
+
+
+};
+
+
+
+r.start();
+
+
+}
+
+
+</script>
 
 
     r.onresult = async e=>{
