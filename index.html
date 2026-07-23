@@ -681,7 +681,17 @@ return "La Spagna ha vinto i Mondiali 2026 ed è Campione del Mondo.";
 
 }
 
+/* Scarica programmi */
 
+if(text.startsWith("scarica")){
+
+    let programma = text
+    .replace("scarica","")
+    .trim();
+
+    return scaricaProgramma(programma);
+
+}
 
 /* Download Oreste AI */
 
