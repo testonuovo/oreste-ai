@@ -853,34 +853,7 @@ r.start();
 </script>
 
 
-    r.onresult = async e=>{
-
-        let t = e.results[0][0].transcript;
-
-        add("🧑",t);
-
-        let r2 = await handle(t);
-
-        add("🤖",r2);
-
-        speak(r2);
-    };
-
-
-    r.onerror = e=>{
-
-        if(e.error=="not-allowed"){
-            add("⚠️","Permesso microfono negato. Abilita il microfono nelle impostazioni di Chrome.");
-        }
-
-    };
-
-
-    r.start();
-
-}
-
-</script>
+    
 
 
 
