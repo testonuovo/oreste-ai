@@ -712,31 +712,37 @@ return "Apro la pagina download di Oreste AI";
 
 
 if(text.includes("difesa personale") || text.includes("difesa")){
-window.open("https://youtu.be/uUUilRrSrLA","_blank");
 
-return "difesa personale";
-   
+    window.open(
+        "https://youtu.be/uUUilRrSrLA",
+        "_blank"
+    );
 
+    return "Apro il video sulla difesa personale";
 }
 
+if(text.includes("amnesty international") ||
+   text.includes("amnesty")){
 
-|| text.includes("amnesty")){
-if(text.includes("amnesty international") {
-window.open("https://www.amnesty.it/","_blank");
-return "amnesty international";
+    window.open(
+        "https://www.amnesty.it/",
+        "_blank"
+    );
 
+    return "Apro il sito di Amnesty International";
 }
- 
-if(text.includes("io sto con amnesty")
+
+if(text.includes("io sto con amnesty")){
 
     window.open(
         "https://iostoconamnesty.altervista.org/",
         "_blank"
     );
 
-   return "io sto con amnesty";
+    return "Apro il sito Io Sto con Amnesty";
 }
 
+return "Non ho capito";
 
 return "Non ho capito";
 
