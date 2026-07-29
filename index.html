@@ -710,8 +710,8 @@ window.open(
 return "Apro la pagina download di Oreste AI";
 }
 
-if(text.includes("difesa personale") || text.includes("difesa"))
 
+if(text.includes("difesa personale") || text.includes("difesa")){
 window.open("https://youtu.be/uUUilRrSrLA","_blank");
 
 return "difesa personale";
@@ -720,8 +720,13 @@ return "difesa personale";
 }
 
 
+if(text.includes("amnesty international") || text.includes("amnesty")){
+window.open("https://www.amnesty.it/","_blank");
 
+return "amnesty international";
+    
 return "Non ho capito";
+}
 
 
 }
