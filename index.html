@@ -607,10 +607,105 @@ return "Apro Amnesty International";
 }
 
 
-
 return "Non ho capito. Scrivi aiuto per vedere i comandi.";
 
-}  
+}
+
+
+/* ================= INVIO TESTO ================= */
+
+async function ask(){
+
+let campo=document.getElementById("input");
+
+let testo=campo.value.trim();
+
+
+if(!testo){
+
+return;
+
+}
+
+
+add("🧑",testo);
+
+
+let risposta=await handle(testo);
+
+
+add("🤖",risposta);
+
+
+speak(risposta);
+
+
+campo.value="";
+
+}
+
+
+
+/* ================= RICONOSCIMENTO VOCALE ================= */
+
+function voice(){
+
+
+let SpeechRecognition =
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+
+if(!SpeechRecognition){
+
+alert("Usa Google Chrome per il riconoscimento vocale");
+
+return;
+
+}
+
+
+let ascolto=new SpeechRecognition();
+
+
+ascolto.lang="it-IT";
+
+ascolto.continuous=false;
+
+ascolto.interimResults=false;
+
+
+
+ascolto.onstart=function(){
+
+add("🎤","Ascolto attivo...");
+
+};
+
+
+
+ascolto.onresult=async function(event){
+
+
+let testo=event.results[0][0].transcript;
+
+
+add("🧑",testo);
+
+
+let risposta=await handle(testo);
+
+
+add("🤖",risposta);
+
+
+speak(risposta);
+
+
+};
+
+
+
 ascolto.onerror=function(){
 
 add("🎤","Errore riconoscimento vocale");
@@ -621,8 +716,8 @@ add("🎤","Errore riconoscimento vocale");
 
 ascolto.start();
 
-
 }
+
 
 
 </script>
