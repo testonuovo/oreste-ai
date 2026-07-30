@@ -17,82 +17,52 @@
 <meta name="author" content="Oreste De Chiara">
 
 
-<meta name="google-site-verification" content="BGQlo83DUVg9LLOEFBpw7DStOr1fKiH_aLg5IsF2HeA">
-
-
 <style>
 
 body{
-
 font-family:Arial,sans-serif;
-
 background:#0a3d91;
-
 color:white;
-
 text-align:center;
-
 margin:0;
-
 }
 
 
 h1{
-
 margin-top:20px;
-
 }
 
 
 nav{
-
 background:rgba(0,0,0,0.4);
-
 padding:12px;
-
 margin:10px;
-
 border-radius:10px;
-
 }
 
 
 nav a{
-
 color:white;
-
 margin:5px;
-
 text-decoration:none;
-
 display:inline-block;
-
 }
 
 
 nav a:hover{
-
 color:#ffd700;
-
 }
 
 
 #chat{
 
 width:90%;
-
 max-width:600px;
-
 margin:20px auto;
-
 background:rgba(0,0,0,0.3);
-
 padding:15px;
-
 border-radius:10px;
-
 min-height:250px;
-
 text-align:left;
 
 }
@@ -101,13 +71,9 @@ text-align:left;
 input{
 
 width:80%;
-
 padding:15px;
-
 font-size:18px;
-
 border-radius:10px;
-
 border:none;
 
 }
@@ -116,17 +82,11 @@ border:none;
 button{
 
 padding:12px 18px;
-
 margin:5px;
-
 border:none;
-
 border-radius:20px;
-
 background:red;
-
 color:white;
-
 cursor:pointer;
 
 }
@@ -145,7 +105,6 @@ margin:8px 0;
 
 }
 
-
 </style>
 
 </head>
@@ -158,28 +117,39 @@ margin:8px 0;
 
 
 <nav>
+
 <a href="index.html">🏠 Home</a>
+
 <a href="assistente.html">🎤 Assistente</a>
+
 <a href="chat.html">💬 Chat</a>
+
 <a href="motivazione.html">🌻 Motivazione</a>
+
 <a href="download.html">📥 Download</a>
+
 <a href="blog.html">📰 Blog</a>
+
 <a href="chi-siamo.html">👤 Chi siamo</a>
+
 <a href="contatti.html">📞 Contatti</a>
+
 <a href="dashboard.html">📊 Dashboard</a>
+
 <a href="os.html">🖥️ Oreste OS</a>
-<a href="chi-ha-creato-oreste-ai.html">👨‍💻 Creatore</a>
-<a href="meditazione.html">🧘 Meditazione</a>
-<a href="mondiali2026.html">🏆 Mondiali 2026</a>
+
 <a href="storybook.html">📚 Storybook</a>
-<a href="storia.html">📖 La Storia</a>  
-<a href="funzioni.html">Funzioni</a>
-<a href="tecnologie oreste ai.html">Tecnologie Oreste AI</a>
+
+<a href="storia.html">📖 La Storia</a>
+
+<a href="funzioni.html">⚙️ Funzioni</a>
+
+<a href="tecnologie oreste ai.html">💻 Tecnologie</a>
+
 <a href="comandi-oreste-ai.html">🎤 Comandi</a>
-<a href="spagna-campione-del-mondo-2026.html">
-🏆 Spagna campione del mondo 2026
-</a>
+
 </nav>
+
 
 <input id="input" placeholder="Scrivi o parla...">
 
@@ -200,9 +170,6 @@ Invia
 <script>
 
 
-/* ================= CHAT ================= */
-
-
 function add(nome,testo){
 
 document.getElementById("chat").innerHTML +=
@@ -211,9 +178,6 @@ document.getElementById("chat").innerHTML +=
 
 }
 
-
-
-/* ================= SINTESI VOCALE ================= */
 
 
 function speak(testo){
@@ -230,23 +194,17 @@ speechSynthesis.speak(voce);
 
 
 
-/* ================= APERTURA SITI ================= */
-
+/* APERTURA SITI */
 
 function openSite(testo){
 
-let siti={
+const siti={
 
 google:"https://google.com",
-
 youtube:"https://youtube.com",
-
 facebook:"https://facebook.com",
-
 instagram:"https://instagram.com",
-
 tiktok:"https://tiktok.com",
-
 github:"https://github.com"
 
 };
@@ -256,12 +214,9 @@ for(let nome in siti){
 
 if(testo.includes(nome)){
 
-
 window.open(siti[nome],"_blank");
 
-
 return "Apro "+nome;
-
 
 }
 
@@ -274,22 +229,20 @@ return null;
 
 
 
-/* ================= METEO ================= */
-
+/* METEO */
 
 async function meteo(citta){
 
 try{
 
-
-let risposta=await fetch(
+let r=await fetch(
 
 "https://geocoding-api.open-meteo.com/v1/search?name="+encodeURIComponent(citta)
 
 );
 
 
-let dati=await risposta.json();
+let dati=await r.json();
 
 
 if(!dati.results){
@@ -304,23 +257,20 @@ let lat=dati.results[0].latitude;
 let lon=dati.results[0].longitude;
 
 
-
-let tempo=await fetch(
+let w=await fetch(
 
 "https://api.open-meteo.com/v1/forecast?latitude="+lat+
-
 "&longitude="+lon+
-
 "&current_weather=true"
 
 );
 
 
-let risultato=await tempo.json();
+let tempo=await w.json();
 
 
 return "🌤️ "+dati.results[0].name+
-": "+risultato.current_weather.temperature+" gradi";
+": "+tempo.current_weather.temperature+" gradi";
 
 
 }
@@ -332,7 +282,10 @@ return "Errore meteo";
 }
 
 }
-/* ================= TIMER ================= */
+
+
+
+/* TIMER */
 
 let timer=null;
 
@@ -370,22 +323,18 @@ tempo--;
 
 if(tempo<0){
 
-
 clearInterval(timer);
 
 timer=null;
-
 
 add("⏱️","FINITO");
 
 speak("Timer terminato");
 
-
 }
 
 
 },1000);
-
 
 
 return "Timer avviato per "+secondi+" secondi";
@@ -394,8 +343,7 @@ return "Timer avviato per "+secondi+" secondi";
 
 
 
-/* ================= SVEGLIA ================= */
-
+/* SVEGLIA */
 
 let svegliaTimer=null;
 
@@ -413,34 +361,31 @@ return "Scrivi la sveglia così: ore:minuti";
 }
 
 
+let h=parseInt(parti[0]);
 
-let ora=parseInt(parti[0]);
-
-let minuti=parseInt(parti[1]);
+let m=parseInt(parti[1]);
 
 
-let adesso=new Date();
+let ora=new Date();
 
 let obiettivo=new Date();
 
 
-obiettivo.setHours(ora);
+obiettivo.setHours(h);
 
-obiettivo.setMinutes(minuti);
+obiettivo.setMinutes(m);
 
 obiettivo.setSeconds(0);
 
 
-
-let differenza=obiettivo-adesso;
+let differenza=obiettivo-ora;
 
 
 if(differenza<0){
 
-return "Questo orario è già passato";
+return "Orario già passato";
 
 }
-
 
 
 if(svegliaTimer){
@@ -450,9 +395,7 @@ clearTimeout(svegliaTimer);
 }
 
 
-
 svegliaTimer=setTimeout(()=>{
-
 
 add("⏰","SVEGLIA!");
 
@@ -460,22 +403,16 @@ speak("Sveglia!");
 
 alert("SVEGLIA!");
 
-
 },differenza);
-
 
 
 return "Sveglia impostata alle "+orario;
 
 }
 
-
-
 /* ================= DOWNLOAD PROGRAMMI ================= */
 
-
 function scaricaProgramma(nome){
-
 
 nome=nome.trim();
 
@@ -503,7 +440,7 @@ return "Cerco il download di "+nome;
 
 
 
-/* ================= HANDLE ORESTE AI ================= */
+/* ================= CERVELLO ORESTE AI ================= */
 
 
 async function handle(text){
@@ -513,8 +450,7 @@ text=text.toLowerCase().trim();
 
 
 
-/* apertura siti */
-
+/* Apertura siti */
 
 let sito=openSite(text);
 
@@ -527,8 +463,7 @@ return sito;
 
 
 
-/* saluto */
-
+/* Saluto */
 
 if(text.includes("ciao")){
 
@@ -538,21 +473,19 @@ return "Ciao! Sono Oreste AI";
 
 
 
-/* aiuto */
-
+/* Aiuto */
 
 if(text.includes("aiuto") ||
 text.includes("cosa sai fare")){
 
 
-return "Sono Oreste AI. Posso aiutarti con meteo, timer, sveglia, ricerca Google, apertura siti, download programmi e comandi vocali.";
+return "Sono Oreste AI. Posso aiutarti con meteo, timer, sveglia, ricerca Google, apertura siti, download programmi, video e comandi vocali.";
 
 }
 
 
 
-/* ora */
-
+/* Ora */
 
 if(text.includes("ora")){
 
@@ -562,24 +495,212 @@ return "Sono le "+new Date().toLocaleTimeString();
 
 
 
-/* data */
-
+/* Data */
 
 if(text.includes("data")){
 
 return "Oggi è il "+new Date().toLocaleDateString();
 
 }
-/* ================= INVIO TESTO ================= */
 
+
+
+/* Meteo */
+
+if(text.startsWith("meteo")){
+
+
+let citta=text.replace("meteo","").trim();
+
+
+if(!citta){
+
+return "Scrivi anche la città";
+
+}
+
+
+return await meteo(citta);
+
+
+}
+
+
+
+/* Timer */
+
+if(text.startsWith("timer")){
+
+
+let secondi=text.replace("timer","").trim();
+
+
+return startTimer(secondi);
+
+
+}
+
+
+
+/* Sveglia */
+
+if(text.startsWith("sveglia")){
+
+
+let ora=text.replace("sveglia","").trim();
+
+
+return sveglia(ora);
+
+
+}
+
+
+
+/* Cerca Google */
+
+if(text.startsWith("cerca")){
+
+
+let ricerca=text.replace("cerca","").trim();
+
+
+window.open(
+
+"https://www.google.com/search?q="+
+encodeURIComponent(ricerca),
+
+"_blank"
+
+);
+
+
+return "Cerco "+ricerca;
+
+}
+
+
+
+/* Download */
+
+if(text.startsWith("scarica")){
+
+
+let programma=text.replace("scarica","").trim();
+
+
+return scaricaProgramma(programma);
+
+
+}
+
+
+
+/* Mondiali */
+
+if(text.includes("mondiali 2026") ||
+text.includes("campione del mondo 2026")){
+
+
+return "🏆 La Spagna ha vinto i Mondiali 2026 ed è Campione del Mondo.";
+
+}
+
+
+
+/* Video Vicino Contursi */
+
+if(text.includes("vicino contursi")){
+
+
+window.open(
+
+"https://youtu.be/r5gGcrJJn_0",
+
+"_blank"
+
+);
+
+
+return "Apro il video Vicino Contursi";
+
+}
+
+
+
+/* Difesa personale */
+
+if(text.includes("difesa")){
+
+
+window.open(
+
+"https://youtu.be/uUUilRrSrLA",
+
+"_blank"
+
+);
+
+
+return "Apro il video sulla difesa personale";
+
+}
+
+
+
+/* Amnesty */
+
+if(text.includes("amnesty")){
+
+
+window.open(
+
+"https://www.amnesty.it/",
+
+"_blank"
+
+);
+
+
+return "Apro Amnesty International";
+
+}
+
+
+
+/* Io sto con Amnesty */
+
+if(text.includes("io sto con amnesty")){
+
+
+window.open(
+
+"https://iostoconamnesty.altervista.org/",
+
+"_blank"
+
+);
+
+
+return "Apro Io Sto con Amnesty";
+
+}
+
+
+
+/* Risposta predefinita */
+
+
+return "Non ho capito. Scrivi aiuto per vedere i comandi.";
+
+}
+/* ================= INVIO TESTO ================= */
 
 async function ask(){
 
-
 let campo=document.getElementById("input");
 
-
-let testo=campo.value;
+let testo=campo.value.trim();
 
 
 if(!testo){
@@ -589,29 +710,21 @@ return;
 }
 
 
-
 add("🧑",testo);
-
 
 
 let risposta=await handle(testo);
 
 
-
 add("🤖",risposta);
-
 
 
 speak(risposta);
 
 
-
 campo.value="";
 
-
 }
-
-
 
 
 
@@ -621,23 +734,15 @@ campo.value="";
 function voice(){
 
 
-let SpeechRecognition=
-
+let SpeechRecognition =
 window.SpeechRecognition ||
-
 window.webkitSpeechRecognition;
 
 
 
 if(!SpeechRecognition){
 
-
-alert(
-
-"Usa Google Chrome per il riconoscimento vocale"
-
-);
-
+alert("Usa Google Chrome per il riconoscimento vocale");
 
 return;
 
@@ -646,7 +751,6 @@ return;
 
 
 let ascolto=new SpeechRecognition();
-
 
 
 ascolto.lang="it-IT";
@@ -659,9 +763,7 @@ ascolto.interimResults=false;
 
 ascolto.onstart=function(){
 
-
 add("🎤","Ascolto attivo...");
-
 
 };
 
@@ -673,7 +775,6 @@ ascolto.onresult=async function(event){
 let testo=event.results[0][0].transcript;
 
 
-
 add("🧑",testo);
 
 
@@ -681,13 +782,19 @@ add("🧑",testo);
 let risposta=await handle(testo);
 
 
-
 add("🤖",risposta);
-
 
 
 speak(risposta);
 
+
+};
+
+
+
+ascolto.onerror=function(){
+
+add("🎤","Errore riconoscimento vocale");
 
 };
 
@@ -705,30 +812,3 @@ ascolto.start();
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
