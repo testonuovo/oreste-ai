@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="it">
 
 <head>
@@ -6,7 +5,6 @@
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 
 <title>Oreste AI - Assistente vocale italiano gratis</title>
 
@@ -166,9 +164,7 @@ margin:8px 0;
 
 }
 
-
 </style>
-
 
 </head>
 
@@ -211,13 +207,8 @@ margin:8px 0;
 
 <a href="comandi-oreste-ai.html">🎤 Comandi</a>
 
-<a href="mondiali2026.html">🏆 Mondiali 2026</a>
-
-<a href="spagna-campione-del-mondo-2026.html">
-🏆 Spagna campione del mondo 2026
-</a>
-
 </nav>
+
 
 <input id="input" placeholder="Scrivi o parla...">
 
@@ -228,58 +219,9 @@ margin:8px 0;
 
 <div id="chat"></div>
 
-<section class="card">
-
-<h2>📱 Utilizzo da smartphone</h2>
-
-<p>
-Oreste AI può essere utilizzato anche da smartphone tramite browser.
-</p>
-
-<p>
-Per i comandi vocali è consigliato usare Google Chrome,
-che supporta la tecnologia Web Speech API.
-</p>
-
-</section>
-
-
-
-<footer class="card">
-
-<h2>🤖 Oreste AI</h2>
-
-<p>
-Assistente vocale italiano gratuito online.
-</p>
-
-<p>
-Creato da <strong>Oreste De Chiara</strong>.
-</p>
-
-<p>
-Oreste AI continua a crescere con nuove funzioni,
-come Oreste OS, Storybook e strumenti basati
-sull'intelligenza artificiale.
-</p>
-
-
-
-
-
-<br><br>
-
-
-
-
-
-</footer>
-
 <script>
 
-
 /* ================= CHAT ================= */
-
 
 function add(w,t){
 
@@ -290,6 +232,7 @@ document.getElementById("chat").innerHTML +=
 }
 
 
+/* ================= VOCE ================= */
 
 function speak(t){
 
@@ -306,7 +249,6 @@ speechSynthesis.speak(s);
 
 
 /* ================= APERTURA SITI ================= */
-
 
 function openSite(t){
 
@@ -356,7 +298,6 @@ return null;
 
 
 /* ================= METEO ================= */
-
 
 async function meteo(city){
 
@@ -417,7 +358,6 @@ return "Errore meteo";
 
 /* ================= TIMER ================= */
 
-
 let timer=null;
 
 
@@ -473,7 +413,6 @@ add("⏱️","FINITO");
 
 return "Timer avviato per "+sec+" secondi";
 
-
 }
 
 
@@ -528,6 +467,7 @@ speak("Sveglia!");
 
 alert("SVEGLIA!");
 
+
 },diff);
 
 
@@ -536,38 +476,55 @@ return "Sveglia impostata alle "+orario;
 
 
 }
-/* ================= SCARICAMENTO PROGRAMMI ================= */
+
+
+
+/* ================= DOWNLOAD ================= */
+
 
 function scaricaProgramma(nome){
 
-    nome = nome.trim();
 
-    if(!nome){
-        return "Dimmi quale programma vuoi scaricare";
-    }
+nome=nome.trim();
 
-    let ricerca = 
-    "https://www.google.com/search?q=download+" 
-    + encodeURIComponent(nome);
 
-    window.open(ricerca,"_blank");
+if(!nome){
 
-    return "Cerco il download di " + nome;
+return "Dimmi quale programma vuoi scaricare";
+
 }
 
 
-/* ================= AI ================= */
+let ricerca=
+
+"https://www.google.com/search?q=download+"+
+
+encodeURIComponent(nome);
+
+
+
+window.open(ricerca,"_blank");
+
+
+
+return "Cerco il download di "+nome;
+
+
+}
+
+/* ================= AI ORESTE ================= */
 
 
 async function handle(text){
 
 
-text=text.toLowerCase();
+text=text.toLowerCase().trim();
 
 
+
+/* Apertura siti */
 
 let site=openSite(text);
-
 
 if(site)
 
@@ -575,26 +532,50 @@ return site;
 
 
 
-if(text.includes("ciao"))
+/* Saluto */
+
+if(text.includes("ciao")){
 
 return "Ciao! Sono Oreste AI";
 
+}
 
 
-if(text.includes("ora"))
+
+/* Aiuto */
+
+if(text.includes("aiuto") ||
+   text.includes("cosa sai fare")){
+
+return "Sono Oreste AI. Posso aiutarti con meteo, timer, sveglia, ricerche Google, apertura siti, download programmi, video e altri comandi.";
+
+}
+
+
+
+/* Ora */
+
+if(text.includes("ora")){
 
 return new Date().toLocaleTimeString();
 
+}
 
 
-if(text.includes("data"))
+
+/* Data */
+
+if(text.includes("data")){
 
 return new Date().toLocaleDateString();
 
+}
 
+
+
+/* Meteo */
 
 if(text.startsWith("meteo")){
-
 
 return await meteo(
 
@@ -602,13 +583,13 @@ text.replace("meteo","").trim()
 
 );
 
-
 }
 
 
 
-if(text.startsWith("timer")){
+/* Timer */
 
+if(text.startsWith("timer")){
 
 return startTimer(
 
@@ -616,13 +597,13 @@ text.replace("timer","").trim()
 
 );
 
-
 }
 
 
 
-if(text.startsWith("sveglia")){
+/* Sveglia */
 
+if(text.startsWith("sveglia")){
 
 return sveglia(
 
@@ -630,18 +611,17 @@ text.replace("sveglia","").trim()
 
 );
 
-
 }
 
 
 
 /* Ricerca Google */
 
-
 if(text.startsWith("cerca")){
 
 
 let q=text.replace("cerca","").trim();
+
 
 
 window.open(
@@ -653,6 +633,7 @@ window.open(
 );
 
 
+
 return "Cerco "+q;
 
 
@@ -662,71 +643,77 @@ return "Cerco "+q;
 
 /* Mondiali */
 
-
-if(text.includes("chi ha vinto i mondiali 2026") ||
-
-text.includes("campione del mondo 2026")){
+if(text.includes("mondiali 2026") ||
+   text.includes("campione del mondo 2026")){
 
 
 return "La Spagna ha vinto i Mondiali 2026 ed è Campione del Mondo.";
 
-
 }
 
-/* Scarica programmi */
 
-if(text.startsWith("scarica")){
 
-    let programma = text
-    .replace("scarica","")
-    .trim();
-
-    return scaricaProgramma(programma);
-
-}
-if(text.includes("vicino contursi")){
-window.open("https://youtu.be/r5gGcrJJn_0","_blank");
-
-return "vicino contursi";
-}
-    
 /* Download Oreste AI */
 
 if(text.includes("scarica oreste ai") ||
    text.includes("download oreste ai")){
 
-    window.open(
-        "https://testonuovo.github.io/oreste-ai/download.html",
-        "_blank"
-    );
 
-    return "Apro la pagina download di Oreste AI";
+window.open(
+
+"https://testonuovo.github.io/oreste-ai/download.html",
+
+"_blank"
+
+);
+
+
+
+return "Apro la pagina download di Oreste AI";
+
+
 }
 
 
-/* Scarica programmi */
+
+/* Download programmi */
 
 if(text.startsWith("scarica")){
 
-    let programma = text
-    .replace("scarica","")
-    .trim();
 
-    return scaricaProgramma(programma);
+let programma=
+
+text.replace("scarica","").trim();
+
+
+
+return scaricaProgramma(programma);
+
+
 }
 
 
-/* Video Vicino Contursi */
+
+/* Vicino Contursi */
 
 if(text.includes("vicino contursi")){
 
-    window.open(
-        "https://youtu.be/r5gGcrJJn_0",
-        "_blank"
-    );
 
-    return "Apro il video Vicino Contursi";
+window.open(
+
+"https://youtu.be/r5gGcrJJn_0",
+
+"_blank"
+
+);
+
+
+
+return "Apro il video Vicino Contursi";
+
+
 }
+
 
 
 /* Difesa personale */
@@ -734,60 +721,79 @@ if(text.includes("vicino contursi")){
 if(text.includes("difesa personale") ||
    text.includes("difesa")){
 
-    window.open(
-        "https://youtu.be/uUUilRrSrLA",
-        "_blank"
-    );
 
-    return "Apro il video sulla difesa personale";
+window.open(
+
+"https://youtu.be/uUUilRrSrLA",
+
+"_blank"
+
+);
+
+
+
+return "Apro il video sulla difesa personale";
+
+
 }
 
 
-/* Amnesty International */
 
-if(text.includes("amnesty international") ||
-   text.includes("amnesty")){
+/* Amnesty */
 
-    window.open(
-        "https://www.amnesty.it/",
-        "_blank"
-    );
+if(text.includes("amnesty international")){
 
-    return "Apro Amnesty International";
+
+window.open(
+
+"https://www.amnesty.it/",
+
+"_blank"
+
+);
+
+
+
+return "Apro Amnesty International";
+
+
 }
+
 
 
 /* Io sto con Amnesty */
 
 if(text.includes("io sto con amnesty")){
 
-    window.open(
-        "https://iostoconamnesty.altervista.org/",
-        "_blank"
-    );
 
-    return "Apro il sito Io Sto con Amnesty";
+window.open(
+
+"https://iostoconamnesty.altervista.org/",
+
+"_blank"
+
+);
+
+
+
+return "Apro Io Sto con Amnesty";
+
+
+}
+
+
+
+/* Risposta predefinita */
+
+
+return "Non ho capito. Scrivi aiuto per vedere i miei comandi.";
+
+
 }
 
 
-return "Non ho capito";
 
-return "Non ho capito";
-
-
-}
-
-if(text.includes("io sto con amnesty")){
-
-    window.open(
-        "https://iostoconamnesty.altervista.org/",
-        "_blank"
-    );
-
-    return "Apro il sito Io Sto con Amnesty";
-
-}
-/* ================= INVIO ================= */
+/* ================= INVIO TESTO ================= */
 
 
 async function ask(){
@@ -828,7 +834,7 @@ i.value="";
 
 
 
-/* ================= RICONOSCIMENTO VOCALE ================= */
+/* ================= VOCE ================= */
 
 
 function voice(){
@@ -907,15 +913,9 @@ r.start();
 
 }
 
-
 </script>
 
 
-    
-
-
-
-
-
 </body>
+
 </html>
