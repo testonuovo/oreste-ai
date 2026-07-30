@@ -1,3 +1,19 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="it">
 
@@ -15,72 +31,121 @@
 
 <meta name="author" content="Oreste De Chiara">
 
+
+<meta name="google-site-verification" content="BGQlo83DUVg9LLOEFBpw7DStOr1fKiH_aLg5IsF2HeA">
+
+
 <style>
 
 body{
+
 font-family:Arial,sans-serif;
+
 background:#0a3d91;
+
 color:white;
+
 text-align:center;
+
 margin:0;
+
 }
+
 
 h1{
+
 margin-top:20px;
+
 }
+
 
 nav{
+
 background:rgba(0,0,0,0.4);
+
 padding:12px;
+
 margin:10px;
+
 border-radius:10px;
+
 }
+
 
 nav a{
+
 color:white;
+
 margin:5px;
+
 text-decoration:none;
+
 display:inline-block;
+
 }
 
+
 nav a:hover{
+
 color:#ffd700;
+
 }
+
 
 #chat{
 
 width:90%;
+
 max-width:600px;
+
 margin:20px auto;
+
 background:rgba(0,0,0,0.3);
+
 padding:15px;
+
 border-radius:10px;
+
 min-height:250px;
+
 text-align:left;
 
 }
 
+
 input{
 
 width:80%;
+
 padding:15px;
+
 font-size:18px;
+
 border-radius:10px;
+
 border:none;
 
 }
+
 
 button{
 
 padding:12px 18px;
+
 margin:5px;
+
 border:none;
+
 border-radius:20px;
+
 background:red;
+
 color:white;
+
 cursor:pointer;
 
 }
+
 
 button:hover{
 
@@ -88,15 +153,18 @@ background:darkred;
 
 }
 
+
 .msg{
 
 margin:8px 0;
 
 }
 
+
 </style>
 
 </head>
+
 
 <body>
 
@@ -107,13 +175,21 @@ margin:8px 0;
 <nav>
 
 <a href="index.html">🏠 Home</a>
+
 <a href="assistente.html">🎤 Assistente</a>
+
 <a href="chat.html">💬 Chat</a>
+
 <a href="download.html">📥 Download</a>
+
 <a href="blog.html">📰 Blog</a>
+
 <a href="chi-siamo.html">👤 Chi siamo</a>
+
 <a href="contatti.html">📞 Contatti</a>
+
 <a href="dashboard.html">📊 Dashboard</a>
+
 <a href="os.html">🖥️ Oreste OS</a>
 
 </nav>
@@ -121,15 +197,24 @@ margin:8px 0;
 
 <input id="input" placeholder="Scrivi o parla...">
 
-<button onclick="ask()">Invia</button>
 
-<button onclick="voice()">🎤 Parla</button>
+<button onclick="ask()">
+Invia
+</button>
+
+
+<button onclick="voice()">
+🎤 Parla
+</button>
 
 
 <div id="chat"></div>
 
 
 <script>
+
+
+/* ================= CHAT ================= */
 
 
 function add(nome,testo){
@@ -139,6 +224,10 @@ document.getElementById("chat").innerHTML +=
 "<div class='msg'><b>"+nome+":</b> "+testo+"</div>";
 
 }
+
+
+
+/* ================= SINTESI VOCALE ================= */
 
 
 function speak(testo){
@@ -152,17 +241,26 @@ speechSynthesis.cancel();
 speechSynthesis.speak(voce);
 
 }
+
+
+
 /* ================= APERTURA SITI ================= */
+
 
 function openSite(testo){
 
-const siti={
+let siti={
 
 google:"https://google.com",
+
 youtube:"https://youtube.com",
+
 facebook:"https://facebook.com",
+
 instagram:"https://instagram.com",
+
 tiktok:"https://tiktok.com",
+
 github:"https://github.com"
 
 };
@@ -172,9 +270,12 @@ for(let nome in siti){
 
 if(testo.includes(nome)){
 
+
 window.open(siti[nome],"_blank");
 
+
 return "Apro "+nome;
+
 
 }
 
@@ -189,19 +290,20 @@ return null;
 
 /* ================= METEO ================= */
 
+
 async function meteo(citta){
 
 try{
 
 
-let r=await fetch(
+let risposta=await fetch(
 
 "https://geocoding-api.open-meteo.com/v1/search?name="+encodeURIComponent(citta)
 
 );
 
 
-let dati=await r.json();
+let dati=await risposta.json();
 
 
 if(!dati.results){
@@ -217,20 +319,22 @@ let lon=dati.results[0].longitude;
 
 
 
-let w=await fetch(
+let tempo=await fetch(
 
 "https://api.open-meteo.com/v1/forecast?latitude="+lat+
+
 "&longitude="+lon+
+
 "&current_weather=true"
 
 );
 
 
-let tempo=await w.json();
+let risultato=await tempo.json();
 
 
 return "🌤️ "+dati.results[0].name+
-": "+tempo.current_weather.temperature+" gradi";
+": "+risultato.current_weather.temperature+" gradi";
 
 
 }
@@ -242,16 +346,12 @@ return "Errore meteo";
 }
 
 }
-
-
-
 /* ================= TIMER ================= */
 
 let timer=null;
 
 
 function startTimer(secondi){
-
 
 secondi=parseInt(secondi);
 
@@ -310,6 +410,7 @@ return "Timer avviato per "+secondi+" secondi";
 
 /* ================= SVEGLIA ================= */
 
+
 let svegliaTimer=null;
 
 
@@ -326,9 +427,10 @@ return "Scrivi la sveglia così: ore:minuti";
 }
 
 
-let h=parseInt(parti[0]);
 
-let m=parseInt(parti[1]);
+let ora=parseInt(parti[0]);
+
+let minuti=parseInt(parti[1]);
 
 
 let adesso=new Date();
@@ -336,9 +438,9 @@ let adesso=new Date();
 let obiettivo=new Date();
 
 
-obiettivo.setHours(h);
+obiettivo.setHours(ora);
 
-obiettivo.setMinutes(m);
+obiettivo.setMinutes(minuti);
 
 obiettivo.setSeconds(0);
 
@@ -349,9 +451,10 @@ let differenza=obiettivo-adesso;
 
 if(differenza<0){
 
-return "Orario già passato";
+return "Questo orario è già passato";
 
 }
+
 
 
 if(svegliaTimer){
@@ -372,22 +475,23 @@ speak("Sveglia!");
 alert("SVEGLIA!");
 
 
-
 },differenza);
 
 
 
 return "Sveglia impostata alle "+orario;
 
-
 }
 
 
 
-/* ================= DOWNLOAD ================= */
+/* ================= DOWNLOAD PROGRAMMI ================= */
 
 
 function scaricaProgramma(nome){
+
+
+nome=nome.trim();
 
 
 if(!nome){
@@ -409,12 +513,11 @@ encodeURIComponent(nome),
 
 return "Cerco il download di "+nome;
 
-
 }
 
 
 
-/* ================= CERVELLO ORESTE AI ================= */
+/* ================= HANDLE ORESTE AI ================= */
 
 
 async function handle(text){
@@ -422,6 +525,9 @@ async function handle(text){
 
 text=text.toLowerCase().trim();
 
+
+
+/* apertura siti */
 
 
 let sito=openSite(text);
@@ -435,12 +541,18 @@ return sito;
 
 
 
+/* saluto */
+
+
 if(text.includes("ciao")){
 
 return "Ciao! Sono Oreste AI";
 
 }
 
+
+
+/* aiuto */
 
 
 if(text.includes("aiuto") ||
@@ -453,6 +565,9 @@ return "Sono Oreste AI. Posso aiutarti con meteo, timer, sveglia, ricerca Google
 
 
 
+/* ora */
+
+
 if(text.includes("ora")){
 
 return "Sono le "+new Date().toLocaleTimeString();
@@ -461,164 +576,24 @@ return "Sono le "+new Date().toLocaleTimeString();
 
 
 
+/* data */
+
+
 if(text.includes("data")){
 
 return "Oggi è il "+new Date().toLocaleDateString();
 
 }
-
-
-
-if(text.startsWith("meteo")){
-
-
-let citta=text.replace("meteo","").trim();
-
-
-return await meteo(citta);
-
-
-}
-
-
-
-if(text.startsWith("timer")){
-
-
-let secondi=text.replace("timer","").trim();
-
-
-return startTimer(secondi);
-
-
-}
-
-
-
-if(text.startsWith("sveglia")){
-
-
-let ora=text.replace("sveglia","").trim();
-
-
-return sveglia(ora);
-
-
-}
-
-
-
-if(text.startsWith("cerca")){
-
-
-let ricerca=text.replace("cerca","").trim();
-
-
-window.open(
-
-"https://www.google.com/search?q="+encodeURIComponent(ricerca),
-
-"_blank"
-
-);
-
-
-return "Cerco "+ricerca;
-
-
-}
-
-
-
-if(text.startsWith("scarica")){
-
-
-let programma=text.replace("scarica","").trim();
-
-
-return scaricaProgramma(programma);
-
-
-}
-
-
-
-if(text.includes("mondiali 2026")){
-
-return "🏆 La Spagna ha vinto i Mondiali 2026 ed è Campione del Mondo.";
-
-}
-
-
-
-if(text.includes("vicino contursi")){
-
-
-window.open(
-
-"https://youtu.be/r5gGcrJJn_0",
-
-"_blank"
-
-);
-
-
-return "Apro il video Vicino Contursi";
-
-
-}
-
-
-
-if(text.includes("difesa")){
-
-
-window.open(
-
-"https://youtu.be/uUUilRrSrLA",
-
-"_blank"
-
-);
-
-
-return "Apro il video sulla difesa personale";
-
-
-}
-
-
-
-if(text.includes("amnesty")){
-
-
-window.open(
-
-"https://www.amnesty.it/",
-
-"_blank"
-
-);
-
-
-return "Apro Amnesty International";
-
-
-}
-
-
-return "Non ho capito. Scrivi aiuto per vedere i comandi.";
-
-}
-
-
 /* ================= INVIO TESTO ================= */
+
 
 async function ask(){
 
+
 let campo=document.getElementById("input");
 
-let testo=campo.value.trim();
+
+let testo=campo.value;
 
 
 if(!testo){
@@ -628,44 +603,64 @@ return;
 }
 
 
+
 add("🧑",testo);
+
 
 
 let risposta=await handle(testo);
 
 
+
 add("🤖",risposta);
+
 
 
 speak(risposta);
 
 
+
 campo.value="";
+
 
 }
 
 
 
+
+
 /* ================= RICONOSCIMENTO VOCALE ================= */
+
 
 function voice(){
 
 
-let SpeechRecognition =
+let SpeechRecognition=
+
 window.SpeechRecognition ||
+
 window.webkitSpeechRecognition;
+
 
 
 if(!SpeechRecognition){
 
-alert("Usa Google Chrome per il riconoscimento vocale");
+
+alert(
+
+"Usa Google Chrome per il riconoscimento vocale"
+
+);
+
 
 return;
 
 }
 
 
+
 let ascolto=new SpeechRecognition();
+
 
 
 ascolto.lang="it-IT";
@@ -678,7 +673,9 @@ ascolto.interimResults=false;
 
 ascolto.onstart=function(){
 
+
 add("🎤","Ascolto attivo...");
+
 
 };
 
@@ -690,13 +687,17 @@ ascolto.onresult=async function(event){
 let testo=event.results[0][0].transcript;
 
 
+
 add("🧑",testo);
+
 
 
 let risposta=await handle(testo);
 
 
+
 add("🤖",risposta);
+
 
 
 speak(risposta);
@@ -706,18 +707,10 @@ speak(risposta);
 
 
 
-ascolto.onerror=function(){
-
-add("🎤","Errore riconoscimento vocale");
-
-};
-
-
-
 ascolto.start();
 
-}
 
+}
 
 
 </script>
@@ -726,4 +719,30 @@ ascolto.start();
 </body>
 
 </html>
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
