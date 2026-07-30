@@ -524,88 +524,7 @@ return "Cerco il download di "+nome;
 
 
 }
-/* ================= CANTANTI ================= */
 
-function cantante(nome){
-
-nome = nome.toLowerCase();
-
-
-const cantanti = {
-
-"max pezzali":
-[
-"Hanno ucciso l'Uomo Ragno",
-"Con un deca",
-"Sei un mito",
-"Come mai",
-"Nessun rimpianto",
-"La dura legge del gol"
-],
-
-
-"vasco rossi":
-[
-"Albachiara",
-"Sally",
-"Vita spericolata",
-"Rewind",
-"Una canzone per te",
-"Vivere"
-],
-
-
-"claudio baglioni":
-[
-"Questo piccolo grande amore",
-"E tu...",
-"Avrai",
-"Strada facendo",
-"Mille giorni di te e di me"
-],
-
-
-"marco masini":
-[
-"Disperato",
-"T'innamorerai",
-"Ci vorrebbe il mare",
-"Vaffanculo",
-"Perché lo fai"
-],
-
-
-"tiziano ferro":
-[
-"Xdono",
-"Rosso relativo",
-"Ti scatterò una foto",
-"Non me lo so spiegare",
-"Il regalo più grande",
-"Incanto"
-]
-
-};
-
-
-
-for(let artista in cantanti){
-
-if(nome.includes(artista)){
-
-
-return "🎵 Le canzoni di "+artista+" sono: "
-+cantanti[artista].join(", ");
-
-
-}
-
-}
-
-
-return null;
-
-}
 /* ================= AI ORESTE ================= */
 
 
@@ -619,13 +538,7 @@ text=text.toLowerCase().trim();
 text=text.toLowerCase().trim();
 
 
-let musica = cantante(text);
 
-if(musica){
-
-return musica;
-
-}
 
 
 
