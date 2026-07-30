@@ -515,118 +515,7 @@ return "Cerco il download di "+nome;
 
 
 
-/* ================= CANTANTI ================= */
 
-
-function cantante(nome){
-
-nome=nome.toLowerCase();
-
-
-const cantanti={
-
-
-"max pezzali":[
-
-"Hanno ucciso l'Uomo Ragno",
-
-"Con un deca",
-
-"Sei un mito",
-
-"Come mai",
-
-"Nessun rimpianto",
-
-"La dura legge del gol"
-
-],
-
-
-"vasco rossi":[
-
-"Albachiara",
-
-"Sally",
-
-"Vita spericolata",
-
-"Rewind",
-
-"Una canzone per te",
-
-"Vivere"
-
-],
-
-
-"claudio baglioni":[
-
-"Questo piccolo grande amore",
-
-"E tu...",
-
-"Avrai",
-
-"Strada facendo",
-
-"Mille giorni di te e di me"
-
-],
-
-
-"marco masini":[
-
-"Disperato",
-
-"T'innamorerai",
-
-"Ci vorrebbe il mare",
-
-"Vaffanculo",
-
-"Perché lo fai"
-
-],
-
-
-"tiziano ferro":[
-
-"Xdono",
-
-"Rosso relativo",
-
-"Ti scatterò una foto",
-
-"Non me lo so spiegare",
-
-"Il regalo più grande",
-
-"Incanto"
-
-]
-
-
-};
-
-
-for(let artista in cantanti){
-
-if(nome.includes(artista)){
-
-
-return "🎵 Le canzoni di "+artista+" sono: "+
-cantanti[artista].join(", ");
-
-
-}
-
-}
-
-
-return null;
-
-}
 
 
 
@@ -675,7 +564,227 @@ return scaricaProgramma(programma);
 
 }
 
+/* ================= AI ORESTE HANDLE ================= */
 
+async function handle(text){
+
+text = text.toLowerCase().trim();
+
+
+/* Apertura siti */
+
+let sito = openSite(text);
+
+if(sito){
+
+return sito;
+
+}
+
+
+/* Saluto */
+
+if(text.includes("ciao")){
+
+return "Ciao! Sono Oreste AI";
+
+}
+
+
+/* Aiuto */
+
+if(text.includes("aiuto") ||
+text.includes("cosa sai fare")){
+
+return "Sono Oreste AI. Posso aiutarti con meteo, timer, sveglia, ricerche Google, apertura siti, download programmi, video e comandi vocali.";
+
+}
+
+
+/* Ora */
+
+if(text.includes("ora")){
+
+return "Sono le " + new Date().toLocaleTimeString();
+
+}
+
+
+/* Data */
+
+if(text.includes("data")){
+
+return "Oggi è il " + new Date().toLocaleDateString();
+
+}
+
+
+/* Meteo */
+
+if(text.startsWith("meteo")){
+
+let città = text.replace("meteo","").trim();
+
+return await meteo(città);
+
+}
+
+
+/* Timer */
+
+if(text.startsWith("timer")){
+
+let secondi = text.replace("timer","").trim();
+
+return startTimer(secondi);
+
+}
+
+
+/* Sveglia */
+
+if(text.startsWith("sveglia")){
+
+let ora = text.replace("sveglia","").trim();
+
+return sveglia(ora);
+
+}
+
+
+/* Cerca su Google */
+
+if(text.startsWith("cerca")){
+
+let ricerca = text.replace("cerca","").trim();
+
+
+window.open(
+"https://www.google.com/search?q="+encodeURIComponent(ricerca),
+"_blank"
+);
+
+
+return "Cerco " + ricerca;
+
+}
+
+
+/* Mondiali */
+
+if(text.includes("mondiali 2026") ||
+text.includes("campione del mondo 2026")){
+
+
+return "🏆 La Spagna ha vinto i Mondiali 2026 ed è Campione del Mondo.";
+
+}
+
+
+
+/* Download Oreste AI */
+
+if(text.includes("scarica oreste ai") ||
+text.includes("download oreste ai")){
+
+
+window.open(
+"https://testonuovo.github.io/oreste-ai/download.html",
+"_blank"
+);
+
+
+return "Apro la pagina download di Oreste AI";
+
+}
+
+
+
+/* Download programmi */
+
+if(text.startsWith("scarica")){
+
+
+let programma = text.replace("scarica","").trim();
+
+
+return scaricaProgramma(programma);
+
+}
+
+
+
+/* Video vicino Contursi */
+
+if(text.includes("vicino contursi")){
+
+
+window.open(
+"https://youtu.be/r5gGcrJJn_0",
+"_blank"
+);
+
+
+return "Apro il video Vicino Contursi";
+
+}
+
+
+
+/* Difesa personale */
+
+if(text.includes("difesa")){
+
+
+window.open(
+"https://youtu.be/uUUilRrSrLA",
+"_blank"
+);
+
+
+return "Apro il video sulla difesa personale";
+
+}
+
+
+
+/* Amnesty */
+
+if(text.includes("amnesty")){
+
+
+window.open(
+"https://www.amnesty.it/",
+"_blank"
+);
+
+
+return "Apro Amnesty International";
+
+}
+
+
+
+/* Io sto con Amnesty */
+
+if(text.includes("io sto con amnesty")){
+
+
+window.open(
+"https://iostoconamnesty.altervista.org/",
+"_blank"
+);
+
+
+return "Apro Io Sto con Amnesty";
+
+}
+
+
+
+return "Non ho capito. Scrivi aiuto per vedere i comandi.";
+
+}
 
 /* ================= VIDEO VICINO CONTURSI ================= */
 
