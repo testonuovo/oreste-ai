@@ -533,7 +533,6 @@ nome = nome.toLowerCase();
 
 const cantanti = {
 
-
 "max pezzali":
 [
 "Hanno ucciso l'Uomo Ragno",
@@ -586,7 +585,6 @@ const cantanti = {
 "Incanto"
 ]
 
-
 };
 
 
@@ -595,8 +593,10 @@ for(let artista in cantanti){
 
 if(nome.includes(artista)){
 
-return "🎵 Le canzoni di "+artista+" sono: "+
-cantanti[artista].join(", ");
+
+return "🎵 Le canzoni di "+artista+" sono: "
++cantanti[artista].join(", ");
+
 
 }
 
