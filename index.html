@@ -716,13 +716,11 @@ return "amnesty international";
 
 let risultatoCantante = cantante(text);
 
-if(risultatoCantante === "__CANTANTE__"){
-    return "";
-}
-
 if(risultatoCantante){
     return risultatoCantante;
 }
+
+
 
 
 return "Non ho capito. Scrivi aiuto per vedere i comandi.";
@@ -758,10 +756,8 @@ nome.includes("ascolta "+artista) ||
 nome.includes("metti "+artista)
 ){
 
-window.open(
-artisti[artista],
-"_blank"
-);
+window.open(artisti[artista], "_blank");
+return "Va bene.";
 
 return "";
 }
