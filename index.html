@@ -716,10 +716,12 @@ return "amnesty international";
 
 let risultatoCantante = cantante(text);
 
+if(risultatoCantante === "__CANTANTE__"){
+    return "";
+}
+
 if(risultatoCantante){
-
-return risultatoCantante;
-
+    return risultatoCantante;
 }
 
 
