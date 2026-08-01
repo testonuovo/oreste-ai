@@ -722,15 +722,19 @@ return "Non ho capito. Scrivi aiuto per vedere i comandi.";
 }
 function cantante(nome){
 
-let artisti={
+nome = nome.toLowerCase().trim();
 
+let artisti = {
+
+"max pezzali":"https://www.youtube.com/results?search_query=Max+Pezzali",
+"883":"https://www.youtube.com/results?search_query=883+Max+Pezzali",
 "vasco rossi":"https://www.youtube.com/results?search_query=Vasco+Rossi",
-"liga":"https://www.youtube.com/results?search_query=Ligabue",
 "ligabue":"https://www.youtube.com/results?search_query=Ligabue",
+"liga":"https://www.youtube.com/results?search_query=Ligabue",
 "tiziano ferro":"https://www.youtube.com/results?search_query=Tiziano+Ferro",
 "laura pausini":"https://www.youtube.com/results?search_query=Laura+Pausini",
-"ramazzotti":"https://www.youtube.com/results?search_query=Eros+Ramazzotti",
 "eros ramazzotti":"https://www.youtube.com/results?search_query=Eros+Ramazzotti",
+"ramazzotti":"https://www.youtube.com/results?search_query=Eros+Ramazzotti",
 "maneskin":"https://www.youtube.com/results?search_query=Maneskin",
 "alessandra amoroso":"https://www.youtube.com/results?search_query=Alessandra+Amoroso"
 
@@ -741,14 +745,12 @@ for(let artista in artisti){
 
 if(nome.includes(artista)){
 
-
 window.open(
 artisti[artista],
 "_blank"
 );
 
-
-return "🎤 Apro le canzoni di "+artista;
+return "🎤 Apro le canzoni di " + artista;
 
 }
 
