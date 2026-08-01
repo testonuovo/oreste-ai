@@ -749,7 +749,12 @@ let artisti = {
 
 for(let artista in artisti){
 
-if(nome.includes(artista)){
+if(
+nome.includes(artista) ||
+nome.includes("cantante "+artista) ||
+nome.includes("ascolta "+artista) ||
+nome.includes("metti "+artista)
+){
 
 window.open(
 artisti[artista],
