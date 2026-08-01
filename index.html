@@ -761,7 +761,7 @@ artisti[artista],
 "_blank"
 );
 
-return "🎤 Apro le canzoni di " + artista;
+return "";
 }
 
 }
@@ -777,29 +777,6 @@ return null;
 
 
 
-/* ================= AGGIUNTA CANTANTI AL CERVELLO ================= */
-
-
-let vecchioHandle=handle;
-
-
-handle=async function(text){
-
-
-let risultatoCantante=cantante(text.toLowerCase());
-
-
-if(risultatoCantante){
-
-return risultatoCantante;
-
-}
-
-
-return await vecchioHandle(text);
-
-
-}
 
 
 
