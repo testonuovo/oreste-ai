@@ -839,7 +839,9 @@ add("🤖",risposta);
 
 
 
-speak(risposta);
+if(risposta && risposta.trim() !== ""){
+    speak(risposta);
+}
 
 
 
