@@ -753,12 +753,13 @@ if(
 nome.includes(artista) ||
 nome.includes("cantante "+artista) ||
 nome.includes("ascolta "+artista) ||
-nome.includes("metti "+artista)
+nome.includes("metti "+artista)   ||
+nome.includes("musica" +artista)
+
 ){
 
 window.open(artisti[artista], "_blank");
-return "subito";
-
+return "va bene";
 }
 
 }
