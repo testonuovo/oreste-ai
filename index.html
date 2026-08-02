@@ -714,88 +714,15 @@ return "amnesty international";
 
 }
 
-let risultato = cercaCantante(text);
-
-if(risultato){
-    return risultato;
-}
-
 
 return "Non ho capito. Scrivi aiuto per vedere i comandi.";
 
 }
-function cercaCantante(nome){
-
-    nome = nome.toLowerCase().trim();
-
-    let comandi = [
-        "ascolta ",
-        "metti ",
-        "musica di ",
-        "canzoni di ",
-        "cantante "
-    ];
-
-    for(let comando of comandi){
-
-        if(nome.startsWith(comando)){
-
-            let artista = nome.replace(comando, "").trim();
-
-            if(artista){
-
-                window.open(
-                    "https://www.youtube.com/results?search_query=" +
-                    encodeURIComponent(artista),
-                    "_blank"
-                );
-
-                return "Va bene.";
-            }
-        }
-    }
-
-    return null;
-}
 
 
-return null;
 
-}
 
-function cercaCantante(nome){
-
-    nome = nome.toLowerCase().trim();
-
-    let comandi = [
-        "ascolta ",
-        "metti ",
-        "cantante ",
-        "cerca "
-    ];
-
-    for(let comando of comandi){
-
-        if(nome.startsWith(comando)){
-
-            let artista = nome.replace(comando, "").trim();
-
-            if(artista !== ""){
-
-                window.open(
-                    "https://www.youtube.com/results?search_query=" +
-                    encodeURIComponent(artista),
-                    "_blank"
-                );
-
-                return "Subito";
-            }
-        }
-    }
-
-    return null;
-}
-
+  
 
 
 
