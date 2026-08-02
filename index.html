@@ -525,8 +525,24 @@ text=text.toLowerCase().trim();
 
 
 
-let sito=openSite(text);
+if(text.startsWith("cerca")){
 
+let ricerca=text.replace("cerca","").trim();
+
+if(!ricerca){
+return "Dimmi cosa devo cercare";
+}
+
+window.open(
+"https://www.google.com/search?q="
++encodeURIComponent(ricerca),
+"_blank"
+);
+
+return "Cerco "+ricerca;
+
+}
+let sito=openSite(text);
 
 if(sito){
 
