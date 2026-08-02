@@ -480,35 +480,25 @@ return "Sveglia impostata alle "+orario;
 
 /* ================= DOWNLOAD ================= */
 
-
-function scaricaProgramma(nome){
-
+unction scaricaProgramma(nome){
 
 if(!nome){
-
 return "Dimmi quale programma vuoi scaricare";
-
 }
 
+
+let ricerca = nome + " download ufficiale";
 
 
 window.open(
-
-"https://www.google.com/search?q=download+"
-+encodeURIComponent(nome),
-
+"https://www.google.com/search?q=" + encodeURIComponent(ricerca),
 "_blank"
-
 );
 
 
-
-return "Cerco il download di "+nome;
-
+return "Cerco il download ufficiale di " + nome;
 
 }
-
-
 
 
 
