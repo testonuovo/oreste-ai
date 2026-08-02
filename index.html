@@ -650,14 +650,18 @@ if(text.startsWith("trova")){
 
 let ricerca=text.replace("trova","").trim();
 
+if(!ricerca){
+return "Dimmi cosa devo trovare";
+}
+
 window.open(
 "https://www.google.com/search?q="
 +encodeURIComponent(ricerca),
-
-"_blank");
+"_blank"
+);
 
 return "Trovo "+ricerca;
-  
+
 }
 
 
