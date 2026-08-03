@@ -499,7 +499,52 @@ return "Scarico" +nome;
 
 }
 
+/* ================= APERTURA PAGINE ORESTE AI ================= */
 
+function apriPagina(testo){
+
+    testo = testo.toLowerCase();
+
+    const pagine = {
+
+        "home": "index.html",
+        "assistente": "assistente.html",
+        "chat": "chat.html",
+        "motivazione": "motivazione.html",
+        "meditazione": "meditazione.html",
+        "download": "download.html",
+        "blog": "blog.html",
+        "chi siamo": "chi-siamo.html",
+        "contatti": "contatti.html",
+        "dashboard": "dashboard.html",
+        "oreste os": "os.html",
+        "storybook": "storybook.html",
+        "storia": "storia.html",
+        "funzioni": "funzioni.html",
+        "tecnologie": "tecnologie oreste ai.html",
+        "comandi": "comandi-oreste-ai.html",
+        "mondiali": "mondiali2026.html",
+        "spagna campione": "spagna-campione-del-mondo-2026.html"
+
+    };
+
+
+    for(let nome in pagine){
+
+        if(testo.includes(nome)){
+
+            window.open(pagine[nome], "_blank");
+
+            return "Apro la pagina " + nome;
+
+        }
+
+    }
+
+
+    return null;
+
+}
 
 
 /* ================= CERVELLO ORESTE AI ================= */
@@ -510,7 +555,10 @@ async function handle(text){
 
 text=text.toLowerCase().trim();
 
+let pagina = apriPagina(text);
 
+if(pagina)
+    return pagina;
 
 
 if(text.startsWith("cerca")){
