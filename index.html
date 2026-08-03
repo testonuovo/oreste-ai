@@ -505,7 +505,7 @@ function apriPagina(testo){
 
     testo = testo.toLowerCase();
 
-    const pagine = {
+    const pagina = {
 
         "home": "index.html",
         "assistente": "assistente.html",
@@ -521,15 +521,14 @@ function apriPagina(testo){
         "storybook": "storybook.html",
         "storia": "storia.html",
         "funzioni": "funzioni.html",
-        "tecnologie": "tecnologie oreste ai.html",
-        "comandi": "comandi-oreste-ai.html",
+        "tecnologie": "tecnologie oreste ai.html",        "comandi": "comandi-oreste-ai.html",
         "mondiali": "mondiali2026.html",
         "spagna campione": "spagna-campione-del-mondo-2026.html"
 
     };
 
 
-    for(let nome in pagine){
+    for(let nome in pagina){
 
         if(testo.includes(nome)){
 
@@ -555,10 +554,10 @@ async function handle(text){
 
 text=text.toLowerCase().trim();
 
-let pagina = apriPagina(text);
+let pagine = apriPagina(text);
 
-if(pagina)
-    return pagina;
+if(pagine)
+    return pagine;
 
 
 if(text.startsWith("cerca")){
