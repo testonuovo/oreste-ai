@@ -505,7 +505,7 @@ function apriPagina(testo){
 
     testo = testo.toLowerCase();
 
-    const pagina = {
+    const pagine = {
 
         "home": "index.html",
         "assistente": "assistente.html",
@@ -528,7 +528,7 @@ function apriPagina(testo){
     };
 
 
-    for(let nome in pagina){
+    for(let nome in pagine){
 
         if(testo.includes(nome)){
 
@@ -554,10 +554,10 @@ async function handle(text){
 
 text=text.toLowerCase().trim();
 
-let pagine = apriPagina(text);
+let pagina = apriPagina(text);
 
-if(pagine)
-    return pagine;
+if(pagina)
+    return "pagina";
 
 
 if(text.startsWith("cerca")){
