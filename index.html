@@ -250,9 +250,9 @@ return null;
 
 /* ================= CANVA AI ================= */
 
-function canva(testo){
+function Canva(testo){
 
-let funzioniCanva={
+let funzioni={
 
 "canva":
 "https://www.canva.com/",
@@ -287,11 +287,11 @@ let funzioniCanva={
 };
 
 
-for(let comando in funzioniCanva){
+for(let comando in funzioni)){
 
 if(testo.includes(comando)){
 
-window.open(funzioniCanva[comando],"_blank");
+window.open(funzioni[comando],"_blank");
 
 return "Apro Canva per "+comando;
 
@@ -856,10 +856,10 @@ window.location.href="https://www.canva.com/mockups/";
 
 return "Apro la pagina del mockup";
 }
-let comandoCanva=canva(text);
+let comando=canva(text);
 
-if(comandoCanva){
-return comandoCanva;
+if(comando){
+return comando;
 }
 return "Non ho capito. Scrivi aiuto per vedere i comandi.";    
 }
