@@ -863,6 +863,17 @@ let comandoCanva=canva(text);
 if(comandoCanva){
 return comandoCanva;
 }
+if(text.includes("impara canva") ||
+text.includes("canva oreste ai")){
+
+window.open(
+"canva-oreste-ai.html",
+"_blank"
+);
+
+return "Apro la guida Canva di Oreste AI";
+
+}   
 return "Non ho capito. Scrivi aiuto per vedere i comandi.";    
 }
 
