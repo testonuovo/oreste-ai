@@ -252,7 +252,7 @@ return null;
 
 function Canva(testo){
 
-let funzioni={
+let funzioniCanva={
 
 "canva":
 "https://www.canva.com/",
@@ -287,11 +287,11 @@ let funzioni={
 };
 
 
-for(let comando in funzioni)){
+for(let comando in funzioniCanva){
 
 if(testo.includes(comando)){
 
-window.open(funzioni[comando],"_blank");
+window.open(funzioniCanva[comando],"_blank");
 
 return "Apro Canva per "+comando;
 
