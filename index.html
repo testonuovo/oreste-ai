@@ -248,7 +248,61 @@ return null;
 
 }
 
+/* ================= CANVA AI ================= */
 
+function canva(testo){
+
+let funzioniCanva={
+
+"canva":
+"https://www.canva.com/",
+
+"mockup":
+"https://www.canva.com/mockups/",
+
+"presentazioni":
+"https://www.canva.com/presentations/",
+
+"logo":
+"https://www.canva.com/create/logos/",
+
+"volantini":
+"https://www.canva.com/create/flyers/",
+
+"video":
+"https://www.canva.com/create/videos/",
+
+"poster":
+"https://www.canva.com/create/posters/",
+
+"curriculum":
+"https://www.canva.com/create/resumes/",
+
+"social":
+"https://www.canva.com/create/social-media/",
+
+"biglietti":
+"https://www.canva.com/create/cards/"
+
+};
+
+
+for(let comando in funzioniCanva){
+
+if(testo.includes(comando)){
+
+window.open(funzioniCanva[comando],"_blank");
+
+return "Apro Canva per "+comando;
+
+}
+
+}
+
+
+return null;
+
+}
 
 
 
@@ -802,7 +856,11 @@ window.location.href="https://www.canva.com/mockups/";
 
 return "Apro la pagina del mockup";
 }
+let comandoCanva=canva(text);
 
+if(comandoCanva){
+return comandoCanva;
+}
 return "Non ho capito. Scrivi aiuto per vedere i comandi.";    
 }
 
