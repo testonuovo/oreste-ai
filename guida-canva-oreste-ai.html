@@ -78,7 +78,6 @@ max-width:450px;
 padding:25px;
 border-radius:20px;
 text-align:center;
-box-shadow:0 0 20px black;
 
 }
 
@@ -89,14 +88,6 @@ color:#0a3d91;
 
 }
 
-
-.popup-box button{
-
-font-size:18px;
-
-}
-
-
 </style>
 
 </head>
@@ -104,8 +95,6 @@ font-size:18px;
 
 <body>
 
-
-<!-- POPUP -->
 
 <div class="popup-canva" id="popupCanva">
 
@@ -149,15 +138,11 @@ con l'aiuto del tuo assistente vocale.
 Crea grafiche, documenti, presentazioni e contenuti digitali.
 </p>
 
-
 <button onclick="apri('https://www.canva.com/')">
-
 Apri Canva
-
 </button>
 
 </div>
-
 
 
 
@@ -169,15 +154,11 @@ Apri Canva
 Realizza anteprime professionali dei tuoi prodotti.
 </p>
 
-
 <button onclick="apri('https://www.canva.com/mockups/')">
-
 Apri Mockup
-
 </button>
 
 </div>
-
 
 
 
@@ -189,15 +170,11 @@ Apri Mockup
 Crea il tuo logo professionale.
 </p>
 
-
 <button onclick="apri('https://www.canva.com/create/logos/')">
-
 Crea Logo
-
 </button>
 
 </div>
-
 
 
 
@@ -209,15 +186,11 @@ Crea Logo
 Crea slide per lavoro, scuola e progetti.
 </p>
 
-
 <button onclick="apri('https://www.canva.com/presentations/')">
-
 Presentazioni
-
 </button>
 
 </div>
-
 
 
 
@@ -229,15 +202,11 @@ Presentazioni
 Crea video per social e contenuti digitali.
 </p>
 
-
 <button onclick="apri('https://www.canva.com/create/videos/')">
-
 Video
-
 </button>
 
 </div>
-
 
 
 
@@ -289,32 +258,25 @@ window.onload=function(){
 document.getElementById("popupCanva").style.display="flex";
 
 
-
 let messaggio =
-"Benvenuto in Impara Canva con Oreste AI. Qui puoi scoprire le principali funzioni di Canva e imparare a creare i tuoi progetti.";
+"Benvenuto in Impara Canva con Oreste AI. Scopri loghi, video, presentazioni e tutte le funzioni di Canva.";
 
 
 
 if("speechSynthesis" in window){
 
-
-let voce =new SpeechSynthesisUtterance(messaggio);
-
+let voce = new SpeechSynthesisUtterance(messaggio);
 
 voce.lang="it-IT";
 
-
 speechSynthesis.cancel();
 
-
 speechSynthesis.speak(voce);
-
 
 }
 
 
 };
-
 
 
 </script>
@@ -323,10 +285,3 @@ speechSynthesis.speak(voce);
 </body>
 
 </html>
-
-
-
-
-
-
-
