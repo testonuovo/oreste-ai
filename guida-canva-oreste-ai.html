@@ -181,11 +181,11 @@ window.open(link,"_blank");
 
 window.onload = function(){
 
-let messaggio = "Benvenuto in Impara Canva con Oreste AI. Qui puoi scoprire le principali funzioni di Canva e imparare a creare i tuoi progetti.";
+let testo = "Benvenuto in Impara Canva con Oreste AI. Qui puoi scoprire le principali funzioni di Canva e imparare a creare i tuoi progetti.";
 
 if("speechSynthesis" in window){
 
-let voce = new SpeechSynthesisUtterance(messaggio);
+let voce = new SpeechSintesisUtterance(testo);
 
 voce.lang = "it-IT";
 
