@@ -50,14 +50,11 @@ background:darkred;
 
 }
 
-a{
 
-text-decoration:none;
-
-}
-<style>
+/* POPUP CANVA */
 
 .popup-canva{
+
 display:none;
 position:fixed;
 top:0;
@@ -68,9 +65,12 @@ background:rgba(0,0,0,0.6);
 justify-content:center;
 align-items:center;
 z-index:9999;
+
 }
 
+
 .popup-box{
+
 background:white;
 color:#333;
 width:90%;
@@ -79,20 +79,21 @@ padding:25px;
 border-radius:20px;
 text-align:center;
 box-shadow:0 0 20px black;
+
 }
+
 
 .popup-box h2{
+
 color:#0a3d91;
+
 }
 
+
 .popup-box button{
-background:red;
-color:white;
-border:none;
-padding:12px 25px;
-border-radius:20px;
-cursor:pointer;
+
 font-size:18px;
+
 }
 
 
@@ -101,12 +102,11 @@ font-size:18px;
 </head>
 
 
-
-
-
-
-
 <body>
+
+
+<!-- POPUP -->
+
 <div class="popup-canva" id="popupCanva">
 
 <div class="popup-box">
@@ -115,19 +115,24 @@ font-size:18px;
 
 <p>
 Scopri le funzioni principali di Canva:
-<br>
-loghi, video, presentazioni, mockup e molto altro.
+<br><br>
+Loghi, video, presentazioni, mockup e molto altro.
 </p>
+
 
 <button onclick="chiudiPopup()">
 🚀 Inizia
 </button>
 
+
 </div>
 
 </div>
+
+
 
 <h1>🎨 Impara Canva con Oreste AI</h1>
+
 
 <p>
 La guida intelligente per imparare Canva
@@ -144,11 +149,15 @@ con l'aiuto del tuo assistente vocale.
 Crea grafiche, documenti, presentazioni e contenuti digitali.
 </p>
 
+
 <button onclick="apri('https://www.canva.com/')">
+
 Apri Canva
+
 </button>
 
 </div>
+
 
 
 
@@ -160,11 +169,15 @@ Apri Canva
 Realizza anteprime professionali dei tuoi prodotti.
 </p>
 
+
 <button onclick="apri('https://www.canva.com/mockups/')">
+
 Apri Mockup
+
 </button>
 
 </div>
+
 
 
 
@@ -176,11 +189,15 @@ Apri Mockup
 Crea il tuo logo professionale.
 </p>
 
+
 <button onclick="apri('https://www.canva.com/create/logos/')">
+
 Crea Logo
+
 </button>
 
 </div>
+
 
 
 
@@ -192,11 +209,15 @@ Crea Logo
 Crea slide per lavoro, scuola e progetti.
 </p>
 
+
 <button onclick="apri('https://www.canva.com/presentations/')">
+
 Presentazioni
+
 </button>
 
 </div>
+
 
 
 
@@ -208,11 +229,15 @@ Presentazioni
 Crea video per social e contenuti digitali.
 </p>
 
+
 <button onclick="apri('https://www.canva.com/create/videos/')">
+
 Video
+
 </button>
 
 </div>
+
 
 
 
@@ -222,9 +247,15 @@ Video
 
 <p>
 
-"Oreste AI apri Canva"<br>
-"Oreste AI crea un logo"<br>
-"Oreste AI crea un mockup"<br>
+"Oreste AI apri Canva"
+<br><br>
+
+"Oreste AI crea un logo"
+<br><br>
+
+"Oreste AI crea un mockup"
+<br><br>
+
 "Oreste AI crea una presentazione"
 
 </p>
@@ -233,6 +264,7 @@ Video
 
 
 
+<script>
 
 
 function apri(link){
@@ -240,23 +272,49 @@ function apri(link){
 window.open(link,"_blank");
 
 }
-<script>
 
-window.onload = function(){
 
-let testo = "Benvenuto in Impara Canva con Oreste AI. Qui puoi scoprire le principali funzioni di Canva e imparare a creare i tuoi progetti.";
 
-if("speechSynthesis" in window){
+function chiudiPopup(){
 
-let voce = new SpeechSintesisUtterance(testo);
-
-voce.lang = "it-IT";
-
-speechSynthesis.speak(voce);
+document.getElementById("popupCanva").style.display="none";
 
 }
 
+
+
+window.onload=function(){
+
+
+document.getElementById("popupCanva").style.display="flex";
+
+
+
+let testo =
+"Benvenuto in Impara Canva con Oreste AI. Qui puoi scoprire le principali funzioni di Canva e imparare a creare i tuoi progetti.";
+
+
+
+if("speechSynthesis" in window){
+
+
+let voce = new SpeechSynthesisUtterance(testo);
+
+
+voce.lang="it-IT";
+
+
+speechSynthesis.cancel();
+
+
+speechSynthesis.speak(voce);
+
+
+}
+
+
 };
+
 
 
 </script>
@@ -265,3 +323,10 @@ speechSynthesis.speak(voce);
 </body>
 
 </html>
+
+
+
+
+
+
+
