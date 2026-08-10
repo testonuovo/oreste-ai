@@ -1,1 +1,1147 @@
-<!DOCTYPE html> <html lang="it"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Impara Canva con Oreste AI</title> <style> *{ box-sizing:border-box; } html{ scroll-behavior:smooth; } body{ font-family:Arial,sans-serif; background:#0a3d91; color:white; text-align:center; margin:0; padding-bottom:40px; } h1{ margin-top:30px; } .intro{ max-width:700px; margin:10px auto 25px; padding:0 20px; line-height:1.6; } /* MENU */ .menu{ max-width:700px; margin:20px auto; padding:20px; } .menu h2{ margin-bottom:15px; } .menu-grid{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; } .menu button{ background:white; color:#0a3d91; border:none; padding:10px 15px; border-radius:20px; cursor:pointer; font-size:14px; font-weight:bold; margin:0; transition:0.2s; } .menu button:hover{ background:#e6e6e6; transform:scale(1.03); } /* ASSISTENTE VOCALE */ .voice-box{ max-width:600px; margin:20px auto; padding:22px; background:rgba(255,255,255,0.12); border-radius:20px; } .voice-box h2{ margin-top:0; } .voice-button{ background:#ff0000; color:white; border:none; padding:15px 25px; border-radius:30px; font-size:16px; font-weight:bold; cursor:pointer; } .voice-button:hover{ background:#cc0000; } .voice-button.ascolto{ background:#00a83b; } #statoVoce{ margin-top:15px; font-weight:bold; } #testoRiconosciuto{ margin-top:10px; font-style:italic; min-height:24px; } /* CARD */ .card{ background:white; color:#222; max-width:600px; margin:20px auto; padding:22px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.2); scroll-margin-top:20px; } .card h2{ color:#0a3d91; } .card p{ line-height:1.6; } .card button{ background:red; color:white; border:none; padding:12px 20px; border-radius:20px; cursor:pointer; font-size:15px; margin-top:8px; } .card button:hover{ background:darkred; } /* POPUP */ .popup-canva{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:9999; padding:20px; } .popup-box{ background:white; color:#333; width:90%; max-width:450px; padding:25px; border-radius:20px; text-align:center; } .popup-box h2{ color:#0a3d91; } /* COMANDI */ .comando{ background:#f2f2f2; color:#222; padding:12px; margin:10px 0; border-radius:10px; font-weight:bold; } /* TORNA SU */ .torna-su{ display:inline-block; margin-top:15px; color:#0a3d91; text-decoration:none; font-weight:bold; } .torna-su:hover{ text-decoration:underline; } /* FOOTER */ footer{ margin-top:40px; font-size:14px; opacity:0.9; } </style> </head> <body> <!-- POPUP --> <div class="popup-canva" id="popupCanva"> <div class="popup-box"> <h2>🎨 Impara Canva con Oreste AI</h2> <p> Scopri le principali funzioni di Canva e impara a creare contenuti digitali in modo semplice. </p> <button onclick="chiudiPopup()"> 🚀 Inizia </button> </div> </div> <h1 id="inizio"> 🎨 Impara Canva con Oreste AI </h1> <p class="intro"> La guida intelligente per imparare Canva con l'aiuto del tuo assistente vocale. <br><br> Scegli una sezione oppure parla con Oreste AI. </p> <!-- ASSISTENTE VOCALE --> <div class="voice-box"> <h2>🎤 Oreste AI</h2> <p> Parla con Oreste AI e chiedigli di aprire una sezione della guida. </p> <button class="voice-button" id="pulsanteVoce" onclick="ascoltaOreste()"> 🎤 Parla con Oreste AI </button> <div id="statoVoce"> Premi il pulsante e parla. </div> <div id="testoRiconosciuto"></div> </div> <!-- MENU --> <div class="menu"> <h2>📚 Esplora la guida</h2> <div class="menu-grid"> <button onclick="vaiA('canva')">🎨 Canva</button> <button onclick="vaiA('strumenti')">🛠️ Strumenti</button> <button onclick="vaiA('mockup')">🖼️ Mockup</button> <button onclick="vaiA('loghi')">🏷️ Loghi</button> <button onclick="vaiA('presentazioni')">📊 Presentazioni</button> <button onclick="vaiA('video')">🎬 Video</button> <button onclick="vaiA('social')">📱 Social</button> <button onclick="vaiA('cv')">📄 CV</button> <button onclick="vaiA('siti')">🌐 Siti Web</button> <button onclick="vaiA('stampa')">🖨️ Stampa</button> <button onclick="vaiA('foto')">📸 Foto</button> <button onclick="vaiA('testo')">✍️ Testo</button> <button onclick="vaiA('ai')">🤖 AI</button> <button onclick="vaiA('esercitazione')">📚 Esercitazione</button> </div> </div> <!-- CANVA --> <div class="card" id="canva"> <h2>🎨 Canva</h2> <p> Canva permette di creare grafiche, documenti, presentazioni e contenuti digitali. </p> <button onclick="apri('https://www.canva.com/')"> Apri Canva </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- STRUMENTI --> <div class="card" id="strumenti"> <h2>🛠️ Strumenti principali</h2> <p> Impara a utilizzare modelli, testo, immagini, elementi, colori, effetti e strumenti di modifica. </p> <button onclick="mostraMessaggio( 'Inizia scegliendo un modello. Poi personalizza testo, immagini, colori ed elementi grafici.' )"> 📚 Impara gli strumenti </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- MOCKUP --> <div class="card" id="mockup"> <h2>🖼️ Mockup</h2> <p> Realizza anteprime professionali dei tuoi prodotti, loghi e progetti. </p> <button onclick="apri('https://www.canva.com/mockups/')"> Apri Mockup </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- LOGHI --> <div class="card" id="loghi"> <h2>🏷️ Loghi</h2> <p> Crea il tuo logo utilizzando modelli, testi, forme e altri elementi grafici. </p> <button onclick="apri('https://www.canva.com/create/logos/')"> Crea Logo </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- PRESENTAZIONI --> <div class="card" id="presentazioni"> <h2>📊 Presentazioni</h2> <p> Crea slide per lavoro, scuola, progetti e presentazioni personali. </p> <button onclick="apri('https://www.canva.com/presentations/')"> Presentazioni </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- VIDEO --> <div class="card" id="video"> <h2>🎬 Video</h2> <p> Crea video per social, progetti personali e contenuti digitali. </p> <button onclick="apri('https://www.canva.com/create/videos/')"> Video </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- SOCIAL --> <div class="card" id="social"> <h2>📱 Social Media</h2> <p> Crea post, storie e contenuti per Instagram, Facebook, LinkedIn, TikTok e altri social. </p> <button onclick="apri('https://www.canva.com/templates/search/social-media/')"> Apri Social Media </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- CV --> <div class="card" id="cv"> <h2>📄 Curriculum Vitae</h2> <p> Crea un curriculum professionale utilizzando modelli pronti. </p> <button onclick="apri('https://www.canva.com/create/resumes/')"> Crea CV </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- SITI --> <div class="card" id="siti"> <h2>🌐 Siti Web</h2> <p> Progetta siti web, landing page e portfolio personali. </p> <button onclick="apri('https://www.canva.com/create/websites/')"> Crea Sito Web </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- STAMPA --> <div class="card" id="stampa"> <h2>🖨️ Stampa</h2> <p> Crea volantini, brochure, biglietti, poster e altri materiali da stampare. </p> <button onclick="apri('https://www.canva.com/print/')"> Scopri la stampa </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- FOTO --> <div class="card" id="foto"> <h2>📸 Foto</h2> <p> Modifica e migliora le immagini utilizzando gli strumenti disponibili in Canva. </p> <button onclick="apri('https://www.canva.com/photo-editor/')"> Modifica Foto </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- TESTO --> <div class="card" id="testo"> <h2>✍️ Testo e font</h2> <p> Scopri come utilizzare titoli, sottotitoli, font, colori, allineamento e spaziatura. </p> <button onclick="mostraMessaggio( 'Per un progetto ordinato usa pochi font e mantieni una gerarchia chiara tra titolo, sottotitolo e testo.' )"> 📚 Impara il testo </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- AI --> <div class="card" id="ai"> <h2>🤖 AI di Canva</h2> <p> Scopri gli strumenti di intelligenza artificiale disponibili all'interno dell'ecosistema Canva. </p> <button onclick="apri('https://www.canva.com/ai-image-generator/')"> Scopri Canva AI </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- ESERCITAZIONE --> <div class="card" id="esercitazione"> <h2>📚 Esercitazione</h2> <p> Prova a creare un semplice post per un social network. Utilizza un titolo, un'immagine, due colori e un elemento grafico. </p> <button onclick="mostraMessaggio( 'La tua esercitazione: crea un post social semplice, ordinato e leggibile. Controlla testo, colori, immagini e allineamento prima di terminarlo.' )"> 🚀 Inizia esercitazione </button> <a class="torna-su" href="#inizio"> ↑ Torna all'inizio </a> </div> <!-- COMANDI VOCALI --> <div class="card"> <h2>🎤 Comandi per Oreste AI</h2> <p> Puoi utilizzare la voce per accedere alle funzioni della guida. </p> <div class="comando"> "Oreste AI, impara Canva" </div> <div class="comando"> "Oreste AI, apri Canva" </div> <div class="comando"> "Oreste AI, crea un logo" </div> <div class="comando"> "Oreste AI, crea un mockup" </div> <div class="comando"> "Oreste AI, crea una presentazione" </div> <div class="comando"> "Oreste AI, crea un video" </div> <div class="comando"> "Oreste AI, apri social" </div> <div class="comando"> "Oreste AI, crea un CV" </div> </div> <footer> 🎨 Impara Canva con Oreste AI <br> Una guida in continua evoluzione. </footer> <script> /* APERTURA LINK */ function apri(link){ window.open(link, "_blank"); } /* NAVIGAZIONE */ function vaiA(id){ let elemento = document.getElementById(id); if(elemento){ elemento.scrollIntoView({ behavior:"smooth", block:"start" }); } } /* POPUP */ function chiudiPopup(){ document.getElementById("popupCanva").style.display="none"; } /* MESSAGGI */ function mostraMessaggio(testo){ alert(testo); } /* VOCE DI ORESTE */ function parlaOreste(testo){ if("speechSynthesis" in window){ speechSynthesis.cancel(); let voce = new SpeechSynthesisUtterance(testo); voce.lang="it-IT"; speechSynthesis.speak(voce); } } /* RICONOSCIMENTO VOCALE */ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; let riconoscimento=null; let ascolto=false; if(SpeechRecognition){ riconoscimento=new SpeechRecognition(); riconoscimento.lang="it-IT"; riconoscimento.continuous=false; riconoscimento.interimResults=false; riconoscimento.maxAlternatives=1; riconoscimento.onstart=function(){ ascolto=true; document.getElementById("pulsanteVoce") .classList.add("ascolto"); document.getElementById("pulsanteVoce") .innerHTML="🔴 Sto ascoltando..."; document.getElementById("statoVoce") .innerText="Parla con Oreste AI."; }; riconoscimento.onresult=function(event){ let testo = event.results[0][0].transcript .toLowerCase() .trim(); document.getElementById("testoRiconosciuto") .innerText="Hai detto: " + testo; gestisciComando(testo); }; riconoscimento.onerror=function(event){ ascolto=false; ripristinaPulsante(); document.getElementById("statoVoce") .innerText="Non ho capito il comando. Riprova."; }; riconoscimento.onend=function(){ ascolto=false; ripristinaPulsante(); }; } function ascoltaOreste(){ if(!riconoscimento){ alert( "Il riconoscimento vocale non è supportato da questo browser." ); return; } if(ascolto){ riconoscimento.stop(); return; } document.getElementById("testoRiconosciuto") .innerText=""; riconoscimento.start(); } function ripristinaPulsante(){ let pulsante = document.getElementById("pulsanteVoce"); pulsante.classList.remove("ascolto"); pulsante.innerHTML="🎤 Parla con Oreste AI"; } /* COMANDI */ function gestisciComando(testo){ /* APRI CANVA */ if( testo.includes("apri canva") || testo.includes("vai a canva") ){ parlaOreste( "Va bene. Apro Canva." ); setTimeout(function(){ apri("https://www.canva.com/"); },700); return; } /* IMPARA CANVA */ if( testo.includes("impara canva") || testo.includes("guida canva") ){ parlaOreste( "Va bene. Ti porto alla guida Canva." ); vaiA("canva"); return; } /* LOGO */ if( testo.includes("crea un logo") || testo.includes("crea logo") || testo.includes("loghi") ){ parlaOreste( "Va bene. Apro la sezione Loghi." ); vaiA("loghi"); return; } /* MOCKUP */ if( testo.includes("crea un mockup") || testo.includes("mockup") ){ parlaOreste( "Va bene. Apro la sezione Mockup." ); vaiA("mockup"); return; } /* PRESENTAZIONE */ if( testo.includes("crea una presentazione") || testo.includes("presentazione") || testo.includes("presentazioni") ){ parlaOreste( "Va bene. Apro la sezione Presentazioni." ); vaiA("presentazioni"); return; } /* VIDEO */ if( testo.includes("crea un video") || testo.includes("video") ){ parlaOreste( "Va bene. Apro la sezione Video." ); vaiA("video"); return; } /* SOCIAL */ if( testo.includes("social") || testo.includes("social media") ){ parlaOreste( "Va bene. Apro la sezione Social Media." ); vaiA("social"); return; } /* CV */ if( testo.includes("crea un cv") || testo.includes("curriculum") || testo.includes("curriculum vitae") ){ parlaOreste( "Va bene. Apro la sezione Curriculum Vitae." ); vaiA("cv"); return; } /* SITO */ if( testo.includes("sito web") || testo.includes("siti web") ){ parlaOreste( "Va bene. Apro la sezione Siti Web." ); vaiA("siti"); return; } /* FOTO */ if( testo.includes("foto") || testo.includes("modifica foto") ){ parlaOreste( "Va bene. Apro la sezione Foto." ); vaiA("foto"); return; } /* TESTO */ if( testo.includes("testo") || testo.includes("font") ){ parlaOreste( "Va bene. Apro la sezione Testo e Font." ); vaiA("testo"); return; } /* AI */ if( testo.includes("canva ai") || testo.includes("intelligenza artificiale") ){ parlaOreste( "Va bene. Apro la sezione AI di Canva." ); vaiA("ai"); return; } /* ESERCITAZIONE */ if( testo.includes("esercitazione") || testo.includes("esercizio") ){ parlaOreste( "Va bene. Apro l'esercitazione." ); vaiA("esercitazione"); return; } /* STRUMENTI */ if( testo.includes("strumenti") || testo.includes("strumento") ){ parlaOreste( "Va bene. Apro gli strumenti principali." ); vaiA("strumenti"); return; } /* COMANDO NON RICONOSCIUTO */ parlaOreste( "Non ho riconosciuto il comando. Prova a chiedermi di aprire Canva, creare un logo, un mockup, una presentazione o un video." ); } /* AVVIO */ window.onload=function(){ document.getElementById("popupCanva") .style.display="flex"; let messaggio = "Benvenuto in Impara Canva con Oreste AI. Scopri loghi, video, presentazioni, social media e tutte le funzioni della guida."; parlaOreste(messaggio); }; </script> </body> </html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Impara Canva con Oreste AI</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0a3d91;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 40px;
+}
+
+h1 {
+    margin-top: 30px;
+}
+
+.intro {
+    max-width: 700px;
+    margin: 10px auto 25px;
+    padding: 0 20px;
+    line-height: 1.6;
+}
+
+/* MENU */
+
+.menu {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.menu-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.menu button {
+    background: white;
+    color: #0a3d91;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ASSISTENTE VOCALE */
+
+.voice-box {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 22px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 20px;
+}
+
+.voice-button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.voice-button.ascolto {
+    background: #00a83b;
+}
+
+#statoVoce {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+#testoRiconosciuto {
+    margin-top: 10px;
+    min-height: 25px;
+    font-style: italic;
+}
+
+/* CARD */
+
+.card {
+    background: white;
+    color: #222;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    scroll-margin-top: 20px;
+}
+
+.card h2 {
+    color: #0a3d91;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.card button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 8px;
+}
+
+/* POPUP */
+
+.popup-canva {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.popup-box {
+    background: white;
+    color: #333;
+    width: 90%;
+    max-width: 450px;
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.popup-box h2 {
+    color: #0a3d91;
+}
+
+/* COMANDI */
+
+.comando {
+    background: #f2f2f2;
+    color: #222;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- POPUP -->
+
+<div class="popup-canva" id="popupCanva">
+
+    <div class="popup-box">
+
+        <h2>🎨 Impara Canva con Oreste AI</h2>
+
+        <p>
+            Scopri le principali funzioni di Canva
+            e impara a creare contenuti digitali
+            in modo semplice.
+        </p>
+
+        <button onclick="chiudiPopup()">
+            🚀 Inizia
+        </button>
+
+    </div>
+
+</div>
+
+<h1 id="inizio">
+    🎨 Impara Canva con Oreste AI
+</h1>
+
+<p class="intro">
+
+    La guida intelligente per imparare Canva
+    con l'aiuto del tuo assistente vocale.
+
+    <br><br>
+
+    Scegli una sezione oppure parla con Oreste AI.
+
+</p>
+
+
+<!-- ASSISTENTE VOCALE -->
+
+<div class="voice-box">
+
+    <h2>🎤 Oreste AI</h2>
+
+    <p>
+        Premi il pulsante e parla con Oreste AI.
+    </p>
+
+    <button
+        class="voice-button"
+        id="pulsanteVoce"
+        onclick="ascoltaOreste()">
+
+        🎤 Parla con Oreste AI
+
+    </button>
+
+    <div id="statoVoce">
+        Premi il pulsante e parla.
+    </div>
+
+    <div id="testoRiconosciuto"></div>
+
+</div>
+
+
+<!-- MENU -->
+
+<div class="menu">
+
+    <h2>📚 Esplora la guida</h2>
+
+    <div class="menu-grid">
+
+        <button onclick="vaiA('canva')">🎨 Canva</button>
+
+        <button onclick="vaiA('strumenti')">🛠️ Strumenti</button>
+
+        <button onclick="vaiA('mockup')">🖼️ Mockup</button>
+
+        <button onclick="vaiA('loghi')">🏷️ Loghi</button>
+
+        <button onclick="vaiA('presentazioni')">📊 Presentazioni</button>
+
+        <button onclick="vaiA('video')">🎬 Video</button>
+
+        <button onclick="vaiA('social')">📱 Social</button>
+
+        <button onclick="vaiA('cv')">📄 CV</button>
+
+        <button onclick="vaiA('siti')">🌐 Siti Web</button>
+
+        <button onclick="vaiA('stampa')">🖨️ Stampa</button>
+
+        <button onclick="vaiA('foto')">📸 Foto</button>
+
+        <button onclick="vaiA('testo')">✍️ Testo</button>
+
+        <button onclick="vaiA('ai')">🤖 AI</button>
+
+        <button onclick="vaiA('esercitazione')">📚 Esercitazione</button>
+
+    </div>
+
+</div>
+
+
+<!-- CANVA -->
+
+<div class="card" id="canva">
+
+    <h2>🎨 Canva</h2>
+
+    <p>
+        Canva permette di creare grafiche,
+        documenti, presentazioni e contenuti digitali.
+    </p>
+
+    <button onclick="apri('https://www.canva.com/')">
+        Apri Canva
+    </button>
+
+</div>
+
+
+<!-- STRUMENTI -->
+
+<div class="card" id="strumenti">
+
+    <h2>🛠️ Strumenti principali</h2>
+
+    <p>
+        Impara a utilizzare modelli, testo,
+        immagini, elementi, colori ed effetti.
+    </p>
+
+    <button onclick="mostraMessaggio(
+        'Inizia scegliendo un modello. Poi personalizza testo, immagini, colori ed elementi grafici.'
+    )">
+
+        📚 Impara gli strumenti
+
+    </button>
+
+</div>
+
+
+<!-- MOCKUP -->
+
+<div class="card" id="mockup">
+
+    <h2>🖼️ Mockup</h2>
+
+    <p>
+        Realizza anteprime professionali
+        dei tuoi prodotti e progetti.
+    </p>
+
+    <button onclick="apri('https://www.canva.com/mockups/')">
+        Apri Mockup
+    </button>
+
+</div>
+
+
+<!-- LOGHI -->
+
+<div class="card" id="loghi">
+
+    <h2>🏷️ Loghi</h2>
+
+    <p>
+        Crea il tuo logo utilizzando
+        modelli, testi e forme.
+    </p>
+
+    <button onclick="apri('https://www.canva.com/create/logos/')">
+        Crea Logo
+    </button>
+
+</div>
+
+
+<!-- PRESENTAZIONI -->
+
+<div class="card" id="presentazioni">
+
+    <h2>📊 Presentazioni</h2>
+
+    <p>
+        Crea slide per lavoro,
+        scuola e progetti personali.
+    </p>
+
+    <button onclick="apri('https://www.canva.com/presentations/')">
+        Presentazioni
+    </button>
+
+</div>
+
+
+<!-- VIDEO -->
+
+<div class="card" id="video">
+
+    <h2>🎬 Video</h2>
+
+    <p>
+        Crea video per social
+        e contenuti digitali.
+    </p>
+
+    <button onclick="apri('https://www.canva.com/create/videos/')">
+        Video
+    </button>
+
+</div>
+
+
+<!-- SOCIAL -->
+
+<div class="card" id="social">
+
+    <h2>📱 Social Media</h2>
+
+    <p>
+        Crea post, storie e contenuti
+        per i principali social network.
+    </p>
+
+    <button onclick="apri(
+        'https://www.canva.com/templates/search/social-media/'
+    )">
+
+        Apri Social Media
+
+    </button>
+
+</div>
+
+
+<!-- CV -->
+
+<div class="card" id="cv">
+
+    <h2>📄 Curriculum Vitae</h2>
+
+    <p>
+        Crea un curriculum professionale
+        utilizzando modelli pronti.
+    </p>
+
+    <button onclick="apri(
+        'https://www.canva.com/create/resumes/'
+    )">
+
+        Crea CV
+
+    </button>
+
+</div>
+
+
+<!-- SITI -->
+
+<div class="card" id="siti">
+
+    <h2>🌐 Siti Web</h2>
+
+    <p>
+        Progetta siti web, landing page
+        e portfolio personali.
+    </p>
+
+    <button onclick="apri(
+        'https://www.canva.com/create/websites/'
+    )">
+
+        Crea Sito Web
+
+    </button>
+
+</div>
+
+
+<!-- STAMPA -->
+
+<div class="card" id="stampa">
+
+    <h2>🖨️ Stampa</h2>
+
+    <p>
+        Crea volantini, brochure,
+        biglietti e poster.
+    </p>
+
+    <button onclick="apri(
+        'https://www.canva.com/print/'
+    )">
+
+        Scopri la stampa
+
+    </button>
+
+</div>
+
+
+<!-- FOTO -->
+
+<div class="card" id="foto">
+
+    <h2>📸 Foto</h2>
+
+    <p>
+        Modifica e migliora le immagini
+        con gli strumenti di Canva.
+    </p>
+
+    <button onclick="apri(
+        'https://www.canva.com/photo-editor/'
+    )">
+
+        Modifica Foto
+
+    </button>
+
+</div>
+
+
+<!-- TESTO -->
+
+<div class="card" id="testo">
+
+    <h2>✍️ Testo e font</h2>
+
+    <p>
+        Scopri titoli, sottotitoli,
+        font, colori e spaziatura.
+    </p>
+
+    <button onclick="mostraMessaggio(
+        'Per un progetto ordinato usa pochi font e mantieni una gerarchia chiara tra titolo, sottotitolo e testo.'
+    )">
+
+        📚 Impara il testo
+
+    </button>
+
+</div>
+
+
+<!-- AI -->
+
+<div class="card" id="ai">
+
+    <h2>🤖 AI di Canva</h2>
+
+    <p>
+        Scopri gli strumenti di intelligenza
+        artificiale disponibili in Canva.
+    </p>
+
+    <button onclick="apri(
+        'https://www.canva.com/ai-image-generator/'
+    )">
+
+        Scopri Canva AI
+
+    </button>
+
+</div>
+
+
+<!-- ESERCITAZIONE -->
+
+<div class="card" id="esercitazione">
+
+    <h2>📚 Esercitazione</h2>
+
+    <p>
+        Prova a creare un semplice post
+        per un social network.
+    </p>
+
+    <button onclick="mostraMessaggio(
+        'Crea un post social semplice, ordinato e leggibile. Controlla testo, colori, immagini e allineamento.'
+    )">
+
+        🚀 Inizia esercitazione
+
+    </button>
+
+</div>
+
+
+<!-- COMANDI VOCALI -->
+
+<div class="card">
+
+    <h2>🎤 Comandi per Oreste AI</h2>
+
+    <p>
+        Puoi utilizzare la voce per accedere
+        alle funzioni della guida.
+    </p>
+
+    <div class="comando">
+        "Oreste AI, impara Canva"
+    </div>
+
+    <div class="comando">
+        "Oreste AI, apri Canva"
+    </div>
+
+    <div class="comando">
+        "Oreste AI, crea un logo"
+    </div>
+
+    <div class="comando">
+        "Oreste AI, crea un mockup"
+    </div>
+
+    <div class="comando">
+        "Oreste AI, crea una presentazione"
+    </div>
+
+    <div class="comando">
+        "Oreste AI, crea un video"
+    </div>
+
+    <div class="comando">
+        "Oreste AI, apri social"
+    </div>
+
+    <div class="comando">
+        "Oreste AI, crea un CV"
+    </div>
+
+</div>
+
+
+<footer>
+
+    🎨 Impara Canva con Oreste AI
+
+    <br>
+
+    Una guida in continua evoluzione.
+
+</footer>
+
+
+<script>
+
+/* APRE UN LINK */
+
+function apri(link) {
+
+    window.open(link, "_blank");
+
+}
+
+
+/* SCROLL VERSO UNA SEZIONE */
+
+function vaiA(id) {
+
+    const elemento = document.getElementById(id);
+
+    if (elemento) {
+
+        elemento.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+}
+
+
+/* CHIUDE IL POPUP */
+
+function chiudiPopup() {
+
+    document.getElementById("popupCanva")
+        .style.display = "none";
+
+}
+
+
+/* MOSTRA UN MESSAGGIO */
+
+function mostraMessaggio(testo) {
+
+    alert(testo);
+
+}
+
+
+/* ORESTE PARLA */
+
+function parlaOreste(testo) {
+
+    if ("speechSynthesis" in window) {
+
+        speechSynthesis.cancel();
+
+        const voce =
+            new SpeechSynthesisUtterance(testo);
+
+        voce.lang = "it-IT";
+
+        speechSynthesis.speak(voce);
+
+    }
+
+}
+
+
+/* RICONOSCIMENTO VOCALE */
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+let riconoscimento = null;
+
+let ascolto = false;
+
+
+if (SpeechRecognition) {
+
+    riconoscimento =
+        new SpeechRecognition();
+
+    riconoscimento.lang = "it-IT";
+
+    riconoscimento.continuous = false;
+
+    riconoscimento.interimResults = false;
+
+    riconoscimento.maxAlternatives = 1;
+
+
+    riconoscimento.onstart = function () {
+
+        ascolto = true;
+
+        const pulsante =
+            document.getElementById("pulsanteVoce");
+
+        pulsante.classList.add("ascolto");
+
+        pulsante.innerHTML =
+            "🔴 Sto ascoltando...";
+
+        document.getElementById("statoVoce")
+            .innerText =
+            "Parla con Oreste AI.";
+
+    };
+
+
+    riconoscimento.onresult = function (event) {
+
+        const testo =
+            event.results[0][0].transcript
+            .toLowerCase()
+            .trim();
+
+        document.getElementById(
+            "testoRiconosciuto"
+        ).innerText =
+            "Hai detto: " + testo;
+
+        gestisciComando(testo);
+
+    };
+
+
+    riconoscimento.onerror = function () {
+
+        ascolto = false;
+
+        ripristinaPulsante();
+
+        document.getElementById(
+            "statoVoce"
+        ).innerText =
+            "Non ho capito il comando. Riprova.";
+
+    };
+
+
+    riconoscimento.onend = function () {
+
+        ascolto = false;
+
+        ripristinaPulsante();
+
+    };
+
+}
+
+
+/* AVVIA ASCOLTO */
+
+function ascoltaOreste() {
+
+    if (!riconoscimento) {
+
+        alert(
+            "Il riconoscimento vocale non è supportato da questo browser."
+        );
+
+        return;
+
+    }
+
+
+    if (ascolto) {
+
+        riconoscimento.stop();
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "testoRiconosciuto"
+    ).innerText = "";
+
+    riconoscimento.start();
+
+}
+
+
+/* RIPRISTINA PULSANTE */
+
+function ripristinaPulsante() {
+
+    const pulsante =
+        document.getElementById("pulsanteVoce");
+
+    pulsante.classList.remove("ascolto");
+
+    pulsante.innerHTML =
+        "🎤 Parla con Oreste AI";
+
+}
+
+
+/* GESTIONE COMANDI */
+
+function gestisciComando(testo) {
+
+
+    /* CANVA */
+
+    if (
+        testo.includes("apri canva") ||
+        testo.includes("vai a canva")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro Canva."
+        );
+
+        setTimeout(function () {
+
+            apri(
+                "https://www.canva.com/"
+            );
+
+        }, 700);
+
+        return;
+
+    }
+
+
+    /* GUIDA */
+
+    if (
+        testo.includes("impara canva") ||
+        testo.includes("guida canva")
+    ) {
+
+        parlaOreste(
+            "Va bene. Ti porto alla guida Canva."
+        );
+
+        vaiA("canva");
+
+        return;
+
+    }
+
+
+    /* LOGO */
+
+    if (
+        testo.includes("crea un logo") ||
+        testo.includes("crea logo") ||
+        testo.includes("loghi")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro la sezione Loghi."
+        );
+
+        vaiA("loghi");
+
+        return;
+
+    }
+
+
+    /* MOCKUP */
+
+    if (
+        testo.includes("crea un mockup") ||
+        testo.includes("mockup")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro la sezione Mockup."
+        );
+
+        vaiA("mockup");
+
+        return;
+
+    }
+
+
+    /* PRESENTAZIONE */
+
+    if (
+        testo.includes("crea una presentazione") ||
+        testo.includes("presentazione") ||
+        testo.includes("presentazioni")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro la sezione Presentazioni."
+        );
+
+        vaiA("presentazioni");
+
+        return;
+
+    }
+
+
+    /* VIDEO */
+
+    if (
+        testo.includes("crea un video") ||
+        testo.includes("video")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro la sezione Video."
+        );
+
+        vaiA("video");
+
+        return;
+
+    }
+
+
+    /* SOCIAL */
+
+    if (
+        testo.includes("social") ||
+        testo.includes("social media")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro la sezione Social Media."
+        );
+
+        vaiA("social");
+
+        return;
+
+    }
+
+
+    /* CV */
+
+    if (
+        testo.includes("crea un cv") ||
+        testo.includes("curriculum") ||
+        testo.includes("curriculum vitae")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro la sezione Curriculum Vitae."
+        );
+
+        vaiA("cv");
+
+        return;
+
+    }
+
+
+    /* SITO */
+
+    if (
+        testo.includes("sito web") ||
+        testo.includes("siti web")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro la sezione Siti Web."
+        );
+
+        vaiA("siti");
+
+        return;
+
+    }
+
+
+    /* FOTO */
+
+    if (
+        testo.includes("foto") ||
+        testo.includes("modifica foto")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro la sezione Foto."
+        );
+
+        vaiA("foto");
+
+        return;
+
+    }
+
+
+    /* TESTO */
+
+    if (
+        testo.includes("testo") ||
+        testo.includes("font")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro la sezione Testo e Font."
+        );
+
+        vaiA("testo");
+
+        return;
+
+    }
+
+
+    /* AI */
+
+    if (
+        testo.includes("canva ai") ||
+        testo.includes("intelligenza artificiale")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro la sezione AI di Canva."
+        );
+
+        vaiA("ai");
+
+        return;
+
+    }
+
+
+    /* ESERCITAZIONE */
+
+    if (
+        testo.includes("esercitazione") ||
+        testo.includes("esercizio")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro l'esercitazione."
+        );
+
+        vaiA("esercitazione");
+
+        return;
+
+    }
+
+
+    /* STRUMENTI */
+
+    if (
+        testo.includes("strumenti") ||
+        testo.includes("strumento")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro gli strumenti principali."
+        );
+
+        vaiA("strumenti");
+
+        return;
+
+    }
+
+
+    /* STAMPA */
+
+    if (
+        testo.includes("stampa") ||
+        testo.includes("stampare")
+    ) {
+
+        parlaOreste(
+            "Va bene. Apro la sezione Stampa."
+        );
+
+        vaiA("stampa");
+
+        return;
+
+    }
+
+
+    /* COMANDO NON RICONOSCIUTO */
+
+    parlaOreste(
+        "Non ho riconosciuto il comando. Prova a chiedermi di aprire Canva, creare un logo, un mockup, una presentazione o un video."
+    );
+
+}
+
+
+/* AVVIO PAGINA */
+
+window.onload = function () {
+
+    document.getElementById(
+        "popupCanva"
+    ).style.display = "flex";
+
+
+    const messaggio =
+        "Benvenuto in Impara Canva con Oreste AI. Scopri loghi, video, presentazioni, social media e tutte le funzioni della guida.";
+
+
+    parlaOreste(messaggio);
+
+};
+
+</script>
+
+</body>
+
+</html>
