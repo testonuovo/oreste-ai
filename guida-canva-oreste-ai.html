@@ -72,7 +72,7 @@
             document.getElementById("pulsanteVoce") .innerHTML="🔴 Sto ascoltando..."; document.getElementById("statoVoce") .innerText="Parla con Oreste AI."; }; 
             riconoscimento.onresult=function(event){ let testo = event.results[0][0].transcript .toLowerCase() .trim(); document.getElementById("testoRiconosciuto") .innerText="Hai detto: " + testo; gestisciComando(testo); }; 
             riconoscimento.onerror=function(event){ ascolto=false; ripristinaPulsante(); document.getElementById("statoVoce") .innerText="Non ho capito il comando. Riprova."; }; 
-            riconoscimento.onend=function(){ ascolto=false; ripristinaPulsante(); }; } function ascoltaOreste(){ if(!riconoscimento){ alert( "Il riconoscimento vocale non è supportato da questo browser." ); 
+            riconoscimento.onend=function(){ ascolto=false; ripristinaPulsante(); }; } functionascoltaOreste(){ if(!riconoscimento){ alert( "Il riconoscimento vocale non è supportato da questo browser." ); 
             return; } if(ascolto){ riconoscimento.stop(); return; } document.getElementById("testoRiconosciuto") .innerText=""; riconoscimento.start(); } function ripristinaPulsante(){ 
             let pulsante = document.getElementById("pulsanteVoce"); pulsante.classList.remove("ascolto"); pulsante.innerHTML="🎤 Parla con Oreste AI"; } /* COMANDI */ function gestisciComando(testo)
             { /* APRI CANVA */ if( testo.includes("apri canva") || testo.includes("vai a canva") ){ parlaOreste( "Va bene. Apro Canva." ); setTimeout(function(){ apri("https://www.canva.com/"); },700); 
