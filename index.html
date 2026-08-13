@@ -1,8 +1,152 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="it">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,532 +156,453 @@
 <meta name="robots" content="index, follow">
 <meta name="author" content="Oreste De Chiara">
 
-
 <style>
 
-body{
-font-family:Arial,sans-serif;
-background:#0a3d91;
-color:white;
-text-align:center;
-margin:0;
+* {
+    box-sizing: border-box;
 }
 
-
-h1{
-margin-top:20px;
+body {
+    font-family: Arial, sans-serif;
+    background: #0a3d91;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 40px;
 }
 
-
-nav{
-
-background:rgba(0,0,0,0.4);
-padding:12px;
-margin:10px;
-border-radius:10px;
-
+h1 {
+    margin-top: 20px;
 }
 
-
-nav a{
-
-color:white;
-margin:5px;
-text-decoration:none;
-display:inline-block;
-
+nav {
+    background: rgba(0,0,0,0.4);
+    padding: 12px;
+    margin: 10px;
+    border-radius: 10px;
 }
 
-
-nav a:hover{
-
-color:#ffd700;
-
+nav a {
+    color: white;
+    margin: 5px;
+    text-decoration: none;
+    display: inline-block;
 }
 
-
-
-#chat{
-
-width:90%;
-max-width:600px;
-margin:20px auto;
-background:rgba(0,0,0,0.3);
-padding:15px;
-border-radius:10px;
-min-height:250px;
-text-align:left;
-
+nav a:hover {
+    color: #ffd700;
 }
 
-
-
-input{
-
-width:80%;
-padding:15px;
-font-size:18px;
-border-radius:10px;
-border:none;
-
+#chat {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 10px;
+    min-height: 250px;
+    max-height: 450px;
+    overflow-y: auto;
+    text-align: left;
 }
 
-
-
-button{
-
-padding:12px 18px;
-margin:5px;
-border:none;
-border-radius:20px;
-background:red;
-color:white;
-cursor:pointer;
-
+input {
+    width: 70%;
+    max-width: 500px;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
 }
 
-
-button:hover{
-
-background:darkred;
-
+button {
+    padding: 12px 18px;
+    margin: 5px;
+    border: none;
+    border-radius: 20px;
+    background: red;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
 }
 
-
-
-.msg{
-
-margin:8px 0;
-
+button:hover {
+    background: darkred;
 }
 
+.msg {
+    margin: 8px 0;
+    line-height: 1.5;
+}
 
 </style>
 
 </head>
 
-
 <body>
 
-
 <h1>🎤 Oreste AI</h1>
-
 
 <nav>
 
 <a href="index.html">🏠 Home</a>
-
 <a href="assistente.html">🎤 Assistente</a>
-
 <a href="chat.html">💬 Chat</a>
-
 <a href="motivazione.html">🌻 Motivazione</a>
-
 <a href="download.html">📥 Download</a>
-
 <a href="blog.html">📰 Blog</a>
-
 <a href="chi-siamo.html">👤 Chi siamo</a>
-
 <a href="contatti.html">📞 Contatti</a>
-
 <a href="dashboard.html">📊 Dashboard</a>
-
 <a href="os.html">🖥️ Oreste OS</a>
-
 <a href="storybook.html">📚 Storybook</a>
-
 <a href="storia.html">📖 La Storia</a>
-
 <a href="funzioni.html">⚙️ Funzioni</a>
-
 <a href="tecnologie oreste ai.html">💻 Tecnologie</a>
-
 <a href="comandi-oreste-ai.html">🎤 Comandi</a>
-
 <a href="mondiali2026.html">🏆 Mondiali 2026</a>
 
 <a href="spagna-campione-del-mondo-2026.html">
 🏆 Spagna campione del mondo 2026
 </a>
+
 <a href="#" onclick="apriCanva(); return false;">
 🎨 Impara Canva
 </a>
 
+</nav>
 
+<div>
 
-<input id="input" placeholder="Scrivi o parla...">
+<input
+    id="input"
+    type="text"
+    placeholder="Scrivi o parla..."
+    onkeydown="if(event.key === 'Enter') ask();"
+>
 
+<br>
 
 <button onclick="ask()">
 Invia
 </button>
 
-
 <button onclick="voice()">
 🎤 Parla
 </button>
 
+</div>
 
 <div id="chat"></div>
 
-
-
 <script>
-function add(nome,testo){
 
-let chat=document.getElementById("chat");
+/* ================= CHAT ================= */
 
-chat.innerHTML +=
-"<div class='msg'><b>"+nome+":</b> "+testo+"</div>";
+function add(nome, testo) {
 
-chat.scrollTop=chat.scrollHeight;
+    const chat = document.getElementById("chat");
 
+    const messaggio = document.createElement("div");
+
+    messaggio.className = "msg";
+
+    const nomeElemento = document.createElement("b");
+
+    nomeElemento.textContent = nome + ": ";
+
+    messaggio.appendChild(nomeElemento);
+
+    messaggio.appendChild(
+        document.createTextNode(testo)
+    );
+
+    chat.appendChild(messaggio);
+
+    chat.scrollTop = chat.scrollHeight;
 }
 
 
+/* ================= VOCE ================= */
 
-function speak(testo){
+function speak(testo) {
 
-if(!("speechSynthesis" in window)) return;
+    if (!("speechSynthesis" in window)) {
+        return;
+    }
 
-let voce=new SpeechSynthesisUtterance(testo);
+    const voce = new SpeechSynthesisUtterance(testo);
 
-voce.lang="it-IT";
+    voce.lang = "it-IT";
 
-speechSynthesis.cancel();
+    speechSynthesis.cancel();
 
-speechSynthesis.speak(voce);
-
+    speechSynthesis.speak(voce);
 }
-
-
 
 
 /* ================= SITI ================= */
 
+function openSite(testo) {
 
-function openSite(testo){
+    const siti = {
 
-let siti={
+        "google": "https://www.google.com/",
+        "youtube": "https://www.youtube.com/",
+        "facebook": "https://www.facebook.com/",
+        "instagram": "https://www.instagram.com/",
+        "tiktok": "https://www.tiktok.com/",
+        "github": "https://github.com/",
+        "canva": "https://www.canva.com/"
 
-"google":"https://google.com",
-"youtube":"https://youtube.com",
-"facebook":"https://facebook.com",
-"instagram":"https://instagram.com",
-"tiktok":"https://tiktok.com",
-"github":"https://github.com",
-"canva":"https://www.canva.com/"
-};
+    };
 
+    for (const nome in siti) {
 
-for(let nome in siti){
+        if (testo.includes(nome)) {
 
-if(testo.includes(nome)){
+            window.open(siti[nome], "_blank");
 
-window.open(siti[nome],"_blank");
+            return "Apro " + nome;
 
-return "Apro "+nome;
+        }
 
+    }
+
+    return null;
 }
 
+
+/* ================= CANVA ================= */
+
+function canva(testo) {
+
+    const funzioni = {
+
+        "mockup": "https://www.canva.com/mockups/",
+        "presentazioni": "https://www.canva.com/presentations/",
+        "logo": "https://www.canva.com/create/logos/",
+        "volantini": "https://www.canva.com/create/flyers/",
+        "video": "https://www.canva.com/create/videos/",
+        "poster": "https://www.canva.com/create/posters/",
+        "curriculum": "https://www.canva.com/create/resumes/",
+        "social": "https://www.canva.com/create/social-media/",
+        "biglietti": "https://www.canva.com/create/cards/"
+
+    };
+
+    for (const comando in funzioni) {
+
+        if (testo.includes(comando)) {
+
+            window.open(
+                funzioni[comando],
+                "_blank"
+            );
+
+            return "Apro Canva per " + comando;
+        }
+    }
+
+    return null;
 }
-
-
-return null;
-
-}
-
-/* ================= CANVA AI ================= */
-
-function canva(testo){
-
-let funzioni={
-
-"canva":"https://www.canva.com/",
-"mockup":"https://www.canva.com/mockups/",
-"presentazioni":"https://www.canva.com/presentations/",
-"logo":"https://www.canva.com/create/logos/",
-"volantini":"https://www.canva.com/create/flyers/",
-"video":"https://www.canva.com/create/videos/",
-"poster":"https://www.canva.com/create/posters/",
-"curriculum":"https://www.canva.com/create/resumes/",
-"social":"https://www.canva.com/create/social-media/",
-"biglietti":"https://www.canva.com/create/cards/"
-
-};
-
-
-for(let comando in funzioni){
-
-if(testo.includes(comando)){
-
-window.open(funzioni[comando],"_blank");
-
-return "Apro Canva per "+comando;
-
-}
-
-}
-
-return null;
-
-}
-
 
 
 /* ================= METEO ================= */
 
+async function meteo(citta) {
 
-async function meteo(citta){
+    if (!citta) {
+        return "Dimmi quale città vuoi controllare.";
+    }
 
+    try {
 
-try{
+        const r = await fetch(
+            "https://geocoding-api.open-meteo.com/v1/search?name="
+            + encodeURIComponent(citta)
+            + "&count=1&language=it&format=json"
+        );
 
+        const dati = await r.json();
 
-let r=await fetch(
-"https://geocoding-api.open-meteo.com/v1/search?name="
-+encodeURIComponent(citta)
-);
+        if (!dati.results || dati.results.length === 0) {
+            return "Città non trovata.";
+        }
 
+        const lat = dati.results[0].latitude;
+        const lon = dati.results[0].longitude;
 
-let dati=await r.json();
+        const w = await fetch(
+            "https://api.open-meteo.com/v1/forecast?latitude="
+            + lat
+            + "&longitude="
+            + lon
+            + "&current_weather=true"
+        );
 
+        const tempo = await w.json();
 
-if(!dati.results){
+        return "🌤️ "
+            + dati.results[0].name
+            + ": "
+            + tempo.current_weather.temperature
+            + " gradi.";
 
-return "Città non trovata";
+    }
 
+    catch (errore) {
+
+        console.error(errore);
+
+        return "Errore durante la richiesta del meteo.";
+
+    }
 }
-
-
-
-let lat=dati.results[0].latitude;
-
-let lon=dati.results[0].longitude;
-
-
-
-let w=await fetch(
-
-"https://api.open-meteo.com/v1/forecast?latitude="
-+lat+
-"&longitude="
-+lon+
-"&current_weather=true"
-
-);
-
-
-
-let tempo=await w.json();
-
-
-return "🌤️ "+dati.results[0].name+
-": "+tempo.current_weather.temperature+" gradi";
-
-
-}
-
-catch(e){
-
-return "Errore meteo";
-
-}
-
-
-}
-
-
-
-
 
 
 /* ================= TIMER ================= */
 
+let timer = null;
 
-let timer=null;
+function startTimer(secondi) {
 
+    secondi = parseInt(secondi);
 
-function startTimer(secondi){
+    if (isNaN(secondi) || secondi <= 0) {
 
+        return "Scrivi, ad esempio: timer 30";
 
-secondi=parseInt(secondi);
+    }
 
+    if (timer) {
+        clearInterval(timer);
+    }
 
-if(isNaN(secondi)){
+    let tempo = secondi;
 
-return "Scrivi timer seguito dai secondi";
+    add("⏱️", "Timer avviato: " + secondi + " secondi.");
 
+    timer = setInterval(function() {
+
+        if (tempo <= 0) {
+
+            clearInterval(timer);
+
+            timer = null;
+
+            add("⏱️", "FINITO");
+
+            speak("Timer terminato");
+
+            return;
+        }
+
+        add("⏱️", tempo + " secondi");
+
+        tempo--;
+
+    }, 1000);
+
+    return "Timer avviato per " + secondi + " secondi.";
 }
-
-
-
-if(timer){
-
-clearInterval(timer);
-
-}
-
-
-
-let tempo=secondi;
-
-
-
-timer=setInterval(()=>{
-
-
-add("⏱️",tempo+" secondi");
-
-
-tempo--;
-
-
-
-if(tempo<0){
-
-
-clearInterval(timer);
-
-timer=null;
-
-
-add("⏱️","FINITO");
-
-speak("Timer terminato");
-
-
-}
-
-
-},1000);
-
-
-
-return "Timer avviato per "+secondi+" secondi";
-
-
-}
-
-
-
-
 
 
 /* ================= SVEGLIA ================= */
 
+let svegliaTimer = null;
 
-let svegliaTimer=null;
+function sveglia(orario) {
 
+    const parti = orario.split(":");
 
+    if (parti.length !== 2) {
 
-function sveglia(orario){
+        return "Scrivi, ad esempio: sveglia 08:30";
 
+    }
 
-let parti=orario.split(":");
+    const h = parseInt(parti[0]);
+    const m = parseInt(parti[1]);
 
+    if (
+        isNaN(h) ||
+        isNaN(m) ||
+        h < 0 ||
+        h > 23 ||
+        m < 0 ||
+        m > 59
+    ) {
 
+        return "Orario non valido.";
 
-if(parti.length!==2){
+    }
 
-return "Scrivi sveglia nel formato ore:minuti";
+    const adesso = new Date();
 
-}
+    const obiettivo = new Date();
 
+    obiettivo.setHours(h);
+    obiettivo.setMinutes(m);
+    obiettivo.setSeconds(0);
+    obiettivo.setMilliseconds(0);
 
+    if (obiettivo <= adesso) {
 
-let h=parseInt(parti[0]);
+        obiettivo.setDate(
+            obiettivo.getDate() + 1
+        );
 
-let m=parseInt(parti[1]);
+    }
 
+    const differenza = obiettivo - adesso;
 
+    if (svegliaTimer) {
+        clearTimeout(svegliaTimer);
+    }
 
-let adesso=new Date();
+    svegliaTimer = setTimeout(function() {
 
-let obiettivo=new Date();
+        add("⏰", "SVEGLIA!");
 
+        speak("Sveglia!");
 
+        alert("⏰ SVEGLIA!");
 
-obiettivo.setHours(h);
+    }, differenza);
 
-obiettivo.setMinutes(m);
-
-obiettivo.setSeconds(0);
-
-
-
-let differenza=obiettivo-adesso;
-
-
-
-if(differenza<0){
-
-return "Orario già passato";
-
-}
-
-
-
-if(svegliaTimer){
-
-clearTimeout(svegliaTimer);
-
-}
-
-
-
-svegliaTimer=setTimeout(()=>{
-
-
-add("⏰","SVEGLIA!");
-
-speak("Sveglia!");
-
-alert("SVEGLIA!");
-
-
-
-},differenza);
-
-
-
-return "Sveglia impostata alle "+orario;
-
+    return "Sveglia impostata alle " + orario;
 
 }
-
-
-
-
 
 
 /* ================= DOWNLOAD ================= */
-function scaricaProgramma(nome){
 
-if(!nome){
-return "Dimmi quale programma vuoi scaricare";
+function scaricaProgramma(nome) {
+
+    if (!nome) {
+
+        return "Dimmi quale programma vuoi cercare.";
+
+    }
+
+    const ricerca =
+        nome + " download ufficiale";
+
+    window.open(
+        "https://www.google.com/search?q="
+        + encodeURIComponent(ricerca),
+        "_blank"
+    );
+
+    return "Cerco il download ufficiale di " + nome;
+
 }
 
 
-let ricerca = nome + " download ufficiale";
+/* ================= PAGINE ORESTE AI ================= */
 
-
-window.open(
-"https://www.google.com/search?q=" + encodeURIComponent(ricerca),
-"_blank"
-);
-
-
-return "Scarico" +nome;
-
-}
-
-/* ================= APERTURA PAGINE ORESTE AI ================= */
-
-function apriPagina(testo){
-
-    testo = testo.toLowerCase();
+function apriPagina(testo) {
 
     const pagine = {
 
@@ -555,18 +620,21 @@ function apriPagina(testo){
         "storybook": "storybook.html",
         "storia": "storia.html",
         "funzioni": "funzioni.html",
-        "tecnologie": "tecnologie oreste ai.html",        "comandi": "comandi-oreste-ai.html",
+        "tecnologie": "tecnologie oreste ai.html",
+        "comandi": "comandi-oreste-ai.html",
         "mondiali": "mondiali2026.html",
         "spagna campione": "spagna-campione-del-mondo-2026.html"
 
     };
 
+    for (const nome in pagine) {
 
-    for(let nome in pagine){
+        if (testo.includes(nome)) {
 
-        if(testo.includes(nome)){
-
-            window.open(pagine[nome], "_blank");
+            window.open(
+                pagine[nome],
+                "_blank"
+            );
 
             return "Apro la pagina " + nome;
 
@@ -574,1495 +642,410 @@ function apriPagina(testo){
 
     }
 
-
     return null;
+}
+
+
+/* ================= CANVA ORESTE AI ================= */
+
+function apriCanva() {
+
+    speak("Impara Canva con Oreste AI");
+
+    setTimeout(function() {
+
+        window.open(
+            "guida-canva-oreste-ai.html",
+            "_blank"
+        );
+
+    }, 1000);
 
 }
-function apriCanva(){
 
-speak("Impara Canva con Oreste AI");
-
-setTimeout(function(){
-
-window.open(
-"guida-canva-oreste-ai.html",
-"_blank"
-);
-
-},2000);
-
-}
 
 /* ================= CERVELLO ORESTE AI ================= */
 
+async function handle(text) {
 
-async function handle(text){
+    text = text.toLowerCase().trim();
 
 
-text=text.toLowerCase().trim();
+    /* PAGINE */
 
-let pagina = apriPagina(text);
+    const pagina = apriPagina(text);
 
-if(pagina)
-    return pagina;
+    if (pagina) {
+        return pagina;
+    }
 
 
-if(text.startsWith("cerca")){
+    /* AIUTO */
 
-let ricerca=text.replace("cerca","").trim();
+    if (
+        text.includes("aiuto") ||
+        text.includes("cosa sai fare")
+    ) {
 
-if(!ricerca){
-return "Dimmi cosa devo cercare";
-}
-
-window.open(
-"https://www.google.com/search?q="
-+encodeURIComponent(ricerca),
-"_blank"
-);
-
-return "Cerco "+ricerca;
-
-}
-let sito=openSite(text);
-
-if(sito){
-
-return sito;
-
-}
-
-
-
-
-
-if(text.includes("ciao")){
-
-return "Ciao! Sono Oreste AI";
-
-}
-
-
-
-
-
-if(text.includes("aiuto") ||
-text.includes("cosa sai fare")){
-
-
-return "Sono Oreste AI. Posso aiutarti con meteo, timer, sveglia, ricerca, download, siti, musica e comandi vocali.";
-
-}
-
-
-
-
-
-if(text.includes("ora")){
-
-return "Sono le "+new Date().toLocaleTimeString();
-
-}
-
-
-
-
-if(text.includes("data")){
-
-return "Oggi è il "+new Date().toLocaleDateString();
-
-}
-
-
-
-
-
-
-if(text.startsWith("meteo")){
-
-
-let citta=text.replace("meteo","").trim();
-
-
-return await meteo(citta);
-
-
-}
-
-
-
-
-
-if(text.startsWith("timer")){
-
-
-return startTimer(
-text.replace("timer","").trim()
-);
-
-
-}
-
-
-
-
-
-if(text.startsWith("sveglia")){
-
-
-return sveglia(
-text.replace("sveglia","").trim()
-);
-
-
-}
-
-
-
-
-
-if(text.startsWith("cerca")){
-
-
-let ricerca=text.replace("cerca","").trim();
-
-
-window.open(
-
-"https://www.google.com/search?q="
-+encodeURIComponent(ricerca),
-
-"_blank"
-
-);
-
-
-
-return "Cerco "+ricerca;
-
-
-}
-
-
-if(text.startsWith("trova")){
-
-let ricerca=text.replace("trova","").trim();
-
-if(!ricerca){
-return "Dimmi cosa devo trovare";
-}
-
-window.open(
-"https://www.google.com/search?q="
-+encodeURIComponent(ricerca),
-"_blank"
-);
-
-return "Trovo "+ricerca;
-
-}
-
-
-if(text.startsWith("scarica")){
-
-
-return scaricaProgramma(
-
-text.replace("scarica","").trim()
-
-);
-
-
-}
-
-
-
-
-
-if(text.includes("vicino contursi")){
-
-
-window.open(
-"https://youtu.be/r5gGcrJJn_0",
-"_blank"
-);
-
-return "vicino contursi";
-
-
-}
-
-
-
-
-
-if(text.includes("difesa personale")){
-
-
-window.open(
-"https://youtu.be/uUUilRrSrLA",
-"_blank"
-);
-
-
-return "difesa personale";
-
-
-}
-
-
-
-
-
-if(text.includes("amnesty international")){
-
-
-window.open(
-"https://www.amnesty.it/",
-"_blank"
-);
-
-
-return "amnesty international";
-
-
-}
-
-if(text.includes("io sto con amnesty")){
-
-window.open(
-"https://iostoconamnesty.altervista.org/","_blank");
-
-
-return "io sto con amnesty"; 
-}
-
-
-
-if(text.includes("mockup")){
-
-window.open(
-"https://www.canva.com/mockups/",
-"_blank"
-);
-
-return "Apro la pagina del mockup";
-}
-let comandoCanva=canva(text);
-
-if(comandoCanva){
-return comandoCanva;
-}
-if(text.includes("impara canva") ||
-text.includes("canva oreste ai")){
-
-window.open(
-"guida-canva-oreste-ai.html",
-"_blank"
-);
-
-
-return "Apro la guida Canva di Oreste AI";
-
-}
-<!DOCTYPE html>
-<html lang="it">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Oreste AI - Assistente vocale italiano gratis</title>
-
-<meta name="description" content="Oreste AI assistente vocale italiano gratuito online.">
-<meta name="robots" content="index, follow">
-<meta name="author" content="Oreste De Chiara">
-
-
-<style>
-
-body{
-font-family:Arial,sans-serif;
-background:#0a3d91;
-color:white;
-text-align:center;
-margin:0;
-}
-
-
-h1{
-margin-top:20px;
-}
-
-
-nav{
-
-background:rgba(0,0,0,0.4);
-padding:12px;
-margin:10px;
-border-radius:10px;
-
-}
-
-
-nav a{
-
-color:white;
-margin:5px;
-text-decoration:none;
-display:inline-block;
-
-}
-
-
-nav a:hover{
-
-color:#ffd700;
-
-}
-
-
-
-#chat{
-
-width:90%;
-max-width:600px;
-margin:20px auto;
-background:rgba(0,0,0,0.3);
-padding:15px;
-border-radius:10px;
-min-height:250px;
-text-align:left;
-
-}
-
-
-
-input{
-
-width:80%;
-padding:15px;
-font-size:18px;
-border-radius:10px;
-border:none;
-
-}
-
-
-
-button{
-
-padding:12px 18px;
-margin:5px;
-border:none;
-border-radius:20px;
-background:red;
-color:white;
-cursor:pointer;
-
-}
-
-
-button:hover{
-
-background:darkred;
-
-}
-
-
-
-.msg{
-
-margin:8px 0;
-
-}
-
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<h1>🎤 Oreste AI</h1>
-
-
-<nav>
-
-<a href="index.html">🏠 Home</a>
-
-<a href="assistente.html">🎤 Assistente</a>
-
-<a href="chat.html">💬 Chat</a>
-
-<a href="motivazione.html">🌻 Motivazione</a>
-
-<a href="download.html">📥 Download</a>
-
-<a href="blog.html">📰 Blog</a>
-
-<a href="chi-siamo.html">👤 Chi siamo</a>
-
-<a href="contatti.html">📞 Contatti</a>
-
-<a href="dashboard.html">📊 Dashboard</a>
-
-<a href="os.html">🖥️ Oreste OS</a>
-
-<a href="storybook.html">📚 Storybook</a>
-
-<a href="storia.html">📖 La Storia</a>
-
-<a href="funzioni.html">⚙️ Funzioni</a>
-
-<a href="tecnologie oreste ai.html">💻 Tecnologie</a>
-
-<a href="comandi-oreste-ai.html">🎤 Comandi</a>
-
-<a href="mondiali2026.html">🏆 Mondiali 2026</a>
-
-<a href="spagna-campione-del-mondo-2026.html">
-🏆 Spagna campione del mondo 2026
-</a>
-<a href="#" onclick="apriCanva(); return false;">
-🎨 Impara Canva
-</a>
-
-
-
-<input id="input" placeholder="Scrivi o parla...">
-
-
-<button onclick="ask()">
-Invia
-</button>
-
-
-<button onclick="voice()">
-🎤 Parla
-</button>
-
-
-<div id="chat"></div>
-
-
-
-<script>
-function add(nome,testo){
-
-let chat=document.getElementById("chat");
-
-chat.innerHTML +=
-"<div class='msg'><b>"+nome+":</b> "+testo+"</div>";
-
-chat.scrollTop=chat.scrollHeight;
-
-}
-
-
-
-function speak(testo){
-
-if(!("speechSynthesis" in window)) return;
-
-let voce=new SpeechSynthesisUtterance(testo);
-
-voce.lang="it-IT";
-
-speechSynthesis.cancel();
-
-speechSynthesis.speak(voce);
-
-}
-
-
-
-
-/* ================= SITI ================= */
-
-
-function openSite(testo){
-
-let siti={
-
-"google":"https://google.com",
-"youtube":"https://youtube.com",
-"facebook":"https://facebook.com",
-"instagram":"https://instagram.com",
-"tiktok":"https://tiktok.com",
-"github":"https://github.com",
-"canva":"https://www.canva.com/"
-};
-
-
-for(let nome in siti){
-
-if(testo.includes(nome)){
-
-window.open(siti[nome],"_blank");
-
-return "Apro "+nome;
-
-}
-
-}
-
-
-return null;
-
-}
-
-/* ================= CANVA AI ================= */
-
-function canva(testo){
-
-let funzioni={
-
-"canva":"https://www.canva.com/",
-"mockup":"https://www.canva.com/mockups/",
-"presentazioni":"https://www.canva.com/presentations/",
-"logo":"https://www.canva.com/create/logos/",
-"volantini":"https://www.canva.com/create/flyers/",
-"video":"https://www.canva.com/create/videos/",
-"poster":"https://www.canva.com/create/posters/",
-"curriculum":"https://www.canva.com/create/resumes/",
-"social":"https://www.canva.com/create/social-media/",
-"biglietti":"https://www.canva.com/create/cards/"
-
-};
-
-
-for(let comando in funzioni){
-
-if(testo.includes(comando)){
-
-window.open(funzioni[comando],"_blank");
-
-return "Apro Canva per "+comando;
-
-}
-
-}
-
-return null;
-
-}
-
-
-
-/* ================= METEO ================= */
-
-
-async function meteo(citta){
-
-
-try{
-
-
-let r=await fetch(
-"https://geocoding-api.open-meteo.com/v1/search?name="
-+encodeURIComponent(citta)
-);
-
-
-let dati=await r.json();
-
-
-if(!dati.results){
-
-return "Città non trovata";
-
-}
-
-
-
-let lat=dati.results[0].latitude;
-
-let lon=dati.results[0].longitude;
-
-
-
-let w=await fetch(
-
-"https://api.open-meteo.com/v1/forecast?latitude="
-+lat+
-"&longitude="
-+lon+
-"&current_weather=true"
-
-);
-
-
-
-let tempo=await w.json();
-
-
-return "🌤️ "+dati.results[0].name+
-": "+tempo.current_weather.temperature+" gradi";
-
-
-}
-
-catch(e){
-
-return "Errore meteo";
-
-}
-
-
-}
-
-
-
-
-
-
-/* ================= TIMER ================= */
-
-
-let timer=null;
-
-
-function startTimer(secondi){
-
-
-secondi=parseInt(secondi);
-
-
-if(isNaN(secondi)){
-
-return "Scrivi timer seguito dai secondi";
-
-}
-
-
-
-if(timer){
-
-clearInterval(timer);
-
-}
-
-
-
-let tempo=secondi;
-
-
-
-timer=setInterval(()=>{
-
-
-add("⏱️",tempo+" secondi");
-
-
-tempo--;
-
-
-
-if(tempo<0){
-
-
-clearInterval(timer);
-
-timer=null;
-
-
-add("⏱️","FINITO");
-
-speak("Timer terminato");
-
-
-}
-
-
-},1000);
-
-
-
-return "Timer avviato per "+secondi+" secondi";
-
-
-}
-
-
-
-
-
-
-/* ================= SVEGLIA ================= */
-
-
-let svegliaTimer=null;
-
-
-
-function sveglia(orario){
-
-
-let parti=orario.split(":");
-
-
-
-if(parti.length!==2){
-
-return "Scrivi sveglia nel formato ore:minuti";
-
-}
-
-
-
-let h=parseInt(parti[0]);
-
-let m=parseInt(parti[1]);
-
-
-
-let adesso=new Date();
-
-let obiettivo=new Date();
-
-
-
-obiettivo.setHours(h);
-
-obiettivo.setMinutes(m);
-
-obiettivo.setSeconds(0);
-
-
-
-let differenza=obiettivo-adesso;
-
-
-
-if(differenza<0){
-
-return "Orario già passato";
-
-}
-
-
-
-if(svegliaTimer){
-
-clearTimeout(svegliaTimer);
-
-}
-
-
-
-svegliaTimer=setTimeout(()=>{
-
-
-add("⏰","SVEGLIA!");
-
-speak("Sveglia!");
-
-alert("SVEGLIA!");
-
-
-
-},differenza);
-
-
-
-return "Sveglia impostata alle "+orario;
-
-
-}
-
-
-
-
-
-
-/* ================= DOWNLOAD ================= */
-function scaricaProgramma(nome){
-
-if(!nome){
-return "Dimmi quale programma vuoi scaricare";
-}
-
-
-let ricerca = nome + " download ufficiale";
-
-
-window.open(
-"https://www.google.com/search?q=" + encodeURIComponent(ricerca),
-"_blank"
-);
-
-
-return "Scarico" +nome;
-
-}
-
-/* ================= APERTURA PAGINE ORESTE AI ================= */
-
-function apriPagina(testo){
-
-    testo = testo.toLowerCase();
-
-    const pagine = {
-
-        "home": "index.html",
-        "assistente": "assistente.html",
-        "chat": "chat.html",
-        "motivazione": "motivazione.html",
-        "meditazione": "meditazione.html",
-        "download": "download.html",
-        "blog": "blog.html",
-        "chi siamo": "chi-siamo.html",
-        "contatti": "contatti.html",
-        "dashboard": "dashboard.html",
-        "oreste os": "os.html",
-        "storybook": "storybook.html",
-        "storia": "storia.html",
-        "funzioni": "funzioni.html",
-        "tecnologie": "tecnologie oreste ai.html",        "comandi": "comandi-oreste-ai.html",
-        "mondiali": "mondiali2026.html",
-        "spagna campione": "spagna-campione-del-mondo-2026.html"
-
-    };
-
-
-    for(let nome in pagine){
-
-        if(testo.includes(nome)){
-
-            window.open(pagine[nome], "_blank");
-
-            return "Apro la pagina " + nome;
-
-        }
+        return "Sono Oreste AI. Posso aiutarti con meteo, timer, sveglia, ricerca, download, siti, Canva e comandi vocali.";
 
     }
 
 
-    return null;
+    /* CIAO */
+
+    if (text.includes("ciao")) {
+
+        return "Ciao! Sono Oreste AI.";
+
+    }
+
+
+    /* ORA */
+
+    if (
+        text === "ora" ||
+        text.includes("che ore sono")
+    ) {
+
+        return "Sono le "
+            + new Date().toLocaleTimeString("it-IT");
+
+    }
+
+
+    /* DATA */
+
+    if (
+        text === "data" ||
+        text.includes("che giorno è")
+    ) {
+
+        return "Oggi è il "
+            + new Date().toLocaleDateString("it-IT");
+
+    }
+
+
+    /* METEO */
+
+    if (text.startsWith("meteo")) {
+
+        const citta =
+            text.replace("meteo", "").trim();
+
+        return await meteo(citta);
+
+    }
+
+
+    /* TIMER */
+
+    if (text.startsWith("timer")) {
+
+        return startTimer(
+            text.replace("timer", "").trim()
+        );
+
+    }
+
+
+    /* SVEGLIA */
+
+    if (text.startsWith("sveglia")) {
+
+        return sveglia(
+            text.replace("sveglia", "").trim()
+        );
+
+    }
+
+
+    /* CERCA */
+
+    if (
+        text.startsWith("cerca") ||
+        text.startsWith("trova")
+    ) {
+
+        let ricerca;
+
+        if (text.startsWith("cerca")) {
+
+            ricerca =
+                text.replace("cerca", "").trim();
+
+        } else {
+
+            ricerca =
+                text.replace("trova", "").trim();
+
+        }
+
+        if (!ricerca) {
+
+            return "Dimmi cosa devo cercare.";
+
+        }
+
+        window.open(
+            "https://www.google.com/search?q="
+            + encodeURIComponent(ricerca),
+            "_blank"
+        );
+
+        return "Cerco " + ricerca;
+
+    }
+
+
+    /* DOWNLOAD */
+
+    if (text.startsWith("scarica")) {
+
+        return scaricaProgramma(
+            text.replace("scarica", "").trim()
+        );
+
+    }
+
+
+    /* VICINO CONTURSI */
+
+    if (text.includes("vicino contursi")) {
+
+        window.open(
+            "https://youtu.be/r5gGcrJJn_0",
+            "_blank"
+        );
+
+        return "Apro il video.";
+
+    }
+
+
+    /* DIFESA PERSONALE */
+
+    if (text.includes("difesa personale")) {
+
+        window.open(
+            "https://youtu.be/uUUilRrSrLA",
+            "_blank"
+        );
+
+        return "Apro il contenuto sulla difesa personale.";
+
+    }
+
+
+    /* AMNESTY */
+
+    if (text.includes("io sto con amnesty")) {
+
+        window.open(
+            "https://iostoconamnesty.altervista.org/",
+            "_blank"
+        );
+
+        return "Apro Io sto con Amnesty.";
+
+    }
+
+
+    if (text.includes("amnesty international")) {
+
+        window.open(
+            "https://www.amnesty.it/",
+            "_blank"
+        );
+
+        return "Apro Amnesty International.";
+
+    }
+
+
+    /* NON TI ARRENDERE */
+
+    if (text.includes("non ti arrendere")) {
+
+        window.open(
+            "https://nontiarrendere.altervista.org/",
+            "_blank"
+        );
+
+        return "Apro Non ti arrendere.";
+
+    }
+
+
+    /* CANVA */
+
+    if (
+        text.includes("impara canva") ||
+        text.includes("canva oreste ai")
+    ) {
+
+        window.open(
+            "guida-canva-oreste-ai.html",
+            "_blank"
+        );
+
+        return "Apro la guida Canva di Oreste AI.";
+
+    }
+
+
+    const comandoCanva = canva(text);
+
+    if (comandoCanva) {
+
+        return comandoCanva;
+
+    }
+
+
+    /* SITI */
+
+    const sito = openSite(text);
+
+    if (sito) {
+
+        return sito;
+
+    }
+
+
+    /* RISPOSTA FINALE */
+
+    return "Non ho capito. Scrivi aiuto per vedere i comandi.";
 
 }
-function apriCanva(){
-
-speak("Impara Canva con Oreste AI");
-
-setTimeout(function(){
-
-window.open(
-"guida-canva-oreste-ai.html",
-"_blank"
-);
-
-},2000);
-
-}
-
-/* ================= CERVELLO ORESTE AI ================= */
-
-
-async function handle(text){
-
-
-text=text.toLowerCase().trim();
-
-let pagina = apriPagina(text);
-
-if(pagina)
-    return pagina;
-
-
-if(text.startsWith("cerca")){
-
-let ricerca=text.replace("cerca","").trim();
-
-if(!ricerca){
-return "Dimmi cosa devo cercare";
-}
-
-window.open(
-"https://www.google.com/search?q="
-+encodeURIComponent(ricerca),
-"_blank"
-);
-
-return "Cerco "+ricerca;
-
-}
-let sito=openSite(text);
-
-if(sito){
-
-return sito;
-
-}
-
-
-
-
-
-if(text.includes("ciao")){
-
-return "Ciao! Sono Oreste AI";
-
-}
-
-
-
-
-
-if(text.includes("aiuto") ||
-text.includes("cosa sai fare")){
-
-
-return "Sono Oreste AI. Posso aiutarti con meteo, timer, sveglia, ricerca, download, siti, musica e comandi vocali.";
-
-}
-
-
-
-
-
-if(text.includes("ora")){
-
-return "Sono le "+new Date().toLocaleTimeString();
-
-}
-
-
-
-
-if(text.includes("data")){
-
-return "Oggi è il "+new Date().toLocaleDateString();
-
-}
-
-
-
-
-
-
-if(text.startsWith("meteo")){
-
-
-let citta=text.replace("meteo","").trim();
-
-
-return await meteo(citta);
-
-
-}
-
-
-
-
-
-if(text.startsWith("timer")){
-
-
-return startTimer(
-text.replace("timer","").trim()
-);
-
-
-}
-
-
-
-
-
-if(text.startsWith("sveglia")){
-
-
-return sveglia(
-text.replace("sveglia","").trim()
-);
-
-
-}
-
-
-
-
-
-if(text.startsWith("cerca")){
-
-
-let ricerca=text.replace("cerca","").trim();
-
-
-window.open(
-
-"https://www.google.com/search?q="
-+encodeURIComponent(ricerca),
-
-"_blank"
-
-);
-
-
-
-return "Cerco "+ricerca;
-
-
-}
-
-
-if(text.startsWith("trova")){
-
-let ricerca=text.replace("trova","").trim();
-
-if(!ricerca){
-return "Dimmi cosa devo trovare";
-}
-
-window.open(
-"https://www.google.com/search?q="
-+encodeURIComponent(ricerca),
-"_blank"
-);
-
-return "Trovo "+ricerca;
-
-}
-
-
-if(text.startsWith("scarica")){
-
-
-return scaricaProgramma(
-
-text.replace("scarica","").trim()
-
-);
-
-
-}
-
-
-
-
-
-if(text.includes("vicino contursi")){
-
-
-window.open(
-"https://youtu.be/r5gGcrJJn_0",
-"_blank"
-);
-
-return "vicino contursi";
-
-
-}
-
-
-
-
-
-if(text.includes("difesa personale")){
-
-
-window.open(
-"https://youtu.be/uUUilRrSrLA",
-"_blank"
-);
-
-
-return "difesa personale";
-
-
-}
-
-
-
-
-
-if(text.includes("amnesty international")){
-
-
-window.open(
-"https://www.amnesty.it/",
-"_blank"
-);
-
-
-return "amnesty international";
-
-
-}
-
-if(text.includes("io sto con amnesty")){
-
-window.open(
-"https://iostoconamnesty.altervista.org/","_blank");
-
-
-return "io sto con amnesty"; 
-}
-
-
-
-if(text.includes("mockup")){
-
-window.open(
-"https://www.canva.com/mockups/",
-"_blank"
-);
-
-return "Apro la pagina del mockup";
-}
-let comandoCanva=canva(text);
-
-if(comandoCanva){
-return comandoCanva;
-}
-if(text.includes("impara canva") ||
-text.includes("canva oreste ai")){
-
-window.open(
-"guida-canva-oreste-ai.html",
-"_blank"
-);
-
-
-return "Apro la guida Canva di Oreste AI";
-
-}
-
-if(text.includes("non ti arrendere")){
-
-window.open("https://nontiarrendere.altervista.org/","_blank");
-
-return "non ti arrendere";
-
-    
-}
-return "Non ho capito. Scrivi aiuto per vedere i comandi.";    
-}
-
-
-
-
 
 
 /* ================= INVIO ================= */
 
+async function ask() {
 
-async function ask(){
+    const campo =
+        document.getElementById("input");
 
+    const testo =
+        campo.value.trim();
 
-let campo=document.getElementById("input");
+    if (!testo) {
+        return;
+    }
 
+    add("🧑", testo);
 
-let testo=campo.value.trim();
+    campo.value = "";
 
+    const risposta =
+        await handle(testo);
 
+    add("🤖", risposta);
 
-if(!testo){
-
-return;
-
-}
-
-
-
-add("🧑",testo);
-
-
-
-let risposta=await handle(testo);
-
-
-
-add("🤖",risposta);
-
-
-
-if(risposta && risposta.trim() !== ""){
-    speak(risposta);
-}
-
-
-
-campo.value="";
-
+    if (risposta) {
+        speak(risposta);
+    }
 
 }
 
 
+/* ================= RICONOSCIMENTO VOCALE ================= */
+
+function voice() {
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+
+        alert(
+            "Il riconoscimento vocale funziona meglio con Google Chrome."
+        );
+
+        return;
+
+    }
+
+    const ascolto =
+        new SpeechRecognition();
+
+    ascolto.lang = "it-IT";
+
+    ascolto.continuous = false;
+
+    ascolto.interimResults = false;
 
 
+    ascolto.onstart = function() {
+
+        add(
+            "🎤",
+            "Ascolto attivo..."
+        );
+
+    };
 
 
+    ascolto.onresult =
+        async function(event) {
+
+            const testo =
+                event.results[0][0].transcript;
+
+            add("🧑", testo);
+
+            const risposta =
+                await handle(testo);
+
+            add("🤖", risposta);
+
+            if (risposta) {
+
+                speak(risposta);
+
+            }
+
+        };
 
 
-/* ================= VOCE ================= */
+    ascolto.onerror =
+        function(event) {
+
+            console.error(event);
+
+            add(
+                "🎤",
+                "Errore nel riconoscimento vocale."
+            );
+
+        };
 
 
-function voice(){
-
-
-
-let SpeechRecognition=
-
-window.SpeechRecognition ||
-
-window.webkitSpeechRecognition;
-
-
-
-if(!SpeechRecognition){
-
-
-alert(
-"Il riconoscimento vocale funziona meglio con Google Chrome"
-);
-
-
-return;
-
+    ascolto.start();
 
 }
-
-
-
-
-let ascolto=new SpeechRecognition();
-
-
-
-ascolto.lang="it-IT";
-
-ascolto.continuous=false;
-
-ascolto.interimResults=false;
-
-
-
-
-ascolto.onstart=function(){
-
-add("🎤","Ascolto attivo...");
-
-};
-
-
-
-
-ascolto.onresult=async function(event){
-
-
-let testo=event.results[0][0].transcript;
-
-
-
-add("🧑",testo);
-
-
-
-let risposta=await handle(testo);
-
-
-
-add("🤖",risposta);
-
-if(risposta!=""){
-speak(risposta);
-}
-
-
-};
-
-
-
-
-
-ascolto.onerror=function(){
-
-add("🎤","Errore riconoscimento vocale");
-
-};
-
-
-
-
-ascolto.start();
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ================= INVIO ================= */
-
-
-async function ask(){
-
-
-let campo=document.getElementById("input");
-
-
-let testo=campo.value.trim();
-
-
-
-if(!testo){
-
-return;
-
-}
-
-
-
-add("🧑",testo);
-
-
-
-let risposta=await handle(testo);
-
-
-
-add("🤖",risposta);
-
-
-
-if(risposta && risposta.trim() !== ""){
-    speak(risposta);
-}
-
-
-
-campo.value="";
-
-
-}
-
-
-
-
-
-
-
-
-/* ================= VOCE ================= */
-
-
-function voice(){
-
-
-
-let SpeechRecognition=
-
-window.SpeechRecognition ||
-
-window.webkitSpeechRecognition;
-
-
-
-if(!SpeechRecognition){
-
-
-alert(
-"Il riconoscimento vocale funziona meglio con Google Chrome"
-);
-
-
-return;
-
-
-}
-
-
-
-
-let ascolto=new SpeechRecognition();
-
-
-
-ascolto.lang="it-IT";
-
-ascolto.continuous=false;
-
-ascolto.interimResults=false;
-
-
-
-
-ascolto.onstart=function(){
-
-add("🎤","Ascolto attivo...");
-
-};
-
-
-
-
-ascolto.onresult=async function(event){
-
-
-let testo=event.results[0][0].transcript;
-
-
-
-add("🧑",testo);
-
-
-
-let risposta=await handle(testo);
-
-
-
-add("🤖",risposta);
-
-if(risposta!=""){
-speak(risposta);
-}
-
-
-};
-
-
-
-
-
-ascolto.onerror=function(){
-
-add("🎤","Errore riconoscimento vocale");
-
-};
-
-
-
-
-ascolto.start();
-
-
-}
-
-
 
 </script>
 
-
 </body>
 
-
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
