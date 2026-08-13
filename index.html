@@ -525,8 +525,7 @@ async function handle(text) {
 
     text = text.toLowerCase().trim();
 
-
-    /* PAGINE */
+    /* ================= PAGINE ORESTE AI ================= */
 
     const pagina = apriPagina(text);
 
@@ -534,138 +533,40 @@ async function handle(text) {
         return pagina;
     }
 
+    /* ================= CIAO ================= */
 
-    /* AIUTO */
+    if (text === "ciao" || text.includes("ciao")) {
+        return "Ciao! Sono Oreste AI.";
+    }
+
+    /* ================= AIUTO ================= */
 
     if (
         text.includes("aiuto") ||
         text.includes("cosa sai fare")
     ) {
-
         return "Sono Oreste AI. Posso aiutarti con meteo, timer, sveglia, ricerca, download, siti, Canva e comandi vocali.";
-
     }
 
-
-    /* CIAO */
-
-    if (text.includes("ciao")) {
-
-        return "Ciao! Sono Oreste AI.";
-
-    }
-
-
-    /* ORA */
+    /* ================= ORA ================= */
 
     if (
         text === "ora" ||
         text.includes("che ore sono")
     ) {
-
-        return "Sono le "
-            + new Date().toLocaleTimeString("it-IT");
-
+        return "Sono le " + new Date().toLocaleTimeString("it-IT");
     }
 
-
-    /* DATA */
+    /* ================= DATA ================= */
 
     if (
         text === "data" ||
         text.includes("che giorno è")
     ) {
-
-        return "Oggi è il "
-            + new Date().toLocaleDateString("it-IT");
-
+        return "Oggi è il " + new Date().toLocaleDateString("it-IT");
     }
 
-
-    /* METEO */
-
-    if (text.startsWith("meteo")) {
-
-        const citta =
-            text.replace("meteo", "").trim();
-
-        return await meteo(citta);
-
-    }
-
-
-    /* TIMER */
-
-    if (text.startsWith("timer")) {
-
-        return startTimer(
-            text.replace("timer", "").trim()
-        );
-
-    }
-
-
-    /* SVEGLIA */
-
-    if (text.startsWith("sveglia")) {
-
-        return sveglia(
-            text.replace("sveglia", "").trim()
-        );
-
-    }
-
-
-    /* CERCA */
-
-    if (
-        text.startsWith("cerca") ||
-        text.startsWith("trova")
-    ) {
-
-        let ricerca;
-
-        if (text.startsWith("cerca")) {
-
-            ricerca =
-                text.replace("cerca", "").trim();
-
-        } else {
-
-            ricerca =
-                text.replace("trova", "").trim();
-
-        }
-
-        if (!ricerca) {
-
-            return "Dimmi cosa devo cercare.";
-
-        }
-
-        window.open(
-            "https://www.google.com/search?q="
-            + encodeURIComponent(ricerca),
-            "_blank"
-        );
-
-        return "Cerco " + ricerca;
-
-    }
-
-
-    /* DOWNLOAD */
-
-    if (text.startsWith("scarica")) {
-
-        return scaricaProgramma(
-            text.replace("scarica", "").trim()
-        );
-
-    }
-
-
-    /* VICINO CONTURSI */
+    /* ================= VICINO CONTURSI ================= */
 
     if (text.includes("vicino contursi")) {
 
@@ -674,12 +575,10 @@ async function handle(text) {
             "_blank"
         );
 
-       return "vicino contursi";
-
+        return "vicino contursi";
     }
 
-
-    /* DIFESA PERSONALE */
+    /* ================= DIFESA PERSONALE ================= */
 
     if (text.includes("difesa personale")) {
 
@@ -688,12 +587,10 @@ async function handle(text) {
             "_blank"
         );
 
-        return "Apro il contenuto sulla difesa personale.";
-
+        return "difesa personale";
     }
 
-
-    /* AMNESTY */
+    /* ================= AMNESTY ================= */
 
     if (text.includes("io sto con amnesty")) {
 
@@ -702,10 +599,8 @@ async function handle(text) {
             "_blank"
         );
 
-        return "Apro Io sto con Amnesty.";
-
+        return "io sto con Amnesty";
     }
-
 
     if (text.includes("amnesty international")) {
 
@@ -714,12 +609,10 @@ async function handle(text) {
             "_blank"
         );
 
-        return "Apro Amnesty International.";
-
+        return "Amnesty International";
     }
 
-
-    /* NON TI ARRENDERE */
+    /* ================= NON TI ARRENDERE ================= */
 
     if (text.includes("non ti arrendere")) {
 
@@ -728,12 +621,78 @@ async function handle(text) {
             "_blank"
         );
 
-        return "Apro Non ti arrendere.";
-
+        return "Non ti arrendere";
     }
 
+    /* ================= METEO ================= */
 
-    /* CANVA */
+    if (text.startsWith("meteo")) {
+
+        const citta = text
+            .replace("meteo", "")
+            .trim();
+
+        return await meteo(citta);
+    }
+
+    /* ================= TIMER ================= */
+
+    if (text.startsWith("timer")) {
+
+        return startTimer(
+            text.replace("timer", "").trim()
+        );
+    }
+
+    /* ================= SVEGLIA ================= */
+
+    if (text.startsWith("sveglia")) {
+
+        return sveglia(
+            text.replace("sveglia", "").trim()
+        );
+    }
+
+    /* ================= CERCA / TROVA ================= */
+
+    if (
+        text.startsWith("cerca") ||
+        text.startsWith("trova")
+    ) {
+
+        let ricerca = "";
+
+        if (text.startsWith("cerca")) {
+            ricerca = text.replace("cerca", "").trim();
+        }
+
+        if (text.startsWith("trova")) {
+            ricerca = text.replace("trova", "").trim();
+        }
+
+        if (!ricerca) {
+            return "Dimmi cosa devo cercare.";
+        }
+
+        window.open(
+            "https://www.google.com/search?q=" +
+            encodeURIComponent(ricerca),
+            "_blank"
+        );
+
+        return "Cerco " + ricerca;
+    }
+
+    /* ================= DOWNLOAD ================= */
+
+    if (text.startsWith("scarica")) {
+
+        return scaricaProgramma(
+            text.replace("scarica", "").trim()
+        );
+    }
+
+    /* ================= CANVA ================= */
 
     if (
         text.includes("impara canva") ||
@@ -746,36 +705,26 @@ async function handle(text) {
         );
 
         return "Apro la guida Canva di Oreste AI.";
-
     }
-
 
     const comandoCanva = canva(text);
 
     if (comandoCanva) {
-
         return comandoCanva;
-
     }
 
-
-    /* SITI */
+    /* ================= SITI ================= */
 
     const sito = openSite(text);
 
     if (sito) {
-
         return sito;
-
     }
 
-
-    /* RISPOSTA FINALE */
+    /* ================= RISPOSTA FINALE ================= */
 
     return "Non ho capito. Scrivi aiuto per vedere i comandi.";
-
 }
-
 
 /* ================= INVIO ================= */
 
