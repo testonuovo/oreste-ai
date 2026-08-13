@@ -627,6 +627,12 @@ async function handle(text) {
         return "Non ti arrendere";
     }
 
+    if(text.includes("karaoke")){
+
+    window.open(
+        "https://testonuovo.github.io/karaokeoresteai/",
+        "_blank"
+    );
     /* ================= METEO ================= */
 
     if (text.startsWith("meteo")) {
@@ -723,12 +729,6 @@ async function handle(text) {
     if (sito) {
         return sito;
     }
-if(text.includes("karaoke")){
-
-    window.open(
-        "https://testonuovo.github.io/karaokeoresteai/",
-        "_blank"
-    );
 
     return "Apro il Karaoke Oreste AI.";
 }
