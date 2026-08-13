@@ -627,22 +627,29 @@ async function handle(text) {
         return "Non ti arrendere";
     }
 
-    if(text.includes("karaoke")){
+   /* ================= KARAOKE ================= */
+
+if (text.includes("karaoke")) {
 
     window.open(
         "https://testonuovo.github.io/karaokeoresteai/",
         "_blank"
     );
-    /* ================= METEO ================= */
 
-    if (text.startsWith("meteo")) {
+    return "Apro il karaoke";
+}
 
-        const citta = text
-            .replace("meteo", "")
-            .trim();
 
-        return await meteo(citta);
-    }
+/* ================= METEO ================= */
+
+if (text.startsWith("meteo")) {
+
+    const citta = text
+        .replace("meteo", "")
+        .trim();
+
+    return await meteo(citta);
+}
 
     /* ================= TIMER ================= */
 
@@ -730,8 +737,6 @@ async function handle(text) {
         return sito;
     }
 
-    return "Apro il karaoke";
-}
     /* ================= RISPOSTA FINALE ================= */
 
     return "Non ho capito. Scrivi aiuto per vedere i comandi.";
