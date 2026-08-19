@@ -734,8 +734,6 @@ if (text.startsWith("meteo")) {
     if (sito) {
         return sito;
     }
-/* ================= ORESTE CLEANER ================= */
-
 if (
     text.includes("pulisci") &&
     (
@@ -745,7 +743,21 @@ if (
     )
 ) {
 
-    return "Apro Oreste AI Cleaner.";
+    try {
+
+        const risposta = await fetch(
+            "http://127.0.0.1:8765/cleaner"
+        );
+
+        const dati = await risposta.json();
+
+        return dati.message;
+
+    } catch (errore) {
+
+        return "Non riesco a collegarmi al Cleaner di Windows.";
+
+    }
 }
     /* ================= RISPOSTA FINALE ================= */
 
