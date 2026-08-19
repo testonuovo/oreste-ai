@@ -734,7 +734,19 @@ if (text.startsWith("meteo")) {
     if (sito) {
         return sito;
     }
+/* ================= ORESTE CLEANER ================= */
 
+if (
+    text.includes("pulisci") &&
+    (
+        text.includes("computer") ||
+        text.includes("file temporanei") ||
+        text.includes("cache")
+    )
+) {
+
+    return "Apro Oreste AI Cleaner.";
+}
     /* ================= RISPOSTA FINALE ================= */
 
     return "Non ho capito. Scrivi aiuto per vedere i comandi.";
