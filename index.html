@@ -734,13 +734,17 @@ if (text.startsWith("meteo")) {
     if (sito) {
         return sito;
     }
+/* ================= ORESTE AI CLEANER ================= */
+
 if (
-    text.includes("pulisci") &&
-    (
-        text.includes("computer") ||
-        text.includes("file temporanei") ||
-        text.includes("cache")
-    )
+    text.includes("apri oreste ai cleaner") ||
+    text.includes("apri oreste cleaner") ||
+    text.includes("avvia oreste ai cleaner") ||
+    text.includes("avvia oreste cleaner") ||
+    text === "apri cleaner" ||
+    text === "avvia cleaner" ||
+    text.includes("apri il cleaner") ||
+    text.includes("avvia il cleaner")
 ) {
 
     try {
@@ -751,11 +755,19 @@ if (
 
         const dati = await risposta.json();
 
-        return dati.message;
+        return dati.message || "Oreste AI Cleaner avviato.";
 
     } catch (errore) {
 
-        return "Non riesco a collegarmi al Cleaner di Windows.";
+        console.error(
+            "Errore avvio Oreste AI Cleaner:",
+            errore
+        );
+
+        return (
+            "Non riesco ad avviare Oreste AI Cleaner. " +
+            "Controlla che il servizio Cleaner sia attivo."
+        );
 
     }
 }
