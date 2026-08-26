@@ -1,0 +1,42 @@
+name: Build Oreste AI Cleaner
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-cleaner:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Inno Setup
+        run: choco install innosetup -y --no-progress
+
+      - name: Build Oreste AI Cleaner
+        shell: cmd
+        run: |
+          cd "oreste ai cleaner"
+          pyinstaller --onefile --noconsole OresteAICleaner.py
+
+      - name: Build installer
+        shell: cmd
+        run: |
+          cd "oreste ai cleaner"
+          ISCC.exe OresteAICleaner.iss
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: OresteAICleanerSetup
+          path: "oreste ai cleaner/installer/OresteAICleanerSetup.exe"
+          if-no-files-found: error
