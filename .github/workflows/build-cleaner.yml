@@ -1,45 +1,17 @@
-name: Build Oreste AI Cleaner
-
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-
-jobs:
-  build-cleaner:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install PyInstaller
-        run: python -m pip install --upgrade pyinstaller
-
-      - name: Install Inno Setup
-        run: choco install innosetup -y --no-progress
-
-      - name: Build Oreste AI Cleaner
-        shell: cmd
-        run: |
-          python -m PyInstaller --onefile --noconsole oreste_cleaner.py
-          if not exist "oreste ai cleaner\dist" mkdir "oreste ai cleaner\dist"
-          copy /Y "dist\oreste_cleaner.exe" "oreste ai cleaner\dist\OresteAICleaner.exe"
-
-      - name: Build installer
-        shell: cmd
-        run: |
-          ISCC.exe "oreste ai cleaner\installer.iss"
-
-      - name: Upload installer
-        uses: actions/upload-artifact@v4
-        with:
-          name: OresteAICleanerSetup
-          path: "oreste ai cleaner\installer\OresteAICleanerSetup.exe"
-          if-no-files-found: error
+name: Build Oreste AI Cleaner on: workflow_dispatch: push: branches: -
+main jobs: build-cleaner: runs-on: windows-latest steps: - name: Checkout repository uses: 
+actions/checkout@v4 - name: Setup Python uses: actions/setup-python@v5 with: python-version: "3.12" - 
+name: Install PyInstaller shell: cmd run: | python -m pip install --upgrade pip python -m pip install pyinstaller - 
+name: Verify files shell: cmd run: | echo Current directory: cd echo. echo Repository files: dir echo. 
+echo Cleaner: if not exist "oreste_cleaner.py" ( echo ERROR: oreste_cleaner.py not found exit /b 1 ) - 
+name: Build Oreste AI Cleaner shell: cmd run: | 
+python -m PyInstaller --onefile --noconsole oreste_cleaner.py - name: Install Inno Setup shell: pwsh run: | 
+choco install innosetup -y --no-progress - name: Verify Inno Setup shell: 
+pwsh run: | $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" if (-not (Test-Path $iscc)) 
+{ $iscc = "${env:ProgramFiles}\Inno Setup 6\ISCC.exe" } 
+if (-not (Test-Path $iscc)) { Write-Error "ISCC.exe not found" exit 1 } 
+Write-Host "Inno Setup found at: $iscc" - name: Build installer shell: 
+pwsh run: | $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" 
+if (-not (Test-Path $iscc)) { $iscc = "${env:ProgramFiles}\Inno Setup 6\ISCC.exe" } 
+if (-not (Test-Path "installer.iss")) { Write-Error "installer.iss not found in repository root" exit 1 } & $iscc "installer.iss" - name: Upload installer uses: actions/upload-artifact@v4 with: name: OresteAICleanerSetup path: "installer/OresteAICleanerSetup.exe" 
+if-no-files-found: error
