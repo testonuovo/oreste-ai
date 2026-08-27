@@ -19,24 +19,28 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install PyInstaller
+        run: python -m pip install --upgrade pyinstaller
+
       - name: Install Inno Setup
         run: choco install innosetup -y --no-progress
 
       - name: Build Oreste AI Cleaner
         shell: cmd
         run: |
-          cd "oreste ai cleaner"
-          pyinstaller --onefile --noconsole OresteAICleaner.py
+          pyinstaller --onefile --noconsole oreste_cleaner.py
+          move "dist\oreste_cleaner.exe" "oreste ai cleaner\dist\OresteAICleaner.exe"
 
       - name: Build installer
         shell: cmd
         run: |
-          cd "oreste ai cleaner"
-          ISCC.exe OresteAICleaner.iss
+          ISCC.exe "oreste ai cleaner\installer.iss"
 
       - name: Upload installer
         uses: actions/upload-artifact@v4
         with:
           name: OresteAICleanerSetup
-          path: "oreste ai cleaner/installer/OresteAICleanerSetup.exe"
+          path: "oreste ai cleaner\installer\OresteAICleanerSetup.exe"
           if-no-files-found: error
+          
+          Add automated Oreste AI Cleaner build
