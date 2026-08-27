@@ -42,5 +42,3 @@ jobs:
           name: OresteAICleanerSetup
           path: "oreste ai cleaner\installer\OresteAICleanerSetup.exe"
           if-no-files-found: error
-          
-          Add automated Oreste AI Cleaner build
