@@ -28,8 +28,9 @@ jobs:
       - name: Build Oreste AI Cleaner
         shell: cmd
         run: |
-          pyinstaller --onefile --noconsole oreste_cleaner.py
-          move "dist\oreste_cleaner.exe" "oreste ai cleaner\dist\OresteAICleaner.exe"
+          python -m PyInstaller --onefile --noconsole oreste_cleaner.py
+          if not exist "oreste ai cleaner\dist" mkdir "oreste ai cleaner\dist"
+          copy /Y "dist\oreste_cleaner.exe" "oreste ai cleaner\dist\OresteAICleaner.exe"
 
       - name: Build installer
         shell: cmd
