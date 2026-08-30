@@ -1,233 +1,134 @@
-<!DOCTYPE html>
-
-<html lang="it">
-
-<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Download Oreste AI - Assistente vocale gratis</title>
-
-<meta name="description"
-    content="Scarica Oreste AI gratuitamente e Oreste AI Cleaner per Windows.">
-
-<meta name="robots" content="index, follow">
-
-<link rel="canonical"
-    href="https://oreste-ai.github.io/oreste-ai/download.html">
-
-<style>
-    body {
-        background: blue;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        color: white;
-        margin: 0;
-    }
-
-    header {
-        padding: 30px 20px 20px;
-    }
-
-    h1 {
-        margin-top: 10px;
-    }
-
-    nav {
-        margin: 20px 0;
-    }
-
-    nav a {
-        text-decoration: none;
-        color: red;
-        margin: 10px;
-        font-weight: bold;
-    }
-
-    .card,
-    .download-cleaner {
-        margin: 30px auto;
-        padding: 25px;
-        max-width: 700px;
-    }
-
-    button {
-        background: red;
-        color: white;
-        border-radius: 19px;
-        padding: 12px 20px;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    button:hover {
-        background: darkred;
-    }
-
-    ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    li {
-        margin: 10px 0;
-    }
-
-    .version {
-        margin-top: 15px;
-        font-size: 14px;
-    }
-</style>
-
-</head>
-
-<body>
-
-<header>
-    <h1>⬇ Download Oreste AI</h1>
-
-    <p>
-        Assistente vocale AI italiano gratuito
-    </p>
-</header>
-
-<nav>
-    <a href="index.html">Home</a>
-    <a href="assistente.html">Assistente</a>
-    <a href="download.html">Download</a>
-    <a href="blog.html">Blog</a>
-</nav>
-
-<main>
-
-    <!-- ================= ORESTE AI ================= -->
-
-    <section class="card">
-
-        <img
-            src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png"
-            alt="Oreste AI assistente vocale"
-            width="120">
-
-        <h2>🎤 Scarica Oreste AI</h2>
-
-        <p>
-            Oreste AI è un assistente vocale che funziona
-            direttamente nel browser con comandi vocali.
-        </p>
-
-        <button onclick="downloadApp()">
-            ⬇ Scarica Oreste AI
-        </button>
-
-    </section>
-
-
-    <!-- ================= ORESTE AI CLEANER ================= -->
-
-    <section class="download-cleaner">
-
-        <h2>🧹 Oreste AI Cleaner</h2>
-
-        <p>
-            Lo strumento di pulizia per Windows di Oreste AI.
-        </p>
-
-        <p>
-            Pulisci in modo semplice e sicuro i file temporanei
-            del tuo computer Windows.
-        </p>
-
-        <p>
-            <strong>
-                🎤 "Oreste, pulisci il computer."
-            </strong>
-        </p>
-
-        <!-- DOWNLOAD DIRETTO DALLA RELEASE GITHUB -->
-
-        <a
-            href="https://github.com/testonuovo/oreste-ai/releases/download/v1.0.0/OresteAICleanerSetup.exe"
-            download>
-
-            <button type="button">
-                📥 Scarica Oreste AI Cleaner
-            </button>
-
-        </a>
-
-        <p class="version">
-            <small>
-                Versione 1.0.0 · Compatibile con Windows 10 e Windows 11.
-            </small>
-        </p>
-
-        <p>
-            <small>
-                Durante l'installazione potrebbe essere richiesta
-                l'autorizzazione dell'amministratore.
-            </small>
-        </p>
-
-    </section>
-
-
-    <!-- ================= FUNZIONI ================= -->
-
-    <section class="card">
-
-        <h2>Cosa include Oreste AI</h2>
-
-        <ul>
-            <li>✔ Assistente vocale AI</li>
-            <li>✔ Comandi vocali in italiano</li>
-            <li>✔ Ricerca Google automatica</li>
-            <li>✔ Apertura siti web</li>
-            <li>✔ Versione web gratuita</li>
-            <li>✔ Integrazione con Oreste AI Cleaner</li>
-        </ul>
-
-    </section>
-
-</main>
-
-
-<script>
-
-    /* ================= VOCE ================= */
-
-    function speak(text) {
-
-        if (!("speechSynthesis" in window)) {
-            return;
-        }
-
-        const msg = new SpeechSynthesisUtterance(text);
-
-        msg.lang = "it-IT";
-
-        speechSynthesis.cancel();
-
-        speechSynthesis.speak(msg);
-    }
-
-
-    /* ================= DOWNLOAD ORESTE AI ================= */
-
-    function downloadApp() {
-
-        const url =
-            "https://github.com/testonuovo/oreste-ai";
-
-        window.open(url, "_blank");
-
-        speak(
-            "Apro la pagina di Oreste AI."
-        );
-    }
-
-</script>
-
-</body>
-
-</html>
+name: Build Oreste AI Cleaner
+
+on:
+workflow_dispatch:
+push:
+branches:
+- main
+
+permissions:
+contents: write
+
+jobs:
+build-cleaner:
+runs-on: windows-latest
+
+steps:
+
+  - name: Checkout repository
+    uses: actions/checkout@v4
+
+  - name: Setup Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: "3.12"
+
+  - name: Install PyInstaller
+    shell: cmd
+    run: |
+      python -m pip install --upgrade pip
+      python -m pip install pyinstaller
+
+  - name: Verify files
+    shell: cmd
+    run: |
+      echo Current directory:
+      cd
+      echo.
+      echo Repository files:
+      dir
+      echo.
+
+      if not exist "oreste_cleaner.py" (
+        echo ERROR: oreste_cleaner.py not found
+        exit /b 1
+      )
+
+      if not exist "installer.iss" (
+        echo ERROR: installer.iss not found
+        exit /b 1
+      )
+
+      echo Required files found.
+
+  - name: Build Oreste AI Cleaner
+    shell: cmd
+    run: |
+      python -m PyInstaller --onefile --noconsole oreste_cleaner.py
+
+  - name: Install Inno Setup
+    shell: pwsh
+    run: |
+      choco install innosetup -y --no-progress
+
+  - name: Build installer
+    shell: pwsh
+    run: |
+      $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+
+      if (-not (Test-Path $iscc)) {
+        $iscc = "${env:ProgramFiles}\Inno Setup 6\ISCC.exe"
+      }
+
+      if (-not (Test-Path $iscc)) {
+        Write-Error "ISCC.exe not found"
+        exit 1
+      }
+
+      & $iscc "installer.iss"
+
+  - name: Verify installer
+    shell: pwsh
+    run: |
+      if (-not (Test-Path "installer\OresteAICleanerSetup.exe")) {
+        Write-Error "Installer was not created"
+        exit 1
+      }
+
+      Write-Host "Installer created successfully."
+
+  - name: Upload installer artifact
+    uses: actions/upload-artifact@v4
+    with:
+      name: OresteAICleanerSetup
+      path: |
+        installer/OresteAICleanerSetup.exe
+        dist/oreste_cleaner.exe
+      if-no-files-found: error
+
+  - name: Publish installer to GitHub Release
+    shell: pwsh
+    env:
+      GH_TOKEN: ${{ github.token }}
+    run: |
+      $tag = "v1.0.0"
+      $file = "installer/OresteAICleanerSetup.exe"
+
+      Write-Host "Checking GitHub Release $tag..."
+
+      gh release view $tag 2>$null
+
+      if ($LASTEXITCODE -ne 0) {
+        Write-Host "Release $tag does not exist. Creating it..."
+
+        gh release create $tag `
+          --title "Oreste AI Cleaner v1.0.0" `
+          --notes "Prima versione ufficiale di Oreste AI Cleaner." `
+          --target "${{ github.sha }}"
+      }
+
+      Write-Host "Uploading installer to Release..."
+
+      gh release upload $tag $file --clobber
+
+      Write-Host "Installer successfully published to Release."
+
+  - name: Show download link
+    shell: pwsh
+    run: |
+      Write-Host ""
+      Write-Host "=============================================="
+      Write-Host "ORESTE AI CLEANER - DOWNLOAD"
+      Write-Host "=============================================="
+      Write-Host "https://github.com/testonuovo/oreste-ai/releases/download/v1.0.0/OresteAICleanerSetup.exe"
+      Write-Host "=============================================="
