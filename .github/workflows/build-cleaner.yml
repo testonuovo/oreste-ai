@@ -1,134 +1,129 @@
 name: Build Oreste AI Cleaner
 
 on:
-workflow_dispatch:
-push:
-branches:
-- main
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 permissions:
-contents: write
+  contents: write
 
 jobs:
-build-cleaner:
-runs-on: windows-latest
+  build-cleaner:
+    runs-on: windows-latest
 
-steps:
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  - name: Checkout repository
-    uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-  - name: Setup Python
-    uses: actions/setup-python@v5
-    with:
-      python-version: "3.12"
+      - name: Install PyInstaller
+        shell: cmd
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pyinstaller
 
-  - name: Install PyInstaller
-    shell: cmd
-    run: |
-      python -m pip install --upgrade pip
-      python -m pip install pyinstaller
+      - name: Verify files
+        shell: cmd
+        run: |
+          if not exist "oreste_cleaner.py" (
+            echo ERROR: oreste_cleaner.py not found
+            exit /b 1
+          )
 
-  - name: Verify files
-    shell: cmd
-    run: |
-      echo Current directory:
-      cd
-      echo.
-      echo Repository files:
-      dir
-      echo.
+          if not exist "installer.iss" (
+            echo ERROR: installer.iss not found
+            exit /b 1
+          )
 
-      if not exist "oreste_cleaner.py" (
-        echo ERROR: oreste_cleaner.py not found
-        exit /b 1
-      )
+          echo Required files found.
 
-      if not exist "installer.iss" (
-        echo ERROR: installer.iss not found
-        exit /b 1
-      )
+      - name: Build Oreste AI Cleaner
+        shell: cmd
+        run: |
+          python -m PyInstaller --onefile --noconsole oreste_cleaner.py
 
-      echo Required files found.
+      - name: Install Inno Setup
+        shell: pwsh
+        run: |
+          choco install innosetup -y --no-progress
 
-  - name: Build Oreste AI Cleaner
-    shell: cmd
-    run: |
-      python -m PyInstaller --onefile --noconsole oreste_cleaner.py
+      - name: Build installer
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
 
-  - name: Install Inno Setup
-    shell: pwsh
-    run: |
-      choco install innosetup -y --no-progress
+          if (-not (Test-Path $iscc)) {
+            $iscc = "${env:ProgramFiles}\Inno Setup 6\ISCC.exe"
+          }
 
-  - name: Build installer
-    shell: pwsh
-    run: |
-      $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) {
+            Write-Error "ISCC.exe not found"
+            exit 1
+          }
 
-      if (-not (Test-Path $iscc)) {
-        $iscc = "${env:ProgramFiles}\Inno Setup 6\ISCC.exe"
-      }
+          & $iscc "installer.iss"
 
-      if (-not (Test-Path $iscc)) {
-        Write-Error "ISCC.exe not found"
-        exit 1
-      }
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Inno Setup compilation failed"
+            exit 1
+          }
 
-      & $iscc "installer.iss"
+      - name: Verify installer
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "installer\OresteAICleanerSetup.exe")) {
+            Write-Error "Installer was not created"
+            exit 1
+          }
 
-  - name: Verify installer
-    shell: pwsh
-    run: |
-      if (-not (Test-Path "installer\OresteAICleanerSetup.exe")) {
-        Write-Error "Installer was not created"
-        exit 1
-      }
+          Write-Host "Installer created successfully."
 
-      Write-Host "Installer created successfully."
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: OresteAICleanerSetup
+          path: installer/OresteAICleanerSetup.exe
+          if-no-files-found: error
 
-  - name: Upload installer artifact
-    uses: actions/upload-artifact@v4
-    with:
-      name: OresteAICleanerSetup
-      path: |
-        installer/OresteAICleanerSetup.exe
-        dist/oreste_cleaner.exe
-      if-no-files-found: error
+      - name: Publish installer to GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = "v1.0.0"
+          $file = "installer/OresteAICleanerSetup.exe"
 
-  - name: Publish installer to GitHub Release
-    shell: pwsh
-    env:
-      GH_TOKEN: ${{ github.token }}
-    run: |
-      $tag = "v1.0.0"
-      $file = "installer/OresteAICleanerSetup.exe"
+          Write-Host "Checking GitHub Release $tag..."
 
-      Write-Host "Checking GitHub Release $tag..."
+          gh release view $tag 2>$null
 
-      gh release view $tag 2>$null
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "Release does not exist. Creating it..."
 
-      if ($LASTEXITCODE -ne 0) {
-        Write-Host "Release $tag does not exist. Creating it..."
+            gh release create $tag `
+              --title "Oreste AI Cleaner v1.0.0" `
+              --notes "Prima versione ufficiale di Oreste AI Cleaner." `
+              --target "${{ github.sha }}"
+          }
 
-        gh release create $tag `
-          --title "Oreste AI Cleaner v1.0.0" `
-          --notes "Prima versione ufficiale di Oreste AI Cleaner." `
-          --target "${{ github.sha }}"
-      }
+          Write-Host "Uploading installer..."
 
-      Write-Host "Uploading installer to Release..."
+          gh release upload $tag $file --clobber
 
-      gh release upload $tag $file --clobber
+          Write-Host "Installer successfully published."
 
-      Write-Host "Installer successfully published to Release."
-
-  - name: Show download link
-    shell: pwsh
-    run: |
-      Write-Host ""
-      Write-Host "=============================================="
-      Write-Host "ORESTE AI CLEANER - DOWNLOAD"
-      Write-Host "=============================================="
-      Write-Host "https://github.com/testonuovo/oreste-ai/releases/download/v1.0.0/OresteAICleanerSetup.exe"
-      Write-Host "=============================================="
+      - name: Show download link
+        shell: pwsh
+        run: |
+          Write-Host ""
+          Write-Host "=============================================="
+          Write-Host "ORESTE AI CLEANER - DOWNLOAD"
+          Write-Host "=============================================="
+          Write-Host "https://github.com/testonuovo/oreste-ai/releases/download/v1.0.0/OresteAICleanerSetup.exe"
+          Write-Host "=============================================="
