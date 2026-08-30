@@ -6,10 +6,13 @@
 
 <title>Download Oreste AI - Assistente vocale gratis</title>
 
-<meta name="description" content="Scarica Oreste AI gratuitamente e Oreste AI Cleaner per Windows.">
+<meta name="description"
+    content="Scarica Oreste AI gratuitamente e Oreste AI Cleaner per Windows.">
+
 <meta name="robots" content="index, follow">
 
-<link rel="canonical" href="https://oreste-ai.github.io/oreste-ai/download.html">
+<link rel="canonical"
+    href="https://oreste-ai.github.io/oreste-ai/download.html">
 
 <style>
     body {
@@ -21,7 +24,7 @@
     }
 
     header {
-        padding: 20px;
+        padding: 30px 20px 20px;
     }
 
     h1 {
@@ -42,22 +45,19 @@
     .card,
     .download-cleaner {
         margin: 30px auto;
-        padding: 20px;
+        padding: 25px;
         max-width: 700px;
-    }
-
-    .download-cleaner {
-        border-radius: 20px;
     }
 
     button {
         background: red;
         color: white;
         border-radius: 19px;
-        padding: 12px 18px;
+        padding: 12px 20px;
         border: none;
         cursor: pointer;
         font-size: 16px;
+        font-weight: bold;
     }
 
     button:hover {
@@ -70,12 +70,12 @@
     }
 
     li {
-        margin: 8px 0;
+        margin: 10px 0;
     }
 
-    img {
-        display: block;
-        margin: 0 auto 15px;
+    .version {
+        margin-top: 15px;
+        font-size: 14px;
     }
 </style>
 
@@ -84,22 +84,18 @@
 <body>
 
 <header>
-
     <h1>⬇ Download Oreste AI</h1>
 
     <p>
         Assistente vocale AI italiano gratuito
     </p>
-
 </header>
 
 <nav>
-
     <a href="index.html">Home</a>
     <a href="assistente.html">Assistente</a>
     <a href="download.html">Download</a>
     <a href="blog.html">Blog</a>
-
 </nav>
 
 <main>
@@ -111,8 +107,7 @@
         <img
             src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png"
             alt="Oreste AI assistente vocale"
-            width="120"
-        >
+            width="120">
 
         <h2>🎤 Scarica Oreste AI</h2>
 
@@ -139,29 +134,38 @@
         </p>
 
         <p>
-            Oreste AI Cleaner permette di pulire in modo
-            semplice e sicuro i file temporanei del computer.
+            Pulisci in modo semplice e sicuro i file temporanei
+            del tuo computer Windows.
         </p>
 
         <p>
             <strong>
-                🎤 “Oreste, pulisci il computer.”
+                🎤 "Oreste, pulisci il computer."
             </strong>
         </p>
 
+        <!-- DOWNLOAD DIRETTO DALLA RELEASE GITHUB -->
+
         <a
-            href="https://github.com/testonuovo/oreste-ai/releases"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
+            href="https://github.com/testonuovo/oreste-ai/releases/download/v1.0.0/OresteAICleanerSetup.exe"
+            download>
+
             <button type="button">
                 📥 Scarica Oreste AI Cleaner
             </button>
+
         </a>
+
+        <p class="version">
+            <small>
+                Versione 1.0.0 · Compatibile con Windows 10 e Windows 11.
+            </small>
+        </p>
 
         <p>
             <small>
-                Versione 1.0.0 · Compatibile con Windows 10 e Windows 11.
+                Durante l'installazione potrebbe essere richiesta
+                l'autorizzazione dell'amministratore.
             </small>
         </p>
 
@@ -175,19 +179,12 @@
         <h2>Cosa include Oreste AI</h2>
 
         <ul>
-
             <li>✔ Assistente vocale AI</li>
-
             <li>✔ Comandi vocali in italiano</li>
-
             <li>✔ Ricerca Google automatica</li>
-
             <li>✔ Apertura siti web</li>
-
             <li>✔ Versione web gratuita</li>
-
             <li>✔ Integrazione con Oreste AI Cleaner</li>
-
         </ul>
 
     </section>
@@ -219,12 +216,14 @@
 
     function downloadApp() {
 
-        const url = "https://github.com/testonuovo/oreste-ai";
+        const url =
+            "https://github.com/testonuovo/oreste-ai";
 
         window.open(url, "_blank");
 
-        speak("Apro la pagina di Oreste AI.");
-
+        speak(
+            "Apro la pagina di Oreste AI."
+        );
     }
 
 </script>
