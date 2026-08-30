@@ -1,134 +1,233 @@
-name: Build Oreste AI Cleaner
+<!DOCTYPE html>
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
+<html lang="it">
 
-permissions:
-  contents: write
+<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-jobs:
-  build-cleaner:
-    runs-on: windows-latest
+<title>Download Oreste AI - Assistente vocale gratis</title>
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
+<meta name="description"
+    content="Scarica Oreste AI gratuitamente e Oreste AI Cleaner per Windows.">
 
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
+<meta name="robots" content="index, follow">
 
-      - name: Install PyInstaller
-        shell: cmd
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install pyinstaller
+<link rel="canonical"
+    href="https://oreste-ai.github.io/oreste-ai/download.html">
 
-      - name: Verify files
-        shell: cmd
-        run: |
-          echo Current directory:
-          cd
-          echo.
-          echo Repository files:
-          dir
-          echo.
+<style>
+    body {
+        background: blue;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: white;
+        margin: 0;
+    }
 
-          if not exist "oreste_cleaner.py" (
-            echo ERROR: oreste_cleaner.py not found
-            exit /b 1
-          )
+    header {
+        padding: 30px 20px 20px;
+    }
 
-          if not exist "installer.iss" (
-            echo ERROR: installer.iss not found
-            exit /b 1
-          )
+    h1 {
+        margin-top: 10px;
+    }
 
-          echo Required files found.
+    nav {
+        margin: 20px 0;
+    }
 
-      - name: Build Oreste AI Cleaner
-        shell: cmd
-        run: |
-          python -m PyInstaller --onefile --noconsole oreste_cleaner.py
+    nav a {
+        text-decoration: none;
+        color: red;
+        margin: 10px;
+        font-weight: bold;
+    }
 
-      - name: Install Inno Setup
-        shell: pwsh
-        run: |
-          choco install innosetup -y --no-progress
+    .card,
+    .download-cleaner {
+        margin: 30px auto;
+        padding: 25px;
+        max-width: 700px;
+    }
 
-      - name: Build installer
-        shell: pwsh
-        run: |
-          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+    button {
+        background: red;
+        color: white;
+        border-radius: 19px;
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+    }
 
-          if (-not (Test-Path $iscc)) {
-            $iscc = "${env:ProgramFiles}\Inno Setup 6\ISCC.exe"
-          }
+    button:hover {
+        background: darkred;
+    }
 
-          if (-not (Test-Path $iscc)) {
-            Write-Error "ISCC.exe not found"
-            exit 1
-          }
+    ul {
+        list-style: none;
+        padding: 0;
+    }
 
-          & $iscc "installer.iss"
+    li {
+        margin: 10px 0;
+    }
 
-          if ($LASTEXITCODE -ne 0) {
-            Write-Error "Inno Setup compilation failed"
-            exit 1
-          }
+    .version {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+</style>
 
-      - name: Verify installer
-        shell: pwsh
-        run: |
-          if (-not (Test-Path "installer\OresteAICleanerSetup.exe")) {
-            Write-Error "Installer was not created"
-            exit 1
-          }
+</head>
 
-          Write-Host "Installer created successfully."
+<body>
 
-      - name: Upload installer artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: OresteAICleanerSetup
-          path: installer/OresteAICleanerSetup.exe
-          if-no-files-found: error
+<header>
+    <h1>⬇ Download Oreste AI</h1>
 
-      - name: Publish installer to GitHub Release
-        shell: pwsh
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          $tag = "v1.0.0"
-          $installer = "installer\OresteAICleanerSetup.exe"
+    <p>
+        Assistente vocale AI italiano gratuito
+    </p>
+</header>
 
-          Write-Host "Checking GitHub Release $tag..."
+<nav>
+    <a href="index.html">Home</a>
+    <a href="assistente.html">Assistente</a>
+    <a href="download.html">Download</a>
+    <a href="blog.html">Blog</a>
+</nav>
 
-          gh release view $tag 2>$null
+<main>
 
-          if ($LASTEXITCODE -ne 0) {
-            Write-Host "Release does not exist. Creating it..."
+    <!-- ================= ORESTE AI ================= -->
 
-            gh release create $tag `
-              $installer `
-              --title "Oreste AI Cleaner v1.0.0" `
-              --notes "Prima versione ufficiale di Oreste AI Cleaner.`n`nStrumento di pulizia per Windows integrato con Oreste AI." `
-              --target main
-          }
-          else {
-            Write-Host "Release exists. Uploading installer..."
+    <section class="card">
 
-            gh release upload $tag `
-              $installer `
-              --clobber
+        <img
+            src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png"
+            alt="Oreste AI assistente vocale"
+            width="120">
 
-            gh release edit $tag `
-              --draft=false `
-              --title "Oreste AI Cleaner v1.0.0"
-          }
+        <h2>🎤 Scarica Oreste AI</h2>
 
-          Write-Host "Oreste AI Cleaner published successfully."
+        <p>
+            Oreste AI è un assistente vocale che funziona
+            direttamente nel browser con comandi vocali.
+        </p>
+
+        <button onclick="downloadApp()">
+            ⬇ Scarica Oreste AI
+        </button>
+
+    </section>
+
+
+    <!-- ================= ORESTE AI CLEANER ================= -->
+
+    <section class="download-cleaner">
+
+        <h2>🧹 Oreste AI Cleaner</h2>
+
+        <p>
+            Lo strumento di pulizia per Windows di Oreste AI.
+        </p>
+
+        <p>
+            Pulisci in modo semplice e sicuro i file temporanei
+            del tuo computer Windows.
+        </p>
+
+        <p>
+            <strong>
+                🎤 "Oreste, pulisci il computer."
+            </strong>
+        </p>
+
+        <!-- DOWNLOAD DIRETTO DALLA RELEASE GITHUB -->
+
+        <a
+            href="https://github.com/testonuovo/oreste-ai/releases/download/v1.0.0/OresteAICleanerSetup.exe"
+            download>
+
+            <button type="button">
+                📥 Scarica Oreste AI Cleaner
+            </button>
+
+        </a>
+
+        <p class="version">
+            <small>
+                Versione 1.0.0 · Compatibile con Windows 10 e Windows 11.
+            </small>
+        </p>
+
+        <p>
+            <small>
+                Durante l'installazione potrebbe essere richiesta
+                l'autorizzazione dell'amministratore.
+            </small>
+        </p>
+
+    </section>
+
+
+    <!-- ================= FUNZIONI ================= -->
+
+    <section class="card">
+
+        <h2>Cosa include Oreste AI</h2>
+
+        <ul>
+            <li>✔ Assistente vocale AI</li>
+            <li>✔ Comandi vocali in italiano</li>
+            <li>✔ Ricerca Google automatica</li>
+            <li>✔ Apertura siti web</li>
+            <li>✔ Versione web gratuita</li>
+            <li>✔ Integrazione con Oreste AI Cleaner</li>
+        </ul>
+
+    </section>
+
+</main>
+
+
+<script>
+
+    /* ================= VOCE ================= */
+
+    function speak(text) {
+
+        if (!("speechSynthesis" in window)) {
+            return;
+        }
+
+        const msg = new SpeechSynthesisUtterance(text);
+
+        msg.lang = "it-IT";
+
+        speechSynthesis.cancel();
+
+        speechSynthesis.speak(msg);
+    }
+
+
+    /* ================= DOWNLOAD ORESTE AI ================= */
+
+    function downloadApp() {
+
+        const url =
+            "https://github.com/testonuovo/oreste-ai";
+
+        window.open(url, "_blank");
+
+        speak(
+            "Apro la pagina di Oreste AI."
+        );
+    }
+
+</script>
+
+</body>
+
+</html>
