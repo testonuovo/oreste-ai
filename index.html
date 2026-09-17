@@ -1452,7 +1452,6 @@
             }
         }
 
-
 /* =====================================================
    MESSAGGIO INIZIALE
 ===================================================== */
@@ -1462,13 +1461,21 @@ window.addEventListener("load", function () {
     const messaggio =
         "Ciao! Sono Oreste AI. Scrivi 'aiuto' per vedere cosa posso fare.";
 
-    // Mostra il messaggio UNA SOLA VOLTA nella chat
-    add("🤖", messaggio);
+    // Controlla che il messaggio non sia già presente
+    const chat = document.getElementById("chat");
 
-    // Fa parlare Oreste all'apertura
-    setTimeout(function () {
-        speak(messaggio);
-    }, 700);
+    if (chat && !chat.dataset.benvenuto) {
+
+        chat.dataset.benvenuto = "true";
+
+        // Mostra il messaggio una sola volta
+        add("🤖", messaggio);
+
+        // Fa parlare Oreste
+        setTimeout(function () {
+            speak(messaggio);
+        }, 700);
+    }
 
 });
     </script>
