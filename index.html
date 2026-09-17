@@ -1469,14 +1469,16 @@
             }
         );
     window.addEventListener("load", function () {
-    const messaggio = "Ciao! Sono Oreste AI. Scrivi 'aiuto' per vedere cosa posso fare.";
+    const messaggio =
+        "Ciao! Sono Oreste AI. Scrivi aiuto per vedere cosa posso fare.";
 
+    // Mostra il messaggio nella chat
     add("🤖", messaggio);
 
-    // Oreste parla automaticamente all'apertura del sito
-    setTimeout(function () {
+    // Fa parlare Oreste automaticamente
+    setTimeout(() => {
         speak(messaggio);
-    }, 500);
+    }, 700);
 });
         
     </script>
