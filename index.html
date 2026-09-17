@@ -580,44 +580,68 @@ async function handle(text) {
         return "Oggi è il " + new Date().toLocaleDateString("it-IT");
     }
 
-    /* ================= VICINO CONTURSI ================= */
+ /* ================= VICINO CONTURSI ================= */
 
-    if (text.includes("vicino contursi1")) {
+if (
+    text.includes("vicino contursi 1") ||
+    text.includes("vicino contursi1")
+) {
+    window.open(
+        "https://youtu.be/r5gGcrJJn_0",
+        "_blank"
+    );
 
-        window.open(
-            "https://youtu.be/r5gGcrJJn_0",
-            "_blank"
-        );
+    return "Apro la prima puntata di Vicino Contursi.";
+}
 
-        return "vicino contursi1";
-    }
-    
-    if (text.includes("vicino contursi2")) {
+if (
+    text.includes("vicino contursi 2") ||
+    text.includes("vicino contursi2")
+) {
+    window.open(
+        "https://youtu.be/-MwXVX1tEdo",
+        "_blank"
+    );
 
-       window.open("https://youtu.be/-MwXVX1tEdo","_blank");
+    return "Apro la seconda puntata di Vicino Contursi.";
+}
 
-       return "vicino contursi2";
-    }
-    if (text.includes("vicino contursi3")) {
+if (
+    text.includes("vicino contursi 3") ||
+    text.includes("vicino contursi3")
+) {
+    window.open(
+        "https://youtu.be/dSdqAWsUxwQ",
+        "_blank"
+    );
 
-      window.open("https://youtu.be/dSdqAWsUxwQ","_blank");
+    return "Apro la terza puntata di Vicino Contursi.";
+}
 
-      return "vicino contursi3";
-    }
-    if (text.includes("vicino contursi4")) {
+if (
+    text.includes("vicino contursi 4") ||
+    text.includes("vicino contursi4")
+) {
+    window.open(
+        "https://youtu.be/jozTmOx66m4",
+        "_blank"
+    );
 
-      window.open("https://youtu.be/dSdqAWsUxwQ","_blank");
+    return "Apro la quarta puntata di Vicino Contursi.";
+}
 
-      return "vicino contursi4";
-    }
-    if (text.includes("vicino contursi5")) {
+if (
+    text.includes("vicino contursi 5") ||
+    text.includes("vicino contursi5")
+) {
+    window.open(
+        "https://youtu.be/8HoZ3vStWwc",
+        "_blank"
+    );
 
-      window.open("https://youtu.be/8HoZ3vStWwc","_blank");
-
-      return "vicino contursi5";
-    }
-    
-      
+    return "Apro la quinta puntata di Vicino Contursi.";
+}
+}
     /* ================= DIFESA PERSONALE ================= */
 
     if (text.includes("difesa personale")) {
