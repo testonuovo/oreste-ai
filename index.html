@@ -1453,44 +1453,24 @@
         }
 
 
-        /* =====================================================
-           MESSAGGIO INIZIALE
-        ===================================================== */
+/* =====================================================
+   MESSAGGIO INIZIALE
+===================================================== */
 
-        window.addEventListener(
-            "load",
-            function () {
+window.addEventListener("load", function () {
 
-                add(
-                    "🤖",
-                    "Ciao! Sono Oreste AI. Scrivi 'aiuto' per vedere cosa posso fare."
-                );
-            }
-        );
-    window.addEventListener("load", function () {
     const messaggio =
-        "Ciao! Sono Oreste AI. Scrivi 'aiuto' per vedere cosa posso fare."
-    
-    // Mostra il messaggio nella chat
+        "Ciao! Sono Oreste AI. Scrivi 'aiuto' per vedere cosa posso fare.";
+
+    // Mostra il messaggio UNA SOLA VOLTA nella chat
     add("🤖", messaggio);
-    
-    // Fa parlare Oreste automaticamente
-    setTimeout(() => {
+
+    // Fa parlare Oreste all'apertura
+    setTimeout(function () {
         speak(messaggio);
     }, 700);
-});
- 
-        window.addEventListener(
-            "load",
-            function () {
 
-                add(
-                    "🤖",
-                   "Ciao!"Sono Oreste AI,scrivi aiuto per vedere cosa posso fare."
-                );
-            }
-        );
-    
+});
     </script>
     
 
