@@ -263,22 +263,21 @@
         ===================================================== */
 
         function speak(testo) {
+    if (!("speechSynthesis" in window)) {
+        console.log("La sintesi vocale non è supportata da questo browser.");
+        return;
+    }
 
-            if (!("speechSynthesis" in window)) {
-                return;
-            }
+    window.speechSynthesis.cancel();
 
-            const voce =
-                new SpeechSynthesisUtterance(testo);
+    const voce = new SpeechSynthesisUtterance(testo);
+    voce.lang = "it-IT";
+    voce.rate = 0.95;
+    voce.pitch = 1;
+    voce.volume = 1;
 
-            voce.lang = "it-IT";
-
-            speechSynthesis.cancel();
-
-            speechSynthesis.speak(voce);
-        }
-
-
+    window.speechSynthesis.speak(voce);
+}
         /* =====================================================
            SITI
         ===================================================== */
