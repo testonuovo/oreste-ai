@@ -1,3 +1,4 @@
+```html
 <html>
 <head>
 <meta charset="UTF-8">
@@ -139,7 +140,7 @@ h1 {
     align-items: center;
     z-index: 9999;
     padding: 20px;
-    }
+}
 
 .popup-box {
     background: white;
@@ -148,24 +149,14 @@ h1 {
     max-width: 450px;
     padding: 25px;
     border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
 }
 
 .popup-box h2 {
     color: #0a3d91;
-    border-radius:19px;
+    border-radius: 19px;
 }
 
-/* COMANDI */
-
-.comando {
-    background: #f2f2f2;
-    color: #222;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 10px;
-    font-weight: bold;
-}
-```css
 /* PULSANTE POPUP CANVA */
 
 .popup-start-button {
@@ -196,7 +187,17 @@ h1 {
 .popup-start-button:active {
     transform: scale(0.97);
 }
-```
+
+/* COMANDI */
+
+.comando {
+    background: #f2f2f2;
+    color: #222;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    font-weight: bold;
+}
 
 /* FOOTER */
 
@@ -224,11 +225,18 @@ footer {
             in modo semplice.
         </p>
 
-<button class="popup-start-button" onclick="chiudiPopup()"> 🚀 Inizia </button>
+        <button
+            class="popup-start-button"
+            onclick="chiudiPopup()">
+
+            🚀 Inizia
+
+        </button>
 
     </div>
 
 </div>
+
 
 <h1 id="inizio">
     🎨 Impara Canva con Oreste AI
@@ -283,31 +291,18 @@ footer {
     <div class="menu-grid">
 
         <button onclick="vaiA('canva')">🎨 Canva</button>
-
         <button onclick="vaiA('strumenti')">🛠️ Strumenti</button>
-
         <button onclick="vaiA('mockup')">🖼️ Mockup</button>
-
         <button onclick="vaiA('loghi')">🏷️ Loghi</button>
-
         <button onclick="vaiA('presentazioni')">📊 Presentazioni</button>
-
         <button onclick="vaiA('video')">🎬 Video</button>
-
         <button onclick="vaiA('social')">📱 Social</button>
-
         <button onclick="vaiA('cv')">📄 CV</button>
-
         <button onclick="vaiA('siti')">🌐 Siti Web</button>
-
         <button onclick="vaiA('stampa')">🖨️ Stampa</button>
-
         <button onclick="vaiA('foto')">📸 Foto</button>
-
         <button onclick="vaiA('testo')">✍️ Testo</button>
-
         <button onclick="vaiA('ai')">🤖 AI</button>
-
         <button onclick="vaiA('esercitazione')">📚 Esercitazione</button>
 
     </div>
@@ -866,7 +861,6 @@ function ripristinaPulsante() {
 
 function gestisciComando(testo) {
 
-
     /* CANVA */
 
     if (
@@ -1175,7 +1169,12 @@ window.onload = function () {
 </script>
 
 </body>
+
 <footer style="margin-top:30px; padding:15px; font-size:14px; opacity:0.9;">
+
     © 2026 Oreste De Chiara – Oreste AI – Tutti i diritti riservati.
+
 </footer>
+
 </html>
+```
