@@ -196,7 +196,21 @@
         </a>
 
     </nav>
-
+<div id="videoMotivazione" class="card" style="display:none;">
+    <h2>🌻 Motivazione di Oreste</h2>
+<button onclick="mostraMotivazione()">
+    🌻 Motivami
+</button>
+    <iframe
+        width="100%"
+        height="500"
+        src="https://www.youtube.com/embed/TbXdNSMfJcw"
+        title="Oreste AI - Un passo alla volta"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+    </iframe>
+</div>
 
     <!-- ================= INPUT ================= -->
 
@@ -777,7 +791,16 @@
 
             return null;
         }
+function mostraMotivazione() {
+    const video = document.getElementById("videoMotivazione");
 
+    video.style.display = "block";
+
+    video.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
 
         /* =====================================================
            CERVELLO ORESTE AI
