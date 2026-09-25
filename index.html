@@ -934,25 +934,41 @@
                 return (
                     "Apro Amnesty International."
                 );
-            }
-
-            if (text.includes("il fuoco dentro")){
-
-                window.open("https://www.youtube.com/shorts/MGYU_zIlpoA","_blank");
-
-                return "il fuoco dentro";
-                
-            }
-            if (text.includes("un passo alla volta")){
-
-             window.open("https://www.youtube.com/shorts/TbXdNSMfJcw?feature=share","_blank");
-
-             return "un passo alla volta";
-
-                
-             }
+           
                 /* =================================================
-             
+             /* =================================================
+   VIDEO MOTIVAZIONALI
+================================================= */
+
+if (
+    text.includes("il fuoco dentro") ||
+    text.includes("fuoco dentro")
+) {
+
+    window.open(
+        "https://www.youtube.com/shorts/MGYU_zIlpoA",
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+    return "Apro il video motivazionale Il fuoco dentro.";
+}
+
+
+if (
+    text.includes("un passo alla volta") ||
+    text.includes("motivami") ||
+    text.includes("motivazione")
+) {
+
+    window.open(
+        "https://www.youtube.com/shorts/TbXdNSMfJcw",
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+    return "Certo. Ti mostro un video motivazionale: Un passo alla volta.";
+}
                 
             
                NON TI ARRENDERE
