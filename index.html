@@ -435,6 +435,10 @@ function add(nome, testo) {
     const chat =
         document.getElementById("chat");
 
+    if (!chat) {
+        return;
+    }
+
     const messaggio =
         document.createElement("div");
 
@@ -454,7 +458,9 @@ function add(nome, testo) {
 
 
     messaggio.appendChild(
-        document.createTextNode(testo)
+        document.createTextNode(
+            String(testo ?? "")
+        )
     );
 
 
@@ -481,11 +487,18 @@ function speak(testo) {
     }
 
 
+    if (!testo) {
+        return;
+    }
+
+
     window.speechSynthesis.cancel();
 
 
     const voce =
-        new SpeechSynthesisUtterance(testo);
+        new SpeechSynthesisUtterance(
+            String(testo)
+        );
 
 
     voce.lang = "it-IT";
@@ -1029,47 +1042,14 @@ function apriPagina(testo) {
 
     const pagine = {
 
-        "home":
-            "index.html",
-
-        "assistente":
-            "assistente.html",
-
-        "chat":
-            "chat.html",
-
-        "motivazione":
-            "motivazione.html",
-
-        "meditazione":
-            "meditazione.html",
-
-        "download":
-            "download.html",
-
-        "blog":
-            "blog.html",
-
         "chi siamo":
             "chi-siamo.html",
 
-        "contatti":
-            "contatti.html",
-
-        "dashboard":
-            "dashboard.html",
+        "spagna campione":
+            "spagna-campione-del-mondo-2026.html",
 
         "oreste os":
             "os.html",
-
-        "storybook":
-            "storybook.html",
-
-        "storia":
-            "storia.html",
-
-        "funzioni":
-            "funzioni.html",
 
         "tecnologie":
             "tecnologie oreste ai.html",
@@ -1080,8 +1060,41 @@ function apriPagina(testo) {
         "mondiali":
             "mondiali2026.html",
 
-        "spagna campione":
-            "spagna-campione-del-mondo-2026.html"
+        "assistente":
+            "assistente.html",
+
+        "motivazione":
+            "motivazione.html",
+
+        "meditazione":
+            "meditazione.html",
+
+        "download":
+            "download.html",
+
+        "storybook":
+            "storybook.html",
+
+        "contatti":
+            "contatti.html",
+
+        "dashboard":
+            "dashboard.html",
+
+        "funzioni":
+            "funzioni.html",
+
+        "storia":
+            "storia.html",
+
+        "blog":
+            "blog.html",
+
+        "chat":
+            "chat.html",
+
+        "home":
+            "index.html"
 
     };
 
@@ -1100,7 +1113,8 @@ function apriPagina(testo) {
 
             window.open(
                 pagine[nome],
-                "_blank"
+                "_blank",
+                "noopener,noreferrer"
             );
 
 
@@ -1133,7 +1147,8 @@ function apriCanva() {
 
             window.open(
                 "guida-canva-oreste-ai.html",
-                "_blank"
+                "_blank",
+                "noopener,noreferrer"
             );
 
         },
@@ -1198,7 +1213,8 @@ function apriVicinoContursi(testo) {
 
             window.open(
                 episodi[numero],
-                "_blank"
+                "_blank",
+                "noopener,noreferrer"
             );
 
 
@@ -1222,13 +1238,15 @@ function apriVicinoContursi(testo) {
 
             window.open(
                 episodi[numero],
-                "_blank"
+                "_blank",
+                "noopener,noreferrer"
             );
 
 
             return (
                 "Vicino Contursi " +
-                numero
+                numero +
+                "."
             );
         }
     }
@@ -1320,13 +1338,32 @@ async function handle(text) {
 
         return mostraMotivazione();
     }
-if (text.includes("affronta la paura e vinci con coraggio")){
-    window.open("https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share","_blank",
 
-            "noopener,noreferrer");
-    return("affronta la paura e vinci con coraggio");
+
     /* =================================================
-    
+       AFFRONTA LA PAURA E VINCI CON CORAGGIO
+    ================================================= */
+
+    if (
+        text.includes(
+            "affronta la paura e vinci con coraggio"
+        )
+    ) {
+
+        window.open(
+            "https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share",
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+
+        return (
+            "Affronta la paura e vinci con coraggio."
+        );
+    }
+
+
+    /* =================================================
        IL FUOCO DENTRO
     ================================================= */
 
@@ -1355,8 +1392,7 @@ if (text.includes("affronta la paura e vinci con coraggio")){
         );
 
 
-        return "Il fuoco dentro";
-        
+        return "Il fuoco dentro.";
     }
 
 
@@ -1502,7 +1538,7 @@ if (text.includes("affronta la paura e vinci con coraggio")){
 
 
         return (
-            "difesa personale"
+            "Apro il video sulla difesa personale."
         );
     }
 
@@ -1529,7 +1565,7 @@ if (text.includes("affronta la paura e vinci con coraggio")){
 
 
         return (
-            "Io Sto con Amnesty."
+            "Apro Io Sto con Amnesty."
         );
     }
 
@@ -1579,7 +1615,7 @@ if (text.includes("affronta la paura e vinci con coraggio")){
 
 
         return (
-            " Non ti arrendere."
+            "Apro Non ti arrendere."
         );
     }
 
@@ -1691,7 +1727,9 @@ if (text.includes("affronta la paura e vinci con coraggio")){
                 .replace("cerca", "")
                 .trim();
 
-        } else {
+        }
+
+        else {
 
             ricerca =
                 text
@@ -1723,7 +1761,8 @@ if (text.includes("affronta la paura e vinci con coraggio")){
 
         return (
             "Cerco " +
-            ricerca
+            ricerca +
+            "."
         );
     }
 
@@ -1929,6 +1968,11 @@ async function ask() {
         document.getElementById("input");
 
 
+    if (!campo) {
+        return;
+    }
+
+
     const testo =
         campo.value.trim();
 
@@ -2094,6 +2138,11 @@ function voice() {
 
                 add(
                     "🤖",
+                    "Si è verificato un errore."
+                );
+
+
+                speak(
                     "Si è verificato un errore."
                 );
             }
