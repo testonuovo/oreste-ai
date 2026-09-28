@@ -516,49 +516,9 @@ function speak(testo) {
 }
 
 
-/* =====================================================
-   VIDEO MOTIVAZIONALE
-===================================================== */
-
-function mostraMotivazione() {
-
-    const contenitore =
-        document.getElementById(
-            "videoMotivazionale"
-        );
-
-    const player =
-        document.getElementById(
-            "playerMotivazionale"
-        );
-
-
-    if (!contenitore || !player) {
-
-        return (
-            "Non riesco a trovare il lettore del video."
-        );
-    }
-
-
-    player.src =
-        "https://www.youtube.com/embed/GYmM6jZUPPA";
-
-
-    contenitore.style.display =
-        "block";
-
-
-    contenitore.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
-
-
-    return (
-        "Certo. Ti mostro il video motivazionale."
-    );
-}
+/* ===================================================== VIDEO MOTIVAZIONALE ===================================================== */
+    function mostraMotivazione() { window.open( "https://www.youtube.com/shorts/GYmM6jZUPPA?feature=share", "_blank" ); 
+                                  return ( "Certo. Ti apro il video motivazionale." ); }
 
 
 /* =====================================================
