@@ -1,1061 +1,674 @@
-```html
+
+       
+       
+     
+        
+        
+        
+           
+
+        
+        
+
+           
+
+        
+
+       
+          
+       
+        
+    ```html
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Oreste AI - Assistente Vocale Italiano Online Gratis</title>
+<meta charset="UTF-8">
 
-    <meta name="description"
-          content="Oreste AI è il tuo assistente vocale italiano online. Chatta, cerca informazioni, ascolta risposte, imposta timer, sveglie e molto altro.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NNY7SHD1NT"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+<title>Oreste AI - Assistente Vocale Italiano Online Gratis</title>
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
+<meta
+    name="description"
+    content="Oreste AI è un assistente vocale italiano online gratis. Usa comandi vocali, chat e strumenti direttamente dal browser."
+>
 
-        gtag('js', new Date());
-        gtag('config', 'G-NNY7SHD1NT');
-    </script>
+<meta name="robots" content="index, follow">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<meta name="author" content="Oreste De Chiara">
 
-        html {
-            scroll-behavior: smooth;
-        }
 
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #0a3d91;
-            color: #ffffff;
-            line-height: 1.6;
-        }
+<!-- ================= GOOGLE ANALYTICS ================= -->
 
-        a {
-            color: inherit;
-        }
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNY7SHD1NT"></script>
 
-        header {
-            background: #062b68;
-            padding: 15px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.25);
-        }
+<script>
 
-        .header-inner {
-            max-width: 1200px;
-            margin: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
+window.dataLayer = window.dataLayer || [];
 
-        .logo {
-            font-size: 26px;
-            font-weight: bold;
-            text-decoration: none;
-            white-space: nowrap;
-        }
+function gtag() {
+    dataLayer.push(arguments);
+}
 
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-        }
+gtag("js", new Date());
 
-        nav a {
-            text-decoration: none;
-            padding: 8px 11px;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: 0.2s;
-        }
+gtag("config", "G-NNY7SHD1NT");
 
-        nav a:hover {
-            background: rgba(255,255,255,0.15);
-        }
+</script>
 
-        main {
-            max-width: 1100px;
-            margin: auto;
-            padding: 30px 20px 60px;
-        }
 
-        .hero {
-            text-align: center;
-            padding: 50px 20px 35px;
-        }
+<!-- ================= STILE ================= -->
 
-        .hero h1 {
-            font-size: clamp(34px, 6vw, 64px);
-            margin: 0 0 15px;
-        }
+<style>
 
-        .hero p {
-            font-size: 20px;
-            max-width: 800px;
-            margin: auto;
-            opacity: 0.95;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        .card {
-            background: #ffffff;
-            color: #172033;
-            border-radius: 18px;
-            padding: 25px;
-            margin: 25px 0;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.18);
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        .card h2 {
-            margin-top: 0;
-            color: #0a3d91;
-        }
+body {
 
-        /* CHAT */
+    font-family: Arial, sans-serif;
 
-        #chat {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+    background: #0a3d91;
 
-        #messages {
-            height: 320px;
-            overflow-y: auto;
-            border: 1px solid #d7dce5;
-            border-radius: 12px;
-            padding: 15px;
-            background: #f7f9fc;
-        }
+    color: white;
 
-        .message {
-            padding: 10px 13px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            max-width: 90%;
-            white-space: pre-wrap;
-            word-break: break-word;
-        }
+    text-align: center;
 
-        .user-message {
-            background: #dbeafe;
-            margin-left: auto;
-        }
+    margin: 0;
 
-        .oreste-message {
-            background: #e8eefc;
-            margin-right: auto;
-        }
+    padding-bottom: 40px;
+}
 
-        .chat-controls {
-            display: flex;
-            gap: 10px;
-        }
+h1 {
+    margin-top: 20px;
+}
 
-        #userInput {
-            flex: 1;
-            padding: 13px;
-            border: 1px solid #ccd3df;
-            border-radius: 10px;
-            font-size: 16px;
-        }
+nav {
 
-        button {
-            border: 0;
-            border-radius: 10px;
-            padding: 12px 18px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            background: #0a3d91;
-            color: white;
-            transition: transform 0.15s, opacity 0.15s;
-        }
+    background: rgba(0, 0, 0, 0.4);
 
-        button:hover {
-            transform: translateY(-1px);
-            opacity: 0.9;
-        }
+    padding: 12px;
 
-        button:active {
-            transform: translateY(0);
-        }
+    margin: 10px;
 
-        .voice-button {
-            background: #16803c;
-        }
+    border-radius: 10px;
+}
 
-        .secondary-button {
-            background: #555f73;
-        }
+nav h2 {
+    margin-top: 5px;
+}
 
-        /* COMANDI */
+nav p {
+    line-height: 1.5;
+}
 
-        .commands {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
-        }
+nav a {
 
-        .command {
-            background: #eef4ff;
-            border-radius: 12px;
-            padding: 15px;
-        }
+    color: white;
 
-        .command strong {
-            display: block;
-            color: #0a3d91;
-            margin-bottom: 5px;
-        }
+    margin: 5px;
 
-        /* VIDEO */
+    text-decoration: none;
 
-        #videoMotivazionale {
-            display: none;
-            margin-top: 25px;
-        }
+    display: inline-block;
 
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin: 20px auto;
-            aspect-ratio: 16 / 9;
-            background: #000;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-        }
+    padding: 5px;
+}
 
-        .video-wrapper iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-            display: block;
-        }
+nav a:hover {
+    color: #ffd700;
+}
 
-        .video-actions {
-            text-align: center;
-            margin-top: 15px;
-        }
 
-        .youtube-button {
-            display: inline-block;
-            background: #ff0000;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
+/* ================= CHAT ================= */
 
-        .youtube-button:hover {
-            opacity: 0.9;
-        }
+#chat {
 
-        /* TIMER */
+    width: 90%;
 
-        #timerDisplay {
-            font-size: 40px;
-            font-weight: bold;
-            text-align: center;
-            margin: 20px 0;
-            color: #0a3d91;
-        }
+    max-width: 600px;
 
-        .timer-controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
+    margin: 20px auto;
 
-        .timer-controls input {
-            width: 100px;
-            padding: 11px;
-            border: 1px solid #ccd3df;
-            border-radius: 8px;
-        }
+    background: rgba(0, 0, 0, 0.3);
 
-        /* WEATHER */
+    padding: 15px;
 
-        #weatherResult {
-            margin-top: 15px;
-            padding: 15px;
-            background: #eef4ff;
-            border-radius: 10px;
-        }
+    border-radius: 10px;
 
-        /* LINK */
+    min-height: 250px;
 
-        .link-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-        }
+    max-height: 450px;
 
-        .link-card {
-            display: block;
-            background: #eef4ff;
-            color: #0a3d91;
-            text-decoration: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: bold;
-            text-align: center;
-        }
+    overflow-y: auto;
 
-        .link-card:hover {
-            background: #dce9ff;
-        }
+    text-align: left;
+}
 
-        footer {
-            background: #062b68;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 30px;
-        }
 
-        footer p {
-            margin: 5px 0;
-        }
+/* ================= INPUT ================= */
 
-        .status {
-            min-height: 24px;
-            color: #555f73;
-            font-size: 14px;
-        }
+.input-container {
 
-        @media (max-width: 800px) {
-            .header-inner {
-                flex-direction: column;
-            }
+    width: 100%;
 
-            nav {
-                gap: 3px;
-            }
+    padding: 10px;
+}
 
-            .chat-controls {
-                flex-direction: column;
-            }
+input {
 
-            #messages {
-                height: 280px;
-            }
-        }
-    </style>
+    width: 70%;
+
+    max-width: 650px;
+
+    height: 55px;
+
+    padding: 15px;
+
+    font-size: 18px;
+
+    border-radius: 19px;
+
+    border: none;
+
+    outline: none;
+}
+
+input:focus {
+
+    box-shadow:
+        0 0 0 3px
+        rgba(255, 215, 0, 0.5);
+}
+
+
+/* ================= PULSANTI ================= */
+
+button {
+
+    padding: 12px 18px;
+
+    margin: 5px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: red;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+button:hover {
+    background: darkred;
+}
+
+
+/* ================= MESSAGGI ================= */
+
+.msg {
+
+    margin: 8px 0;
+
+    line-height: 1.5;
+
+    word-wrap: break-word;
+}
+
+
+/* ================= VIDEO MOTIVAZIONALE ================= */
+
+#videoMotivazionale {
+
+    display: none;
+
+    width: 90%;
+
+    max-width: 400px;
+
+    margin: 25px auto;
+
+    padding: 15px;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+#videoMotivazionale h2 {
+
+    margin-top: 0;
+
+    margin-bottom: 15px;
+}
+
+.video-wrapper {
+
+    width: 100%;
+
+    aspect-ratio: 9 / 16;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    background: black;
+}
+
+.video-wrapper iframe {
+
+    width: 100%;
+
+    height: 100%;
+
+    border: 0;
+}
+
+
+/* ================= LINK YOUTUBE VIDEO ================= */
+
+.video-youtube-link {
+
+    display: inline-block;
+
+    margin-top: 12px;
+
+    padding: 10px 16px;
+
+    border-radius: 20px;
+
+    background: red;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+.video-youtube-link:hover {
+
+    background: darkred;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+
+    margin-top: 30px;
+
+    padding: 15px;
+
+    font-size: 14px;
+
+    opacity: 0.9;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    input {
+        width: 90%;
+    }
+
+    nav a {
+
+        display: block;
+
+        margin: 8px;
+    }
+
+    #chat {
+
+        width: 94%;
+    }
+
+    #videoMotivazionale {
+
+        width: 94%;
+
+        max-width: 380px;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<header>
-    <div class="header-inner">
 
-        <a href="index.html" class="logo">
-            🤖 Oreste AI
-        </a>
+<h1>🎤 Oreste AI</h1>
 
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="assistente.html">Assistente</a>
-            <a href="chat.html">Chat</a>
-            <a href="motivazione.html">Motivazione</a>
-            <a href="download.html">Download</a>
-            <a href="blog.html">Blog</a>
-            <a href="chi-siamo.html">Chi siamo</a>
-            <a href="contatti.html">Contatti</a>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="os.html">Oreste OS</a>
-            <a href="storybook.html">Storybook</a>
-            <a href="storia.html">Storia</a>
-            <a href="funzioni.html">Funzioni</a>
-            <a href="tecnologie oreste ai.html">Tecnologie</a>
-            <a href="comandi-oreste-ai.html">Comandi</a>
-            <a href="mondiali2026.html">Mondiali 2026</a>
-            <a href="spagna-campione-del-mondo-2026.html">Spagna</a>
-            <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">
-                Canva
-            </a>
-        </nav>
 
-    </div>
-</header>
+<!-- ================= NAVIGAZIONE ================= -->
 
-<main>
+<nav>
 
-    <!-- HERO -->
+<h2>
+Oreste AI: assistente vocale italiano online gratis
+</h2>
 
-    <section class="hero">
-        <h1>🤖 Oreste AI</h1>
+<p>
 
-        <p>
-            Il tuo assistente vocale italiano online.
-            Parla con Oreste, fai domande, cerca informazioni,
-            ascolta le risposte e usa i suoi strumenti.
-        </p>
-    </section>
+Oreste AI è un assistente vocale italiano online gratis,
+pensato per aiutarti con comandi vocali, chat e strumenti
+utili direttamente dal browser.
 
+</p>
 
-    <!-- CHAT -->
 
-    <section class="card">
+<a href="index.html">🏠 Home</a>
 
-        <h2>💬 Parla con Oreste AI</h2>
+<a href="assistente.html">🎤 Assistente</a>
 
-        <div id="chat">
+<a href="chat.html">💬 Chat</a>
 
-            <div id="messages">
-                <div class="message oreste-message">
-                    👋 Ciao! Sono Oreste AI. Come posso aiutarti?
-                </div>
-            </div>
+<a href="motivazione.html">🌻 Motivazione</a>
 
-            <div class="chat-controls">
+<a href="download.html">📥 Download</a>
 
-                <input
-                    type="text"
-                    id="userInput"
-                    placeholder="Scrivi qui la tua domanda..."
-                    autocomplete="off"
-                >
+<a href="blog.html">📰 Blog</a>
 
-                <button id="sendButton">
-                    Invia
-                </button>
+<a href="chi-siamo.html">👤 Chi siamo</a>
 
-                <button
-                    id="voiceButton"
-                    class="voice-button"
-                    type="button">
-                    🎤 Parla
-                </button>
+<a href="contatti.html">📞 Contatti</a>
 
-            </div>
+<a href="dashboard.html">📊 Dashboard</a>
 
-            <div id="voiceStatus" class="status"></div>
+<a href="os.html">🖥️ Oreste OS</a>
 
-        </div>
+<a href="storybook.html">📚 Storybook</a>
 
-    </section>
+<a href="storia.html">📖 La Storia</a>
 
+<a href="funzioni.html">⚙️ Funzioni</a>
 
-    <!-- FUNZIONI -->
+<a href="tecnologie oreste ai.html">💻 Tecnologie</a>
 
-    <section class="card">
+<a href="comandi-oreste-ai.html">🎤 Comandi</a>
 
-        <h2>⚡ Cosa puoi chiedere a Oreste</h2>
+<a href="mondiali2026.html">🏆 Mondiali 2026</a>
 
-        <div class="commands">
+<a href="spagna-campione-del-mondo-2026.html">
+🏆 Spagna campione del mondo 2026
+</a>
 
-            <div class="command">
-                <strong>🌤️ Meteo</strong>
-                Chiedi: "Che tempo fa?"
-            </div>
+<a href="#" onclick="apriCanva(); return false;">
+🎨 Impara Canva
+</a>
 
-            <div class="command">
-                <strong>⏱️ Timer</strong>
-                Chiedi: "Imposta un timer di 10 minuti."
-            </div>
+</nav>
 
-            <div class="command">
-                <strong>🔎 Ricerca</strong>
-                Chiedi a Oreste di cercare qualcosa su Google.
-            </div>
 
-            <div class="command">
-                <strong>🎵 Musica</strong>
-                Chiedi di cercare musica o video.
-            </div>
+<!-- ================= INPUT ================= -->
 
-            <div class="command">
-                <strong>🌱 Motivazione</strong>
-                Di': "Mostrami un video motivazionale."
-            </div>
+<div class="input-container">
 
-            <div class="command">
-                <strong>⏰ Sveglia</strong>
-                Puoi impostare un promemoria temporizzato.
-            </div>
+<input
+    id="input"
+    type="text"
+    placeholder="Scrivi o parla..."
+    autocomplete="off"
+    onkeydown="if(event.key === 'Enter') ask();"
+>
 
-        </div>
+<br>
 
-    </section>
+<button onclick="ask()">
+Invia
+</button>
 
+<button onclick="voice()">
+🎤 Parla
+</button>
 
-    <!-- VIDEO MOTIVAZIONALE -->
+</div>
 
-    <section class="card" id="videoMotivazionale">
 
-        <h2>🌱 Oreste AI motivazione</h2>
+<!-- ================= VIDEO MOTIVAZIONALE ================= -->
 
-        <div class="video-wrapper">
+<div id="videoMotivazionale">
 
-            <!-- UN SOLO IFRAME CON ID UNIVOCO -->
-            <iframe
-                id="playerMotivazionale"
-                src=""
-                title="Oreste AI - Un passo alla volta"
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-            </iframe>
+<h2>🌱 Oreste AI motivazione</h2>
 
-        </div>
+<div class="video-wrapper">
 
-        <div class="video-actions">
+<iframe
+    id="playerMotivazionale"
+    src=""
+    title="Oreste AI - Un passo alla volta"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+</iframe>
 
-            <a
-                id="youtubeMotivazionale"
-                class="youtube-button"
-                href="https://www.youtube.com/watch?v=TbXdNSMfJcw"
-                target="_blank"
-                rel="noopener noreferrer">
-                ▶️ Apri il video direttamente su YouTube
-            </a>
+</div>
 
-        </div>
+<a
+    id="linkVideoMotivazionale"
+    class="video-youtube-link"
+    href="https://www.youtube.com/watch?v=TbXdNSMfJcw"
+    target="_blank"
+    rel="noopener noreferrer">
 
-    </section>
+    ▶️ Apri il video su YouTube
 
+</a>
 
-    <!-- TIMER -->
+</div>
 
-    <section class="card">
 
-        <h2>⏱️ Timer</h2>
+<!-- ================= CHAT ================= -->
 
-        <div id="timerDisplay">
-            00:00
-        </div>
-
-        <div class="timer-controls">
-
-            <input
-                type="number"
-                id="timerMinutes"
-                min="0"
-                max="999"
-                value="1"
-                aria-label="Minuti">
-
-            <input
-                type="number"
-                id="timerSeconds"
-                min="0"
-                max="59"
-                value="0"
-                aria-label="Secondi">
-
-            <button id="startTimerButton">
-                ▶️ Avvia
-            </button>
-
-            <button
-                id="stopTimerButton"
-                class="secondary-button">
-                ⏹️ Ferma
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- METEO -->
-
-    <section class="card">
-
-        <h2>🌤️ Meteo</h2>
-
-        <button id="weatherButton">
-            🌍 Trova il meteo
-        </button>
-
-        <div id="weatherResult">
-            Premi il pulsante per cercare il meteo.
-        </div>
-
-    </section>
-
-
-    <!-- LINK -->
-
-    <section class="card">
-
-        <h2>🔗 Sezioni di Oreste AI</h2>
-
-        <div class="link-grid">
-
-            <a class="link-card" href="assistente.html">
-                🤖 Assistente
-            </a>
-
-            <a class="link-card" href="chat.html">
-                💬 Chat
-            </a>
-
-            <a class="link-card" href="motivazione.html">
-                🌱 Motivazione
-            </a>
-
-            <a class="link-card" href="download.html">
-                📥 Download
-            </a>
-
-            <a class="link-card" href="blog.html">
-                📰 Blog
-            </a>
-
-            <a class="link-card" href="dashboard.html">
-                📊 Dashboard
-            </a>
-
-            <a class="link-card" href="os.html">
-                💻 Oreste OS
-            </a>
-
-            <a class="link-card" href="storybook.html">
-                📖 Storybook
-            </a>
-
-            <a class="link-card" href="storia.html">
-                📚 La storia di Oreste
-            </a>
-
-            <a class="link-card" href="funzioni.html">
-                ⚙️ Funzioni
-            </a>
-
-            <a class="link-card" href="tecnologie oreste ai.html">
-                🧠 Tecnologie
-            </a>
-
-            <a class="link-card" href="comandi-oreste-ai.html">
-                🎤 Comandi vocali
-            </a>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<footer>
-
-    <p>
-        🤖 <strong>Oreste AI</strong>
-    </p>
-
-    <p>
-        Assistente vocale italiano online
-    </p>
-
-    <p>
-        © 2026 Oreste AI
-    </p>
-
-</footer>
+<div id="chat"></div>
 
 
 <script>
 
-    /* =========================================================
-       ELEMENTI PRINCIPALI
-    ========================================================= */
 
-    const messages = document.getElementById("messages");
-    const userInput = document.getElementById("userInput");
-    const sendButton = document.getElementById("sendButton");
-    const voiceButton = document.getElementById("voiceButton");
-    const voiceStatus = document.getElementById("voiceStatus");
+/* =====================================================
+   CHAT
+===================================================== */
+
+function add(nome, testo) {
+
+    const chat =
+        document.getElementById("chat");
+
+    if (!chat) {
+        return;
+    }
+
+    const messaggio =
+        document.createElement("div");
+
+    messaggio.className = "msg";
 
 
-    /* =========================================================
-       CHAT
-    ========================================================= */
+    const nomeElemento =
+        document.createElement("b");
 
-    function aggiungiMessaggio(testo, tipo) {
+    nomeElemento.textContent =
+        nome + ": ";
 
-        const div = document.createElement("div");
 
-        div.className =
-            "message " +
-            (tipo === "user"
-                ? "user-message"
-                : "oreste-message");
+    messaggio.appendChild(
+        nomeElemento
+    );
 
-        div.textContent = testo;
 
-        messages.appendChild(div);
+    messaggio.appendChild(
+        document.createTextNode(
+            String(testo ?? "")
+        )
+    );
 
-        messages.scrollTop = messages.scrollHeight;
+
+    chat.appendChild(messaggio);
+
+    chat.scrollTop =
+        chat.scrollHeight;
+}
+
+
+/* =====================================================
+   SINTESI VOCALE
+===================================================== */
+
+function speak(testo) {
+
+    if (!("speechSynthesis" in window)) {
+
+        console.log(
+            "La sintesi vocale non è supportata da questo browser."
+        );
+
+        return;
     }
 
 
-    function parla(testo) {
-
-        if (!("speechSynthesis" in window)) {
-            return;
-        }
-
-        window.speechSynthesis.cancel();
-
-        const utterance =
-            new SpeechSynthesisUtterance(testo);
-
-        utterance.lang = "it-IT";
-        utterance.rate = 1;
-        utterance.pitch = 1;
-
-        window.speechSynthesis.speak(utterance);
+    if (!testo) {
+        return;
     }
 
 
-    function rispondi(testo) {
-
-        aggiungiMessaggio(testo, "oreste");
-
-        parla(testo);
-    }
+    window.speechSynthesis.cancel();
 
 
-    /* =========================================================
-       COMANDI ORESTE
-    ========================================================= */
-
-    function elaboraComando(testo) {
-
-        const comando = testo
-            .toLowerCase()
-            .trim();
+    const voce =
+        new SpeechSynthesisUtterance(
+            String(testo)
+        );
 
 
-        /* VIDEO MOTIVAZIONALE */
+    voce.lang = "it-IT";
 
-        if (
-            comando.includes("video motivazionale") ||
-            comando.includes("video motivazionale") ||
-            comando.includes("motivazione") ||
-            comando.includes("un passo alla volta")
-        ) {
+    voce.rate = 0.95;
 
-            mostraMotivazione();
+    voce.pitch = 1;
 
-            return "Certo. Ti mostro il video motivazionale.";
-        }
+    voce.volume = 1;
 
 
-        /* TIMER */
-
-        if (
-            comando.includes("timer") &&
-            (
-                comando.includes("minuto") ||
-                comando.includes("minuti")
-            )
-        ) {
-
-            const numero =
-                comando.match(/(\d+)/);
-
-            if (numero) {
-
-                const minuti =
-                    parseInt(numero[1], 10);
-
-                avviaTimer(minuti * 60);
-
-                return "Ho impostato un timer di " +
-                    minuti +
-                    (minuti === 1
-                        ? " minuto."
-                        : " minuti.");
-            }
-        }
+    window.speechSynthesis.speak(voce);
+}
 
 
-        /* METEO */
+/* =====================================================
+   VIDEO MOTIVAZIONALE
+===================================================== */
 
-        if (
-            comando.includes("meteo") ||
-            comando.includes("tempo fa") ||
-            comando.includes("che tempo")
-        ) {
+function mostraMotivazione() {
 
-            cercaMeteo();
+    const contenitore =
+        document.getElementById(
+            "videoMotivazionale"
+        );
 
-            return "Controllo il meteo per te.";
-        }
+    const player =
+        document.getElementById(
+            "playerMotivazionale"
+        );
 
-
-        /* GOOGLE */
-
-        if (
-            comando.startsWith("cerca ") ||
-            comando.startsWith("ricerca ")
-        ) {
-
-            let query = comando
-                .replace(/^cerca\s+/, "")
-                .replace(/^ricerca\s+/, "")
-                .trim();
-
-            if (query) {
-
-                const url =
-                    "https://www.google.com/search?q=" +
-                    encodeURIComponent(query);
-
-                window.open(
-                    url,
-                    "_blank",
-                    "noopener,noreferrer"
-                );
-
-                return "Ho aperto la ricerca su Google.";
-            }
-        }
+    const link =
+        document.getElementById(
+            "linkVideoMotivazionale"
+        );
 
 
-        /* YOUTUBE */
-
-        if (
-            comando.includes("youtube")
-        ) {
-
-            const query =
-                comando
-                    .replace("youtube", "")
-                    .trim();
-
-            const url =
-                "https://www.youtube.com/results?search_query=" +
-                encodeURIComponent(query || "musica");
-
-            window.open(
-                url,
-                "_blank",
-                "noopener,noreferrer"
-            );
-
-            return "Ho aperto YouTube.";
-        }
-
-
-        /* CANVA */
-
-        if (
-            comando.includes("canva")
-        ) {
-
-            window.open(
-                "https://www.canva.com/",
-                "_blank",
-                "noopener,noreferrer"
-            );
-
-            return "Ho aperto Canva.";
-        }
-
-
-        /* SALUTO */
-
-        if (
-            comando === "ciao" ||
-            comando.includes("buongiorno") ||
-            comando.includes("buonasera")
-        ) {
-
-            return "Ciao! Sono Oreste AI. Sono qui per aiutarti.";
-        }
-
-
-        /* RISPOSTA GENERICA */
+    if (!contenitore || !player) {
 
         return (
-            "Ho ricevuto la tua richiesta: \"" +
-            testo +
-            "\". " +
-            "Per una ricerca online puoi dirmi, per esempio, " +
-            "\"cerca informazioni su...\"."
+            "Non riesco a trovare il lettore del video."
         );
     }
 
 
-    function inviaMessaggio() {
+    /*
+       ID DEL VIDEO ORIGINALE
+    */
 
-        const testo =
-            userInput.value.trim();
+    const videoID =
+        "TbXdNSMfJcw";
 
-        if (!testo) {
-            return;
-        }
 
-        aggiungiMessaggio(testo, "user");
+    /*
+       URL INCORPORATO
+    */
 
-        userInput.value = "";
+    player.src =
+        "https://www.youtube.com/embed/" +
+        videoID;
 
-        const risposta =
-            elaboraComando(testo);
 
-        rispondi(risposta);
+    /*
+       LINK DIRETTO YOUTUBE
+    */
+
+    if (link) {
+
+        link.href =
+            "https://www.youtube.com/watch?v=" +
+            videoID;
     }
 
 
-    sendButton.addEventListener(
-        "click",
-        inviaMessaggio
+    /*
+       MOSTRA IL VIDEO
+    */
+
+    contenitore.style.display =
+        "block";
+
+
+    /*
+       PORTA IL VIDEO AL CENTRO
+    */
+
+    contenitore.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+
+    return (
+        "Certo. Ti mostro il video " +
+        "Un passo alla volta."
     );
+}
 
 
-    userInput.addEventListener(
-        "keydown",
-        function(event) {
+/* =====================================================
+   SITI
+===================================================== */
 
-            if (event.key === "Enter") {
+function openSite(testo) {
 
-                event.preventDefault();
+    const siti = {
 
-                inviaMessaggio();
-            }
-        }
-    );
-
-
-    /* =========================================================
-       RICONOSCIMENTO VOCALE
-    ========================================================= */
-
-    const SpeechRecognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-    let recognition = null;
-
-    if (SpeechRecognition) {
-
-        recognition =
-            new SpeechRecognition();
-
-        recognition.lang = "it-IT";
-
-        recognition.continuous = false;
-
-        recognition.interimResults = false;
-
-
-        recognition.onstart = function() {
-
-            voiceStatus.textContent =
-                "🎤 Ti ascolto...";
+        "google":
+            "htt
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
