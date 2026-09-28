@@ -320,7 +320,189 @@ function canva(){
 
 function meteo(){
 
-   
+    openSite("https://www.google.com/search?q=meteo");
+
+    return "Certo. Ti apro le informazioni sul meteo.";
+}
+
+
+/* =================================================
+   TIMER
+===================================================== */
+
+function startTimer(seconds){
+
+    setTimeout(function(){
+
+        speak("Il timer è terminato.");
+
+        add("⏰ Il timer è terminato.", "bot");
+
+    }, seconds * 1000);
+
+    return "Timer impostato.";
+}
+
+
+/* =================================================
+   SVEGLIA
+===================================================== */
+
+function sveglia(){
+
+    return "La funzione sveglia è pronta.";
+}
+
+
+/* =================================================
+   SCARICA PROGRAMMA
+===================================================== */
+
+function scaricaProgramma(){
+
+    openSite("programma.html");
+
+    return "Certo. Ti apro il programma.";
+}
+
+
+/* =================================================
+   APRI PAGINA
+===================================================== */
+
+function apriPagina(text){
+
+    const pagine = {
+
+        "motivazione": "motivazione.html",
+
+        "servizi": "servizi.html",
+
+        "contatti": "contatti.html",
+
+        "chi siamo": "chi-siamo.html",
+
+        "come funziona": "come-funziona.html",
+
+        "privacy": "privacy.html",
+
+        "termini": "termini.html"
+
+    };
+
+    for (const parola in pagine){
+
+        if (text.includes(parola)){
+
+            openSite(pagine[parola]);
+
+            return "Certo. Ti apro la pagina " + parola + ".";
+        }
+    }
+
+    return null;
+}
+
+
+/* =================================================
+   APRI CANVA
+===================================================== */
+
+function apriCanva(){
+
+    openSite("https://www.canva.com/");
+
+    return "Certo. Ti apro Canva.";
+}
+
+
+/* =================================================
+   VICINO CONTURSI
+===================================================== */
+
+function apriVicinoContursi(){
+
+    openSite(
+        "https://www.google.com/maps/search/Contursi+Terme"
+    );
+
+    return "Certo. Ti apro i risultati vicino a Contursi.";
+}
+
+
+/* =================================================
+   HANDLE
+===================================================== */
+
+function handle(text){
+
+    text = text.toLowerCase().trim();
+
+
+    if (!text){
+
+        return "Scrivi un comando.";
+    }
+
+
+    /* =================================================
+       VICINO CONTURSI
+    ===================================================== */
+
+    if (
+        text.includes("vicino contursi") ||
+        text.includes("vicino a contursi") ||
+        text.includes("cosa c'è vicino contursi") ||
+        text.includes("cosa ce vicino contursi")
+    ){
+
+        return apriVicinoContursi();
+    }
+
+
+    /* =================================================
+       UN PASSO ALLA VOLTA
+    ===================================================== */
+
+    if (text.includes("un passo alla volta")){
+
+        return "Un passo alla volta.";
+    }
+
+
+    /* =================================================
+       AFFRONTA LA PAURA
+    ===================================================== */
+
+    if (
+        text.includes("affronta la paura e vinci con coraggio")
+    ){
+
+        return "Affronta la paura e vinci con coraggio.";
+    }
+
+
+    /* =================================================
+       IL FUOCO DENTRO
+    ===================================================== */
+
+    if (
+        text.includes("il fuoco dentro") ||
+        text.includes("fuoco dentro")
+    ){
+
+        return "Il fuoco dentro di te.";
+    }
+
+
+    /* =================================================
+       CANVA
+    ===================================================== */
+
+    if (
+        text === "canva" ||
+        text.includes("apri canva") ||
 ```
+
 
 
