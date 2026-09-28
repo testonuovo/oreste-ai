@@ -1,3 +1,415 @@
+```html
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Oreste AI - Assistente Vocale Italiano Online Gratis</title>
+
+<meta name="description" content="Oreste AI è un assistente vocale italiano online gratuito. Chatta, ascolta, cerca informazioni, controlla il meteo, imposta timer e molto altro.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Oreste De Chiara">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNY7SHD1NT"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-NNY7SHD1NT');
+</script>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #0a3d91;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    padding: 15px;
+    background: rgba(0,0,0,0.2);
+}
+
+nav a {
+    color: white;
+    margin: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+h1 {
+    margin-top: 30px;
+}
+
+#chat {
+    width: 90%;
+    max-width: 700px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+.msg {
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.15);
+}
+
+input {
+    width: 70%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+}
+
+button {
+    padding: 12px 18px;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(0,0,0,0.2);
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="assistente.html">Assistente</a>
+<a href="chat.html">Chat</a>
+<a href="motivazione.html">Motivazione</a>
+<a href="download.html">Download</a>
+<a href="blog.html">Blog</a>
+<a href="chi-siamo.html">Chi siamo</a>
+<a href="contatti.html">Contatti</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="os.html">Oreste OS</a>
+<a href="storybook.html">Storybook</a>
+<a href="storia.html">Storia</a>
+<a href="funzioni.html">Funzioni</a>
+<a href="tecnologie oreste ai.html">Tecnologie Oreste AI</a>
+<a href="comandi-oreste-ai.html">Comandi Oreste AI</a>
+<a href="mondiali2026.html">Mondiali 2026</a>
+<a href="spagna-campione-del-mondo-2026.html">Spagna campione del mondo 2026</a>
+<a href="#" onclick="apriCanva(); return false;">Impara Canva</a>
+</nav>
+
+<h1>🤖 Oreste AI</h1>
+
+<p>Il tuo assistente vocale italiano gratuito</p>
+
+<div>
+<input
+    id="input"
+    type="text"
+    placeholder="Scrivi qualcosa a Oreste..."
+    onkeydown="if(event.key==='Enter') ask()"
+>
+
+<button onclick="ask()">Invia</button>
+<button onclick="voice()">🎤 Parla</button>
+</div>
+
+<div id="chat"></div>
+
+<footer>
+© 2026 Oreste De Chiara – Oreste AI – Tutti i diritti riservati.
+</footer>
+
+<script>
+
+function add(nome, testo) {
+
+    const chat = document.getElementById("chat");
+
+    const div = document.createElement("div");
+
+    div.className = "msg";
+
+    div.innerHTML =
+        "<strong>" +
+        nome +
+        ":</strong> " +
+        testo;
+
+    chat.appendChild(div);
+
+    chat.scrollTop = chat.scrollHeight;
+}
+
+
+function speak(testo) {
+
+    if (!("speechSynthesis" in window)) {
+        return;
+    }
+
+    const voce = new SpeechSynthesisUtterance(testo);
+
+    voce.lang = "it-IT";
+    voce.rate = 0.95;
+    voce.pitch = 1;
+    voce.volume = 1;
+
+    speechSynthesis.cancel();
+
+    speechSynthesis.speak(voce);
+}
+
+
+function openSite(testo) {
+
+    const t = testo.toLowerCase();
+
+    if (t.includes("google")) {
+        window.open(
+            "https://www.google.com",
+            "_blank"
+        );
+        return "Apro Google.";
+    }
+
+    if (t.includes("youtube")) {
+        window.open(
+            "https://www.youtube.com",
+            "_blank"
+        );
+        return "Apro YouTube.";
+    }
+
+    if (t.includes("facebook")) {
+        window.open(
+            "https://www.facebook.com",
+            "_blank"
+        );
+        return "Apro Facebook.";
+    }
+
+    if (t.includes("instagram")) {
+        window.open(
+            "https://www.instagram.com",
+            "_blank"
+        );
+        return "Apro Instagram.";
+    }
+
+    if (t.includes("tiktok")) {
+        window.open(
+            "https://www.tiktok.com",
+            "_blank"
+        );
+        return "Apro TikTok.";
+    }
+
+    if (t.includes("github")) {
+        window.open(
+            "https://github.com",
+            "_blank"
+        );
+        return "Apro GitHub.";
+    }
+
+    if (t.includes("canva")) {
+        window.open(
+            "https://www.canva.com",
+            "_blank"
+        );
+        return "Apro Canva.";
+    }
+
+    return null;
+}
+
+
+function canva(testo) {
+
+    const t = testo.toLowerCase();
+
+    const links = {
+
+        "mockup":
+        "https://www.canva.com/create/mockups/",
+
+        "presentazioni":
+        "https://www.canva.com/create/presentations/",
+
+        "logo":
+        "https://www.canva.com/create/logos/",
+
+        "volantini":
+        "https://www.canva.com/create/flyers/",
+
+        "video":
+        "https://www.canva.com/create/videos/",
+
+        "poster":
+        "https://www.canva.com/create/posters/",
+
+        "curriculum":
+        "https://www.canva.com/create/resumes/",
+
+        "social":
+        "https://www.canva.com/create/social-media-graphics/",
+
+        "biglietti":
+        "https://www.canva.com/create/business-cards/"
+    };
+
+    for (const parola in links) {
+
+        if (t.includes(parola)) {
+
+            window.open(
+                links[parola],
+                "_blank"
+            );
+
+            return "Apro Canva per " + parola + ".";
+        }
+    }
+
+    return null;
+}
+
+
+async function meteo(citta) {
+
+    try {
+
+        const geo =
+            await fetch(
+                "https://geocoding-api.open-meteo.com/v1/search?name=" +
+                encodeURIComponent(citta) +
+                "&count=1&language=it&format=json"
+            );
+
+        const datiGeo =
+            await geo.json();
+
+        if (
+            !datiGeo.results ||
+            !datiGeo.results.length
+        ) {
+            return "Non trovo questa città.";
+        }
+
+        const luogo =
+            datiGeo.results[0];
+
+        const weather =
+            await fetch(
+                "https://api.open-meteo.com/v1/forecast?latitude=" +
+                luogo.latitude +
+                "&longitude=" +
+                luogo.longitude +
+                "&current=temperature_2m,weather_code"
+            );
+
+        const dati =
+            await weather.json();
+
+        return (
+            "A " +
+            luogo.name +
+            " ci sono " +
+            dati.current.temperature_2m +
+            " gradi."
+        );
+
+    } catch (e) {
+
+        return "Non riesco a recuperare il meteo.";
+    }
+}
+
+
+function startTimer(secondi) {
+
+    let restante = secondi;
+
+    add(
+        "Oreste",
+        "Timer avviato per " +
+        secondi +
+        " secondi."
+    );
+
+    const timer =
+        setInterval(() => {
+
+            restante--;
+
+            if (restante > 0) {
+
+                add(
+                    "Timer",
+                    restante +
+                    " secondi"
+                );
+
+            } else {
+
+                clearInterval(timer);
+
+                add(
+                    "Oreste",
+                    "⏰ Timer terminato!"
+                );
+
+                speak(
+                    "Timer terminato!"
+                );
+            }
+
+        }, 1000);
+}
+
+
+function sveglia(orario) {
+
+    const parti =
+        orario.split(":");
+
+    if (parti.length !== 2) {
+
+        return "Inserisci l'orario nel formato ore:minuti.";
+    }
+
+    const ora =
+        parseInt(parti[0]);
+
+    const minuti =
+        parseInt(parti[1]);
+
+    const adesso =
+        new Date();
+
+    const target =
+        new Date();
+
+    target.setHours(
+        ora,
+        minuti,
+        0,
+        0
+    );
+
+    if (target <= adesso) {
+
+```
 
        
        
@@ -16,267 +428,6 @@
 
        
           
-   ```html
-<!DOCTYPE html>
-<html lang="it">
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Oreste AI - Assistente Vocale Italiano Online Gratis</title>
-
-<meta name="description"
-content="Oreste AI è un assistente vocale italiano online gratis. Usa comandi vocali, chat e strumenti direttamente dal browser.">
-
-<meta name="robots" content="index, follow">
-<meta name="author" content="Oreste De Chiara">
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNY7SHD1NT"></script>
-
-<script>
-window.dataLayer = window.dataLayer || [];
-
-function gtag() {
-    dataLayer.push(arguments);
-}
-
-gtag("js", new Date());
-gtag("config", "G-NNY7SHD1NT");
-</script>
-
-<style>
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background: #0a3d91;
-    color: white;
-    text-align: center;
-    margin: 0;
-    padding-bottom: 40px;
-}
-
-h1 {
-    margin-top: 20px;
-}
-
-nav {
-    background: rgba(0, 0, 0, 0.4);
-    padding: 12px;
-    margin: 10px;
-    border-radius: 10px;
-}
-
-nav h2 {
-    margin-top: 5px;
-}
-
-nav p {
-    line-height: 1.5;
-}
-
-nav a {
-    color: white;
-    margin: 5px;
-    text-decoration: none;
-    display: inline-block;
-    padding: 5px;
-}
-
-nav a:hover {
-    color: #ffd700;
-}
-
-#chat {
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 15px;
-    border-radius: 10px;
-    min-height: 250px;
-    max-height: 450px;
-    overflow-y: auto;
-    text-align: left;
-}
-
-.input-container {
-    width: 100%;
-    padding: 10px;
-}
-
-input {
-    width: 70%;
-    max-width: 650px;
-    height: 55px;
-    padding: 15px;
-    font-size: 18px;
-    border-radius: 19px;
-    border: none;
-    outline: none;
-}
-
-input:focus {
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.5);
-}
-
-button {
-    padding: 12px 18px;
-    margin: 5px;
-    border: none;
-    border-radius: 20px;
-    background: red;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-button:hover {
-    background: darkred;
-}
-
-.msg {
-    margin: 8px 0;
-    line-height: 1.5;
-    word-wrap: break-word;
-}
-
-/* ================= VIDEO ================= */
-
-#videoMotivazionale {
-    display: none;
-    width: 90%;
-    max-width: 400px;
-    margin: 25px auto;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-}
-
-#videoMotivazionale h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-
-.video-wrapper {
-    width: 100%;
-    aspect-ratio: 9 / 16;
-    border-radius: 15px;
-    overflow: hidden;
-    background: black;
-}
-
-.video-wrapper iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-.video-youtube-link {
-    display: inline-block;
-    margin-top: 12px;
-    padding: 10px 16px;
-    border-radius: 20px;
-    background: red;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.video-youtube-link:hover {
-    background: darkred;
-}
-
-footer {
-    margin-top: 30px;
-    padding: 15px;
-    font-size: 14px;
-    opacity: 0.9;
-}
-
-@media (max-width: 600px) {
-
-    input {
-        width: 90%;
-    }
-
-    nav a {
-        display: block;
-        margin: 8px;
-    }
-
-    #chat {
-        width: 94%;
-    }
-
-    #videoMotivazionale {
-        width: 94%;
-        max-width: 380px;
-    }
-}
-
-</style>
-</head>
-
-<body>
-
-<h1>🎤 Oreste AI</h1>
-
-<nav>
-
-<h2>
-Oreste AI: assistente vocale italiano online gratis
-</h2>
-
-<p>
-Oreste AI è un assistente vocale italiano online gratis,
-pensato per aiutarti con comandi vocali, chat e strumenti
-utili direttamente dal browser.
-</p>
-
-<a href="index.html">🏠 Home</a>
-<a href="assistente.html">🎤 Assistente</a>
-<a href="chat.html">💬 Chat</a>
-<a href="motivazione.html">🌻 Motivazione</a>
-<a href="download.html">📥 Download</a>
-<a href="blog.html">📰 Blog</a>
-<a href="chi-siamo.html">👤 Chi siamo</a>
-<a href="contatti.html">📞 Contatti</a>
-<a href="dashboard.html">📊 Dashboard</a>
-<a href="os.html">🖥️ Oreste OS</a>
-<a href="storybook.html">📚 Storybook</a>
-<a href="storia.html">📖 La Storia</a>
-<a href="funzioni.html">⚙️ Funzioni</a>
-<a href="tecnologie oreste ai.html">💻 Tecnologie</a>
-<a href="comandi-oreste-ai.html">🎤 Comandi</a>
-<a href="mondiali2026.html">🏆 Mondiali 2026</a>
-
-<a href="spagna
-```
-    
-        
-
-
-
-
-   
-       
-      
-
-  
-
-  
-
-
 
 
 
