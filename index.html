@@ -1,7 +1,6 @@
 ```html
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
 
 <meta charset="UTF-8">
@@ -10,236 +9,188 @@
 
 <title>Oreste AI - Assistente Vocale Italiano Online Gratis</title>
 
-<meta
-    name="description"
-    content="Oreste AI è un assistente vocale italiano online gratis. Usa comandi vocali, chat e strumenti direttamente dal browser."
->
+<meta name="description" content="Oreste AI è un assistente vocale italiano online gratuito. Puoi parlare, ascoltare risposte, aprire siti, consultare il meteo, usare timer e sveglia e molto altro.">
 
-<meta name="robots" content="index, follow">
+<meta name="keywords" content="Oreste AI, assistente vocale italiano, intelligenza artificiale, assistente online, AI italiano, assistente vocale gratuito">
 
-<meta name="author" content="Oreste De Chiara">
+<meta name="author" content="Oreste AI">
 
-
-<!-- ================= GOOGLE ANALYTICS ================= -->
-
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NNY7SHD1NT"></script>
 
 <script>
 
 window.dataLayer = window.dataLayer || [];
 
-function gtag() {
-    dataLayer.push(arguments);
+function gtag(){
+
+dataLayer.push(arguments);
+
 }
 
-gtag("js", new Date());
+gtag('js', new Date());
 
-gtag("config", "G-NNY7SHD1NT");
+gtag('config', 'G-NNY7SHD1NT');
 
 </script>
 
-
-<!-- ================= STILE ================= -->
-
 <style>
 
-* {
-    box-sizing: border-box;
+body{
+
+font-family:Arial, sans-serif;
+
+background:#0a3d91;
+
+color:white;
+
+margin:0;
+
+padding:0;
+
+text-align:center;
+
 }
 
-html {
-    scroll-behavior: smooth;
+header{
+
+padding:20px;
+
 }
 
-body {
+h1{
 
-    font-family: Arial, sans-serif;
+margin:10px 0;
 
-    background: #0a3d91;
-
-    color: white;
-
-    text-align: center;
-
-    margin: 0;
-
-    padding-bottom: 40px;
 }
 
-h1 {
-    margin-top: 20px;
+nav{
+
+display:flex;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+gap:10px;
+
+padding:10px;
+
 }
 
-nav {
+nav a{
 
-    background: rgba(0, 0, 0, 0.4);
+color:white;
 
-    padding: 12px;
+text-decoration:none;
 
-    margin: 10px;
+padding:8px 12px;
 
-    border-radius: 10px;
+border-radius:8px;
+
+background:rgba(255,255,255,0.15);
+
 }
 
-nav h2 {
-    margin-top: 5px;
+nav a:hover{
+
+background:rgba(255,255,255,0.25);
+
 }
 
-nav p {
-    line-height: 1.5;
+#chat{
+
+max-width:800px;
+
+margin:20px auto;
+
+padding:20px;
+
 }
 
-nav a {
+#messages{
 
-    color: white;
+background:white;
 
-    margin: 5px;
+color:#111;
 
-    text-decoration: none;
+border-radius:12px;
 
-    display: inline-block;
+padding:15px;
 
-    padding: 5px;
+min-height:250px;
+
+max-height:450px;
+
+overflow-y:auto;
+
+text-align:left;
+
 }
 
-nav a:hover {
-    color: #ffd700;
+.msg{
+
+margin:10px 0;
+
+padding:10px;
+
+border-radius:10px;
+
 }
 
+.user{
 
-/* ================= CHAT ================= */
+background:#e6f0ff;
 
-#chat {
-
-    width: 90%;
-
-    max-width: 600px;
-
-    margin: 20px auto;
-
-    background: rgba(0, 0, 0, 0.3);
-
-    padding: 15px;
-
-    border-radius: 10px;
-
-    min-height: 250px;
-
-    max-height: 450px;
-
-    overflow-y: auto;
-
-    text-align: left;
 }
 
+.bot{
 
-/* ================= INPUT ================= */
+background:#f1f1f1;
 
-.input-container {
-
-    width: 100%;
-
-    padding: 10px;
 }
 
-input {
+.controls{
 
-    width: 70%;
+display:flex;
 
-    max-width: 650px;
+gap:10px;
 
-    height: 55px;
+margin-top:15px;
 
-    padding: 15px;
-
-    font-size: 18px;
-
-    border-radius: 19px;
-
-    border: none;
-
-    outline: none;
 }
 
-input:focus {
+input{
 
-    box-shadow:
-        0 0 0 3px
-        rgba(255, 215, 0, 0.5);
+flex:1;
+
+padding:14px;
+
+border-radius:10px;
+
+border:none;
+
+font-size:16px;
+
 }
 
+button{
 
-/* ================= PULSANTI ================= */
+padding:14px 18px;
 
-button {
+border:none;
 
-    padding: 12px 18px;
+border-radius:10px;
 
-    margin: 5px;
+cursor:pointer;
 
-    border: none;
+font-size:16px;
 
-    border-radius: 20px;
-
-    background: red;
-
-    color: white;
-
-    cursor: pointer;
-
-    font-size: 15px;
 }
 
-button:hover {
-    background: darkred;
-}
+button:hover{
 
-
-/* ================= MESSAGGI ================= */
-
-.msg {
-
-    margin: 8px 0;
-
-    line-height: 1.5;
-
-    word-wrap: break-word;
-}
-
-
-/* ================= FOOTER ================= */
-
-footer {
-
-    margin-top: 30px;
-
-    padding: 15px;
-
-    font-size: 14px;
-
-    opacity: 0.9;
-}
-
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 600px) {
-
-    input {
-        width: 90%;
-    }
-
-    nav a {
-
-        display: block;
-
-        margin: 8px;
-    }
-
-    #chat {
-
-        width: 94%;
-    }
+opacity:.9;
 
 }
 
@@ -247,765 +198,129 @@ footer {
 
 </head>
 
-
 <body>
 
+<header>
 
-<h1>🎤 Oreste AI</h1>
+<h1>Oreste AI</h1>
 
-
-<!-- ================= NAVIGAZIONE ================= -->
+<p>Il tuo assistente vocale italiano</p>
 
 <nav>
 
-<h2>
-Oreste AI: assistente vocale italiano online gratis
-</h2>
+<a href="index.html">Home</a>
 
-<p>
+<a href="chi-siamo.html">Chi siamo</a>
 
-Oreste AI è un assistente vocale italiano online gratis,
-pensato per aiutarti con comandi vocali, chat e strumenti
-utili direttamente dal browser.
+<a href="come-funziona.html">Come funziona</a>
 
-</p>
+<a href="servizi.html">Servizi</a>
 
+<a href="contatti.html">Contatti</a>
 
-<a href="index.html">🏠 Home</a>
+<a href="privacy.html">Privacy</a>
 
-<a href="assistente.html">🎤 Assistente</a>
+<a href="termini.html">Termini</a>
 
-<a href="chat.html">💬 Chat</a>
-
-<a href="motivazione.html">🌻 Motivazione</a>
-
-<a href="download.html">📥 Download</a>
-
-<a href="blog.html">📰 Blog</a>
-
-<a href="chi-siamo.html">👤 Chi siamo</a>
-
-<a href="contatti.html">📞 Contatti</a>
-
-<a href="dashboard.html">📊 Dashboard</a>
-
-<a href="os.html">🖥️ Oreste OS</a>
-
-<a href="storybook.html">📚 Storybook</a>
-
-<a href="storia.html">📖 La Storia</a>
-
-<a href="funzioni.html">⚙️ Funzioni</a>
-
-<a href="tecnologie oreste ai.html">💻 Tecnologie</a>
-
-<a href="comandi-oreste-ai.html">🎤 Comandi</a>
-
-<a href="mondiali2026.html">🏆 Mondiali 2026</a>
-
-<a href="spagna-campione-del-mondo-2026.html">
-🏆 Spagna campione del mondo 2026
-</a>
-
-<a href="#" onclick="apriCanva(); return false;">
-🎨 Impara Canva
-</a>
+<a href="motivazione.html">Motivazione</a>
 
 </nav>
 
+</header>
 
-<!-- ================= INPUT ================= -->
 
-<div class="input-container">
+<div id="chat">
+
+<div id="messages"></div>
+
+<div class="controls">
 
 <input
-    id="input"
-    type="text"
-    placeholder="Scrivi o parla..."
-    autocomplete="off"
-    onkeydown="if(event.key === 'Enter') ask();"
+id="input"
+type="text"
+placeholder="Scrivi a Oreste..."
+autocomplete="off"
 >
 
-<br>
+<button onclick="ask()">Invia</button>
 
-<button onclick="ask()">
-Invia
-</button>
+<button onclick="voice()">🎤</button>
 
-<button onclick="voice()">
-🎤 Parla
-</button>
+</div>
 
 </div>
 
 
-<!-- ================= CHAT ================= -->
-
-<div id="chat"></div>
-
-
 <script>
 
-
-/* =====================================================
-   CHAT
+/* =================================================
+   MESSAGGI
 ===================================================== */
 
-function add(nome, testo) {
+function add(text, who){
 
-    const chat =
-        document.getElementById("chat");
+    const messages = document.getElementById("messages");
 
-    if (!chat) {
-        return;
-    }
+    const div = document.createElement("div");
 
-    const messaggio =
-        document.createElement("div");
+    div.className = "msg " + who;
 
-    messaggio.className = "msg";
+    div.textContent = text;
 
+    messages.appendChild(div);
 
-    const nomeElemento =
-        document.createElement("b");
-
-    nomeElemento.textContent =
-        nome + ": ";
-
-
-    messaggio.appendChild(
-        nomeElemento
-    );
-
-
-    messaggio.appendChild(
-        document.createTextNode(
-            String(testo ?? "")
-        )
-    );
-
-
-    chat.appendChild(messaggio);
-
-    chat.scrollTop =
-        chat.scrollHeight;
+    messages.scrollTop = messages.scrollHeight;
 }
 
 
-/* =====================================================
-   SINTESI VOCALE
+/* =================================================
+   VOCE
 ===================================================== */
 
-function speak(testo) {
+function speak(text){
 
-    if (!("speechSynthesis" in window)) {
+    if ("speechSynthesis" in window){
 
-        console.log(
-            "La sintesi vocale non è supportata da questo browser."
-        );
+        const utterance = new SpeechSynthesisUtterance(text);
 
-        return;
+        utterance.lang = "it-IT";
+
+        window.speechSynthesis.cancel();
+
+        window.speechSynthesis.speak(utterance);
     }
-
-
-    if (!testo) {
-        return;
-    }
-
-
-    window.speechSynthesis.cancel();
-
-
-    const voce =
-        new SpeechSynthesisUtterance(
-            String(testo)
-        );
-
-
-    voce.lang = "it-IT";
-
-    voce.rate = 0.95;
-
-    voce.pitch = 1;
-
-    voce.volume = 1;
-
-
-    window.speechSynthesis.speak(voce);
 }
 
 
-/* =====================================================
-   SITI
+/* =================================================
+   APRI SITO
 ===================================================== */
 
-function openSite(testo) {
+function openSite(url){
 
-    const siti = {
-
-        "google":
-            "https://www.google.com/",
-
-        "youtube":
-            "https://www.youtube.com/",
-
-        "facebook":
-            "https://www.facebook.com/",
-
-        "instagram":
-            "https://www.instagram.com/",
-
-        "tiktok":
-            "https://www.tiktok.com/",
-
-        "github":
-            "https://github.com/",
-
-        "canva":
-            "https://www.canva.com/"
-
-    };
-
-
-    for (const nome in siti) {
-
-        if (testo.includes(nome)) {
-
-            window.open(
-                siti[nome],
-                "_blank",
-                "noopener,noreferrer"
-            );
-
-            return "Apro " + nome + ".";
-        }
-    }
-
-
-    return null;
+    window.open(url, "_blank", "noopener,noreferrer");
 }
 
 
-/* =====================================================
+/* =================================================
    CANVA
 ===================================================== */
 
-function canva(testo) {
+function canva(){
 
-    const funzioni = {
+    openSite("https://www.canva.com/");
 
-        "mockup":
-            "https://www.canva.com/mockups/",
-
-        "presentazioni":
-            "https://www.canva.com/presentations/",
-
-        "logo":
-            "https://www.canva.com/create/logos/",
-
-        "volantini":
-            "https://www.canva.com/create/flyers/",
-
-        "video":
-            "https://www.canva.com/create/videos/",
-
-        "poster":
-            "https://www.canva.com/create/posters/",
-
-        "curriculum":
-            "https://www.canva.com/create/resumes/",
-
-        "social":
-            "https://www.canva.com/create/social-media/",
-
-        "biglietti":
-            "https://www.canva.com/create/cards/"
-
-    };
-
-
-    for (const comando in funzioni) {
-
-        if (testo.includes(comando)) {
-
-            window.open(
-                funzioni[comando],
-                "_blank",
-                "noopener,noreferrer"
-            );
-
-            return (
-                "Apro Canva per " +
-                comando +
-                "."
-            );
-        }
-    }
-
-
-    return null;
+    return "Certo. Ti apro Canva.";
 }
 
 
-/* =====================================================
+/* =================================================
    METEO
 ===================================================== */
 
-async function meteo(citta) {
+function meteo(){
 
-    if (!citta) {
-
-        return (
-            "Dimmi quale città vuoi controllare."
-        );
-    }
-
-
-    try {
-
-        const r = await fetch(
-
-            "https://geocoding-api.open-meteo.com/v1/search" +
-
-            "?name=" +
-            encodeURIComponent(citta) +
-
-            "&count=1" +
-
-            "&language=it" +
-
-            "&format=json"
-
-        );
-
-
-        if (!r.ok) {
-
-            throw new Error(
-                "Errore geocoding"
-            );
-        }
-
-
-        const dati =
-            await r.json();
-
-
-        if (
-            !dati.results ||
-            dati.results.length === 0
-        ) {
-
-            return "Città non trovata.";
-        }
-
-
-        const risultato =
-            dati.results[0];
-
-
-        const lat =
-            risultato.latitude;
-
-
-        const lon =
-            risultato.longitude;
-
-
-        const w = await fetch(
-
-            "https://api.open-meteo.com/v1/forecast" +
-
-            "?latitude=" +
-            lat +
-
-            "&longitude=" +
-            lon +
-
-            "&current_weather=true"
-
-        );
-
-
-        if (!w.ok) {
-
-            throw new Error(
-                "Errore meteo"
-            );
-        }
-
-
-        const tempo =
-            await w.json();
-
-
-        if (!tempo.current_weather) {
-
-            return (
-                "Dati meteo non disponibili."
-            );
-        }
-
-
-        return (
-
-            "🌤️ " +
-            risultato.name +
-            ": " +
-            tempo.current_weather.temperature +
-            " °C."
-
-        );
-
-    }
-
-    catch (errore) {
-
-        console.error(
-            "Errore meteo:",
-            errore
-        );
-
-        return (
-            "Errore durante la richiesta del meteo."
-        );
-    }
-}
-
-
-/* =====================================================
-   TIMER
-===================================================== */
-
-let timer = null;
-
-
-function startTimer(secondi) {
-
-    secondi =
-        parseInt(secondi, 10);
-
-
-    if (
-        isNaN(secondi) ||
-        secondi <= 0
-    ) {
-
-        return (
-            "Scrivi, ad esempio: timer 30"
-        );
-    }
-
-
-    if (timer) {
-
-        clearInterval(timer);
-    }
-
-
-    let tempo = secondi;
-
-
-    add(
-        "⏱️",
-        "Timer avviato: " +
-        secondi +
-        " secondi."
-    );
-
-
-    timer = setInterval(
-        function () {
-
-            tempo--;
-
-
-            if (tempo <= 0) {
-
-                clearInterval(timer);
-
-                timer = null;
-
-
-                add(
-                    "⏱️",
-                    "FINITO"
-                );
-
-
-                speak(
-                    "Timer terminato"
-                );
-
-
-                return;
-            }
-
-
-            add(
-                "⏱️",
-                tempo +
-                " secondi"
-            );
-
-        },
-        1000
-    );
-
-
-    return (
-        "Timer avviato per " +
-        secondi +
-        " secondi."
-    );
-}
-
-
-/* =====================================================
-   SVEGLIA
-===================================================== */
-
-let svegliaTimer = null;
-
-
-function sveglia(orario) {
-
-    const parti =
-        orario.split(":");
-
-
-    if (parti.length !== 2) {
-
-        return (
-            "Scrivi, ad esempio: sveglia 08:30"
-        );
-    }
-
-
-    const h =
-        parseInt(parti[0], 10);
-
-
-    const m =
-        parseInt(parti[1], 10);
-
-
-    if (
-        isNaN(h) ||
-        isNaN(m) ||
-        h < 0 ||
-        h > 23 ||
-        m < 0 ||
-        m > 59
-    ) {
-
-        return "Orario non valido.";
-    }
-
-
-    const adesso =
-        new Date();
-
-
-    const obiettivo =
-        new Date();
-
-
-    obiettivo.setHours(h);
-
-    obiettivo.setMinutes(m);
-
-    obiettivo.setSeconds(0);
-
-    obiettivo.setMilliseconds(0);
-
-
-    if (obiettivo <= adesso) {
-
-        obiettivo.setDate(
-            obiettivo.getDate() + 1
-        );
-    }
-
-
-    const differenza =
-        obiettivo - adesso;
-
-
-    if (svegliaTimer) {
-
-        clearTimeout(
-            svegliaTimer
-        );
-    }
-
-
-    svegliaTimer =
-        setTimeout(
-            function () {
-
-                add(
-                    "⏰",
-                    "SVEGLIA!"
-                );
-
-                speak(
-                    "Sveglia!"
-                );
-
-                alert(
-                    "⏰ SVEGLIA!"
-                );
-
-                svegliaTimer = null;
-
-            },
-            differenza
-        );
-
-
-    return (
-        "Sveglia impostata alle " +
-        orario
-    );
-}
-
-
-/* =====================================================
-   DOWNLOAD
-===================================================== */
-
-function scaricaProgramma(nome) {
-
-    if (!nome) {
-
-        return (
-            "Dimmi quale programma vuoi cercare."
-        );
-    }
-
-
-    const ricerca =
-        nome +
-        " download ufficiale";
-
-
-    window.open(
-
-        "https://www.google.com/search?q=" +
-        encodeURIComponent(ricerca),
-
-        "_blank",
-
-        "noopener,noreferrer"
-
-    );
-
-
-    return (
-        "Cerco il download ufficiale di " +
-        nome
-    );
-}
-
-
-/* =====================================================
-   PAGINE ORESTE AI
-===================================================== */
-
-function apriPagina(testo) {
-
-    const pagine = {
-
-        "chi siamo":
-            "chi-siamo.html",
-
-        "spagna campione":
-            "spagna-campione-del-mondo-2026.html",
-
-        "oreste os":
-            "os.html",
-
-        "tecnologie":
-            "tecnologie oreste ai.html",
-
-        "comandi":
-            "comandi-oreste-ai.html",
-
-        "mondiali":
-            "mondiali2026.html",
-
-        "assistente":
-            "assistente.html",
-
-        "motivazione":
-            "motivazione.html",
-
-        "meditazione":
-            "meditazione.html",
-
-        "download":
-            "download.html",
-
-        "storybook":
-            "storybook.html",
-
-        "contatti":
-            "contatti.html",
-
-        "dashboard":
-            "dashboard.html",
-
-        "funzioni":
-            "funzioni.html",
-
-        "storia":
-            "storia.html",
-
-        "blog":
-            "blog.html",
-
-        "chat":
-            "chat.html",
-
-        "home":
-            "index.html"
-
-    };
-
-
-    const nomi =
-        Object.keys(pagine)
-        .sort(
-            (a, b) =>
-                b.length - a.length
-        );
-
-
-    for (const nome of nomi) {
-
-        if (testo.includes(nome)) {
-
-            window.open(
-                pagine[nome],
-                "_blank",
-                "noopener,noreferrer"
-            );
-
-
-            return (
-                "Apro la pagina " +
-                nome +
-                "."
-            );
-        }
-    }
-
-
-    return null;
-}
-
-
-/* =====================================================
+   
 ```
+
 
