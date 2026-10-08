@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="it">
 
@@ -5,177 +6,920 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Download Oreste AI - Assistente vocale gratis</title>
+    <title>
+        Oreste AI - Assistente Vocale Italiano Online Gratis
+    </title>
 
     <meta
         name="description"
-        content="Scarica Oreste AI gratuitamente e Oreste AI Cleaner per Windows."
+        content="Oreste AI è un assistente vocale italiano online gratis. Usa comandi vocali, chat, meditazione, motivazione, video, calendario e strumenti direttamente dal browser."
     >
 
-    <meta name="robots" content="index, follow">
+    <meta
+        name="robots"
+        content="index, follow"
+    >
+
+    <meta
+        name="author"
+        content="Oreste De Chiara"
+    >
 
     <link
         rel="canonical"
-        href="https://testonuovo.github.io/oreste-ai/download.html"
+        href="https://testonuovo.github.io/oreste-ai/"
     >
+
+    <meta
+        property="og:type"
+        content="website"
+    >
+
+    <meta
+        property="og:title"
+        content="Oreste AI - Assistente Vocale Italiano Online Gratis"
+    >
+
+    <meta
+        property="og:description"
+        content="Oreste AI è un assistente vocale italiano online gratis con voce, chat, motivazione, meditazione, Canva e strumenti utili."
+    >
+
+    <meta
+        property="og:url"
+        content="https://testonuovo.github.io/oreste-ai/"
+    >
+
+    <meta
+        property="og:locale"
+        content="it_IT"
+    >
+
+
+    <!-- =====================================================
+         GOOGLE ANALYTICS
+    ====================================================== -->
+
+    <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-NNY7SHD1NT">
+    </script>
+
+    <script>
+
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag("js", new Date());
+
+        gtag(
+            "config",
+            "G-NNY7SHD1NT"
+        );
+
+    </script>
+
+
+    <!-- =====================================================
+         STILE
+    ====================================================== -->
 
     <style>
 
-        body {
-            background: blue;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            color: white;
-            margin: 0;
-            min-height: 100vh;
+        * {
+            box-sizing: border-box;
         }
 
-        header {
-            padding: 30px 20px 20px;
+        html {
+            scroll-behavior: smooth;
         }
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: #0a3d91;
+
+            color: white;
+
+            text-align: center;
+
+            margin: 0;
+
+            padding-bottom: 40px;
+
+        }
+
 
         h1 {
-            margin-top: 10px;
+            margin-top: 20px;
         }
+
 
         h2 {
+            margin: 18px 0;
+        }
+
+
+        h3 {
             margin-top: 10px;
         }
 
-        nav {
-            margin: 20px 0;
+
+        p {
+            line-height: 1.6;
         }
 
-        nav a {
-            text-decoration: none;
-            color: red;
-            margin: 10px;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        .card,
-        .download-cleaner {
-            margin: 30px auto;
-            padding: 25px;
-            max-width: 700px;
-            box-sizing: border-box;
-        }
-
-        .avatar {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            display: block;
-            margin: 0 auto 20px;
-        }
-
-        .download-button,
-        .voice-button {
-            display: inline-block;
-            background: red;
-            color: white;
-            border-radius: 19px;
-            padding: 12px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            margin: 8px;
-            text-decoration: none;
-            box-sizing: border-box;
-        }
-
-        .download-button:hover,
-        .voice-button:hover {
-            background: darkred;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            margin: 10px 0;
-        }
-
-        .version {
-            margin-top: 15px;
-            font-size: 14px;
-        }
-
-        .voice-status {
-            margin-top: 15px;
-            font-size: 14px;
-            min-height: 20px;
-        }
-
-        footer {
-            padding: 30px 20px;
-            margin-top: 30px;
-        }
 
         /* =====================================================
-           PANNELLO VOCE ALL'APERTURA
-        ===================================================== */
+           NAV
+        ====================================================== */
 
-        #voiceWelcome {
-            position: fixed;
-            inset: 0;
-            background:blue;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            padding: 20px;
-            box-sizing: border-box;
+        nav {
+
+            background: rgba(0, 0, 0, 0.4);
+
+            padding: 12px;
+
+            margin: 10px;
+
+            border-radius: 10px;
+
         }
 
-        .voice-welcome-box {
-            background:white;
-            color: black;
-            width: 100%;
-            max-width: 450px;
-            padding: 30px;
-            border-radius: 25px;
-            box-sizing: border-box;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+
+        nav h2 {
+            margin-top: 5px;
         }
 
-        .welcome-avatar {
-            width: 130px;
-            height: 130px;
-            object-fit: cover;
-            border-radius: 50%;
-            display: block;
-            margin: 0 auto 20px;
+
+        nav p {
+            line-height: 1.5;
         }
 
-        .voice-welcome-box h2 {
-            color: blue;
-        }
 
-        .voice-welcome-box button {
-            background: red;
+        nav a {
+
             color: white;
-            border: none;
-            border-radius: 19px;
-            padding: 14px 22px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
+
+            margin: 5px;
+
+            text-decoration: none;
+
+            display: inline-block;
+
+            padding: 7px 9px;
+
+            border-radius: 8px;
+
         }
 
-        .voice-welcome-box button:hover {
+
+        nav a:hover {
+
+            color: #ffd700;
+
+            background: rgba(255, 255, 255, 0.08);
+
+        }
+
+
+        /* =====================================================
+           INTRO ORESTE
+        ====================================================== */
+
+        .oreste-intro {
+
+            width: 94%;
+
+            max-width: 800px;
+
+            margin: 20px auto;
+
+            padding: 20px;
+
+            background: rgba(0, 0, 0, 0.25);
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, 0.15);
+
+        }
+
+
+        .oreste-avatar {
+
+            font-size: 55px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .oreste-intro-title {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        #introVoiceStatus {
+
+            min-height: 22px;
+
+            margin-top: 8px;
+
+            font-size: 14px;
+
+            opacity: 0.9;
+
+        }
+
+
+        /* =====================================================
+           CHAT
+        ====================================================== */
+
+        #chat {
+
+            width: 90%;
+
+            max-width: 700px;
+
+            margin: 20px auto;
+
+            background: rgba(0, 0, 0, 0.3);
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            min-height: 250px;
+
+            max-height: 450px;
+
+            overflow-y: auto;
+
+            text-align: left;
+
+        }
+
+
+        .msg {
+
+            margin: 8px 0;
+
+            line-height: 1.5;
+
+            word-wrap: break-word;
+
+            overflow-wrap: anywhere;
+
+            padding: 8px;
+
+            border-radius: 8px;
+
+        }
+
+
+        /* =====================================================
+           INPUT
+        ====================================================== */
+
+        .input-container {
+
+            width: 100%;
+
+            padding: 10px;
+
+            text-align: center;
+
+        }
+
+
+        input {
+
+            width: 70%;
+
+            max-width: 650px;
+
+            height: 55px;
+
+            padding: 15px;
+
+            font-size: 18px;
+
+            border-radius: 19px;
+
+            border: none;
+
+            outline: none;
+
+        }
+
+
+        input:focus {
+
+            box-shadow:
+                0 0 0 3px
+                rgba(255, 215, 0, 0.5);
+
+        }
+
+
+        /* =====================================================
+           PULSANTI
+        ====================================================== */
+
+        button {
+
+            padding: 12px 18px;
+
+            margin: 5px;
+
+            border: none;
+
+            border-radius: 20px;
+
+            background: red;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            transition: 0.2s;
+
+        }
+
+
+        button:hover {
+
             background: darkred;
+
+        }
+
+
+        .secondary-button {
+
+            background: #1c5fc8;
+
+        }
+
+
+        .secondary-button:hover {
+
+            background: #174f9f;
+
+        }
+
+
+        .voice-button {
+
+            background: #e00000;
+
+            min-width: 130px;
+
+        }
+
+
+        .voice-button:hover {
+
+            background: #b00000;
+
+        }
+
+
+        .voice-button.listening {
+
+            background: #8b0000;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(255, 215, 0, 0.35);
+
+        }
+
+
+        #voiceStatus {
+
+            min-height: 24px;
+
+            margin-top: 5px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =====================================================
+           MOTIVAZIONE
+        ====================================================== */
+
+        #motivazione {
+
+            width: 94%;
+
+            max-width: 900px;
+
+            margin: 35px auto;
+
+            padding: 25px 20px;
+
+            background:
+                rgba(0, 0, 0, 0.25);
+
+            border-radius: 16px;
+
+        }
+
+
+        .motivation-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .motivation-card {
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            padding: 15px;
+
+            border-radius: 14px;
+
+        }
+
+
+        .motivation-card h3 {
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .motivation-card a {
+
+            display: inline-block;
+
+            color: white;
+
+            background: #d41414;
+
+            padding: 10px 15px;
+
+            border-radius: 15px;
+
+            text-decoration: none;
+
+            margin-top: 8px;
+
+        }
+
+
+        .motivation-card a:hover {
+
+            background: darkred;
+
+        }
+
+
+        /* =====================================================
+           CANVA
+        ====================================================== */
+
+        #canva-section {
+
+            width: 94%;
+
+            max-width: 900px;
+
+            margin: 35px auto;
+
+            padding: 25px 20px;
+
+            background:
+                rgba(0, 0, 0, 0.25);
+
+            border-radius: 16px;
+
+        }
+
+
+        .canva-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .canva-card {
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            padding: 15px;
+
+            border-radius: 13px;
+
+        }
+
+
+        .canva-card button {
+
+            background: #7b2ff7;
+
+        }
+
+
+        .canva-card button:hover {
+
+            background: #5c18c6;
+
+        }
+
+
+        /* =====================================================
+           MEDITAZIONE
+        ====================================================== */
+
+        #meditazione {
+
+            width: 94%;
+
+            max-width: 800px;
+
+            margin: 35px auto;
+
+            padding: 25px 20px;
+
+            background:
+                rgba(0, 0, 0, 0.25);
+
+            border-radius: 16px;
+
+        }
+
+
+        .meditation-card {
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            padding: 20px;
+
+            border-radius: 14px;
+
+            margin-top: 15px;
+
+        }
+
+
+        #meditationPhase {
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            margin: 20px 0 10px;
+
+        }
+
+
+        #meditationInstruction {
+
+            font-size: 19px;
+
+            min-height: 55px;
+
+            line-height: 1.5;
+
+        }
+
+
+        #meditationTimer {
+
+            font-size: 42px;
+
+            font-weight: bold;
+
+            margin: 15px 0;
+
+        }
+
+
+        #meditationStatus {
+
+            min-height: 24px;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================================
+           CALENDARIO
+        ====================================================== */
+
+        .calendar-container {
+
+            width: 94%;
+
+            max-width: 800px;
+
+            margin: 30px auto;
+
+            background:
+                rgba(0, 0, 0, 0.2);
+
+            padding: 15px;
+
+            border-radius: 15px;
+
+        }
+
+
+        .calendar-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        #monthTitle {
+
+            display: inline-block;
+
+            min-width: 150px;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+        }
+
+
+        #calendar {
+
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(7, 1fr);
+
+            gap: 5px;
+
+        }
+
+
+        .weekday {
+
+            background:
+                rgba(0, 0, 0, 0.35);
+
+            padding: 10px 5px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            font-size: 13px;
+
+        }
+
+
+        .day {
+
+            background:
+                rgba(255, 255, 255, 0.1);
+
+            padding: 10px 5px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            min-height: 75px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .day:hover {
+
+            background:
+                rgba(255, 255, 255, 0.2);
+
+        }
+
+
+        .day.today {
+
+            outline:
+                2px solid #ffd700;
+
+        }
+
+
+        .day-number {
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+        }
+
+
+        .event {
+
+            font-size: 11px;
+
+            color: yellow;
+
+            margin-top: 5px;
+
+            line-height: 1.25;
+
+            text-align: left;
+
+        }
+
+
+        .empty {
+
+            background: transparent;
+
+            cursor: default;
+
+        }
+
+
+        .calendar-help {
+
+            font-size: 13px;
+
+            opacity: 0.9;
+
+            margin-top: 12px;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        footer {
+
+            margin-top: 30px;
+
+            padding: 15px;
+
+            font-size: 14px;
+
+            opacity: 0.9;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 700px) {
+
+            input {
+                width: 90%;
+            }
+
+
+            nav a {
+
+                display: block;
+
+                margin: 8px;
+
+            }
+
+
+            #chat {
+
+                width: 94%;
+
+            }
+
+
+            #calendar {
+
+                gap: 3px;
+
+            }
+
+
+            .day {
+
+                min-height: 65px;
+
+                padding: 7px 4px;
+
+            }
+
+
+            .event {
+
+                font-size: 9px;
+
+            }
+
+
+            .weekday {
+
+                font-size: 10px;
+
+                padding: 8px 2px;
+
+            }
+
+
+            .oreste-intro {
+
+                width: 94%;
+
+            }
+
+
+            .motivation-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .canva-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            #meditationPhase {
+
+                font-size: 25px;
+
+            }
+
+
+            #meditationInstruction {
+
+                font-size: 17px;
+
+            }
+
         }
 
     </style>
@@ -186,617 +930,3380 @@
 <body>
 
 
-<!-- =========================================================
-     PANNELLO VOCE ALL'APERTURA
-========================================================= -->
+    <!-- =====================================================
+         TITOLO
+    ====================================================== -->
 
-<div id="voiceWelcome">
-
-    <div class="voice-welcome-box">
-
-        <img
-            class="welcome-avatar"
-            src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png"
-            alt="Avatar di Oreste AI"
-            width="130"
-            height="130"
-        >
-
-        <h2>🎤 Ciao, sono Oreste AI</h2>
-
-        <p>
-            Benvenuto nella pagina Download.
-        </p>
-
-        <p>
-            Premi il pulsante per attivare la mia voce.
-        </p>
-
-        <button
-            type="button"
-            onclick="attivaVoceOreste()"
-        >
-            🔊 Attiva la voce di Oreste AI
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
-<header>
-
-    <h1>⬇ Download Oreste AI</h1>
-
-    <p>
-        Assistente vocale AI italiano gratuito
-    </p>
-
-</header>
-
-
-<!-- =========================================================
-     NAVIGAZIONE
-========================================================= -->
-
-<nav>
-
-    <a href="index.html">Home</a>
-
-    <a href="assistente.html">Assistente</a>
-
-    <a href="download.html">Download</a>
-
-    <a href="blog.html">Blog</a>
-
-</nav>
-
-
-<main>
+    <h1>
+        🎤 Oreste AI
+    </h1>
 
 
     <!-- =====================================================
-         ORESTE AI
+         BENVENUTO VOCALE
     ====================================================== -->
 
-    <section class="card">
+    <section
+        class="oreste-intro"
+        aria-label="Benvenuto di Oreste AI"
+    >
 
-        <img
-            class="avatar"
-            src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png"
-            alt="Avatar di Oreste AI"
-            width="150"
-            height="150"
-        >
+        <div class="oreste-avatar">
+            🤖🎤
+        </div>
 
-        <h2>🎤 Scarica Oreste AI</h2>
-
-        <p>
-            Scarica Oreste AI per Windows.
-        </p>
+        <div class="oreste-intro-title">
+            Ciao, sono Oreste AI!
+        </div>
 
         <p>
-            Applicazione desktop Oreste AI per
-            Windows 10 e Windows 11.
+            Sono il tuo assistente vocale italiano.
+            Puoi parlarmi oppure scrivere un comando.
         </p>
-
-
-        <!-- DOWNLOAD ORESTE AI -->
-
-        <a
-            id="downloadOresteAI"
-            class="download-button"
-            href="https://github.com/testonuovo/oreste-ai/releases/tag/v1.0.1"
-            target="_blank"
-            rel="noopener noreferrer"
-            onclick="parlaDownloadOresteAI()"
-        >
-            ⬇️ Scarica Oreste AI
-        </a>
-
-
-        <!-- ASCOLTA ORESTE -->
 
         <button
-            type="button"
             class="voice-button"
-            onclick="parlaOreste()"
+            onclick="benvenutoOreste(true)"
         >
-            🔊 Ascolta Oreste AI
+            🔊 Ascolta Oreste
         </button>
 
-
-        <p
-            id="voiceStatus"
-            class="voice-status"
+        <button
+            class="secondary-button"
+            onclick="document.getElementById('input').focus()"
         >
-            🔊 Voce pronta.
-        </p>
+            💬 Inizia
+        </button>
 
-
-        <p class="version">
-
-            <small>
-                Versione 1.0.1 · Windows 10 e Windows 11 · 64 bit
-            </small>
-
-        </p>
+        <div id="introVoiceStatus"></div>
 
     </section>
 
 
-
     <!-- =====================================================
-         ORESTE AI CLEANER
+         MENU ORIGINALE
     ====================================================== -->
 
-    <section class="download-cleaner">
-
-        <h2>🧹 Oreste AI Cleaner</h2>
-
-        <p>
-            Lo strumento di pulizia per Windows di Oreste AI.
-        </p>
-
-        <p>
-            Pulisci in modo semplice e sicuro i file temporanei
-            del tuo computer Windows.
-        </p>
-
-        <p>
-
-            <strong>
-                🎤 "Oreste, pulisci il computer."
-            </strong>
-
-        </p>
-
-
-        <!-- DOWNLOAD CLEANER -->
-
-        <a
-            id="downloadOresteAICleaner"
-            class="download-button"
-            href="https://github.com/testonuovo/oreste-ai/releases/download/v1.0.0/OresteAICleanerSetup.exe"
-            download
-            onclick="parlaDownloadCleaner()"
-        >
-            📥 Scarica Oreste AI Cleaner
-        </a>
-
-
-        <p class="version">
-
-            <small>
-                Versione 1.0.0 · Compatibile con Windows 10 e Windows 11.
-            </small>
-
-        </p>
-
-
-        <p>
-
-            <small>
-                Durante l'installazione potrebbe essere richiesta
-                l'autorizzazione dell'amministratore.
-            </small>
-
-        </p>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         FUNZIONI
-    ====================================================== -->
-
-    <section class="card">
+    <nav>
 
         <h2>
-            Cosa include Oreste AI
+            Oreste AI: assistente vocale italiano online gratis
         </h2>
 
 
-        <ul>
+        <section>
 
-            <li>
-                ✔ Assistente vocale AI
-            </li>
+            <p>
+                Oreste AI è un assistente vocale italiano online
+                gratis che puoi utilizzare direttamente dal browser.
+                Puoi parlare con Oreste AI attraverso il microfono
+                oppure scrivere i tuoi comandi e ricevere risposte
+                direttamente online.
+            </p>
 
-            <li>
-                ✔ Comandi vocali in italiano
-            </li>
 
-            <li>
-                ✔ Ricerca Google automatica
-            </li>
+            <p>
+                Con Oreste AI puoi utilizzare comandi vocali,
+                controllare il meteo, impostare timer e sveglie,
+                effettuare ricerche online, aprire siti e utilizzare
+                diversi strumenti direttamente dal browser.
+            </p>
 
-            <li>
-                ✔ Apertura siti web
-            </li>
 
-            <li>
-                ✔ Versione web gratuita
-            </li>
+            <p>
+                L'obiettivo di Oreste AI è offrire un assistente
+                vocale italiano semplice, accessibile e utilizzabile
+                online senza installazioni complicate.
+            </p>
 
-            <li>
-                ✔ Integrazione con Oreste AI Cleaner
-            </li>
+        </section>
 
-        </ul>
+
+        <h2>
+            Come funziona Oreste AI
+        </h2>
+
+
+        <p>
+            Oreste AI è un assistente vocale italiano online gratis,
+            pensato per aiutarti con comandi vocali, chat e strumenti
+            utili direttamente dal browser.
+        </p>
+
+
+        <a href="index.html">
+            🏠 Home
+        </a>
+
+
+        <a href="assistente.html">
+            🎤 Assistente
+        </a>
+
+
+        <a href="chat.html">
+            💬 Chat
+        </a>
+
+
+        <a href="#meditazione">
+            🌿 Meditazione
+        </a>
+
+
+        <a href="#motivazione">
+            🌻 Motivazione
+        </a>
+
+
+        <a href="download.html">
+            📥 Download
+        </a>
+
+
+        <a href="blog.html">
+            📰 Blog
+        </a>
+
+
+        <a href="chi-siamo.html">
+            👤 Chi siamo
+        </a>
+
+
+        <a href="contatti.html">
+            📞 Contatti
+        </a>
+
+
+        <a href="dashboard.html">
+            📊 Dashboard
+        </a>
+
+
+        <a href="os.html">
+            🖥️ Oreste OS
+        </a>
+
+
+        <a href="storybook.html">
+            📚 Storybook
+        </a>
+
+
+        <a href="storia.html">
+            📖 La Storia
+        </a>
+
+
+        <a href="funzioni.html">
+            ⚙️ Funzioni
+        </a>
+
+
+        <a href="tecnologie%20oreste%20ai.html">
+            💻 Tecnologie
+        </a>
+
+
+        <a href="comandi-oreste-ai.html">
+            🎤 Comandi
+        </a>
+
+
+        <a href="mondiali2026.html">
+            🏆 Mondiali 2026
+        </a>
+
+
+        <a href="spagna-campione-del-mondo-2026.html">
+            🏆 Spagna campione del mondo 2026
+        </a>
+
+
+        <a
+            href="#canva-section"
+        >
+            🎨 Impara Canva
+        </a>
+
+
+        <a href="assistente-vocale-italiano-online-gratis.html">
+            Scopri Oreste AI
+        </a>
+
+    </nav>
+
+
+    <!-- =====================================================
+         INPUT
+    ====================================================== -->
+
+    <div class="input-container">
+
+        <input
+            id="input"
+            type="text"
+            placeholder="Scrivi o parla..."
+            autocomplete="off"
+            aria-label="Comando per Oreste AI"
+            onkeydown="if(event.key === 'Enter') ask();"
+        >
+
+
+        <br>
+
+
+        <button onclick="ask()">
+            Invia
+        </button>
+
+
+        <button
+            id="voiceButton"
+            class="voice-button"
+            onclick="voice()"
+        >
+            🎤 Parla
+        </button>
+
+
+        <button
+            class="secondary-button"
+            onclick="pulisciChat()"
+        >
+            🗑️ Pulisci chat
+        </button>
+
+
+        <div id="voiceStatus"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CHAT
+    ====================================================== -->
+
+    <div id="chat"></div>
+
+
+    <!-- =====================================================
+         MOTIVAZIONE + VIDEO
+    ====================================================== -->
+
+    <section id="motivazione">
+
+        <h2>
+            🌻 Motivazione con Oreste AI
+        </h2>
+
+
+        <p>
+            Una piccola dose di motivazione può aiutarti
+            a ripartire, concentrarti e affrontare meglio
+            la giornata.
+        </p>
+
+
+        <div class="motivation-grid">
+
+
+            <div class="motivation-card">
+
+                <h3>
+                    💪 Non mollare
+                </h3>
+
+                <p>
+                    Ogni passo conta. Anche quando sembra
+                    piccolo, ti sta portando avanti.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=video+motivazionale+non+mollare"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ▶️ Video motivazionale
+                </a>
+
+            </div>
+
+
+            <div class="motivation-card">
+
+                <h3>
+                    🔥 Disciplina
+                </h3>
+
+                <p>
+                    La costanza quotidiana può diventare
+                    più importante della motivazione del momento.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=video+motivazionale+disciplina"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ▶️ Video sulla disciplina
+                </a>
+
+            </div>
+
+
+            <div class="motivation-card">
+
+                <h3>
+                    🚀 Successo
+                </h3>
+
+                <p>
+                    Continua a lavorare sui tuoi obiettivi
+                    e costruisci il tuo percorso un giorno alla volta.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=video+motivazionale+successo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ▶️ Video sul successo
+                </a>
+
+            </div>
+
+
+            <div class="motivation-card">
+
+                <h3>
+                    🌅 Ricominciare
+                </h3>
+
+                <p>
+                    Non è mai troppo tardi per fermarsi,
+                    respirare e ripartire.
+                </p>
+
+                <a
+                    href="https://www.youtube.com/results?search_query=video+motivazionale+ricominciare"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ▶️ Video per ripartire
+                </a>
+
+            </div>
+
+
+        </div>
 
     </section>
 
 
-</main>
+    <!-- =====================================================
+         IMPARA CANVA
+    ====================================================== -->
+
+    <section id="canva-section">
+
+        <h2>
+            🎨 Impara Canva con Oreste AI
+        </h2>
 
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer>
-
-    <p>
-        © Oreste AI
-    </p>
-
-</footer>
+        <p>
+            Scopri alcune delle funzioni più utili di Canva
+            direttamente da Oreste AI.
+        </p>
 
 
+        <div class="canva-grid">
 
-<script>
+
+            <div class="canva-card">
+
+                <h3>
+                    🖼️ Mockup
+                </h3>
+
+                <p>
+                    Crea presentazioni realistiche dei tuoi progetti.
+                </p>
+
+                <button
+                    onclick="apriCanvaFunzione('mockup')"
+                >
+                    Apri Canva
+                </button>
+
+            </div>
 
 
-/* =========================================================
-   TROVA VOCE ITALIANA
-========================================================= */
+            <div class="canva-card">
 
-function trovaVoceItaliana() {
+                <h3>
+                    📊 Presentazioni
+                </h3>
 
-    if (!("speechSynthesis" in window)) {
-        return null;
-    }
+                <p>
+                    Crea presentazioni professionali.
+                </p>
 
-    const voci = speechSynthesis.getVoices();
+                <button
+                    onclick="apriCanvaFunzione('presentazioni')"
+                >
+                    Apri Canva
+                </button>
 
-    if (!voci || voci.length === 0) {
-        return null;
-    }
+            </div>
 
-    return (
 
-        voci.find(function(voce) {
+            <div class="canva-card">
 
-            return (
-                voce.lang &&
-                voce.lang.toLowerCase() === "it-it"
+                <h3>
+                    🏷️ Logo
+                </h3>
+
+                <p>
+                    Crea un logo per il tuo progetto.
+                </p>
+
+                <button
+                    onclick="apriCanvaFunzione('logo')"
+                >
+                    Crea logo
+                </button>
+
+            </div>
+
+
+            <div class="canva-card">
+
+                <h3>
+                    📄 Volantini
+                </h3>
+
+                <p>
+                    Crea volantini e materiale promozionale.
+                </p>
+
+                <button
+                    onclick="apriCanvaFunzione('volantini')"
+                >
+                    Crea volantino
+                </button>
+
+            </div>
+
+
+            <div class="canva-card">
+
+                <h3>
+                    🎬 Video
+                </h3>
+
+                <p>
+                    Crea e modifica video.
+                </p>
+
+                <button
+                    onclick="apriCanvaFunzione('video')"
+                >
+                    Crea video
+                </button>
+
+            </div>
+
+
+            <div class="canva-card">
+
+                <h3>
+                    📱 Social
+                </h3>
+
+                <p>
+                    Crea contenuti per i social network.
+                </p>
+
+                <button
+                    onclick="apriCanvaFunzione('social')"
+                >
+                    Crea contenuto
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MEDITAZIONE
+    ====================================================== -->
+
+    <section id="meditazione">
+
+        <h2>
+            🌿 Meditazione con Oreste AI
+        </h2>
+
+
+        <p>
+            Fermati per qualche minuto, respira lentamente
+            e lascia che Oreste AI ti accompagni.
+        </p>
+
+
+        <div class="meditation-card">
+
+            <h3>
+                🧘 Respirazione guidata
+            </h3>
+
+
+            <div id="meditationPhase">
+                Pronto
+            </div>
+
+
+            <div id="meditationInstruction">
+                Premi "Inizia meditazione" per cominciare.
+            </div>
+
+
+            <div id="meditationTimer">
+                02:00
+            </div>
+
+
+            <button
+                onclick="avviaMeditazione()"
+            >
+                ▶️ Inizia meditazione
+            </button>
+
+
+            <button
+                class="secondary-button"
+                onclick="fermaMeditazione()"
+            >
+                ⏹️ Ferma
+            </button>
+
+
+            <button
+                class="secondary-button"
+                onclick="voceMeditazione()"
+            >
+                🔊 Voce meditazione
+            </button>
+
+
+            <div id="meditationStatus"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CALENDARIO
+    ====================================================== -->
+
+    <div class="calendar-container">
+
+        <h2>
+            📅 Calendario Mensile
+        </h2>
+
+
+        <div class="calendar-header">
+
+            <button
+                class="secondary-button"
+                onclick="prevMonth()"
+            >
+                ⬅️
+            </button>
+
+
+            <span id="monthTitle"></span>
+
+
+            <button
+                class="secondary-button"
+                onclick="nextMonth()"
+            >
+                ➡️
+            </button>
+
+        </div>
+
+
+        <div id="calendar"></div>
+
+
+        <div class="calendar-help">
+            Clicca su un giorno per aggiungere un evento.
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           CHAT
+        ====================================================== */
+
+        function add(nome, testo) {
+
+            const chat =
+                document.getElementById("chat");
+
+            if (!chat) {
+                return;
+            }
+
+
+            const messaggio =
+                document.createElement("div");
+
+
+            messaggio.className =
+                "msg";
+
+
+            const nomeElemento =
+                document.createElement("b");
+
+
+            nomeElemento.textContent =
+                nome + ": ";
+
+
+            messaggio.appendChild(
+                nomeElemento
             );
 
-        })
 
-        ||
-
-        voci.find(function(voce) {
-
-            return (
-                voce.lang &&
-                voce.lang.toLowerCase().startsWith("it")
+            messaggio.appendChild(
+                document.createTextNode(
+                    String(testo ?? "")
+                )
             );
 
-        })
 
-        ||
+            chat.appendChild(
+                messaggio
+            );
 
-        null
 
-    );
-
-}
-
-
-/* =========================================================
-   FUNZIONE VOCE GENERALE
-========================================================= */
-
-function parlaTesto(testo) {
-
-    if (!("speechSynthesis" in window)) {
-
-        return false;
-
-    }
-
-    const messaggio =
-        new SpeechSynthesisUtterance(testo);
-
-    messaggio.lang = "it-IT";
-
-    messaggio.rate = 0.95;
-
-    messaggio.pitch = 1;
-
-
-    const voce =
-        trovaVoceItaliana();
-
-    if (voce) {
-
-        messaggio.voice = voce;
-
-    }
-
-
-    speechSynthesis.cancel();
-
-    speechSynthesis.speak(messaggio);
-
-
-    return true;
-
-}
-
-
-/* =========================================================
-   ORESTE PARLA
-========================================================= */
-
-function parlaOreste() {
-
-    const status =
-        document.getElementById("voiceStatus");
-
-
-    if (!("speechSynthesis" in window)) {
-
-        if (status) {
-
-            status.textContent =
-                "⚠️ La sintesi vocale non è disponibile in questo browser.";
-
-        }
-
-        return;
-
-    }
-
-
-    const testo =
-        "Ciao, sono Oreste AI. " +
-        "Benvenuto nella pagina Download. " +
-        "Qui puoi scaricare Oreste AI per Windows " +
-        "e Oreste AI Cleaner.";
-
-
-    speechSynthesis.cancel();
-
-
-    const messaggio =
-        new SpeechSynthesisUtterance(testo);
-
-
-    messaggio.lang = "it-IT";
-
-    messaggio.rate = 0.95;
-
-    messaggio.pitch = 1;
-
-
-    const voce =
-        trovaVoceItaliana();
-
-    if (voce) {
-
-        messaggio.voice = voce;
-
-    }
-
-
-    messaggio.onstart = function() {
-
-        if (status) {
-
-            status.textContent =
-                "🔊 Oreste AI sta parlando...";
-
-        }
-
-    };
-
-
-    messaggio.onend = function() {
-
-        if (status) {
-
-            status.textContent =
-                "✅ Voce di Oreste AI attiva.";
-
-        }
-
-    };
-
-
-    messaggio.onerror = function() {
-
-        if (status) {
-
-            status.textContent =
-                "⚠️ Errore nella riproduzione della voce.";
-
-        }
-
-    };
-
-
-    speechSynthesis.speak(messaggio);
-
-}
-
-
-/* =========================================================
-   ATTIVA VOCE ALL'APERTURA
-========================================================= */
-
-function attivaVoceOreste() {
-
-    const pannello =
-        document.getElementById("voiceWelcome");
-
-
-    const status =
-        document.getElementById("voiceStatus");
-
-
-    if (!("speechSynthesis" in window)) {
-
-        if (status) {
-
-            status.textContent =
-                "⚠️ La sintesi vocale non è disponibile.";
-
-        }
-
-        if (pannello) {
-
-            pannello.style.display = "none";
-
-        }
-
-        return;
-
-    }
-
-
-    const testo =
-        "Ciao, sono Oreste AI. " +
-        "Benvenuto nella pagina Download. " +
-        "Qui puoi scaricare Oreste AI per Windows " +
-        "e Oreste AI Cleaner.";
-
-
-    speechSynthesis.cancel();
-
-
-    const messaggio =
-        new SpeechSynthesisUtterance(testo);
-
-
-    messaggio.lang = "it-IT";
-
-    messaggio.rate = 0.95;
-
-    messaggio.pitch = 1;
-
-
-    const voce =
-        trovaVoceItaliana();
-
-
-    if (voce) {
-
-        messaggio.voice = voce;
-
-    }
-
-
-    messaggio.onstart = function() {
-
-        if (pannello) {
-
-            pannello.style.display = "none";
-
+            chat.scrollTop =
+                chat.scrollHeight;
         }
 
 
-        if (status) {
+        function pulisciChat() {
 
-            status.textContent =
-                "🔊 Oreste AI sta parlando...";
+            const chat =
+                document.getElementById(
+                    "chat"
+                );
+
+
+            if (chat) {
+
+                chat.innerHTML = "";
+
+            }
+        }
+
+
+        /* =====================================================
+           VOCE
+        ====================================================== */
+
+        function trovaVoceItaliana() {
+
+            if (
+                !("speechSynthesis" in window)
+            ) {
+
+                return null;
+
+            }
+
+
+            const voci =
+                window.speechSynthesis
+                    .getVoices();
+
+
+            return (
+                voci.find(
+                    function(voce) {
+
+                        return (
+                            voce.lang &&
+                            voce.lang
+                                .toLowerCase()
+                                .startsWith("it")
+                        );
+
+                    }
+                ) || null
+            );
+        }
+
+
+        function speak(testo) {
+
+            if (
+                !("speechSynthesis" in window)
+            ) {
+
+                return;
+
+            }
+
+
+            if (!testo) {
+
+                return;
+
+            }
+
+
+            window.speechSynthesis.cancel();
+
+
+            const voce =
+                new SpeechSynthesisUtterance(
+                    String(testo)
+                );
+
+
+            voce.lang =
+                "it-IT";
+
+
+            voce.rate =
+                0.95;
+
+
+            voce.pitch =
+                1;
+
+
+            voce.volume =
+                1;
+
+
+            const voceItaliana =
+                trovaVoceItaliana();
+
+
+            if (voceItaliana) {
+
+                voce.voice =
+                    voceItaliana;
+
+            }
+
+
+            window.speechSynthesis.speak(
+                voce
+            );
+        }
+
+
+        /* =====================================================
+           BENVENUTO ORESTE
+        ====================================================== */
+
+        let benvenutoRiprodotto =
+            false;
+
+
+        function benvenutoOreste(
+            forza = false
+        ) {
+
+            if (
+                !forza &&
+                benvenutoRiprodotto
+            ) {
+
+                return;
+
+            }
+
+
+            benvenutoRiprodotto =
+                true;
+
+
+            const testo =
+                "Ciao! Sono Oreste AI. " +
+                "Sono pronto ad aiutarti. " +
+                "Puoi parlarmi oppure scrivere un comando.";
+
+
+            const stato =
+                document.getElementById(
+                    "introVoiceStatus"
+                );
+
+
+            if (stato) {
+
+                stato.textContent =
+                    "🔊 Oreste sta parlando...";
+
+            }
+
+
+            speak(
+                testo
+            );
+
+
+            setTimeout(
+                function() {
+
+                    if (stato) {
+
+                        stato.textContent =
+                            "✅ Oreste è pronto.";
+
+                    }
+
+                },
+                2500
+            );
+        }
+
+
+        /* =====================================================
+           MEMORIA
+        ====================================================== */
+
+        function salvaNome(nome) {
+
+            localStorage.setItem(
+                "nomeAI",
+                nome
+            );
+        }
+
+
+        function getNome() {
+
+            return localStorage.getItem(
+                "nomeAI"
+            );
+        }
+
+
+        /* =====================================================
+           EVENTI
+        ====================================================== */
+
+        function getEventi() {
+
+            try {
+
+                const dati =
+                    localStorage.getItem(
+                        "eventiAI"
+                    );
+
+
+                if (!dati) {
+
+                    return [];
+
+                }
+
+
+                const arr =
+                    JSON.parse(dati);
+
+
+                if (
+                    !Array.isArray(arr)
+                ) {
+
+                    return [];
+
+                }
+
+
+                return arr;
+
+            }
+            catch (errore) {
+
+                console.error(
+                    "Errore lettura eventi:",
+                    errore
+                );
+
+
+                return [];
+            }
+        }
+
+
+        function salvaEvento(evento) {
+
+            const eventi =
+                getEventi();
+
+
+            eventi.push(
+                evento
+            );
+
+
+            localStorage.setItem(
+                "eventiAI",
+                JSON.stringify(eventi)
+            );
+        }
+
+
+        function eventiDelGiorno(
+            dataString
+        ) {
+
+            return getEventi().filter(
+                function(evento) {
+
+                    return (
+                        evento.data ===
+                        dataString
+                    );
+
+                }
+            );
+        }
+
+
+        /* =====================================================
+           TIMER
+        ====================================================== */
+
+        let timer =
+            null;
+
+
+        function startTimer(
+            secondi
+        ) {
+
+            secondi =
+                parseInt(
+                    secondi,
+                    10
+                );
+
+
+            if (
+                isNaN(secondi) ||
+                secondi <= 0
+            ) {
+
+                return (
+                    "Scrivi, ad esempio: timer 30"
+                );
+            }
+
+
+            if (timer) {
+
+                clearInterval(
+                    timer
+                );
+
+                timer =
+                    null;
+            }
+
+
+            let tempo =
+                secondi;
+
+
+            add(
+                "⏱️",
+                "Timer avviato: " +
+                secondi +
+                " secondi."
+            );
+
+
+            timer =
+                setInterval(
+                    function() {
+
+                        tempo--;
+
+
+                        if (
+                            tempo <= 0
+                        ) {
+
+                            clearInterval(
+                                timer
+                            );
+
+
+                            timer =
+                                null;
+
+
+                            add(
+                                "⏱️",
+                                "FINITO!"
+                            );
+
+
+                            speak(
+                                "Timer terminato"
+                            );
+
+
+                            alert(
+                                "⏰ Timer finito!"
+                            );
+
+
+                            return;
+                        }
+
+
+                        add(
+                            "⏱️",
+                            tempo +
+                            " secondi"
+                        );
+
+                    },
+                    1000
+                );
+
+
+            return (
+                "Timer avviato per " +
+                secondi +
+                " secondi."
+            );
+        }
+
+
+        /* =====================================================
+           SVEGLIA
+        ====================================================== */
+
+        let svegliaTimer =
+            null;
+
+
+        function sveglia(
+            orario
+        ) {
+
+            if (!orario) {
+
+                return (
+                    "Scrivi, ad esempio: sveglia 08:30"
+                );
+            }
+
+
+            const parti =
+                orario
+                    .trim()
+                    .split(":");
+
+
+            if (
+                parti.length !== 2
+            ) {
+
+                return (
+                    "Scrivi, ad esempio: sveglia 08:30"
+                );
+            }
+
+
+            const h =
+                parseInt(
+                    parti[0],
+                    10
+                );
+
+
+            const m =
+                parseInt(
+                    parti[1],
+                    10
+                );
+
+
+            if (
+                isNaN(h) ||
+                isNaN(m) ||
+                h < 0 ||
+                h > 23 ||
+                m < 0 ||
+                m > 59
+            ) {
+
+                return (
+                    "Orario non valido."
+                );
+            }
+
+
+            const adesso =
+                new Date();
+
+
+            const obiettivo =
+                new Date();
+
+
+            obiettivo.setHours(h);
+
+            obiettivo.setMinutes(m);
+
+            obiettivo.setSeconds(0);
+
+            obiettivo.setMilliseconds(0);
+
+
+            if (
+                obiettivo <=
+                adesso
+            ) {
+
+                obiettivo.setDate(
+                    obiettivo.getDate() + 1
+                );
+            }
+
+
+            const differenza =
+                obiettivo - adesso;
+
+
+            if (
+                svegliaTimer
+            ) {
+
+                clearTimeout(
+                    svegliaTimer
+                );
+
+            }
+
+
+            svegliaTimer =
+                setTimeout(
+                    function() {
+
+                        add(
+                            "⏰",
+                            "SVEGLIA!"
+                        );
+
+
+                        speak(
+                            "Sveglia!"
+                        );
+
+
+                        alert(
+                            "⏰ SVEGLIA!"
+                        );
+
+
+                        svegliaTimer =
+                            null;
+
+                    },
+                    differenza
+                );
+
+
+            return (
+                "Sveglia impostata alle " +
+                orario
+            );
+        }
+
+
+        /* =====================================================
+           METEO
+        ====================================================== */
+
+        async function meteo(
+            citta
+        ) {
+
+            if (!citta) {
+
+                return (
+                    "Dimmi quale città vuoi controllare."
+                );
+            }
+
+
+            try {
+
+                const r =
+                    await fetch(
+                        "https://geocoding-api.open-meteo.com/v1/search" +
+                        "?name=" +
+                        encodeURIComponent(
+                            citta
+                        ) +
+                        "&count=1" +
+                        "&language=it" +
+                        "&format=json"
+                    );
+
+
+                if (!r.ok) {
+
+                    throw new Error(
+                        "Errore geocoding"
+                    );
+                }
+
+
+                const dati =
+                    await r.json();
+
+
+                if (
+                    !dati.results ||
+                    dati.results.length === 0
+                ) {
+
+                    return (
+                        "Città non trovata."
+                    );
+                }
+
+
+                const risultato =
+                    dati.results[0];
+
+
+                const lat =
+                    risultato.latitude;
+
+
+                const lon =
+                    risultato.longitude;
+
+
+                const w =
+                    await fetch(
+                        "https://api.open-meteo.com/v1/forecast" +
+                        "?latitude=" +
+                        lat +
+                        "&longitude=" +
+                        lon +
+                        "&current_weather=true"
+                    );
+
+
+                if (!w.ok) {
+
+                    throw new Error(
+                        "Errore meteo"
+                    );
+                }
+
+
+                const tempo =
+                    await w.json();
+
+
+                if (
+                    !tempo.current_weather
+                ) {
+
+                    return (
+                        "Dati meteo non disponibili."
+                    );
+                }
+
+
+                return (
+                    "🌤️ " +
+                    risultato.name +
+                    ": " +
+                    tempo
+                        .current_weather
+                        .temperature +
+                    " °C."
+                );
+
+            }
+            catch (errore) {
+
+                console.error(
+                    "Errore meteo:",
+                    errore
+                );
+
+
+                return (
+                    "Errore durante la richiesta del meteo."
+                );
+            }
+        }
+
+
+        /* =====================================================
+           SITI
+        ====================================================== */
+
+        function openSite(
+            testo
+        ) {
+
+            const siti = {
+
+                google:
+                    "https://www.google.com/",
+
+                youtube:
+                    "https://www.youtube.com/",
+
+                facebook:
+                    "https://www.facebook.com/",
+
+                instagram:
+                    "https://www.instagram.com/",
+
+                tiktok:
+                    "https://www.tiktok.com/",
+
+                canva:
+                    "https://www.canva.com/",
+
+                whatsapp:
+                    "https://web.whatsapp.com/",
+
+                github:
+                    "https://github.com/",
+
+                gmail:
+                    "https://mail.google.com/",
+
+                email:
+                    "https://mail.google.com/",
+
+                pinterest:
+                    "https://www.pinterest.com/",
+
+                linkedin:
+                    "https://www.linkedin.com/"
+            };
+
+
+            for (
+                const nome in siti
+            ) {
+
+                if (
+                    testo.includes(
+                        nome
+                    )
+                ) {
+
+                    window.open(
+                        siti[nome],
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
+
+
+                    return (
+                        "Apro " +
+                        nome +
+                        "."
+                    );
+                }
+            }
+
+
+            return null;
+        }
+
+
+        /* =====================================================
+           CANVA
+        ====================================================== */
+
+        function canva(
+            testo
+        ) {
+
+            const funzioni = {
+
+                mockup:
+                    "https://www.canva.com/mockups/",
+
+                presentazioni:
+                    "https://www.canva.com/presentations/",
+
+                logo:
+                    "https://www.canva.com/create/logos/",
+
+                volantini:
+                    "https://www.canva.com/create/flyers/",
+
+                video:
+                    "https://www.canva.com/create/videos/",
+
+                poster:
+                    "https://www.canva.com/create/posters/",
+
+                curriculum:
+                    "https://www.canva.com/create/resumes/",
+
+                social:
+                    "https://www.canva.com/create/social-media/",
+
+                biglietti:
+                    "https://www.canva.com/create/cards/"
+            };
+
+
+            for (
+                const comando in funzioni
+            ) {
+
+                if (
+                    testo.includes(
+                        comando
+                    )
+                ) {
+
+                    window.open(
+                        funzioni[comando],
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
+
+
+                    return (
+                        "Apro Canva per " +
+                        comando +
+                        "."
+                    );
+                }
+            }
+
+
+            return null;
+        }
+
+
+        function apriCanva() {
+
+            window.open(
+                "https://www.canva.com/",
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+
+            add(
+                "🎨",
+                "Apro Canva."
+            );
+
+
+            speak(
+                "Apro Canva."
+            );
+        }
+
+
+        function apriCanvaFunzione(
+            funzione
+        ) {
+
+            const risultato =
+                canva(
+                    funzione
+                );
+
+
+            if (!risultato) {
+
+                apriCanva();
+
+            }
 
         }
 
-    };
+
+        /* =====================================================
+           DOWNLOAD
+        ====================================================== */
+
+        function scaricaProgramma(
+            nome
+        ) {
+
+            if (!nome) {
+
+                return (
+                    "Dimmi quale programma vuoi cercare."
+                );
+            }
 
 
-    messaggio.onend = function() {
+            const ricerca =
+                nome +
+                " download ufficiale";
 
-        if (status) {
 
-            status.textContent =
-                "✅ Voce di Oreste AI attiva.";
+            window.open(
+                "https://www.google.com/search?q=" +
+                encodeURIComponent(
+                    ricerca
+                ),
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+
+            return (
+                "Cerco il download ufficiale di " +
+                nome
+            );
+        }
+
+
+        /* =====================================================
+           CALENDARIO
+        ====================================================== */
+
+        let date =
+            new Date();
+
+
+        const mesi = [
+
+            "Gennaio",
+            "Febbraio",
+            "Marzo",
+            "Aprile",
+            "Maggio",
+            "Giugno",
+            "Luglio",
+            "Agosto",
+            "Settembre",
+            "Ottobre",
+            "Novembre",
+            "Dicembre"
+
+        ];
+
+
+        const giorni = [
+
+            "Lun",
+            "Mar",
+            "Mer",
+            "Gio",
+            "Ven",
+            "Sab",
+            "Dom"
+
+        ];
+
+
+        function getDataKey(
+            anno,
+            mese,
+            giorno
+        ) {
+
+            return (
+                anno +
+                "-" +
+                String(
+                    mese + 1
+                ).padStart(
+                    2,
+                    "0"
+                ) +
+                "-" +
+                String(
+                    giorno
+                ).padStart(
+                    2,
+                    "0"
+                )
+            );
+        }
+
+
+        function render() {
+
+            const cal =
+                document.getElementById(
+                    "calendar"
+                );
+
+
+            const monthTitle =
+                document.getElementById(
+                    "monthTitle"
+                );
+
+
+            if (
+                !cal ||
+                !monthTitle
+            ) {
+
+                return;
+
+            }
+
+
+            cal.innerHTML =
+                "";
+
+
+            const y =
+                date.getFullYear();
+
+
+            const m =
+                date.getMonth();
+
+
+            monthTitle.innerText =
+                mesi[m] +
+                " " +
+                y;
+
+
+            giorni.forEach(
+                function(giorno) {
+
+                    const elemento =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    elemento.className =
+                        "weekday";
+
+
+                    elemento.textContent =
+                        giorno;
+
+
+                    cal.appendChild(
+                        elemento
+                    );
+
+                }
+            );
+
+
+            const primoGiorno =
+                new Date(
+                    y,
+                    m,
+                    1
+                ).getDay();
+
+
+            const offset =
+                primoGiorno === 0
+                    ? 6
+                    : primoGiorno - 1;
+
+
+            const giorniNelMese =
+                new Date(
+                    y,
+                    m + 1,
+                    0
+                ).getDate();
+
+
+            for (
+                let i = 0;
+                i < offset;
+                i++
+            ) {
+
+                const elemento =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                elemento.className =
+                    "day empty";
+
+
+                cal.appendChild(
+                    elemento
+                );
+
+            }
+
+
+            const oggi =
+                new Date();
+
+
+            for (
+                let d = 1;
+                d <= giorniNelMese;
+                d++
+            ) {
+
+                const div =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                div.className =
+                    "day";
+
+
+                const dataKey =
+                    getDataKey(
+                        y,
+                        m,
+                        d
+                    );
+
+
+                if (
+                    oggi.getFullYear() === y &&
+                    oggi.getMonth() === m &&
+                    oggi.getDate() === d
+                ) {
+
+                    div.classList.add(
+                        "today"
+                    );
+
+                }
+
+
+                const numero =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                numero.className =
+                    "day-number";
+
+
+                numero.textContent =
+                    d;
+
+
+                div.appendChild(
+                    numero
+                );
+
+
+                const eventi =
+                    eventiDelGiorno(
+                        dataKey
+                    );
+
+
+                eventi.forEach(
+                    function(evento) {
+
+                        const eventoDiv =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        eventoDiv.className =
+                            "event";
+
+
+                        eventoDiv.textContent =
+                            "• " +
+                            evento.testo;
+
+
+                        div.appendChild(
+                            eventoDiv
+                        );
+
+                    }
+                );
+
+
+                div.onclick =
+                    function() {
+
+                        const ev =
+                            prompt(
+                                "Evento per " +
+                                dataKey +
+                                ":"
+                            );
+
+
+                        if (!ev) {
+
+                            return;
+
+                        }
+
+
+                        salvaEvento({
+
+                            data:
+                                dataKey,
+
+                            testo:
+                                ev
+
+                        });
+
+
+                        render();
+
+
+                        add(
+                            "📅",
+                            "Evento salvato per " +
+                            dataKey +
+                            ": " +
+                            ev
+                        );
+
+                    };
+
+
+                cal.appendChild(
+                    div
+                );
+
+            }
 
         }
 
-    };
 
+        function prevMonth() {
 
-    messaggio.onerror = function() {
+            date.setMonth(
+                date.getMonth() - 1
+            );
 
-        if (status) {
-
-            status.textContent =
-                "⚠️ La voce non è disponibile.";
-
+            render();
         }
 
-    };
+
+        function nextMonth() {
+
+            date.setMonth(
+                date.getMonth() + 1
+            );
+
+            render();
+        }
 
 
-    speechSynthesis.speak(messaggio);
+        /* =====================================================
+           NORMALIZZAZIONE
+        ====================================================== */
 
-}
+        function normalizza(
+            testo
+        ) {
 
-
-/* =========================================================
-   DOWNLOAD ORESTE AI + VOCE
-========================================================= */
-
-function parlaDownloadOresteAI() {
-
-    parlaTesto(
-        "Scarico Oreste AI per Windows"
-    );
-
-}
-
-
-/* =========================================================
-   DOWNLOAD CLEANER + VOCE
-========================================================= */
-
-function parlaDownloadCleaner() {
-
-    parlaTesto(
-        "Scarico Oreste AI Cleaner per Windows"
-    );
-
-}
+            return String(
+                testo || ""
+            )
+                .toLowerCase()
+                .trim()
+                .replace(
+                    /[!?.,;]/g,
+                    " "
+                )
+                .replace(
+                    /\s+/g,
+                    " "
+                );
+        }
 
 
-/* =========================================================
-   CARICAMENTO DELLE VOCI DEL BROWSER
-========================================================= */
+        /* =====================================================
+           GOOGLE
+        ====================================================== */
 
-if ("speechSynthesis" in window) {
+        function cercaGoogle(
+            query
+        ) {
 
-    speechSynthesis.onvoiceschanged =
-        function() {
+            if (!query) {
 
-            trovaVoceItaliana();
+                return (
+                    "Scrivi qualcosa da cercare."
+                );
 
-        };
-
-}
+            }
 
 
-</script>
+            window.open(
+                "https://www.google.com/search?q=" +
+                encodeURIComponent(
+                    query
+                ),
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+
+            return (
+                "Cerco su Google: " +
+                query
+            );
+        }
+
+
+        /* =====================================================
+           ORESTE AI
+        ====================================================== */
+
+        async function handle(
+            testo
+        ) {
+
+            const text =
+                normalizza(
+                    testo
+                );
+
+
+            if (!text) {
+
+                return (
+                    "Scrivimi qualcosa."
+                );
+            }
+
+
+            /* =================================================
+               CIAO
+            ================================================= */
+
+            if (
+                text === "ciao" ||
+                text.includes(
+                    "ciao oreste"
+                ) ||
+                text.startsWith(
+                    "ciao "
+                )
+            ) {
+
+                const nome =
+                    getNome();
+
+
+                return nome
+
+                    ? "Ciao " +
+                      nome +
+                      "! 👋"
+
+                    : "Ciao! 👋";
+
+            }
+
+
+            /* =================================================
+               NOME
+            ================================================= */
+
+            if (
+                text.startsWith(
+                    "mi chiamo "
+                )
+            ) {
+
+                const nome =
+                    text
+                        .replace(
+                            "mi chiamo ",
+                            ""
+                        )
+                        .trim();
+
+
+                if (!nome) {
+
+                    return (
+                        "Non ho ricevuto il tuo nome."
+                    );
+
+                }
+
+
+                salvaNome(
+                    nome
+                );
+
+
+                return (
+                    "Piacere di conoscerti, " +
+                    nome +
+                    "! 😊"
+                );
+            }
+
+
+            /* =================================================
+               MEMORIA
+            ================================================= */
+
+            if (
+                text.includes(
+                    "come mi chiamo"
+                ) ||
+                text.includes(
+                    "ricordi il mio nome"
+                )
+            ) {
+
+                const nome =
+                    getNome();
+
+
+                return nome
+
+                    ? "Ti chiami " +
+                      nome +
+                      "."
+
+                    : "Non mi hai ancora detto il tuo nome.";
+            }
+
+
+            /* =================================================
+               ORA
+            ================================================= */
+
+            if (
+                text === "ora" ||
+                text.includes(
+                    "che ore sono"
+                ) ||
+                text.includes(
+                    "che ora è"
+                )
+            ) {
+
+                return (
+                    "Sono le " +
+                    new Date()
+                        .toLocaleTimeString(
+                            "it-IT",
+                            {
+                                hour:
+                                    "2-digit",
+
+                                minute:
+                                    "2-digit"
+                            }
+                        ) +
+                    "."
+                );
+            }
+
+
+            /* =================================================
+               DATA
+            ================================================= */
+
+            if (
+                text === "data" ||
+                text.includes(
+                    "che data è"
+                ) ||
+                text.includes(
+                    "che giorno è"
+                )
+            ) {
+
+                return (
+                    "Oggi è " +
+                    new Date()
+                        .toLocaleDateString(
+                            "it-IT",
+                            {
+                                weekday:
+                                    "long",
+
+                                day:
+                                    "numeric",
+
+                                month:
+                                    "long",
+
+                                year:
+                                    "numeric"
+                            }
+                        ) +
+                    "."
+                );
+            }
+
+
+            /* =================================================
+               MEDITAZIONE
+            ================================================= */
+
+            if (
+                text.includes(
+                    "meditazione"
+                ) ||
+                text.includes(
+                    "medita"
+                ) ||
+                text.includes(
+                    "fammi meditare"
+                )
+            ) {
+
+                document
+                    .getElementById(
+                        "meditazione"
+                    )
+                    .scrollIntoView({
+                        behavior:
+                            "smooth"
+                    });
+
+
+                return (
+                    "Certo. Ti accompagno nella meditazione guidata. "
+                    +
+                    "Premi il pulsante Inizia meditazione."
+                );
+            }
+
+
+            /* =================================================
+               CANVA
+            ================================================= */
+
+            if (
+                text.includes(
+                    "canva"
+                )
+            ) {
+
+                const risultatoCanva =
+                    canva(
+                        text
+                    );
+
+
+                if (
+                    risultatoCanva
+                ) {
+
+                    return (
+                        risultatoCanva
+                    );
+
+                }
+
+
+                apriCanva();
+
+
+                return (
+                    "Apro Canva."
+                );
+            }
+
+
+            /* =================================================
+               SITI
+            ================================================= */
+
+            const sito =
+                openSite(
+                    text
+                );
+
+
+            if (sito) {
+
+                return sito;
+
+            }
+
+
+            /* =================================================
+               CERCA
+            ================================================= */
+
+            if (
+                text.startsWith(
+                    "cerca su google "
+                )
+            ) {
+
+                const q =
+                    text
+                        .replace(
+                            "cerca su google ",
+                            ""
+                        )
+                        .trim();
+
+
+                return cercaGoogle(
+                    q
+                );
+            }
+
+
+            if (
+                text.startsWith(
+                    "cerca "
+                )
+            ) {
+
+                const q =
+                    text
+                        .replace(
+                            "cerca ",
+                            ""
+                        )
+                        .trim();
+
+
+                return cercaGoogle(
+                    q
+                );
+            }
+
+
+            /* =================================================
+               METEO
+            ================================================= */
+
+            if (
+                text.startsWith(
+                    "meteo"
+                )
+            ) {
+
+                const citta =
+                    text
+                        .replace(
+                            "meteo",
+                            ""
+                        )
+                        .trim();
+
+
+                return await meteo(
+                    citta
+                );
+            }
+
+
+            /* =================================================
+               SVEGLIA
+            ================================================= */
+
+            if (
+                text.startsWith(
+                    "sveglia"
+                )
+            ) {
+
+                const orario =
+                    text
+                        .replace(
+                            "sveglia",
+                            ""
+                        )
+                        .trim();
+
+
+                return sveglia(
+                    orario
+                );
+            }
+
+
+            /* =================================================
+               TIMER
+            ================================================= */
+
+            if (
+                text.startsWith(
+                    "timer"
+                )
+            ) {
+
+                const secondi =
+                    text
+                        .replace(
+                            "timer",
+                            ""
+                        )
+                        .trim();
+
+
+                return startTimer(
+                    secondi
+                );
+            }
+
+
+            /* =================================================
+               DOWNLOAD
+            ================================================= */
+
+            if (
+                text.startsWith(
+                    "download"
+                )
+            ) {
+
+                const programma =
+                    text
+                        .replace(
+                            "download",
+                            ""
+                        )
+                        .trim();
+
+
+                return scaricaProgramma(
+                    programma
+                );
+            }
+
+
+            /* =================================================
+               BASE
+            ================================================= */
+
+            if (
+                text.includes(
+                    "come stai"
+                )
+            ) {
+
+                return (
+                    "Sto bene e sono pronto ad aiutarti! 🤖"
+                );
+            }
+
+
+            if (
+                text.includes(
+                    "grazie"
+                )
+            ) {
+
+                return (
+                    "Di nulla! 😊"
+                );
+            }
+
+
+            if (
+                text.includes(
+                    "chi sei"
+                )
+            ) {
+
+                return (
+                    "Sono Oreste AI, il tuo assistente vocale italiano online. 🎤🤖"
+                );
+            }
+
+
+            if (
+                text.includes(
+                    "cosa sai fare"
+                ) ||
+                text.includes(
+                    "cosa puoi fare"
+                )
+            ) {
+
+                return (
+                    "Posso gestire il meteo, timer, sveglie, "
+                    +
+                    "calendario, ricerche Google, apertura "
+                    +
+                    "di siti, Canva, memoria del nome, "
+                    +
+                    "motivazione, meditazione e comandi vocali."
+                );
+            }
+
+
+            return (
+                "Non ho capito il comando. " +
+                "Prova con: ciao, mi chiamo Oreste, " +
+                "meteo Roma, timer 30, sveglia 08:30, " +
+                "meditazione, cerca calcio, apri YouTube, " +
+                "Canva oppure download Chrome."
+            );
+        }
+
+
+        /* =====================================================
+           ASK
+        ====================================================== */
+
+        async function ask() {
+
+            const input =
+                document.getElementById(
+                    "input"
+                );
+
+
+            if (!input) {
+
+                return;
+
+            }
+
+
+            const testo =
+                input.value.trim();
+
+
+            if (!testo) {
+
+                return;
+
+            }
+
+
+            add(
+                "🧑",
+                testo
+            );
+
+
+            input.value =
+                "";
+
+
+            try {
+
+                const risposta =
+                    await handle(
+                        testo
+                    );
+
+
+                add(
+                    "🤖",
+                    risposta
+                );
+
+
+                speak(
+                    risposta
+                );
+
+            }
+
+            catch (errore) {
+
+                console.error(
+                    "Errore assistente:",
+                    errore
+                );
+
+
+                const rispostaErrore =
+                    "Si è verificato un errore durante l'elaborazione del comando.";
+
+
+                add(
+                    "🤖",
+                    rispostaErrore
+                );
+
+
+                speak(
+                    rispostaErrore
+                );
+            }
+        }
+
+
+        /* =====================================================
+           RICONOSCIMENTO VOCALE
+        ====================================================== */
+
+        let recognition =
+            null;
+
+
+        let ascoltoAttivo =
+            false;
+
+
+        function aggiornaStatoVoce(
+            attivo,
+            testo
+        ) {
+
+            const pulsante =
+                document.getElementById(
+                    "voiceButton"
+                );
+
+
+            const stato =
+                document.getElementById(
+                    "voiceStatus"
+                );
+
+
+            if (pulsante) {
+
+                pulsante.classList.toggle(
+                    "listening",
+                    attivo
+                );
+
+
+                pulsante.textContent =
+                    attivo
+
+                        ? "🔴 Ascolto..."
+
+                        : "🎤 Parla";
+            }
+
+
+            if (stato) {
+
+                stato.textContent =
+                    testo || "";
+
+            }
+        }
+
+
+        function voice() {
+
+            const SpeechRecognition =
+                window.SpeechRecognition ||
+                window.webkitSpeechRecognition;
+
+
+            if (!SpeechRecognition) {
+
+                alert(
+                    "Il riconoscimento vocale non è supportato da questo browser. Prova Chrome o Edge."
+                );
+
+
+                return;
+
+            }
+
+
+            if (
+                ascoltoAttivo &&
+                recognition
+            ) {
+
+                recognition.stop();
+
+                return;
+
+            }
+
+
+            recognition =
+                new SpeechRecognition();
+
+
+            recognition.lang =
+                "it-IT";
+
+
+            recognition.interimResults =
+                false;
+
+
+            recognition.continuous =
+                false;
+
+
+            recognition.maxAlternatives =
+                1;
+
+
+            recognition.onstart =
+                function() {
+
+                    ascoltoAttivo =
+                        true;
+
+
+                    aggiornaStatoVoce(
+                        true,
+                        "🎤 Ti ascolto..."
+                    );
+
+
+                    add(
+                        "🎤",
+                        "Ti ascolto..."
+                    );
+                };
+
+
+            recognition.onresult =
+                async function(evento) {
+
+                    const testo =
+                        evento
+                            .results[0][0]
+                            .transcript
+                            .trim();
+
+
+                    if (!testo) {
+
+                        return;
+
+                    }
+
+
+                    add(
+                        "🧑",
+                        testo
+                    );
+
+
+                    const input =
+                        document.getElementById(
+                            "input"
+                        );
+
+
+                    if (input) {
+
+                        input.value =
+                            testo;
+
+                    }
+
+
+                    aggiornaStatoVoce(
+                        true,
+                        "✅ Ho capito: " +
+                        testo
+                    );
+
+
+                    try {
+
+                        const risposta =
+                            await handle(
+                                testo
+                            );
+
+
+                        add(
+                            "🤖",
+                            risposta
+                        );
+
+
+                        speak(
+                            risposta
+                        );
+
+                    }
+
+                    catch (errore) {
+
+                        console.error(
+                            "Errore voce:",
+                            errore
+                        );
+
+
+                        const rispostaErrore =
+                            "Si è verificato un errore durante l'elaborazione del comando vocale.";
+
+
+                        add(
+                            "🤖",
+                            rispostaErrore
+                        );
+
+
+                        speak(
+                            rispostaErrore
+                        );
+
+                    }
+
+                    finally {
+
+                        if (input) {
+
+                            input.value =
+                                "";
+
+                        }
+                    }
+                };
+
+
+            recognition.onerror =
+                function(evento) {
+
+                    console.error(
+                        "Errore riconoscimento vocale:",
+                        evento
+                    );
+
+
+                    let messaggio =
+                        "Non riesco a capire la voce. Riprova.";
+
+
+                    if (
+                        evento.error ===
+                        "not-allowed"
+                    ) {
+
+                        messaggio =
+                            "Permesso microfono negato. Abilita il microfono nel browser.";
+
+                    }
+
+                    else if (
+                        evento.error ===
+                        "no-speech"
+                    ) {
+
+                        messaggio =
+                            "Non ho sentito nulla. Prova a parlare di nuovo.";
+
+                    }
+
+                    else if (
+                        evento.error ===
+                        "audio-capture"
+                    ) {
+
+                        messaggio =
+                            "Non riesco ad accedere al microfono.";
+
+                    }
+
+
+                    add(
+                        "🎤",
+                        messaggio
+                    );
+
+
+                    aggiornaStatoVoce(
+                        false,
+                        messaggio
+                    );
+                };
+
+
+            recognition.onend =
+                function() {
+
+                    ascoltoAttivo =
+                        false;
+
+
+                    aggiornaStatoVoce(
+                        false,
+                        ""
+                    );
+                };
+
+
+            try {
+
+                recognition.start();
+
+            }
+
+            catch (errore) {
+
+                console.error(
+                    "Impossibile avviare il microfono:",
+                    errore
+                );
+
+
+                ascoltoAttivo =
+                    false;
+
+
+                aggiornaStatoVoce(
+                    false,
+                    "Impossibile avviare il microfono."
+                );
+            }
+        }
+
+
+        /* =====================================================
+           MEDITAZIONE
+        ====================================================== */
+
+        let meditationInterval =
+            null;
+
+
+        let meditationTimeout =
+            null;
+
+
+        let meditationRemaining =
+            120;
+
+
+        let meditationRunning =
+            false;
+
+
+        let meditationPhaseIndex =
+            0;
+
+
+        const meditationPhases = [
+
+            {
+                nome:
+                    "Inspira",
+
+                testo:
+                    "Inspira lentamente dal naso.",
+
+                durata:
+                    4
+            },
+
+
+            {
+                nome:
+                    "Trattieni",
+
+                testo:
+                    "Trattieni il respiro con calma.",
+
+                durata:
+                    4
+            },
+
+
+            {
+                nome:
+                    "Espira",
+
+                testo:
+                    "Espira lentamente e rilassati.",
+
+                durata:
+                    6
+            }
+
+        ];
+
+
+        function formatMeditationTime(
+            secondi
+        ) {
+
+            const minuti =
+                Math.floor(
+                    secondi / 60
+                );
+
+
+            const secondiRimasti =
+                secondi % 60;
+
+
+            return (
+                String(
+                    minuti
+                ).padStart(
+                    2,
+                    "0"
+                ) +
+                ":" +
+                String(
+                    secondiRimasti
+                ).padStart(
+                    2,
+                    "0"
+                )
+            );
+        }
+
+
+        function aggiornaMeditazioneUI(
+            fase,
+            istruzione
+        ) {
+
+            const phase =
+                document.getElementById(
+                    "meditationPhase"
+                );
+
+
+            const instruction =
+                document.getElementById(
+                    "meditationInstruction"
+                );
+
+
+            const timerElemento =
+                document.getElementById(
+                    "meditationTimer"
+                );
+
+
+            if (phase) {
+
+                phase.textContent =
+                    fase;
+
+            }
+
+
+            if (instruction) {
+
+                instruction.textContent =
+                    istruzione;
+
+            }
+
+
+            if (
+                timerElemento
+            ) {
+
+                timerElemento.textContent =
+                    formatMeditationTime(
+                        meditationRemaining
+                    );
+
+            }
+        }
+
+
+        function cicloRespirazione() {
+
+            if (
+                !meditationRunning
+            ) {
+
+                return;
+
+            }
+
+
+            const fase =
+                meditationPhases[
+                    meditationPhaseIndex
+                ];
+
+
+            aggiornaMeditazioneUI(
+                fase.nome,
+                fase.testo
+            );
+
+
+            speak(
+                fase.testo
+            );
+
+
+            meditationTimeout =
+                setTimeout(
+                    function() {
+
+                        meditationPhaseIndex =
+                            (
+                                meditationPhaseIndex +
+                                1
+                            )
+                            %
+                            meditationPhases.length;
+
+
+                        cicloRespirazione();
+
+                    },
+                    fase.durata * 1000
+                );
+        }
+
+
+        function avviaMeditazione() {
+
+            fermaMeditazione();
+
+
+            meditationRunning =
+                true;
+
+
+            meditationRemaining =
+                120;
+
+
+            meditationPhaseIndex =
+                0;
+
+
+            const status =
+                document.getElementById(
+                    "meditationStatus"
+                );
+
+
+            if (status) {
+
+                status.textContent =
+                    "🧘 Meditazione iniziata.";
+
+            }
+
+
+            aggiornaMeditazioneUI(
+                "Preparati",
+                "Siediti comodamente e rilassa le spalle."
+            );
+
+
+            speak(
+                "Preparati. Siediti comodamente e rilassa le spalle."
+            );
+
+
+            cicloTimerMeditazione();
+
+
+            setTimeout(
+                function() {
+
+                    if (
+                        meditationRunning
+                    ) {
+
+                        cicloRespirazione();
+
+                    }
+
+                },
+                4000
+            );
+        }
+
+
+        function cicloTimerMeditazione() {
+
+            if (
+                !meditationRunning
+            ) {
+
+                return;
+
+            }
+
+
+            const timerElemento =
+                document.getElementById(
+                    "meditationTimer"
+                );
+
+
+            if (
+                timerElemento
+            ) {
+
+                timerElemento.textContent =
+                    formatMeditationTime(
+                        meditationRemaining
+                    );
+            }
+
+
+            if (
+                meditationRemaining <= 0
+            ) {
+
+                fineMeditazione();
+
+                return;
+            }
+
+
+            meditationRemaining--;
+
+
+            meditationInterval =
+                setTimeout(
+                    cicloTimerMeditazione,
+                    1000
+                );
+        }
+
+
+        function fineMeditazione() {
+
+            meditationRunning =
+                false;
+
+
+            clearTimeout(
+                meditationInterval
+            );
+
+
+            clearTimeout(
+                meditationTimeout
+            );
+
+
+            meditationInterval =
+                null;
+
+
+            meditationTimeout =
+                null;
+
+
+            aggiornaMeditazioneUI(
+                "🌿 Fine",
+                "Hai completato la meditazione. Respira ancora una volta lentamente."
+            );
+
+
+            const status =
+                document.getElementById(
+                    "meditationStatus"
+                );
+
+
+            if (status) {
+
+                status.textContent =
+                    "✅ Meditazione completata.";
+
+            }
+
+
+            speak(
+                "Meditazione completata. Respira ancora una volta lentamente."
+            );
+        }
+
+
+        function fermaMeditazione() {
+
+            meditationRunning =
+                false;
+
+
+            clearTimeout(
+                meditationInterval
+            );
+
+
+            clearTimeout(
+                meditationTimeout
+            );
+
+
+            meditationInterval =
+                null;
+
+
+            meditationTimeout =
+                null;
+
+
+            if (
+                "speechSynthesis" in window
+            ) {
+
+                window.speechSynthesis.cancel();
+
+            }
+
+
+            meditationRemaining =
+                120;
+
+
+            aggiornaMeditazioneUI(
+                "Pronto",
+                "Premi \"Inizia meditazione\" per cominciare."
+            );
+
+
+            const status =
+                document.getElementById(
+                    "meditationStatus"
+                );
+
+
+            if (status) {
+
+                status.textContent =
+                    "";
+
+            }
+        }
+
+
+        function voceMeditazione() {
+
+            speak(
+                "Benvenuto nella meditazione di Oreste AI. " +
+                "Rilassa le spalle, inspira lentamente dal naso " +
+                "e lascia uscire l'aria con calma. " +
+                "Quando sei pronto, premi inizia meditazione."
+            );
+        }
+
+
+        /* =====================================================
+           AVVIO
+        ====================================================== */
+
+        render();
+
+
+        add(
+            "🤖",
+            "Ciao! Sono Oreste AI. Scrivi oppure premi 🎤 Parla."
+        );
+
+
+        setTimeout(
+            function() {
+
+                benvenutoOreste(
+                    false
+                );
+
+            },
+            800
+        );
+
+
+        document.addEventListener(
+            "click",
+            function() {
+
+                benvenutoOreste(
+                    false
+                );
+
+            },
+            {
+                once:
+                    true
+            }
+        );
+
+
+        if (
+            "speechSynthesis" in window &&
+            "onvoiceschanged" in
+            window.speechSynthesis
+        ) {
+
+            window.speechSynthesis.onvoiceschanged =
+                function() {
+
+                    window.speechSynthesis
+                        .getVoices();
+
+                };
+        }
+
+    </script>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        © Oreste AI —
+        Assistente vocale italiano online
+
+    </footer>
 
 
 </body>
 
 </html>
+```
