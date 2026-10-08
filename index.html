@@ -53,7 +53,7 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
 <div class="oreste-avatar">🤖🎤</div>
 <div class="oreste-intro-title">Ciao, sono Oreste AI!</div>
 <p>Sono il tuo assistente vocale italiano. Puoi parlarmi oppure scrivere un comando.</p>
-<button class="voice-button" onclick="benvenutoOreste(true)">🔊 Ascolta Oreste</button>
+<button class="voice-button" onclick="benvenutoOreste(true)">🔊 Ascolta Oreste AI</button>
 <button class="secondary-button" onclick="document.getElementById('input').focus()">💬 Inizia</button>
 <div id="introVoiceStatus"></div>
 </section>
@@ -175,11 +175,11 @@ if(text==="ciao"||text.includes("ciao"))return"Ciao! Sono Oreste AI.";
 if(text.includes("aiuto")||text.includes("cosa sai fare"))return"Sono Oreste AI. Posso aiutarti con meteo, timer, sveglia, ricerca, download, siti, Canva, video motivazionali, Vicino Contursi, meditazione e comandi vocali.";
 if(text==="ora"||text.includes("che ore sono"))return"Sono le "+new Date().toLocaleTimeString("it-IT");
 if(text==="data"||text.includes("che giorno è")||text.includes("che giorno e"))return"Oggi è il "+new Date().toLocaleDateString("it-IT");
-if(text.includes("difesa personale")){window.open("https://youtu.be/uUUilRrSrLA","_blank","noopener,noreferrer");return"Apro il video sulla difesa personale.";}
-if(text.includes("io sto con amnesty")){window.open("https://iostoconamnesty.altervista.org/","_blank","noopener,noreferrer");return"Apro Io Sto con Amnesty.";}
-if(text.includes("amnesty international")){window.open("https://www.amnesty.org/","_blank","noopener,noreferrer");return"Apro Amnesty International.";}
-if(text.includes("non ti arrendere")){window.open("https://nontiarrendere.altervista.org/","_blank","noopener,noreferrer");return"Apro Non ti arrendere.";}
-if(text.includes("karaoke")){window.open("https://testonuovo.github.io/karaokeoresteai/","_blank","noopener,noreferrer");return"Apro il karaoke.";}
+if(text.includes("difesa personale")){window.open("https://youtu.be/uUUilRrSrLA","_blank","noopener,noreferrer");return"Difesa personale.";}
+if(text.includes("io sto con amnesty")){window.open("https://iostoconamnesty.altervista.org/","_blank","noopener,noreferrer");return"Io sto con Amnesty";}
+if(text.includes("amnesty international")){window.open("https://www.amnesty.org/","_blank","noopener,noreferrer");return"Amnesty International.";}
+if(text.includes("non ti arrendere")){window.open("https://nontiarrendere.altervista.org/","_blank","noopener,noreferrer");return"Non ti arrendere.";}
+if(text.includes("karaoke")){window.open("https://testonuovo.github.io/karaokeoresteai/","_blank","noopener,noreferrer");return"Karaoke"";}
 if(text.includes("apri oreste ai cleaner")||text.includes("apri oreste cleaner")||text.includes("avvia oreste ai cleaner")||text.includes("avvia oreste cleaner")||text==="apri cleaner"||text==="avvia cleaner"||text.includes("apri il cleaner")||text.includes("avvia il cleaner")){return await apriCleaner();}
 if(text.startsWith("meteo"))return await meteo(text.replace("meteo","").trim());
 if(text.startsWith("timer"))return startTimer(text.replace("timer","").trim());
