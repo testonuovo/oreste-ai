@@ -1152,27 +1152,55 @@ function apriVicinoContursi(testo) {
     return null;
 }
 
-/* ===================================================== VIDEO MOTIVAZIONALE ===================================================== */ 
-    function mostraMotivazione()     { 
-        
-        window.open( "https://www.youtube.com/shorts/GYmM6jZUPPA?feature=share", "_blank", "noopener,noreferrer" );
- 
-        return "Certo. Ti apro il video motivazionale."; }
+/* =====================================================
+   VIDEO MOTIVAZIONALI
+   ===================================================== */
+
+function apriVideoMotivazionale(titolo, url) {
+
+    if (!url || url.includes("INSERISCI_QUI")) {
+        return (
+            "Il link di " +
+            titolo +
+            " non è ancora stato inserito."
+        );
+    }
+
+    window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+    return titolo + ".";
+}
+
+
+function mostraMotivazione() {
+
+    window.open(
+        "https://www.youtube.com/shorts/GYmM6jZUPPA?feature=share",
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+    return "Certo. Ti apro il video motivazionale.";
+}
+
 
 /* =====================================================
    CERVELLO ORESTE AI
-===================================================== */
+   ===================================================== */
 
 async function handle(text) {
 
     text =
         text
-        .toLowerCase()
-        .trim();
+            .toLowerCase()
+            .trim();
 
 
     if (!text) {
-
         return "Scrivi un comando.";
     }
 
@@ -1184,127 +1212,82 @@ async function handle(text) {
     const vicino =
         apriVicinoContursi(text);
 
-
     if (vicino) {
-
         return vicino;
     }
 
 
     /* =================================================
-       AFFRONTA LA PAURA E VINCI CON CORAGGIO
+       VIDEO MOTIVAZIONALI
     ================================================= */
 
     if (
-        text.includes(
-            "affronta la paura e vinci con coraggio"
-        )
+        text.includes("affronta la paura e vinci con coraggio") ||
+        text.includes("affronta la paura") ||
+        text.includes("vinci con coraggio")
     ) {
 
-        window.open(
-            "https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share",
-            "_blank",
-            "noopener,noreferrer"
-        );
-
-
-        return (
-            "Affronta la paura e vinci con coraggio."
+        return apriVideoMotivazionale(
+            "Affronta la paura e vinci con coraggio",
+            "https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share"
         );
     }
 
 
-    if (text.includes("non è mai troppo tardi per ricominciare")){
-
-        window.open("
     if (
-        text.includes(
-            "non è mai troppo tardi per ricominciare"
-        )
+        text.includes("non è mai troppo tardi per ricominciare") ||
+        text.includes("non è mai troppo tardi") ||
+        text.includes("troppo tardi per ricominciare")
     ) {
 
-        window.open(
-            "https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share",
-            "_blank",
-            "noopener,noreferrer"
-        );
-
-
-return ("Non è mai troppo tardi per ricominciare";
+        return apriVideoMotivazionale(
+            "Non è mai troppo tardi per ricominciare",
+            "INSERISCI_QUI_IL_LINK_DI_NON_E_MAI_TROPPO_TARDI"
         );
     }
 
 
-    if (text.includes("un passo alla volta")){
-
-        window.open("https://www.youtube.com/shorts/GYmM6jZUPPA?feature=share","_blank",
-            "noopener,noreferrer");
-",
-            "noopener,noreferrer");
-
-        
-        return("Un passo alla volta.");}
-
     if (
-        text.includes(
-            "affronta la paura e vinci con coraggio"
-        )
+        text.includes("un passo alla volta") ||
+        text.includes("passo alla volta")
     ) {
 
-        window.open(
-            "https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share",
-            "_blank",
-            "noopener,noreferrer"
-        );
-
-
-        return (
-            "Affronta la paura e vinci con coraggio."
+        return apriVideoMotivazionale(
+            "Un passo alla volta",
+            "https://www.youtube.com/shorts/GYmM6jZUPPA?feature=share"
         );
     }
 
 
-    if (text.includes("un passo alla volta")){
-
-        window.open("https://www.youtube.com/shorts/GYmM6jZUPPA?feature=share","_blank",
-            "noopener,noreferrer");
-
-    
-    /* =================================================
-       IL FUOCO DENTRO
-    ================================================= */
-
     if (
-
-        text.includes(
-            "il fuoco dentro"
-        )
-
-        ||
-
-        text.includes(
-            "fuoco dentro"
-        )
-
+        text.includes("il fuoco dentro") ||
+        text.includes("fuoco dentro")
     ) {
 
-        window.open(
-
-            "https://www.youtube.com/shorts/MGYU_zIlpoA",
-
-            "_blank",
-
-            "noopener,noreferrer"
-
+        return apriVideoMotivazionale(
+            "Il fuoco dentro",
+            "https://www.youtube.com/shorts/MGYU_zIlpoA"
         );
+    }
 
 
-        return "Il fuoco dentro.";
+    if (
+        text.includes("comincio da zero") ||
+        text.includes("inizio da zero")
+    ) {
+
+        return apriVideoMotivazionale(
+            "Comincio da zero",
+            "INSERISCI_QUI_IL_LINK_DI_COMINCIO_DA_ZERO"
+        );
     }
 
 
     /* =================================================
        PAGINE ORESTE AI
+    ================================================= */
+
+PAGINE ORESTE AI
     ================================================= */
 
     const pagina =
