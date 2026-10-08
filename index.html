@@ -1,400 +1,423 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO Fondamentale Potenziata -->
-    <title>Oreste AI - Il Primo Assistente Vocale Italiano Online Gratuito</title>
-    <meta name="description" content="Oreste AI è un assistente vocale italiano gratuito online. Parla con Oreste AI direttamente dal browser senza installazione.">
-    <meta name="keywords" content="assistente vocale italiano, assistente vocale online gratis, intelligenza vocale browser, Oreste AI, Oreste De Chiara">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Oreste De Chiara">
+<title>Oreste AI</title>
 
-    <!-- Google Search Console -->
-    <meta name="google-site-verification" content="BGQlo83DUVg9LLOEFBpw7DStOr1fKiH_aLg5IsF2HeA">
+<style>
+body{
+    font-family: Arial;
+    background:#0a3d91;
+    color:white;
+    text-align:center;
+    margin:0;
+}
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://googletagmanager.com"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){ dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config','G-NNY7SHD1NT');
-    </script>
+h1{ margin-top:20px; }
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0a3d91;
-            color: white;
-            text-align: center;
-            margin: 0;
-        }
+nav{
+    background: rgba(0,0,0,0.4);
+    padding: 12px;
+    border-radius: 10px;
+    margin: 10px;
+}
 
-        h1 {
-            margin-top: 20px;
-        }
+nav a{
+    color:white;
+    margin:5px;
+    text-decoration:none;
+}
 
-        nav {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 12px;
-            margin: 10px;
-            border-radius: 10px;
-        }
+#chat{
+    width:90%;
+    max-width:600px;
+    margin:20px auto;
+    background:rgba(0,0,0,0.3);
+    padding:10px;
+    border-radius:10px;
+    min-height:200px;
+    text-align:left;
+}
 
-        nav a {
-            color: white;
-            margin: 5px;
-            text-decoration: none;
-            display: inline-block;
-        }
+input{
+    width:70%;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+}
 
-        nav a:hover {
-            color: #ffd700;
-        }
+button{
+    padding:10px 15px;
+    margin:5px;
+    border:none;
+    border-radius:10px;
+    background:red;
+    color:white;
+    cursor:pointer;
+}
 
-        #chat {
-            width: 90%;
-            max-width: 600px;
-            margin: 20px auto;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
-            min-height: 250px;
-            text-align: left;
-            overflow-y: auto;
-        }
+button:hover{ background:darkred; }
 
-        input {
-            width: 80%;
-            padding: 15px;
-            font-size: 18px;
-            border-radius: 10px;
-            border: none;
-            box-sizing: border-box;
-        }
+.msg{
+    margin:8px 0;
+    padding:8px;
+}
 
-        button {
-            padding: 12px 18px;
-            margin: 5px;
-            border: none;
-            border-radius: 20px;
-            background: red;
-            color: white;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
+/* CALENDARIO */
+#calendar{
+    width:90%;
+    max-width:600px;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap:5px;
+}
 
-        button:hover {
-            background: darkred;
-        }
+.day{
+    background: rgba(255,255,255,0.1);
+    padding:10px;
+    border-radius:8px;
+    cursor:pointer;
+}
 
-        /* Stile speciale quando l'assistente ascolta dal microfono */
-        button.listening {
-            background: #00cc66 !important;
-            animation: pulse 1.5s infinite;
-        }
+.empty{ background:transparent; }
 
-        .msg {
-            margin: 8px 0;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            margin: 20px auto;
-            max-width: 600px;
-            border-radius: 10px;
-        }
-
-        footer a {
-            color: #ffd700;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.6; }
-            100% { opacity: 1; }
-        }
-    </style>
+.event{
+    font-size:10px;
+    color:yellow;
+}
+</style>
 </head>
 
 <body>
 
-    <h1>🎤 Oreste AI</h1>
+<h1>🎤 Oreste AI</h1>
 
-    <nav>
-        <a href="index.html">🏠 Home</a>
-        <a href="assistente.html">🎤 Assistente</a>
-        <a href="chat.html">💬 Chat</a>
-        <a href="motivazione.html">🌻 Motivazione</a>
-        <a href="download.html">📥 Download</a>
-        <a href="blog.html">📰 Blog</a>
-        <a href="chi-siamo.html">👤 Chi siamo</a>
-        <a href="contatti.html">📞 Contatti</a>
-        <a href="dashboard.html">📊 Dashboard</a>
-        <a href="os.html">🖥️ Oreste OS</a>
-        <a href="storybook.html">📚 Storybook</a>
-        <a href="storia.html">📖 La Storia</a>
-        <a href="funzioni.html">Funzioni</a>
-        <a href="tecnologie oreste ai.html">Tecnologie Oreste AI</a>
-        <a href="comandi-oreste-ai.html">🎤 Comandi</a>
-        <a href="mondiali2026.html">🏆 Mondiali 2026</a>
-        <a href="spagna-campione-del-mondo-2026.html">🏆 Spagna campione del mondo 2026</a>
-    </nav>
+<!-- MENU -->
+<nav>
+<a href="index.html">🏠 Home</a>
+<a href="assistente-vocale.html">🎤 Assistente</a>
+<a href="chat.html">💬 Chat</a>
+<a href="motivazione.html">🌻 Motivazione</a>
+<a href="download.html">📥 Download</a>
+<a href="blog.html">📰 Blog</a>
+<a href="contatti.html">📞 Contatti</a>
+<a href="dashboard.html">📊 Dashboard</a>
+</nav>
 
-    <input id="input" placeholder="Scrivi o parla...">
-    <button onclick="ask()">Invia</button>
-    <button id="voice-btn" onclick="voice()">🎤 Parla</button>
+<h2>Assistente vocale</h2>
 
-    <div id="chat"></div>
+<input id="input" placeholder="Scrivi o parla...">
+<button onclick="ask()">Invia</button>
+<button onclick="voice()">🎤 Parla</button>
 
-    <section class="card">
-        <h2>📱 Utilizzo da smartphone</h2>
-        <p>Oreste AI può essere utilizzato anche da smartphone tramite browser.</p>
-        <p>Per i comandi vocali è consigliato usare Google Chrome, che supporta la tecnologia Web Speech API.</p>
-    </section>
+<div id="chat"></div>
 
-    <footer class="card">
-        <h2>🤖 Oreste AI</h2>
-        <p>Assistente vocale italiano gratuito online.</p>
-        <p>Creato da <strong>Oreste De Chiara</strong>.</p>
-        <p>Oreste AI continua a crescere con nuove funzioni, come Oreste OS, Storybook e strumenti basati sull'intelligenza artificiale.</p>
-        <a href="download.html">📥 Scarica Oreste AI</a>
-        <br><br>
-        <a href="storia.html">📖 La storia di Oreste AI</a>
-    </footer>
+<h2>📅 Calendario Mensile</h2>
 
-    <script>
-        /* ================= CHAT ================= */
-        function add(w, t) {
-            document.getElementById("chat").innerHTML += "<div class='msg'><b>" + w + ":</b> " + t + "</div>";
-            const chatDiv = document.getElementById("chat");
-            chatDiv.scrollTop = chatDiv.scrollHeight;
+<div>
+<button onclick="prevMonth()">⬅️</button>
+<span id="monthTitle"></span>
+<button onclick="nextMonth()">➡️</button>
+</div>
+
+<div id="calendar"></div>
+
+<script>
+
+/* ================= CHAT ================= */
+function add(t,m){
+    document.getElementById("chat").innerHTML +=
+    "<div class='msg'>"+t+": "+m+"</div>";
+}
+
+function speak(t){
+    let s=new SpeechSynthesisUtterance(t);
+    s.lang="it-IT";
+    speechSynthesis.cancel();
+    speechSynthesis.speak(s);
+}
+
+/* ================= MEMORIA ================= */
+function salvaNome(n){ localStorage.setItem("nomeAI", n); }
+function getNome(){ return localStorage.getItem("nomeAI"); }
+
+/* ================= EVENTI ================= */
+function salvaEvento(ev){
+    let arr=JSON.parse(localStorage.getItem("eventiAI")||"[]");
+    arr.push(ev);
+    localStorage.setItem("eventiAI",JSON.stringify(arr));
+}
+
+/* ================= SVEGLIA ================= */
+let svegliaTimer=null;
+
+function sveglia(orario){
+    let [h,m]=orario.split(":").map(Number);
+    if(isNaN(h)||isNaN(m)) return "Formato 7:30";
+
+    let now=new Date();
+    let s=new Date();
+    s.setHours(h,m,0);
+
+    let diff=s-now;
+    if(diff<0) return "Orario passato";
+
+    if(svegliaTimer) clearTimeout(svegliaTimer);
+
+    svegliaTimer=setTimeout(()=>{
+        add("⏰","SVEGLIA!");
+        speak("Sveglia!");
+        alert("SVEGLIA!");
+    },diff);
+
+    return "Sveglia impostata per " + orario;
+}
+
+/* ================= METEO ================= */
+async function meteo(citta){
+    let geo=await fetch("https://geocoding-api.open-meteo.com/v1/search?name="+citta);
+    let g=await geo.json();
+
+    if(!g.results) return "Città non trovata";
+
+    let lat=g.results[0].latitude;
+    let lon=g.results[0].longitude;
+
+    let m=await fetch("https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current_weather=true");
+    let d=await m.json();
+
+    return "🌤️ "+g.results[0].name+": "+d.current_weather.temperature+"°C";
+}
+let timerInterval = null;
+
+function timer(sec){
+
+    if(timerInterval){
+        clearInterval(timerInterval);
+    }
+
+    let t = sec;
+
+    timerInterval = setInterval(() => {
+
+        add("⏱️", "Tempo rimasto: " + t + " sec");
+        speak(t + " secondi");
+
+        t--;
+
+        if(t < 0){
+            clearInterval(timerInterval);
+            timerInterval = null;
+
+            add("⏱️","⏰ Tempo finito!");
+            speak("Timer terminato");
+            alert("⏰ Timer finito!");
         }
 
-        function speak(t) {
-            if ('speechSynthesis' in window) {
-                let s = new SpeechSynthesisUtterance(t);
-                s.lang = "it-IT";
-                speechSynthesis.cancel();
-                speechSynthesis.speak(s);
+    }, 1000);
+
+    return "Timer avviato per " + sec + " secondi";
+}
+function scaricaProgramma(nome){
+    window.open("https://google.com/search?q=download+" + encodeURIComponent(nome), "_blank");
+    return "Cerco il download di " + nome;
+}
+/* ================= CALENDARIO ================= */
+let date=new Date();
+const mesi=["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"];
+
+function render(){
+    let cal=document.getElementById("calendar");
+    cal.innerHTML="";
+
+    let y=date.getFullYear();
+    let m=date.getMonth();
+
+    document.getElementById("monthTitle").innerText=mesi[m]+" "+y;
+
+    let first=new Date(y,m,1).getDay();
+    let days=new Date(y,m+1,0).getDate();
+
+    for(let i=0;i<first;i++){
+        let e=document.createElement("div");
+        e.className="day empty";
+        cal.appendChild(e);
+    }
+
+    for(let d=1;d<=days;d++){
+        let div=document.createElement("div");
+        div.className="day";
+        div.innerHTML=d;
+
+        div.onclick=()=>{
+            let ev=prompt("Evento:");
+            if(ev){
+                salvaEvento(y+"-"+(m+1)+"-"+d+": "+ev);
+                render();
+            }
+        };
+
+        cal.appendChild(div);
+    }
+}
+function normalizza(t){
+    return t
+        .toLowerCase()
+        .replaceAll(" ", "")
+        .replaceAll("su","")
+        .replaceAll("vai","")
+        .replaceAll("apri","")
+        .trim();
+}
+render();
+function apriSito(text){
+
+    let t = normalizza(text);
+
+    const siti = [
+        {keys:["google"], url:"https://google.com", nome:"Google"},
+        {keys:["youtube","you tube"], url:"https://youtube.com", nome:"YouTube"},
+        {keys:["facebook"], url:"https://facebook.com", nome:"Facebook"},
+        {keys:["instagram"], url:"https://instagram.com", nome:"Instagram"},
+        {keys:["tiktok"], url:"https://tiktok.com", nome:"TikTok"},
+        {keys:["canva"], url:"https://canva.com", nome:"Canva"},
+        {keys:["whatsapp"], url:"https://web.whatsapp.com", nome:"WhatsApp Web"},
+        {keys:["github"], url:"https://github.com", nome:"GitHub"},
+        {keys:["gmail","email"], url:"https://mail.google.com", nome:"Gmail"},
+        {keys:["pinterest"], url:"https://pinterest.com", nome:"Pinterest"},
+        {keys:["linkedin"], url:"https://linkedin.com", nome:"LinkedIn"}
+    ];
+
+    for(let s of siti){
+        for(let k of s.keys){
+            if(t.includes(k)){
+                window.open(s.url, "_blank");
+                return "Apro " + s.nome;
             }
         }
+    }
 
-        /* ================= APERTURA SITI ================= */
-        function openSite(t) {
-            t = t.toLowerCase();
-            const sites = {
-                google: "https://google.com",
-                youtube: "https://youtube.com",
-                facebook: "https://facebook.com",
-                instagram: "https://instagram.com",
-                tiktok: "https://tiktok.com",
-                canva: "https://canva.com",
-                github: "https://github.com",
-                linkedin: "https://linkedin.com",
-                pinterest: "https://pinterest.com"
-            };
+    return null;
+}
+/* ================= AI ================= */
+async function handle(text){
 
-            for (let k in sites) {
-                if (t.includes(k)) {
-                    window.open(sites[k], "_blank");
-                    return "Apro " + k;
-                }
+    text = text.toLowerCase().trim();
+
+    // ======================
+    // 👋 BASE
+    // ======================
+    if(text.includes("ciao")){
+        let n = getNome();
+        return n ? "Ciao " + n : "Ciao!";
+    }
+
+    if(text.startsWith("mi chiamo")){
+        let n = text.replace("mi chiamo","").trim();
+        salvaNome(n);
+        return "Piacere " + n;
+    }
+
+    if(text.includes("ora")){
+        return "Sono le " + new Date().toLocaleTimeString();
+    }
+
+    if(text.includes("data")){
+        return "Oggi è " + new Date().toLocaleDateString();
+    }
+
+    // ======================
+    // 🌐 APERTURA SITI (FIX)
+    // ======================
+    
+// 🌐 SITI (IMPORTANTE FIX)
+let sito = apriSito(text);
+if(sito) return sito;
+    // ======================
+    // 🔍 RICERCA
+    // ======================
+    if(text.startsWith("cerca")){
+        let q = text.replace("cerca","").trim();
+        window.open("https://google.com/search?q=" + encodeURIComponent(q), "_blank");
+        return "Cerco " + q;
+    }
+
+    // ======================
+    // 🌤️ METEO
+    // ======================
+    if(text.startsWith("meteo")){
+        let c = text.replace("meteo","").trim();
+        if(!c) return "Scrivi: meteo Roma";
+        return await meteo(c);
+    }
+
+    // ======================
+    // ⏰ SVEGLIA
+    // ======================
+    if(text.startsWith("sveglia")){
+        return sveglia(text.replace("sveglia","").trim());
+    }
+
+    // ======================
+    // ⏱️ TIMER
+    // ======================
+    if(text.startsWith("timer")){
+        let s = parseInt(text.replace("timer",""));
+        if(isNaN(s)) return "Scrivi: timer 10";
+
+        let t = s;
+        let timer = setInterval(()=>{
+            t--;
+            add("⏱️", t + " sec");
+
+            if(t <= 0){
+                clearInterval(timer);
+                speak("Timer terminato");
+                add("⏱️","FINE!");
             }
-            return null;
-        }
+        },1000);
 
-        /* ================= METEO ================= */
-        async function meteo(city) {
-            try {
-                let g = await fetch("https://open-meteo.com" + city);
-                let j = await g.json();
+        return "Timer avviato per " + s + " secondi";
+    }
 
-                if (!j.results || j.results.length === 0) return "Città non trovata";
-
-                let lat = j.results[0].latitude;
-                let lon = j.results[0].longitude;
-
-                let w = await fetch("https://open-meteo.com" + lat + "&longitude=" + lon + "&current_weather=true");
-                let d = await w.json();
-
-                return "🌤️ " + j.results[0].name + ": " + d.current_weather.temperature + "°C";
-            } catch (e) {
-                return "Errore meteo";
-            }
-        }
-
-        /* ================= TIMER ================= */
-        let timer = null;
-        function startTimer(sec) {
-            sec = parseInt(sec);
-            if (isNaN(sec)) return "Scrivi timer seguito dai secondi";
-
-            let t = sec;
-            if (timer) clearInterval(timer);
-
-            timer = setInterval(() => {
-                add("⏱️", t + " secondi");
-                t--;
-                if (t < 0) {
-                    clearInterval(timer);
-                    timer = null;
-                    speak("Timer terminato");
-                    add("⏱️", "FINITO");
-                }
-            }, 1000);
-
-            return "Timer avviato per " + sec + " secondi";
-        }
-
-        /* ================= SVEGLIA ================= */
-        let svegliaTimer = null;
-        function sveglia(orario) {
-            let parti = orario.split(":");
-            let h = parseInt(parti[0]);
-            let m = parseInt(parti[1]);
-
-            if (isNaN(h) || isNaN(m)) return "Specifica l'orario nel formato HH:MM (es. sveglia 15:30)";
-
-            let ora = new Date();
-            let sveglia = new Date();
-            sveglia.setHours(h, m, 0);
-
-            let diff = sveglia - ora;
-            if (diff < 0) return "Orario passato";
-
-            if (svegliaTimer) clearTimeout(svegliaTimer);
-
-            svegliaTimer = setTimeout(() => {
-                add("⏰", "SVEGLIA!");
-                speak("Sveglia!");
-                alert("SVEGLIA!");
-            }, diff);
-
-            return "Sveglia impostata alle " + orario;
-        }
-
-        /* ================= SCARICAMENTO PROGRAMMI ================= */
-        function scaricaProgramma(nome) {
-            nome = nome.trim();
-            if (!nome) {
-                return "Dimmi quale programma vuoi scaricare";
-            }
-            let ricerca = "https://google.com+" + encodeURIComponent(nome);
-            window.open(ricerca, "_blank");
-            return "Cerco il download di " + nome;
-        }
-
-        /* ================= LOGICA INTELLIGENZA ARTIFICIALE ================= */
-        async function handle(text) {
-            text = text.toLowerCase().trim();
-
-            let site = openSite(text);
-            if (site) return site;
-
-            if (text.includes("ciao")) return "Ciao! Sono Oreste AI";
-            if (text.includes("ora")) return new Date().toLocaleTimeString();
-Usa il codice con cautela.
-if (text.includes("data")) return new Date().toLocaleDateString();
-if (text.startsWith("meteo")) {
-return await meteo(text.replace("meteo", "").trim());
+    return "Non ho capito il comando";
 }
-if (text.startsWith("timer")) {
-return startTimer(text.replace("timer", "").trim());
-}
-if (text.startsWith("sveglia")) {
-return sveglia(text.replace("sveglia", "").trim());
-}
-/* Ricerca Google */
-if (text.startsWith("cerca")) {
-let q = text.replace("cerca", "").trim();
-window.open("google.com" + encodeURIComponent(q), "_blank");
-return "Cerco " + q;
-}
-/* Mondiali */
-if (text.includes("chi ha vinto i mondiali 2026") || text.includes("campione del mondo 2026")) {
-return "La Spagna ha vinto i Mondiali 2026 ed è Campione del Mondo.";
-}
-/* Download Oreste AI */
-if (text.includes("scarica oreste ai") || text.includes("download oreste ai")) {
-window.open("download.html", "_blank");
-return "Apro la pagina download di Oreste AI";
-}
-/* Scarica programmi generici */
-if (text.startsWith("scarica")) {
-let programma = text.replace("scarica", "").trim();
-return scaricaProgramma(programma);
-}
-if (text.includes("vicino contursi")) {
-window.open("youtu.be", "_blank");
-return "vicino contursi";
-}
-return "Non ho capito";
-}
-/* ================= INVIO DA INPUT TESTUALE ================= */
-async function ask() {
-let i = document.getElementById("input");
-let t = i.value;
-if (!t) return;
-add("🧑", t);
-let r = await handle(t);
-add("🤖", r);
-speak(r);
-i.value = "";
-}
-/* ================= RICONOSCIMENTO VOCALE (CORRETTO E CORRETTO) ================= */
-function voice() {
-let SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-if (!SR) {
-alert("Usa Google Chrome o Microsoft Edge per utilizzare il riconoscimento vocale.");
-return;
-}
-const recognition = new SR();
-const voiceBtn = document.getElementById("voice-btn");
-recognition.lang = "it-IT";
-recognition.continuous = false;
-recognition.interimResults = false;
-// Cambia l'aspetto del pulsante all'avvio dell'ascolto
-recognition.onstart = function() {
-voiceBtn.classList.add("listening");
-voiceBtn.innerText = "Ascolto in corso...";
-};
-// Cattura correttamente la stringa vocale dell'utente
-recognition.onresult = async function(event) {
-let t = event.results[0][0].transcript; // <-- FIX: Indici array corretti
-add("🧑", t);
-let r = await handle(t);
-add("🤖", r);
-speak(r);
-};
-// Gestione in caso di errore o blocchi microfono
-recognition.onerror = function(event) {
-console.error("Errore riconoscimento vocale:", event.error);
-voiceBtn.classList.remove("listening");
-voiceBtn.innerText = "🎤 Parla";
-};
-// Ripristina lo stato del pulsante quando finisci di parlare
-recognition.onend = function() {
-voiceBtn.classList.remove("listening");
-voiceBtn.innerText = "🎤 Parla";
-};
-// Avvio effettivo del microfono
-recognition.start();
+/* ================= INPUT ================= */
+async function ask(){
+    let i=document.getElementById("input");
+    let t=i.value;
+    if(!t) return;
+
+    add("🧑",t);
+    let r=await handle(t);
+    add("🤖",r);
+    speak(r);
+    i.value="";
 }
 
+/* ================= VOCE ================= */
+function voice(){
+    let SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!SR) return alert("Non supportato");
 
-<FollowUp>
-Ora che la base è corretta e testata al 100%, cosa vorresti fare?
-* Vuoi aggiungere un **nuovo comando vocale specifico** (per esempio, per fargli raccontare una barzelletta o dare informazioni sul progetto)?
-* Vuoi che miglioriamo il **layout responsivo** per farlo sembrare una vera applicazione mobile a tutto schermo?
-</FollowUp>
+    let r=new SR();
+    r.lang="it-IT";
+
+    r.onresult=async e=>{
+        let t=e.results[0][0].transcript;
+        add("🧑",t);
+        let r2=await handle(t);
+        add("🤖",r2);
+        speak(r2);
+    };
+
+    r.start();
+}
+
+</script>
+
+</body>
+</html>
