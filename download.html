@@ -595,6 +595,76 @@
 
     }
 
+/* =========================================================
+   VOCE AUTOMATICA ALL'APERTURA DELLA PAGINA
+========================================================= */
+
+function avviaVocePagina() {
+
+    if (!("speechSynthesis" in window)) {
+        return;
+    }
+
+    const testo =
+        "Ciao, sono Oreste AI. " +
+        "Benvenuto nella pagina Download. " +
+        "Qui puoi scaricare Oreste AI per Windows " +
+        "e Oreste AI Cleaner.";
+
+    const parla = function() {
+
+        speechSynthesis.cancel();
+
+        const messaggio =
+            new SpeechSynthesisUtterance(testo);
+
+        messaggio.lang = "it-IT";
+        messaggio.rate = 0.95;
+        messaggio.pitch = 1;
+
+        const voce = trovaVoceItaliana();
+
+        if (voce) {
+            messaggio.voice = voce;
+        }
+
+        speechSynthesis.speak(messaggio);
+    };
+
+    const voci = speechSynthesis.getVoices();
+
+    if (voci && voci.length > 0) {
+
+        setTimeout(function() {
+            parla();
+        }, 800);
+
+    } else {
+
+        speechSynthesis.onvoiceschanged = function() {
+
+            speechSynthesis.onvoiceschanged = null;
+
+            setTimeout(function() {
+                parla();
+            }, 500);
+
+        };
+
+    }
+
+}
+
+
+/* =========================================================
+   AVVIO AUTOMATICO ALL'APERTURA
+========================================================= */
+
+window.addEventListener("load", function() {
+
+    setTimeout(function() {
+        avviaVocePagina();
+    }, 1000);
 
 </script>
 
