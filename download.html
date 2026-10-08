@@ -3,6 +3,7 @@
 <html lang="it">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,7 +77,9 @@
             margin: 0 auto 20px;
         }
 
-        button {
+        .download-button,
+        .voice-button {
+            display: inline-block;
             background: red;
             color: white;
             border-radius: 19px;
@@ -86,15 +89,13 @@
             font-size: 16px;
             font-weight: bold;
             margin: 8px;
-        }
-
-        button:hover {
-            background: darkred;
-        }
-
-        .download-button {
-            display: inline-block;
             text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .download-button:hover,
+        .voice-button:hover {
+            background: darkred;
         }
 
         ul {
@@ -114,6 +115,7 @@
         .voice-status {
             margin-top: 15px;
             font-size: 14px;
+            min-height: 20px;
         }
 
         footer {
@@ -163,7 +165,7 @@
         <img
             class="avatar"
             src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png"
-            alt="Avatar di Oreste AI - assistente vocale italiano"
+            alt="Avatar di Oreste AI"
             width="150"
             height="150"
         >
@@ -178,28 +180,29 @@
 
 
         <p>
-            Il pulsante apre la pagina ufficiale della release
-            di Oreste AI su GitHub, dove puoi scaricare
-            il programma per Windows.
+            Prima release dell'applicazione desktop Oreste AI
+            per Windows 10 e Windows 11.
         </p>
 
+
+        <!-- DOWNLOAD ORESTE AI -->
 
         <a
             class="download-button"
             href="https://github.com/testonuovo/oreste-ai/releases/tag/v1.0.1"
             target="_blank"
             rel="noopener noreferrer"
+            onclick="parlaDownloadOresteAI()"
         >
-
-            <button type="button">
-                ⬇️ Scarica Oreste AI
-            </button>
-
+            ⬇️ Scarica Oreste AI
         </a>
 
 
+        <!-- ASCOLTA ORESTE -->
+
         <button
             type="button"
+            class="voice-button"
             onclick="parlaOreste()"
         >
             🔊 Ascolta Oreste AI
@@ -210,7 +213,7 @@
             id="voiceStatus"
             class="voice-status"
         >
-            🔊 Premi "Ascolta Oreste AI" per sentire la voce.
+            🔊 Premi "Ascolta Oreste AI" per ascoltare la voce.
         </p>
 
 
@@ -223,6 +226,7 @@
         </p>
 
     </section>
+
 
 
     <!-- ================= ORESTE AI CLEANER ================= -->
@@ -252,18 +256,15 @@
         </p>
 
 
+        <!-- DOWNLOAD CLEANER -->
+
         <a
             class="download-button"
             href="https://github.com/testonuovo/oreste-ai/releases/download/v1.0.0/OresteAICleanerSetup.exe"
             download
+            onclick="parlaDownloadCleaner()"
         >
-
-            <button type="button">
-
-                📥 Scarica Oreste AI Cleaner
-
-            </button>
-
+            📥 Scarica Oreste AI Cleaner
         </a>
 
 
@@ -288,26 +289,41 @@
     </section>
 
 
+
     <!-- ================= FUNZIONI ================= -->
 
     <section class="card">
 
-        <h2>Cosa include Oreste AI</h2>
+        <h2>
+            Cosa include Oreste AI
+        </h2>
 
 
         <ul>
 
-            <li>✔ Assistente vocale AI</li>
+            <li>
+                ✔ Assistente vocale AI
+            </li>
 
-            <li>✔ Comandi vocali in italiano</li>
+            <li>
+                ✔ Comandi vocali in italiano
+            </li>
 
-            <li>✔ Ricerca Google automatica</li>
+            <li>
+                ✔ Ricerca Google automatica
+            </li>
 
-            <li>✔ Apertura siti web</li>
+            <li>
+                ✔ Apertura siti web
+            </li>
 
-            <li>✔ Versione web gratuita</li>
+            <li>
+                ✔ Versione web gratuita
+            </li>
 
-            <li>✔ Integrazione con Oreste AI Cleaner</li>
+            <li>
+                ✔ Integrazione con Oreste AI Cleaner
+            </li>
 
         </ul>
 
@@ -315,6 +331,7 @@
 
 
 </main>
+
 
 
 <footer>
@@ -330,7 +347,9 @@
 <script>
 
 
-    /* ================= VOCE ================= */
+    /* =========================================================
+       TROVA VOCE ITALIANA
+    ========================================================= */
 
     function trovaVoceItaliana() {
 
@@ -348,51 +367,46 @@
 
 
         return (
-            voci.find(
-                voce =>
+
+            voci.find(function(voce) {
+
+                return (
                     voce.lang &&
                     voce.lang.toLowerCase() === "it-it"
-            )
+                );
+
+            })
+
             ||
-            voci.find(
-                voce =>
+
+            voci.find(function(voce) {
+
+                return (
                     voce.lang &&
                     voce.lang.toLowerCase().startsWith("it")
-            )
+                );
+
+            })
+
             ||
+
             null
+
         );
+
     }
 
 
 
-    /* ================= PARLA ORESTE ================= */
+    /* =========================================================
+       FUNZIONE VOCE GENERALE
+    ========================================================= */
 
-    function parlaOreste() {
-
-        const status =
-            document.getElementById("voiceStatus");
-
+    function parlaTesto(testo) {
 
         if (!("speechSynthesis" in window)) {
-
-            if (status) {
-                status.textContent =
-                    "⚠️ La sintesi vocale non è disponibile in questo browser.";
-            }
-
             return;
         }
-
-
-        const testo =
-            "Ciao, sono Oreste AI. " +
-            "Benvenuto nella pagina Download. " +
-            "Puoi scaricare Oreste AI per Windows " +
-            "oppure Oreste AI Cleaner.";
-
-
-        speechSynthesis.cancel();
 
 
         const messaggio =
@@ -415,31 +429,99 @@
         }
 
 
-        messaggio.onstart = function () {
+        speechSynthesis.cancel();
+
+        speechSynthesis.speak(messaggio);
+
+    }
+
+
+
+    /* =========================================================
+       ORESTE AI PARLA
+    ========================================================= */
+
+    function parlaOreste() {
+
+        const status =
+            document.getElementById("voiceStatus");
+
+
+        if (!("speechSynthesis" in window)) {
 
             if (status) {
+
+                status.textContent =
+                    "⚠️ La sintesi vocale non è disponibile in questo browser.";
+
+            }
+
+            return;
+
+        }
+
+
+        const testo =
+            "Ciao, sono Oreste AI. " +
+            "Benvenuto nella pagina Download. " +
+            "Qui puoi scaricare Oreste AI per Windows " +
+            "e Oreste AI Cleaner.";
+
+
+        const messaggio =
+            new SpeechSynthesisUtterance(testo);
+
+
+        messaggio.lang = "it-IT";
+
+        messaggio.rate = 0.95;
+
+        messaggio.pitch = 1;
+
+
+        const voce =
+            trovaVoceItaliana();
+
+
+        if (voce) {
+            messaggio.voice = voce;
+        }
+
+
+        speechSynthesis.cancel();
+
+
+        messaggio.onstart = function() {
+
+            if (status) {
+
                 status.textContent =
                     "🔊 Oreste AI sta parlando...";
+
             }
 
         };
 
 
-        messaggio.onend = function () {
+        messaggio.onend = function() {
 
             if (status) {
+
                 status.textContent =
                     "✅ Oreste AI ha terminato di parlare.";
+
             }
 
         };
 
 
-        messaggio.onerror = function () {
+        messaggio.onerror = function() {
 
             if (status) {
+
                 status.textContent =
-                    "⚠️ La voce non è disponibile. Premi nuovamente il pulsante.";
+                    "⚠️ La voce non è disponibile.";
+
             }
 
         };
@@ -451,47 +533,48 @@
 
 
 
-    /* ================= CARICAMENTO VOCI ================= */
+    /* =========================================================
+       VOCE DOWNLOAD ORESTE AI
+    ========================================================= */
 
-    if ("speechSynthesis" in window) {
+    function parlaDownloadOresteAI() {
 
-        speechSynthesis.onvoiceschanged = function () {
-
-            trovaVoceItaliana();
-
-        };
+        parlaTesto(
+            "Apro la pagina per scaricare Oreste AI per Windows."
+        );
 
     }
 
 
 
-    /* ================= VOCE AUTOMATICA ================= */
+    /* =========================================================
+       VOCE DOWNLOAD CLEANER
+    ========================================================= */
 
-    window.addEventListener("load", function () {
+    function parlaDownloadCleaner() {
 
-        /*
-         * Alcuni browser bloccano la voce automatica
-         * prima di un'interazione dell'utente.
-         * Per questo tentiamo di avviarla dopo un breve intervallo.
-         */
+        parlaTesto(
+            "Apro il download di Oreste AI Cleaner."
+        );
 
-        setTimeout(function () {
+    }
 
-            try {
 
-                parlaOreste();
 
-            } catch (errore) {
+    /* =========================================================
+       CARICAMENTO DELLE VOCI DEL BROWSER
+    ========================================================= */
 
-                console.log(
-                    "Avvio automatico della voce bloccato dal browser."
-                );
+    if ("speechSynthesis" in window) {
 
-            }
+        speechSynthesis.onvoiceschanged =
+            function() {
 
-        }, 1200);
+                trovaVoceItaliana();
 
-    });
+            };
+
+    }
 
 
 </script>
