@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="it">
 
 <head>
@@ -170,14 +169,11 @@
             height="150"
         >
 
-
         <h2>🎤 Scarica Oreste AI</h2>
-
 
         <p>
             Scarica Oreste AI per Windows.
         </p>
-
 
         <p>
             Prima release dell'applicazione desktop Oreste AI
@@ -188,11 +184,12 @@
         <!-- DOWNLOAD ORESTE AI -->
 
         <a
+            id="downloadOreste"
             class="download-button"
             href="https://github.com/testonuovo/oreste-ai/releases/tag/v1.0.1"
             target="_blank"
             rel="noopener noreferrer"
-            onclick="parlaDownloadOresteAI()"
+            onclick="parlaDownloadOresteAI(event)"
         >
             ⬇️ Scarica Oreste AI
         </a>
@@ -228,24 +225,20 @@
     </section>
 
 
-
     <!-- ================= ORESTE AI CLEANER ================= -->
 
     <section class="download-cleaner">
 
         <h2>🧹 Oreste AI Cleaner</h2>
 
-
         <p>
             Lo strumento di pulizia per Windows di Oreste AI.
         </p>
-
 
         <p>
             Pulisci in modo semplice e sicuro i file temporanei
             del tuo computer Windows.
         </p>
-
 
         <p>
 
@@ -259,10 +252,11 @@
         <!-- DOWNLOAD CLEANER -->
 
         <a
+            id="downloadCleaner"
             class="download-button"
             href="https://github.com/testonuovo/oreste-ai/releases/download/v1.0.0/OresteAICleanerSetup.exe"
             download
-            onclick="parlaDownloadCleaner()"
+            onclick="parlaDownloadCleaner(event)"
         >
             📥 Scarica Oreste AI Cleaner
         </a>
@@ -289,7 +283,6 @@
     </section>
 
 
-
     <!-- ================= FUNZIONI ================= -->
 
     <section class="card">
@@ -297,7 +290,6 @@
         <h2>
             Cosa include Oreste AI
         </h2>
-
 
         <ul>
 
@@ -333,7 +325,6 @@
 </main>
 
 
-
 <footer>
 
     <p>
@@ -341,7 +332,6 @@
     </p>
 
 </footer>
-
 
 
 <script>
@@ -357,14 +347,11 @@
             return null;
         }
 
-
         const voci = speechSynthesis.getVoices();
-
 
         if (!voci || voci.length === 0) {
             return null;
         }
-
 
         return (
 
@@ -397,7 +384,6 @@
     }
 
 
-
     /* =========================================================
        FUNZIONE VOCE GENERALE
     ========================================================= */
@@ -408,10 +394,8 @@
             return;
         }
 
-
         const messaggio =
             new SpeechSynthesisUtterance(testo);
-
 
         messaggio.lang = "it-IT";
 
@@ -419,22 +403,18 @@
 
         messaggio.pitch = 1;
 
-
         const voce =
             trovaVoceItaliana();
-
 
         if (voce) {
             messaggio.voice = voce;
         }
-
 
         speechSynthesis.cancel();
 
         speechSynthesis.speak(messaggio);
 
     }
-
 
 
     /* =========================================================
@@ -445,7 +425,6 @@
 
         const status =
             document.getElementById("voiceStatus");
-
 
         if (!("speechSynthesis" in window)) {
 
@@ -460,17 +439,14 @@
 
         }
 
-
         const testo =
             "Ciao, sono Oreste AI. " +
             "Benvenuto nella pagina Download. " +
             "Qui puoi scaricare Oreste AI per Windows " +
             "e Oreste AI Cleaner.";
 
-
         const messaggio =
             new SpeechSynthesisUtterance(testo);
-
 
         messaggio.lang = "it-IT";
 
@@ -478,15 +454,12 @@
 
         messaggio.pitch = 1;
 
-
         const voce =
             trovaVoceItaliana();
-
 
         if (voce) {
             messaggio.voice = voce;
         }
-
 
         speechSynthesis.cancel();
 
@@ -532,36 +505,84 @@
     }
 
 
-
     /* =========================================================
        VOCE DOWNLOAD ORESTE AI
     ========================================================= */
 
-    function parlaDownloadOresteAI() {
+    function parlaDownloadOresteAI(event) {
 
-       parlaTesto("Scarico Oreste AI per Windows"
+        if (event) {
+            event.preventDefault();
+        }
+
+        const link =
+            document.getElementById("downloadOreste");
+
+        parlaTesto(
+            "Apro la pagina per scaricare Oreste AI per Windows."
         );
 
-    }
+        setTimeout(function() {
 
+            if (link) {
+
+                window.open(
+                    link.href,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+
+            }
+
+        }, 900);
+
+    }
 
 
     /* =========================================================
        VOCE DOWNLOAD CLEANER
     ========================================================= */
 
-    function parlaDownloadCleaner() {
+    function parlaDownloadCleaner(event) {
 
-        parlaTesto("Scarico Oreste AI Cleaner"
+        if (event) {
+            event.preventDefault();
+        }
+
+        const link =
+            document.getElementById("downloadCleaner");
+
+        parlaTesto(
+            "Apro il download di Oreste AI Cleaner."
         );
+
+        setTimeout(function() {
+
+            if (link) {
+
+                const a =
+                    document.createElement("a");
+
+                a.href = link.href;
+
+                a.download = "";
+
+                document.body.appendChild(a);
+
+                a.click();
+
+                a.remove();
+
+            }
+
+        }, 900);
 
     }
 
 
-
     /* =========================================================
        CARICAMENTO DELLE VOCI DEL BROWSER
-    ========================================================
+    ========================================================= */
 
     if ("speechSynthesis" in window) {
 
