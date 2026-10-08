@@ -944,5 +944,231 @@ function scaricaProgramma(nome) {
 
 /* =====================================================
    PAGINE ORESTE AI
-==========================
+===================================================== */
+
+function apriPagina(testo) {
+
+    const pagine = {
+
+        "chi siamo":
+            "chi-siamo.html",
+
+        "spagna campione":
+            "spagna-campione-del-mondo-2026.html",
+
+        "oreste os":
+            "os.html",
+
+        "tecnologie":
+            "tecnologie oreste ai.html",
+
+        "comandi":
+            "comandi-oreste-ai.html",
+
+        "mondiali":
+            "mondiali2026.html",
+
+        "assistente":
+            "assistente.html",
+
+        "motivazione":
+            "motivazione.html",
+
+        "meditazione":
+            "meditazione.html",
+
+        "download":
+            "download.html",
+
+        "storybook":
+            "storybook.html",
+
+        "contatti":
+            "contatti.html",
+
+        "dashboard":
+            "dashboard.html",
+
+        "funzioni":
+            "funzioni.html",
+
+        "storia":
+            "storia.html",
+
+        "blog":
+            "blog.html",
+
+        "chat":
+            "chat.html",
+
+        "home":
+            "index.html"
+
+    };
+
+
+    const nomi =
+        Object.keys(pagine)
+        .sort(
+            (a, b) =>
+                b.length - a.length
+        );
+
+
+    for (const nome of nomi) {
+
+        if (testo.includes(nome)) {
+
+            window.open(
+                pagine[nome],
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+
+            return (
+                "Apro la pagina " +
+                nome +
+                "."
+            );
+        }
+    }
+
+
+    return null;
+}
+
+
+/* =====================================================
+   CANVA ORESTE AI
+===================================================== */
+
+function apriCanva() {
+
+    speak(
+        "Impara Canva con Oreste AI"
+    );
+
+
+    setTimeout(
+        function () {
+
+            window.open(
+                "guida-canva-oreste-ai.html",
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+        },
+        700
+    );
+}
+
+
+/* =====================================================
+   VICINO CONTURSI
+===================================================== */
+
+function apriVicinoContursi(testo) {
+
+    const episodi = {
+
+        "1":
+            "https://youtu.be/r5gGcrJJn_0",
+
+        "2":
+            "https://youtu.be/-MwXVX1tEdo",
+
+        "3":
+            "https://youtu.be/dSdqAWsUxwQ",
+
+        "4":
+            "https://youtu.be/jozTmOx66m4",
+
+        "5":
+            "https://youtu.be/8HoZ3vStWwc"
+
+    };
+
+
+    const parole = {
+
+        "uno": "1",
+
+        "due": "2",
+
+        "tre": "3",
+
+        "quattro": "4",
+
+        "cinque": "5"
+
+    };
+
+
+    for (const parola in parole) {
+
+        if (
+            testo.includes(
+                "vicino contursi " +
+                parola
+            )
+        ) {
+
+            const numero =
+                parole[parola];
+
+
+            window.open(
+                episodi[numero],
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+
+            return (
+                "Vicino Contursi " +
+                numero +
+                "."
+            );
+        }
+    }
+
+
+    for (const numero in episodi) {
+
+        if (
+            testo.includes(
+                "vicino contursi " +
+                numero
+            )
+        ) {
+
+            window.open(
+                episodi[numero],
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+
+            return (
+                "Vicino Contursi " +
+                numero +
+                "."
+            );
+        }
+    }
+
+
+    return null;
+}
+
+
+/* =====================================================
+   VIDEO MOTIVAZIONALI
+===================================================== */
+
+function apriVideoMotivazionale(titolo, url) {
+
+    if (!url || url.includes("INSERISCI_QUI")) {
 ```
