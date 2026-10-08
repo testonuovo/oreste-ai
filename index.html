@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="it">
 
@@ -193,7 +192,7 @@
 
 
         /* =====================================================
-           INTRO ORESTE
+           INTRO ORESTE AI
         ====================================================== */
 
         .oreste-intro {
@@ -965,7 +964,7 @@
             class="voice-button"
             onclick="benvenutoOreste(true)"
         >
-            🔊 Ascolta Oreste
+            🔊 Ascolta Oreste AI
         </button>
 
         <button
@@ -1645,8 +1644,7 @@
 
 
             const voci =
-                window.speechSynthesis
-                    .getVoices();
+                speechSynthesis.getVoices();
 
 
             return (
@@ -1728,7 +1726,7 @@
 
 
         /* =====================================================
-           BENVENUTO ORESTE
+           BENVENUTO ORESTE AI
         ====================================================== */
 
         let benvenutoRiprodotto =
@@ -1768,7 +1766,7 @@
             if (stato) {
 
                 stato.textContent =
-                    "🔊 Oreste sta parlando...";
+                    "🔊 Oreste AI sta parlando...";
 
             }
 
@@ -1784,7 +1782,7 @@
                     if (stato) {
 
                         stato.textContent =
-                            "✅ Oreste è pronto.";
+                            "✅ Oreste AI è pronto.";
 
                     }
 
@@ -2499,7 +2497,7 @@
 
 
             return (
-                "Cerco il download ufficiale di " +
+                "Scarico " +
                 nome
             );
         }
@@ -4306,4 +4304,3 @@
 </body>
 
 </html>
-```
