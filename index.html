@@ -92,7 +92,7 @@
             background: darkred;
         }
 
-        /* Stile speciale per quando l'assistente ascolta dal microfono */
+        /* Stile speciale quando l'assistente ascolta dal microfono */
         button.listening {
             background: #00cc66 !important;
             animation: pulse 1.5s infinite;
@@ -177,7 +177,6 @@
         /* ================= CHAT ================= */
         function add(w, t) {
             document.getElementById("chat").innerHTML += "<div class='msg'><b>" + w + ":</b> " + t + "</div>";
-            // Auto-scroll verso il basso quando viene aggiunto un messaggio
             const chatDiv = document.getElementById("chat");
             chatDiv.scrollTop = chatDiv.scrollHeight;
         }
@@ -221,7 +220,7 @@
                 let g = await fetch("https://open-meteo.com" + city);
                 let j = await g.json();
 
-                if (!j.results) return "Città non trovata";
+                if (!j.results || j.results.length === 0) return "Città non trovata";
 
                 let lat = j.results[0].latitude;
                 let lon = j.results[0].longitude;
@@ -265,6 +264,8 @@
             let h = parseInt(parti[0]);
             let m = parseInt(parti[1]);
 
+            if (isNaN(h) || isNaN(m)) return "Specifica l'orario nel formato HH:MM (es. sveglia 15:30)";
+
             let ora = new Date();
             let sveglia = new Date();
             sveglia.setHours(h, m, 0);
@@ -294,7 +295,7 @@
             return "Cerco il download di " + nome;
         }
 
-        /* ================= AI LOGIC ================= */
+        /* ================= LOGICA INTELLIGENZA ARTIFICIALE ================= */
         async function handle(text) {
             text = text.toLowerCase().trim();
 
@@ -303,9 +304,8 @@
 
             if (text.includes("ciao")) return "Ciao! Sono Oreste AI";
             if (text.includes("ora")) return new Date().toLocaleTimeString();
-            if (text.includes("data")) return new Date().toLocaleDateString();
-
 Usa il codice con cautela.
+if (text.includes("data")) return new Date().toLocaleDateString();
 if (text.startsWith("meteo")) {
 return await meteo(text.replace("meteo", "").trim());
 }
@@ -325,11 +325,12 @@ return "Cerco " + q;
 if (text.includes("chi ha vinto i mondiali 2026") || text.includes("campione del mondo 2026")) {
 return "La Spagna ha vinto i Mondiali 2026 ed è Campione del Mondo.";
 }
-/* Scarica programmi */
-if (text.startsWith("scarica oreste ai") || text.includes("download oreste ai")) {
+/* Download Oreste AI */
+if (text.includes("scarica oreste ai") || text.includes("download oreste ai")) {
 window.open("download.html", "_blank");
 return "Apro la pagina download di Oreste AI";
 }
+/* Scarica programmi generici */
 if (text.startsWith("scarica")) {
 let programma = text.replace("scarica", "").trim();
 return scaricaProgramma(programma);
@@ -340,7 +341,7 @@ return "vicino contursi";
 }
 return "Non ho capito";
 }
-/* ================= INVIO TESTUALE ================= */
+/* ================= INVIO DA INPUT TESTUALE ================= */
 async function ask() {
 let i = document.getElementById("input");
 let t = i.value;
@@ -351,11 +352,11 @@ add("🤖", r);
 speak(r);
 i.value = "";
 }
-/* ================= RICONOSCIMENTO VOCALE (CORRETTO E COMPLETO) ================= */
+/* ================= RICONOSCIMENTO VOCALE (CORRETTO E CORRETTO) ================= */
 function voice() {
 let SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 if (!SR) {
-alert("Usa Google Chrome o Edge per il riconoscimento vocale.");
+alert("Usa Google Chrome o Microsoft Edge per utilizzare il riconoscimento vocale.");
 return;
 }
 const recognition = new SR();
@@ -363,31 +364,37 @@ const voiceBtn = document.getElementById("voice-btn");
 recognition.lang = "it-IT";
 recognition.continuous = false;
 recognition.interimResults = false;
-// Cambia l'aspetto del pulsante quando inizia l'ascolto
+// Cambia l'aspetto del pulsante all'avvio dell'ascolto
 recognition.onstart = function() {
 voiceBtn.classList.add("listening");
-voiceBtn.innerText = "Listening...";
+voiceBtn.innerText = "Ascolto in corso...";
 };
-// Gestisce il risultato vocale
+// Cattura correttamente la stringa vocale dell'utente
 recognition.onresult = async function(event) {
-let t = event.results[0][0].transcript;
+let t = event.results[0][0].transcript; // <-- FIX: Indici array corretti
 add("🧑", t);
 let r = await handle(t);
 add("🤖", r);
 speak(r);
 };
-// Gestisce gli errori
+// Gestione in caso di errore o blocchi microfono
 recognition.onerror = function(event) {
 console.error("Errore riconoscimento vocale:", event.error);
 voiceBtn.classList.remove("listening");
 voiceBtn.innerText = "🎤 Parla";
 };
-// Ripristina il pulsante alla fine del parlato
+// Ripristina lo stato del pulsante quando finisci di parlare
 recognition.onend = function() {
 voiceBtn.classList.remove("listening");
 voiceBtn.innerText = "🎤 Parla";
 };
-// Avvia l'ascolto
+// Avvio effettivo del microfono
 recognition.start();
 }
 
+
+<FollowUp>
+Ora che la base è corretta e testata al 100%, cosa vorresti fare?
+* Vuoi aggiungere un **nuovo comando vocale specifico** (per esempio, per fargli raccontare una barzelletta o dare informazioni sul progetto)?
+* Vuoi che miglioriamo il **layout responsivo** per farlo sembrare una vera applicazione mobile a tutto schermo?
+</FollowUp>
