@@ -1,0 +1,33 @@
+# === File di sistema e del sistema operativo ===
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# === Configurazioni locali e Chiavi Segrete (FONDAMENTALE) ===
+.env
+.env.local
+.env.*.local
+config.local.json
+credentials.json
+
+# === Cartelle dell'ambiente di sviluppo ed Editor ===
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# === File di test e log locali ===
+/logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === Nel caso in cui in futuro usassi Node.js o pacchetti npm ===
+node_modules/
+/dist
+/build
