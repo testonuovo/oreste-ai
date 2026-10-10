@@ -160,6 +160,22 @@ button{padding:12px 18px;margin:5px;border:none;border-radius:20px;background:re
 #calendar{width:100%;display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.weekday{background:rgba(0,0,0,.35);padding:10px 5px;border-radius:8px;font-weight:bold;font-size:13px}.day{background:rgba(255,255,255,.1);padding:10px 5px;border-radius:8px;cursor:pointer;min-height:75px;transition:.2s}.day:hover{background:rgba(255,255,255,.2)}.day.today{outline:2px solid #ffd700}.day-number{font-weight:bold;font-size:15px}.event{font-size:11px;color:#ff0;margin-top:5px;line-height:1.25;text-align:left}.empty{background:transparent;cursor:default}.calendar-help{font-size:13px;opacity:.9;margin-top:12px}
 footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
 @media (max-width:700px){input{width:90%}nav a{display:block;margin:8px}#chat{width:94%}#calendar{gap:3px}.day{min-height:65px;padding:7px 4px}.event{font-size:9px}.weekday{font-size:10px;padding:8px 2px}.video-grid,.canva-grid{grid-template-columns:1fr}}
+/* Immagine nella home di Oreste AI */
+.home-image {
+  width: 92%;
+  max-width: 700px;
+  margin: 22px auto;
+  padding: 10px;
+  background: rgba(255,255,255,.08);
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,.25);
+}
+
+.home-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radiu
 </style>
 </head>
 <body>
@@ -171,6 +187,13 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
 <button class="voice-button" onclick="benvenutoOreste(true)">🔊 Ascolta Oreste</button>
 <button class="secondary-button" onclick="document.getElementById('input').focus()">💬 Inizia</button>
 <div id="introVoiceStatus"></div>
+</section>
+<section class="home-image" aria-label="Immagine di Oreste AI">
+  <img
+    src="https://i.ibb.co/zVyLCTPc/IMG-20261010-122018.jpg"
+    alt="Immagine di presentazione di Oreste AI"
+    loading="eager"
+  >
 </section>
 <nav>
 <h2>Oreste AI: assistente vocale italiano online gratis</h2>
