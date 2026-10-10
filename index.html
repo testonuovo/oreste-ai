@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -160,35 +160,6 @@ button{padding:12px 18px;margin:5px;border:none;border-radius:20px;background:re
 #calendar{width:100%;display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.weekday{background:rgba(0,0,0,.35);padding:10px 5px;border-radius:8px;font-weight:bold;font-size:13px}.day{background:rgba(255,255,255,.1);padding:10px 5px;border-radius:8px;cursor:pointer;min-height:75px;transition:.2s}.day:hover{background:rgba(255,255,255,.2)}.day.today{outline:2px solid #ffd700}.day-number{font-weight:bold;font-size:15px}.event{font-size:11px;color:#ff0;margin-top:5px;line-height:1.25;text-align:left}.empty{background:transparent;cursor:default}.calendar-help{font-size:13px;opacity:.9;margin-top:12px}
 footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
 @media (max-width:700px){input{width:90%}nav a{display:block;margin:8px}#chat{width:94%}#calendar{gap:3px}.day{min-height:65px;padding:7px 4px}.event{font-size:9px}.weekday{font-size:10px;padding:8px 2px}.video-grid,.canva-grid{grid-template-columns:1fr}}
-/* Immagine nella home di Oreste AI */
-.home-image {
-  width: 92%;
-  max-width: 700px;
-  margin: 22px auto;
-  padding: 10px;
-  background: rgba(255,255,255,.08);
-  border-radius: 18px;
-  box-shadow: 0 8px 25px rgba(0,0,0,.25);
-}
-
-.home-image {
-  width:30%;
-  max-width:300%;
-  margin: 18px auto;
-  padding: 6px;
-  background: rgba(255,255,255,.08);
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.20);
-}
-
-.home-image img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-
 </style>
 </head>
 <body>
@@ -201,19 +172,42 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
 <button class="secondary-button" onclick="document.getElementById('input').focus()">💬 Inizia</button>
 <div id="introVoiceStatus"></div>
 </section>
-<section class="home-image" aria-label="Immagine di Oreste AI">
-  <img
-    src="https://i.ibb.co/zVyLCTPc/IMG-20261010-122018.jpg"
-    alt="Immagine di presentazione di Oreste AI" width="50" height="50"
-    loading="eager"
-  >
-</section>
-   
-    
-    </p>
 <nav>
 <h2>Oreste AI: assistente vocale italiano online gratis</h2>
+<section>
+<h2>Un progetto italiano, indipendente e accessibile a tutti</h2>
+<p>Nato dall'ingegno del programmatore italiano Oreste De Chiara...</p>
 
+<!-- INSERISCI QUI LA TUA FOTO DI AUTORE -->
+<a href="https://ibb.co/m5LYdVhs"><img src="https://i.ibb.co/zVyLCTPc/IMG-20261010-122018.jpg" alt="IMG-20261010-122018" border="0"></a><br /><a target='_blank' href='https://it.imgbb.com/'>imgbb senza pubblicità</a><br />
+    <p style="font-size: 0.9em; color: #666; margin-top: 2px; font-family: sans-serif;">
+        Creatore e Sviluppatore del Progetto
+    </p>
+</div>
+    <p style="font-size: 0.9em; color: #666; margin-top: 2px; font-family: sans-serif;">
+        Creatore e Sviluppatore del Progetto
+    </p>
+</div>
+    <!-- Didascalia sotto la foto -->
+    <p style="font-size: 1em; font-weight: bold; color: #333; margin-top: 10px; font-family: sans-serif;">
+        Oreste De Chiara
+    </p>
+    <p style="font-size: 0.9em; color: #666; margin-top: 2px; font-family: sans-serif;">
+        Creatore e Sviluppatore del Progetto
+    </p>
+</div>
+    
+    <!-- Didascalia sotto la foto -->
+    <p style="font-size: 1em; font-weight: bold; color: #333; margin-top: 10px; font-family: sans-serif;">
+        Oreste De Chiara
+    </p>
+    <!-- Didascalia sotto la foto -->
+    <p style="font-size: 1em; font-weight: bold; color: #333; margin-top: 10px; font-family: sans-serif;">
+        Oreste De Chiara
+    </p>
+    <p style="font-size: 0.9em; color: #666; margin-top: 2px; font-family: sans-serif;">
+        Creatore e Sviluppatore del Progetto
+    </p>
 </div>
 <p>Oreste AI è un assistente vocale italiano online gratis che puoi utilizzare direttamente dal browser. Puoi parlare con Oreste AI attraverso il microfono oppure scrivere i tuoi comandi e ricevere risposte direttamente online.</p>
 <p>Con Oreste AI puoi utilizzare comandi vocali, controllare il meteo, impostare timer e sveglie, effettuare ricerche online, aprire siti e utilizzare diversi strumenti direttamente dal browser.</p>
@@ -358,7 +352,7 @@ const vicino=apriVicinoContursi(text);if(vicino)return vicino;
 if(text.includes("affronta la paura e vinci con coraggio")){window.open("https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share","_blank","noopener,noreferrer");return"Affronta la paura e vinci con coraggio.";}
 if(text.includes("non è mai troppo tardi per ricominciare")){window.open("https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share","_blank","noopener,noreferrer");return"Non è mai troppo tardi per ricominciare.";}
 if(text.includes("un passo alla volta")){window.open("https://www.youtube.com/shorts/GYmM6jZUPPA?feature=share","_blank","noopener,noreferrer");return"Un passo alla volta.";}
-if(text.includes("comincio da zero")||text.includes("cominciare da zero")){window.open("https://www.youtube.com/shorts/xKTSSWy8SDM?feature=share","_blank","noopener,noreferrer");return"comincio da zero.";}
+if(text.includes("comincio da zero")||text.includes("cominciare da zero")){window.open("https://www.youtube.com/shorts/xKTSSWy8SDM?feature=share","_blank","noopener,noreferrer");return"cominciare da zero.";}
 if(text.includes("credi in te stesso")||text.includes("credi")){window.open("https://www.youtube.com/shorts/2CEJzlZR7gc?feature=share","_blank","noopener,noreferrer");return"credi in te stesso.";}
 if(text.includes("il silenzio è forza")||text.includes("silenzio")){window.open("https://www.youtube.com/shorts/0P1oNhdWL8Q?feature=share","_blank","noopener,noreferrer");return"il silenzio è forza.";}
 
@@ -406,6 +400,5 @@ document.addEventListener("click",()=>benvenutoOreste(false),{once:true});
 if("speechSynthesis" in window&&"onvoiceschanged" in window.speechSynthesis){window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();}
 </script>
 <footer>© 2026 Oreste De Chiara – Oreste AI – Tutti i diritti riservati.</footer>
-
 </body>
 </html>
