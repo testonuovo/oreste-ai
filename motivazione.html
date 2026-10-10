@@ -1,245 +1,345 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Motivazione - Oreste AI</title>
-
-<style>
-body{
-    margin:0;
-    font-family:Arial;
-    color:white;
-    text-align:center;
-    overflow-x:hidden;
-}
-
-/* 🌊 SFONDO */
-.sky{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:linear-gradient(to top,#0077be,#00c6ff,#87ceeb);
-    z-index:-3;
-}
-
-.sun{
-    position:fixed;
-    top:60px;
-    left:-120px;
-    width:100px;
-    height:100px;
-    background:yellow;
-    border-radius:50%;
-    box-shadow:0 0 40px yellow;
-    animation:sunMove 20s linear infinite;
-    z-index:-2;
-}
-
-@keyframes sunMove{
-    0%{left:-120px;}
-    100%{left:110%;}
-}
-
-.wave{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:200%;
-    height:120px;
-    background:rgba(255,255,255,0.15);
-    border-radius:50%;
-    animation:waveMove 6s linear infinite;
-    z-index:-1;
-}
-
-.wave2{
-    opacity:0.5;
-    animation:waveMove 10s linear infinite reverse;
-}
-
-@keyframes waveMove{
-    0%{transform:translateX(0);}
-    100%{transform:translateX(-50%);}
-}
-
-.container{
-    width:90%;
-    max-width:800px;
-    margin:30px auto;
-}
-
-.card{
-    background:rgba(0,0,0,0.25);
-    padding:20px;
-    margin:15px 0;
-    border-radius:15px;
-}
-
-button{
-    padding:10px 15px;
-    border:none;
-    border-radius:10px;
-    background:red;
-    color:white;
-    cursor:pointer;
-    margin:5px;
-}
-a{
-text-decoration:none;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌻 Motivazione - Oreste AI</title>
+  <meta name="description" content="Trova una frase motivazionale, ascolta il suono rilassante del mare e guarda i video motivazionali scelti da Oreste AI.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://oreste-ai.vercel.app/motivazione.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="🌻 Motivazione - Oreste AI">
+  <meta property="og:description" content="La calma è dentro di te. Frasi e video motivazionali con Oreste AI.">
+  <meta property="og:url" content="https://oreste-ai.vercel.app/motivazione.html">
+  <meta property="og:locale" content="it_IT">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      padding: 0 0 30px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(160deg, #0a3d91, #102a63 70%, #071b40);
+    }
+    header { padding: 28px 16px 12px; }
+    h1 { margin: 0 0 10px; font-size: clamp(1.8rem, 5vw, 2.5rem); }
+    h2 { margin-top: 0; }
+    nav {
+      margin: 10px auto 25px;
+      padding: 12px;
+      width: min(96%, 1200px);
+      border-radius: 14px;
+      background: rgba(0, 0, 0, .3);
+    }
+    nav a {
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      padding: 8px 10px;
+      margin: 3px;
+      border-radius: 8px;
+    }
+    nav a:hover, nav a:focus-visible { background: rgba(255,255,255,.13); color: #ffe58a; }
+    main { width: min(94%, 1000px); margin: 0 auto; }
+    .hero, .videos-section {
+      padding: clamp(20px, 4vw, 34px);
+      margin: 24px auto;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, .25);
+      box-shadow: 0 8px 26px rgba(0,0,0,.16);
+    }
+    .hero-icon { font-size: 52px; margin-bottom: 8px; }
+    #fraseMotivazionale {
+      font-size: clamp(1.45rem, 4vw, 2rem);
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 18px auto 22px;
+      min-height: 2.8em;
+    }
+    .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    button {
+      border: 0;
+      border-radius: 22px;
+      padding: 12px 18px;
+      margin: 4px;
+      color: white;
+      background: #d41435;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    button:hover { background: #a90f2a; transform: translateY(-1px); }
+    button:focus-visible { outline: 3px solid #ffe58a; outline-offset: 3px; }
+    button.secondary { background: #1c5fc8; }
+    button.secondary:hover { background: #174f9f; }
+    button.sea { background: #087eaa; }
+    button.sea:hover { background: #066486; }
+    #statoMotivazione { min-height: 24px; margin: 12px 0 0; font-size: .92rem; }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .video-card {
+      padding: 20px 15px;
+      border-radius: 15px;
+      background: rgba(255,255,255,.09);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 180px;
+    }
+    .video-card h3 { margin-top: 0; line-height: 1.4; }
+    .video-card a {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 15px;
+      border-radius: 18px;
+      color: #fff;
+      background: #d41435;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .video-card a:hover { background: #a90f2a; }
+    footer { margin: 30px 15px 0; padding: 15px; font-size: .9rem; opacity: .9; }
+    @media (max-width: 760px) {
+      nav a { display: block; }
+      .video-grid { grid-template-columns: 1fr; }
+      .video-card { min-height: auto; }
+    }
+  </style>
 </head>
-
 <body>
-<audio id="bgMusic" loop>
-  <source src="./music/mare.mp3" type="audio/mpeg">
-</audio>
+  <header>
+    <h1>🌻 Motivazione - Oreste AI</h1>
+    <p>Piccoli pensieri per ritrovare calma, forza e fiducia.</p>
+  </header>
 
+  <nav aria-label="Menu principale">
+    <a href="index.html">🏠 Home</a>
+    <a href="assistente.html">🎤 Assistente</a>
+    <a href="chat.html">💬 Chat</a>
+    <a href="motivazione.html" aria-current="page">🌻 Motivazione</a>
+    <a href="download.html">📥 Download</a>
+    <a href="blog.html">📰 Blog</a>
+    <a href="chi-siamo.html">👤 Chi siamo</a>
+    <a href="contatti.html">📞 Contatti</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="os.html">🖥️ Oreste OS</a>
+    <a href="creatore.html">👨‍💻 Creatore</a>
+    <a href="meditazione.html">🧘 Meditazione</a>
+    <a href="mondiali2026.html">🏆 Mondiali 2026</a>
+    <a href="spagna-campione-del-mondo-2026.html">🏆 Spagna campione del mondo 2026</a>
+    <a href="storybook.html">📚 Storybook</a>
+    <a href="storia.html">📖 La Storia</a>
+    <a href="funzioni.html">⚙️ Funzioni</a>
+    <a href="tecnologie%20oreste%20ai.html">💻 Tecnologie Oreste AI</a>
+    <a href="comandi-oreste-ai.html">🎤 Comandi</a>
+  </nav>
 
-<div class="sky"></div>
-<div class="sun"></div>
-<div class="wave"></div>
-<div class="wave wave2"></div>
+  <main>
+    <section class="hero" aria-labelledby="titolo-motivazione">
+      <div class="hero-icon" aria-hidden="true">🌊💛</div>
+      <h2 id="titolo-motivazione">La calma è dentro di te.</h2>
+      <p id="fraseMotivazionale" aria-live="polite">La calma è dentro di te.</p>
+      <div class="actions">
+        <button type="button" onclick="motivamiOra()">💖 Motivami ora</button>
+        <button type="button" class="secondary" onclick="nuovaFrase()">✨ Nuova frase</button>
+        <button type="button" id="pulsanteMare" class="sea" onclick="toggleSuonoMare()">🌊 Suono mare</button>
+      </div>
+      <p id="statoMotivazione" aria-live="polite">Scegli una frase o attiva il suono del mare.</p>
+    </section>
 
-<h1>🌻 Motivazione - Oreste AI</h1>
-<nav>
-<a href="index.html">🏠 Home</a>
-<a href="assistente.html">🎤 Assistente</a>
-<a href="chat.html">💬 Chat</a>
-<a href="motivazione.html">🌻 Motivazione</a>
-<a href="download.html">📥 Download</a>
-<a href="blog.html">📰 Blog</a>
-<a href="chi-siamo.html">👤 Chi siamo</a>
-<a href="contatti.html">📞 Contatti</a>
-<a href="dashboard.html">📊 Dashboard</a>
-<a href="os.html">🖥️ Oreste OS</a>
-<a href="chi-ha-creato-oreste-ai.html">👨‍💻 Creatore</a>
-<a href="meditazione.html">🧘 Meditazione</a>
-<a href="mondiali2026.html">🏆 Mondiali 2026</a>
-<a href="spagna-campione-del-mondo-2026.html">
-🏆 Spagna campione del mondo 2026
-</a>
-<a href="storybook.html">📚 Storybook</a>
-<a href="storia.html">📖 La Storia</a>
-<a href="funzioni.html">Funzioni</a>
-<a href="tecnologie oreste ai.html">Tecnologie Oreste AI</a>
-<a href="comandi-oreste-ai.html">🎤 Comandi</a>
-</nav>
-<div class="container">
+    <section class="videos-section" aria-labelledby="titolo-video">
+      <h2 id="titolo-video">🎬 Video Motivazionali</h2>
+      <div class="video-grid">
+        <article class="video-card">
+          <h3>Il silenzio è forza</h3>
+          <a href="https://www.youtube.com/shorts/0P1oNhdWL8Q" target="_blank" rel="noopener noreferrer">▶ Guarda il video</a>
+        </article>
+        <article class="video-card">
+          <h3>💪 Credi in te stesso</h3>
+          <a href="https://www.youtube.com/shorts/2CEJzlZR7gc" target="_blank" rel="noopener noreferrer">▶ Guarda il video</a>
+        </article>
+        <article class="video-card">
+          <h3>🚀 Il fuoco dentro</h3>
+          <a href="https://www.youtube.com/shorts/MGYU_zIlpoA" target="_blank" rel="noopener noreferrer">▶ Guarda il video</a>
+        </article>
+      </div>
+    </section>
+  </main>
 
-<div class="card" id="frase">
-Premi un pulsante 🌊
-</div>
-
-<button onclick="motivami()">💖 Motivami ora</button>
-<button onclick="nuovaFrase()">✨ Nuova frase</button>
-<button onclick="toggleAudio()">🌊 Suono mare</button>
-
-<audio id="music" preload="auto">
-  <source src="https://www.dropbox.com/scl/fi/k1yh855pre1jhhh0nk97z/mare.mp3?rlkey=ew3ixaqufzvmyt8xf0o3t9tgp&dl=1" type="audio/mpeg">
-</audio>
-
-<!-- 🎬 VIDEO -->
- <div class="card">
-  <h2>🎬 Video Motivazionali</h2>
-</div>
-
-<div class="card">
-  <h3>Il silenzio è forza</h3>
-  <a href="https://www.youtube.com/shorts/0P1oNhdWL8Q" target="_blank">
-    ▶ Guarda il video
-  </a>
-</div>
-
-<div class="card">
-  <h3>💪Credi in te stesso</h3>
-  <a href="https://www.youtube.com/shorts/2CEJzlZR7gc" target="_blank">
-    ▶ Guarda il video
-  </a>
-</div>
-
-<div class="card">
-  <h3>🚀Il fuoco dentro</h3>
-  <a href="https://www.youtube.com/shorts/MGYU_zIlpoA" target="_blank">
-    ▶ Guarda il video
-  </a>
-</div> 
-
-  
-  
-  
-</div>
-
-<script>
-
-/* 🌻 FRASI */
-const frasi = [
-"Respira lentamente...",
-"Sei al sicuro.",
-"Non ti arrendere.",
-"Ogni passo conta.",
-"La calma è dentro di te.",
-"Sei più forte di quanto pensi.",
-"Ogni giorno è un nuovo inizio.",
-"Puoi ricominciare quando vuoi.",
-"La serenità è dentro di te.",
-"Non ti arrendere."
-];
-
-function nuovaFrase(){
-    const box = document.getElementById("frase");
-    const i = Math.floor(Math.random() * frasi.length);
-    box.innerText = frasi[i];
-}
-
-function motivami(){
-    nuovaFrase();
-
-    let msg = new SpeechSynthesisUtterance(
-        document.getElementById("frase").innerText
-    );
-
-    msg.lang = "it-IT";
-    speechSynthesis.cancel();
-    speechSynthesis.speak(msg);
-}
-
-/* 🌊 AUDIO */
-function toggleAudio(){
-
-    const music = document.getElementById("music");
-
-    music.volume = 0.5;
-
-    if(music.paused){
-        music.play().catch(err=>{
-            alert("Errore audio: " + err.message);
-        });
-    } else {
-        music.pause();
-    }
-}
-
-window.onload = nuovaFrase;
-function toggleMusic(){
-    const music = document.getElementById("bgMusic");
-
-    if(music.paused){
-        music.volume = 0.4;
-        music.play().then(()=>{
-            console.log("Musica avviata");
-        }).catch(err=>{
-            alert("Audio bloccato dal browser: " + err.message);
-        });
-    } else {
-        music.pause();
-    }
-}
-</script>
-
-</body>
- <footer style="margin-top:30px; padding:15px; font-size:14px; opacity:0.9;">
+  <footer>
     © 2026 Oreste De Chiara – Oreste AI – Tutti i diritti riservati.
-</footer>   
+  </footer>
+
+  <script>
+    const frasiMotivazionali = [
+      "La calma è dentro di te.",
+      "Un passo alla volta è comunque un passo avanti.",
+      "Credi in te stesso: hai già superato giorni difficili.",
+      "Non devi fare tutto oggi. Comincia da ciò che puoi fare adesso.",
+      "La tua forza cresce ogni volta che scegli di non arrenderti.",
+      "Respira. Rallenta. Riparti con fiducia.",
+      "Anche il mare più agitato, prima o poi, ritrova la calma.",
+      "Non confrontare il tuo percorso con quello degli altri: continua il tuo.",
+      "Ogni nuovo giorno è un'occasione per ricominciare.",
+      "La costanza trasforma piccoli gesti in grandi cambiamenti."
+    ];
+
+    let ultimaFrase = 0;
+    let contestoAudioMare = null;
+    let sorgenteMare = null;
+    let filtroMare = null;
+    let volumeMare = null;
+    let oscillatoreMare = null;
+    let modulazioneMare = null;
+    let mareAttivo = false;
+
+    function parlaMotivazione(testo) {
+      if (!("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();
+      const voce = new SpeechSynthesisUtterance(testo);
+      voce.lang = "it-IT";
+      voce.rate = 0.94;
+      voce.pitch = 1;
+      const voci = window.speechSynthesis.getVoices();
+      const italiana = voci.find(v => v.lang && v.lang.toLowerCase() === "it-it")
+        || voci.find(v => v.lang && v.lang.toLowerCase().startsWith("it"));
+      if (italiana) voce.voice = italiana;
+      window.speechSynthesis.speak(voce);
+    }
+
+    function mostraFrase(indice, parla = false) {
+      ultimaFrase = indice;
+      const elemento = document.getElementById("fraseMotivazionale");
+      const stato = document.getElementById("statoMotivazione");
+      const frase = frasiMotivazionali[indice];
+      elemento.textContent = frase;
+      if (stato) stato.textContent = parla ? "💖 Un pensiero per te." : "✨ Ecco una nuova frase.";
+      if (parla) parlaMotivazione(frase);
+    }
+
+    function motivamiOra() {
+      const indice = Math.floor(Math.random() * frasiMotivazionali.length);
+      mostraFrase(indice, true);
+    }
+
+    function nuovaFrase() {
+      if (frasiMotivazionali.length < 2) {
+        mostraFrase(0, false);
+        return;
+      }
+      let indice = ultimaFrase;
+      while (indice === ultimaFrase) {
+        indice = Math.floor(Math.random() * frasiMotivazionali.length);
+      }
+      mostraFrase(indice, false);
+    }
+
+    async function toggleSuonoMare() {
+      const pulsante = document.getElementById("pulsanteMare");
+      const stato = document.getElementById("statoMotivazione");
+
+      if (mareAttivo) {
+        try {
+          if (sorgenteMare) sorgenteMare.stop();
+          if (oscillatoreMare) oscillatoreMare.stop();
+          if (contestoAudioMare) await contestoAudioMare.close();
+        } catch (errore) {
+          console.warn("Chiusura audio mare:", errore);
+        }
+        contestoAudioMare = null;
+        sorgenteMare = null;
+        filtroMare = null;
+        volumeMare = null;
+        oscillatoreMare = null;
+        modulazioneMare = null;
+        mareAttivo = false;
+        pulsante.textContent = "🌊 Suono mare";
+        stato.textContent = "Suono del mare disattivato.";
+        return;
+      }
+
+      const AudioContextDisponibile = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextDisponibile) {
+        stato.textContent = "Il tuo browser non supporta il suono del mare.";
+        return;
+      }
+
+      try {
+        contestoAudioMare = new AudioContextDisponibile();
+        await contestoAudioMare.resume();
+
+        const durataBuffer = 4;
+        const buffer = contestoAudioMare.createBuffer(
+          1,
+          contestoAudioMare.sampleRate * durataBuffer,
+          contestoAudioMare.sampleRate
+        );
+        const dati = buffer.getChannelData(0);
+
+        // Rumore filtrato e modulato per ricreare un sottofondo simile alle onde.
+        let valore = 0;
+        for (let i = 0; i < dati.length; i++) {
+          const bianco = Math.random() * 2 - 1;
+          valore = valore * 0.985 + bianco * 0.015;
+          dati[i] = valore * 7;
+        }
+
+        sorgenteMare = contestoAudioMare.createBufferSource();
+        sorgenteMare.buffer = buffer;
+        sorgenteMare.loop = true;
+
+        filtroMare = contestoAudioMare.createBiquadFilter();
+        filtroMare.type = "lowpass";
+        filtroMare.frequency.value = 650;
+
+        volumeMare = contestoAudioMare.createGain();
+        volumeMare.gain.value = 0.055;
+
+        oscillatoreMare = contestoAudioMare.createOscillator();
+        oscillatoreMare.type = "sine";
+        oscillatoreMare.frequency.value = 0.12;
+
+        modulazioneMare = contestoAudioMare.createGain();
+        modulazioneMare.gain.value = 0.035;
+
+        oscillatoreMare.connect(modulazioneMare);
+        modulazioneMare.connect(volumeMare.gain);
+        sorgenteMare.connect(filtroMare);
+        filtroMare.connect(volumeMare);
+        volumeMare.connect(contestoAudioMare.destination);
+
+        sorgenteMare.start();
+        oscillatoreMare.start();
+
+        mareAttivo = true;
+        pulsante.textContent = "⏹️ Ferma suono mare";
+        stato.textContent = "🌊 Suono del mare attivo. Premi di nuovo per fermarlo.";
+      } catch (errore) {
+        console.error("Impossibile avviare il suono del mare:", errore);
+        stato.textContent = "Non riesco ad avviare il suono. Riprova con il pulsante.";
+        mareAttivo = false;
+        pulsante.textContent = "🌊 Suono mare";
+        if (contestoAudioMare) {
+          try { await contestoAudioMare.close(); } catch (_) {}
+        }
+        contestoAudioMare = null;
+      }
+    }
+
+    window.addEventListener("pagehide", function () {
+      if (contestoAudioMare && contestoAudioMare.state !== "closed") {
+        contestoAudioMare.close().catch(function () {});
+      }
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+    });
+  </script>
+</body>
 </html>
