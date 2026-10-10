@@ -50,14 +50,113 @@
       background: rgba(0, 0, 0, .25);
       box-shadow: 0 8px 26px rgba(0,0,0,.16);
     }
-    .hero-icon { font-size: 52px; margin-bottom: 8px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* Sole animato che sorge sopra il mare */
+    .sun-scene {
+      position: relative;
+      height: 180px;
+      max-width: 560px;
+      margin: 0 auto 22px;
+      overflow: hidden;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #173b7b 0%, #7d5792 44%, #f5a568 73%, #efba76 100%);
+      box-shadow: inset 0 -10px 22px rgba(4, 25, 64, .25);
+    }
+    .sun-scene::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 72%, rgba(255, 231, 151, .38), transparent 54%);
+      animation: sky-glow 5s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    .sun-rays {
+      position: absolute;
+      z-index: 1;
+      width: 142px;
+      height: 142px;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: repeating-conic-gradient(from 0deg, rgba(255, 227, 132, .84) 0deg 3deg, transparent 3deg 18deg);
+      -webkit-mask: radial-gradient(circle, transparent 0 39px, #000 43px 67px, transparent 70px);
+      mask: radial-gradient(circle, transparent 0 39px, #000 43px 67px, transparent 70px);
+      animation: sun-rays-spin 35s linear infinite;
+      transform-origin: center center;
+    }
+    .sun {
+      position: absolute;
+      z-index: 2;
+      width: 78px;
+      height: 78px;
+      left: 50%;
+      bottom: 52px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #fff8bc 0%, #ffe778 42%, #ffb83f 77%, #ff9d38 100%);
+      box-shadow: 0 0 22px rgba(255, 218, 117, .8), 0 0 54px rgba(255, 183, 91, .55);
+      animation: sun-float 4.5s ease-in-out infinite, sun-glow 3.8s ease-in-out infinite alternate;
+    }
+    .sun-horizon {
+      position: absolute;
+      z-index: 3;
+      left: 0;
+      right: 0;
+      bottom: 51px;
+      height: 2px;
+      background: rgba(255, 237, 184, .8);
+      box-shadow: 0 0 10px rgba(255, 226, 159, .7);
+    }
+    .sea-wave {
+      position: absolute;
+      z-index: 4;
+      left: -15%;
+      bottom: -27px;
+      width: 130%;
+      height: 74px;
+      border-radius: 48% 52% 0 0 / 24% 30% 0 0;
+      background: repeating-linear-gradient(180deg, rgba(154, 224, 255, .38) 0 2px, transparent 2px 15px),
+                  linear-gradient(180deg, rgba(29, 119, 174, .72), #0a467d);
+      animation: wave-drift 7s ease-in-out infinite alternate;
+    }
+    .sea-wave.wave-two {
+      z-index: 5;
+      left: -24%;
+      bottom: -43px;
+      opacity: .76;
+      height: 70px;
+      animation: wave-drift-two 9s ease-in-out infinite alternate;
+      background: repeating-linear-gradient(180deg, rgba(192, 237, 255, .34) 0 2px, transparent 2px 17px),
+                  linear-gradient(180deg, rgba(11, 91, 148, .84), #072d61);
+    }
+    .sun-spark {
+      position: absolute;
+      z-index: 6;
+      color: #fff2b0;
+      font-size: 19px;
+      text-shadow: 0 0 12px rgba(255, 236, 153, .9);
+      animation: sparkle 2.8s ease-in-out infinite;
+    }
+    .spark-one { left: 23%; top: 35%; }
+    .spark-two { right: 22%; top: 25%; animation-delay: .9s; }
+    .spark-three { right: 31%; top: 48%; animation-delay: 1.6s; }
+    .hero-icon { font-size: 36px; margin-bottom: 8px; animation: heart-float 3.6s ease-in-out infinite; }
+
     #fraseMotivazionale {
       font-size: clamp(1.45rem, 4vw, 2rem);
       font-weight: 700;
       line-height: 1.45;
       margin: 18px auto 22px;
       min-height: 2.8em;
+      text-shadow: 0 2px 14px rgba(255, 221, 132, .16);
     }
+    #fraseMotivazionale.frase-animata { animation: phrase-appear .65s ease both; }
     .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
     button {
       border: 0;
@@ -93,6 +192,15 @@
       align-items: center;
       justify-content: space-between;
       min-height: 180px;
+      animation: card-appear .7s ease both;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .video-card:nth-child(2) { animation-delay: .12s; }
+    .video-card:nth-child(3) { animation-delay: .24s; }
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .2);
+      background: rgba(255,255,255,.13);
     }
     .video-card h3 { margin-top: 0; line-height: 1.4; }
     .video-card a {
@@ -107,6 +215,57 @@
     }
     .video-card a:hover { background: #a90f2a; }
     footer { margin: 30px 15px 0; padding: 15px; font-size: .9rem; opacity: .9; }
+
+    @keyframes sun-rays-spin {
+      from { transform: translateX(-50%) rotate(0deg); }
+      to { transform: translateX(-50%) rotate(360deg); }
+    }
+    @keyframes sun-float {
+      0%, 100% { transform: translate(-50%, 5px); }
+      50% { transform: translate(-50%, -5px); }
+    }
+    @keyframes sun-glow {
+      from { box-shadow: 0 0 18px rgba(255, 218, 117, .65), 0 0 42px rgba(255, 183, 91, .38); }
+      to { box-shadow: 0 0 28px rgba(255, 231, 150, .95), 0 0 66px rgba(255, 183, 91, .68); }
+    }
+    @keyframes sky-glow {
+      from { opacity: .55; }
+      to { opacity: 1; }
+    }
+    @keyframes wave-drift {
+      from { transform: translateX(-3%) rotate(-1deg); }
+      to { transform: translateX(3%) rotate(1deg); }
+    }
+    @keyframes wave-drift-two {
+      from { transform: translateX(3%) rotate(1deg); }
+      to { transform: translateX(-3%) rotate(-1deg); }
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: .45; transform: scale(.75) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.15) rotate(18deg); }
+    }
+    @keyframes heart-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes phrase-appear {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes card-appear {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
     @media (max-width: 760px) {
       nav a { display: block; }
       .video-grid { grid-template-columns: 1fr; }
@@ -144,6 +303,16 @@
 
   <main>
     <section class="hero" aria-labelledby="titolo-motivazione">
+      <div class="sun-scene" role="img" aria-label="Sole animato che splende sopra il mare">
+        <div class="sun-rays" aria-hidden="true"></div>
+        <div class="sun" aria-hidden="true"></div>
+        <div class="sun-horizon" aria-hidden="true"></div>
+        <div class="sea-wave wave-one" aria-hidden="true"></div>
+        <div class="sea-wave wave-two" aria-hidden="true"></div>
+        <span class="sun-spark spark-one" aria-hidden="true">✦</span>
+        <span class="sun-spark spark-two" aria-hidden="true">✧</span>
+        <span class="sun-spark spark-three" aria-hidden="true">✦</span>
+      </div>
       <div class="hero-icon" aria-hidden="true">🌊💛</div>
       <h2 id="titolo-motivazione">La calma è dentro di te.</h2>
       <p id="fraseMotivazionale" aria-live="polite">La calma è dentro di te.</p>
@@ -171,20 +340,6 @@
           <a href="https://www.youtube.com/shorts/MGYU_zIlpoA" target="_blank" rel="noopener noreferrer">▶ Guarda il video</a>
         </article>
       </div>
-      <article class="video-card">
-      <h3>Un passo alla volta</h3>
-      <a href="https://www.youtube.com/shorts/GYmM6jZUPPA?feature=share" target="_blank" rel="noopener noreferrer">▶ Guarda il video</a>
-    </article>
-      <article class="video-card">
-      <h3>Non è mai troppo tardi per ricominciare</h3>
-      <a href="https://www.youtube.com/shorts/LxVeagUVRfI?feature=share" target="_blank" rel="noopener noreferrer">▶ Guarda il video</a>
-    </article>
-      </div>
-      <article class="video-card">
-      <h3>Cominciare da zero</h3>
-      <a href="https://www.youtube.com/shorts/xKTSSWy8SDM?feature=share" target="_blank" rel="noopener noreferrer">▶ Guarda il video</a>
-    </article>
-      </div>
     </section>
   </main>
 
@@ -203,8 +358,7 @@
       "Anche il mare più agitato, prima o poi, ritrova la calma.",
       "Non confrontare il tuo percorso con quello degli altri: continua il tuo.",
       "Ogni nuovo giorno è un'occasione per ricominciare.",
-      "La costanza trasforma piccoli gesti in grandi cambiamenti.",
-      "Non ti arrendere."
+      "La costanza trasforma piccoli gesti in grandi cambiamenti."
     ];
 
     let ultimaFrase = 0;
@@ -235,7 +389,11 @@
       const elemento = document.getElementById("fraseMotivazionale");
       const stato = document.getElementById("statoMotivazione");
       const frase = frasiMotivazionali[indice];
+      elemento.classList.remove("frase-animata");
       elemento.textContent = frase;
+      // Riavvia l'animazione ogni volta che cambia la frase.
+      void elemento.offsetWidth;
+      elemento.classList.add("frase-animata");
       if (stato) stato.textContent = parla ? "💖 Un pensiero per te." : "✨ Ecco una nuova frase.";
       if (parla) parlaMotivazione(frase);
     }
