@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -39,6 +40,8 @@ button{padding:12px 18px;margin:5px;border:none;border-radius:20px;background:re
 .video-grid,.canva-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:20px}
 .video-card,.canva-card,.meditation-card{background:rgba(255,255,255,.08);padding:15px;border-radius:14px}
 .video-card a{display:inline-block;color:#fff;background:#d41414;padding:10px 15px;border-radius:15px;text-decoration:none;margin-top:8px}.video-card a:hover{background:darkred}
+.video-embed{position:relative;width:100%;max-width:300px;aspect-ratio:9/16;margin:14px auto;overflow:hidden;border-radius:12px;background:#000}
+.video-embed iframe{display:block;width:100%;height:100%;border:0}
 
 /* =====================================================
    MOTIVAZIONE: SOLE E ANIMAZIONI
@@ -268,13 +271,24 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
     <p>Puoi sempre ripartire: ogni giorno è una nuova occasione.</p>
     <a href="https://www.youtube.com/shorts/LxVeagUVRfI?feature=share" target="_blank" rel="noopener noreferrer">▶️ Guarda il video</a>
   </article>
-</div>
-<article class="video-card">
+  <article class="video-card">
     <h3>🌅 Rinasci dal dolore</h3>
-    <p>Rinasci dal dolore,la tua storia non è finita</p>
-    <a href="https://www.youtube.com/shorts/7PLwMDJFggU?feature=share" target="_blank" rel="noopener noreferrer">▶️ Guarda il video</a>
+    <p>Rinasci dal dolore: la tua storia non è finita.</p>
+    <div class="video-embed">
+      <iframe
+        src="https://www.youtube.com/embed/7PLwMDJFggU"
+        title="Rinasci dal dolore - Video motivazionale"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <p><em>🎬 Video realizzato in Canva.</em></p>
+    <p>💙 Se questo video ti dà forza, condividilo con qualcuno che ha bisogno di speranza.</p>
+    <a href="https://www.youtube.com/shorts/7PLwMDJFggU?feature=share" target="_blank" rel="noopener noreferrer">▶️ Guarda il video su YouTube</a>
   </article>
-</div>   
+</div>
 <p><a class="motivation-page-link" href="motivazione.html">🌻 Apri la pagina Motivazione completa</a></p>
 </section>
 <section id="canva-section" class="section-box">
