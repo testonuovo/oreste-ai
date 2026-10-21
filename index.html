@@ -162,7 +162,55 @@ button{padding:12px 18px;margin:5px;border:none;border-radius:20px;background:re
 #calendar{width:100%;display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.weekday{background:rgba(0,0,0,.35);padding:10px 5px;border-radius:8px;font-weight:bold;font-size:13px}.day{background:rgba(255,255,255,.1);padding:10px 5px;border-radius:8px;cursor:pointer;min-height:75px;transition:.2s}.day:hover{background:rgba(255,255,255,.2)}.day.today{outline:2px solid #ffd700}.day-number{font-weight:bold;font-size:15px}.event{font-size:11px;color:#ff0;margin-top:5px;line-height:1.25;text-align:left}.empty{background:transparent;cursor:default}.calendar-help{font-size:13px;opacity:.9;margin-top:12px}
 footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
 @media (max-width:700px){input{width:90%}nav a{display:block;margin:8px}#chat{width:94%}#calendar{gap:3px}.day{min-height:65px;padding:7px 4px}.event{font-size:9px}.weekday{font-size:10px;padding:8px 2px}.video-grid,.canva-grid{grid-template-columns:1fr}}
-
+/* =====================================================
+   SEZIONE CONTATTI E SOCIAL ORESTE AI
+===================================================== */
+.social-section {
+  width: 94%;
+  max-width: 900px;
+  margin: 35px auto;
+  padding: 25px 20px;
+  background: rgba(0, 0, 0, .25);
+  border-radius: 16px;
+  text-align: center;
+}
+.social-section h3 {
+  margin-top: 0;
+  color: #ffd700;
+}
+.social-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.social-link {
+  display: inline-block;
+  text-decoration: none;
+  transition: transform .25s ease;
+}
+.social-link:hover {
+  transform: translateY(-5px);
+}
+.social-icon {
+  width: 45px;
+  height: 45px;
+  color: #ffffff;
+  display: block;
+  transition: color .2s ease;
+}
+.social-link:hover .social-icon {
+  color: #ffd700;
+}
+.amnesty-logo-img {
+  height: 45px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+Usa il codice con cautela.
 </style>
 </head>
 <body>
@@ -312,7 +360,32 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
 <div id="calendar"></div>
 <div class="calendar-help">Clicca su un giorno per aggiungere un evento.</div>
 </div>
+<!-- Sezione Contatti, Social e Impegno Civile -->
+<div class="section-box social-section">
+    <h3>I miei Canali Ufficiali e Impegno Sociale</h3>
+    <p>Segui lo sviluppo indipendente di Oreste AI e sostieni le cause civili.</p>
+    
+    <div class="social-grid">
+        <!-- Il logo che hai creato su Canva puntato al tuo sito Altervista -->
+        <a href="https://altervista.org" target="_blank" class="social-link" title="Io sto con Amnesty International">
+            <img src="https://ibb.co" alt="io-sto-con-amnesty" class="amnesty-logo-img" border="0">
+        </a>
 
+        <!-- Logo TikTok (Formato SVG Nativo) -->
+        <a href="https://tiktok.com" target="_blank" class="social-link" title="Seguimi su TikTok">
+            <svg class="social-icon" viewBox="0 0 448 512" fill="currentColor">
+                <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31c8.07,0,15.93.63,23.6,1.82v65.61a96.52,96.52,0,1,0-23.6,128.89c52.42,0,96.53-42.53,96.53-95.21V0h66.75a125.17,125.17,0,0,0,100,123.63Z"/>
+            </svg>
+        </a>
+
+        <!-- Logo GitHub (Formato SVG Nativo) -->
+        <a href="https://github.com" target="_blank" class="social-link" title="Il mio profilo GitHub">
+            <svg class="social-icon" viewBox="0 0 496 512" fill="currentColor">
+                <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-21.8-1.7c0 2-2.3 3.6-5.2 3.6-3-.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm199.2-1.2c0-2-2.3-3.6-5.2-3.6-3-.3-5.6 1.3-5.6 3.6 0 2 2.3 3.6 5.2 3.6 3-.3 5.6-1.3 5.6-3.6zm-6.1-4.7c0-2-2.3-3.6-5.2-3.6-3-.3-5.6 1.3-5.6 3.6 0 2 2.3 3.6 5.2 3.6 3-.3 5.6-1.3 5.6-3.6zM496 248c0-137-111-248-248-248S0 111 0 248c0 116.5 88 212.9 201.2 243.5.7.3 1.6.3 2.4.3 10.5-.2 14.3-4.6 14.3-10.4 0-5.1-.1-18.4-.2-36.2-74.4 16-89.9-36.1-89.9-36.1-12.2-31.1-29.8-39.4-29.8-39.4-24.2-16.6 1.8-16.3 1.8-16.3 26.8 1.8 41 27.5 41 27.5 23.8 40.8 53.4 29 66.4 22.2 2.4-17.2 9.3-29 16.9-35.7-59.6-6.7-122.1-29.8-122.1-132.2 0-29.1 10.4-53 27.5-71.6-2.8-6.7-11.9-33.9 2.6-70.4 0 0 22.3-7.1 73.3 27.3 21.2-5.9 44-8.8 66.7-8.9 22.7.1 45.5 3 66.7 8.9 50.9-34.4 73.2-27.3 73.2-27.3 14.5 36.5 5.5 63.7 2.7 70.4 17.1 18.6 27.5 42.5 27.5 71.6 0 102.6-62.6 125.3-122.5 131.6 9.6 8.3 18.2 24.8 18.2 50 0 36.1-.2 65.1-.2 74.1 0 5.9 3.8 10.3 14.3 10.3 1.5 0 2.9-.2 4.3-.5C408 460.9 496 364.5 496 248z"/>
+            </svg>
+        </a>
+    </div>
+</div>
  
 <script>
 function add(nome,testo){const chat=document.getElementById("chat");if(!chat)return;const messaggio=document.createElement("div");messaggio.className="msg";const nomeElemento=document.createElement("b");nomeElemento.textContent=nome+": ";messaggio.appendChild(nomeElemento);messaggio.appendChild(document.createTextNode(String(testo??"")));chat.appendChild(messaggio);chat.scrollTop=chat.scrollHeight;}
