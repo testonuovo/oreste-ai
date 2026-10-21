@@ -139,10 +139,6 @@ button{padding:12px 18px;margin:5px;border:none;border-radius:20px;background:re
   transform: translateY(-5px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, .2);
 }
- <div class name="logo">
-<img src="https://iostoconamnesty.altervista.org/" alt="io-sto-con-amnesty" border="0"></a>
-
-</class>
 @keyframes sunRotate { to { transform: rotate(360deg); } }
 @keyframes sunPulse {
   0%, 100% { transform: translateY(0) scale(1); }
@@ -315,10 +311,9 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
 <div id="calendar"></div>
 <div class="calendar-help">Clicca su un giorno per aggiungere un evento.</div>
 </div>
-<div class name="logo">
-<img src="https://iostoconamnesty.altervista.org/" alt="io-sto-con-amnesty" border="0"></a>
-
-</class>
+<div class="logo" style="text-align:center;margin:25px auto;">
+  <a href="https://iostoconamnesty.altervista.org/" target="_blank" rel="noopener noreferrer" style="color:#fff;text-decoration:none;font-weight:bold;">✊ Io sto con Amnesty International</a>
+</div>
  
 <script>
 function add(nome,testo){const chat=document.getElementById("chat");if(!chat)return;const messaggio=document.createElement("div");messaggio.className="msg";const nomeElemento=document.createElement("b");nomeElemento.textContent=nome+": ";messaggio.appendChild(nomeElemento);messaggio.appendChild(document.createTextNode(String(testo??"")));chat.appendChild(messaggio);chat.scrollTop=chat.scrollHeight;}
@@ -364,8 +359,8 @@ if(text.includes("difesa personale")){window.open("https://youtu.be/uUUilRrSrLA"
 if(text.includes("io sto con amnesty")){window.open("https://iostoconamnesty.altervista.org/","_blank","noopener,noreferrer");return"Io sto con Amnesty.";}
 if(text.includes("portfolio oreste de chiara")){window.open("https://testonuovo.github.io/portfolio-oreste-de-chiara/","_blank","noopener,noreferrer");return"Portfolio Oreste De Chiara";}
 if(text.includes("amnesty international")){window.open("https://www.amnesty.org/","_blank","noopener,noreferrer");return"Amnesty International.";}
+if(text.includes("sto con amnesty")){window.open("https://testonuovo.github.io/iostoconamnesty/","_blank","noopener,noreferrer");return"Amnesty International.";}
 if(text.includes("non ti arrendere")){window.open("https://nontiarrendere.altervista.org/","_blank","noopener,noreferrer");return"Non ti arrendere.";}
-if(text.includes("sto con amnesty")){window.open("https://testonuovo.github.io/iostoconamnesty/","_blank","noopener,noreferrer");return"Amnesty International.;}
 if(text.includes("karaoke")){window.open("https://testonuovo.github.io/karaokeoresteai/","_blank","noopener,noreferrer");return"Karaoke.";}
 if(text.includes("apri oreste ai cleaner")||text.includes("apri oreste cleaner")||text.includes("avvia oreste ai cleaner")||text.includes("avvia oreste cleaner")||text==="apri cleaner"||text==="avvia cleaner"||text.includes("apri il cleaner")||text.includes("avvia il cleaner")){return await apriCleaner();}
 if(text.startsWith("meteo"))return await meteo(text.replace("meteo","").trim());
@@ -403,3 +398,6 @@ if("speechSynthesis" in window&&"onvoiceschanged" in window.speechSynthesis){win
 <footer>© 2026 Oreste De Chiara – Oreste AI – Tutti i diritti riservati.</footer>
 </body>
 </html>
+
+
+    
