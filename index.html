@@ -7,13 +7,13 @@
 <meta name="description" content="Oreste AI è l'unico assistente vocale italiano gratis da browser in JavaScript. Scopri l'ecosistema Oreste OS, Chat IA, Motivazione, Meditazione, Storybook e Blog.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Oreste De Chiara">
-<link rel="canonical" href="https://github.io">
+<link rel="canonical" href="https://testonuovo.github.io/oreste-ai/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Oreste AI - Assistente Vocale Italiano Online Gratis">
 <meta property="og:description" content="Oreste AI è un assistente vocale italiano online gratis. Usa comandi vocali, chat, meditazione, motivazione, video, calendario e strumenti direttamente dal browser.">
-<meta property="og:url" content="https://github.io">
+<meta property="og:url" content="https://testonuovo.github.io/oreste-ai/">
 <meta property="og:locale" content="it_IT">
-<script async src="https://googletagmanager.com"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NNY7SHD1NT"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){ dataLayer.push(arguments); }
@@ -139,7 +139,10 @@ button{padding:12px 18px;margin:5px;border:none;border-radius:20px;background:re
   transform: translateY(-5px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, .2);
 }
+ <div class name="logo">
+<img src="https://iostoconamnesty.altervista.org/" alt="io-sto-con-amnesty" border="0"></a>
 
+</class>
 @keyframes sunRotate { to { transform: rotate(360deg); } }
 @keyframes sunPulse {
   0%, 100% { transform: translateY(0) scale(1); }
@@ -160,8 +163,242 @@ button{padding:12px 18px;margin:5px;border:none;border-radius:20px;background:re
 .canva-grid{grid-template-columns:repeat(3,1fr)}.canva-card button{background:#7b2ff7}.canva-card button:hover{background:#5c18c6}
 #meditationPhase{font-size:30px;font-weight:bold;margin:20px 0 10px}#meditationInstruction{font-size:19px;min-height:55px;line-height:1.5}#meditationTimer{font-size:42px;font-weight:bold;margin:15px 0}#meditationStatus{min-height:24px;font-size:14px}
 .calendar-container{width:94%;max-width:800px;margin:30px auto;background:rgba(0,0,0,.2);padding:15px;border-radius:15px}.calendar-header{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:15px}#monthTitle{display:inline-block;min-width:150px;font-size:20px;font-weight:bold}
-#calendar{width:100%;display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.weekday{background:rgba(0,0,0,.35);padding:10px 5px;border-radius:8px;font-weight:bold;font-size:13px}.day{background:rgba(255,255,255,.1);padding:10px 5px;border-radius:8px;cursor:pointer;min-height:75px;transition:.2s}.day:hover{background:rgba(255,255,255,.2)}
+#calendar{width:100%;display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.weekday{background:rgba(0,0,0,.35);padding:10px 5px;border-radius:8px;font-weight:bold;font-size:13px}.day{background:rgba(255,255,255,.1);padding:10px 5px;border-radius:8px;cursor:pointer;min-height:75px;transition:.2s}.day:hover{background:rgba(255,255,255,.2)}.day.today{outline:2px solid #ffd700}.day-number{font-weight:bold;font-size:15px}.event{font-size:11px;color:#ff0;margin-top:5px;line-height:1.25;text-align:left}.empty{background:transparent;cursor:default}.calendar-help{font-size:13px;opacity:.9;margin-top:12px}
+footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
+@media (max-width:700px){input{width:90%}nav a{display:block;margin:8px}#chat{width:94%}#calendar{gap:3px}.day{min-height:65px;padding:7px 4px}.event{font-size:9px}.weekday{font-size:10px;padding:8px 2px}.video-grid,.canva-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+<h1>🎤 Oreste AI</h1>
+<section class="oreste-intro" aria-label="Benvenuto di Oreste AI">
+<div class="oreste-avatar">🤖🎤</div>
+<div class="oreste-intro-title">Ciao, sono Oreste AI!</div>
+<p>Sono il tuo assistente vocale italiano. Puoi parlarmi oppure scrivere un comando.</p>
+<button class="voice-button" onclick="benvenutoOreste(true)">🔊 Ascolta Oreste AI</button>
+<button class="secondary-button" onclick="document.getElementById('input').focus()">💬 Inizia</button>
+<div id="introVoiceStatus"></div>
+</section>
+<nav>
+<h2>Oreste AI: assistente vocale italiano online gratis</h2>
+<section>
+<h2>Un progetto italiano, indipendente e accessibile a tutti</h2>
+<p>Nato dall'ingegno del programmatore italiano Oreste De Chiara...</p>
+
+<!-- INSERISCI QUI LA TUA FOTO DI AUTORE -->
+<div class="foto-autore" style="text-align: center; margin: 25px 0;">
+
+  <img
+    src="https://i.ibb.co/zVyLCTPc/IMG-20261010-122018.jpg"
+    alt="Logo Oreste AI"
+    style="width:69px; height:62px; object-fit: cover; border-radius: 50%; border: 2px solid #ffd700;">
+
+  <p style="font-size: 0.9em; color: #666; margin-top: 5px;">
+    Oreste De Chiara, Creatore del Progetto
+  </p>
+
+</div>
+<p>Oreste AI è un assistente vocale italiano online gratis che puoi utilizzare direttamente dal browser. Puoi parlare con Oreste AI attraverso il microfono oppure scrivere i tuoi comandi e ricevere risposte direttamente online.</p>
+<p>Con Oreste AI puoi utilizzare comandi vocali, controllare il meteo, impostare timer e sveglie, effettuare ricerche online, aprire siti e utilizzare diversi strumenti direttamente dal browser.</p>
+<p>L'obiettivo di Oreste AI è offrire un assistente vocale italiano semplice, accessibile e utilizzabile online senza installazioni complicate.</p>
+</section>
+<h2>Come funziona Oreste AI</h2>
+<p>Oreste AI è un assistente vocale italiano online gratis, pensato per aiutarti con comandi vocali, chat e strumenti utili direttamente dal browser.</p>
+<a href="index.html">🏠 Home</a>
+<a href="assistente.html">🎤 Assistente</a>
+<a href="chat.html">💬 Chat</a>
+<a href="#motivazione">🌻 Motivazione</a>
+<a href="#meditazione">🌿 Meditazione</a>
+<a href="download.html">📥 Download</a>
+<a href="blog.html">📰 Blog</a>
+<a href="chi-siamo.html">👤 Chi siamo</a>
+<a href="contatti.html">📞 Contatti</a>
+<a href="dashboard.html">📊 Dashboard</a>
+<a href="os.html">🖥️ Oreste OS</a>
+<a href="storybook.html">📚 Storybook</a>
+<a href="storia.html">📖 La Storia</a>
+<a href="funzioni.html">⚙️ Funzioni</a>
+<a href="tecnologie oreste ai.html">💻 Tecnologie</a>
+<a href="comandi-oreste-ai.html">🎤 Comandi</a>
+<a href="mondiali2026.html">🏆 Mondiali 2026</a>
+<a href="spagna-campione-del-mondo-2026.html">🏆 Spagna campione del mondo 2026</a>
+<a href="#" onclick="apriCanva();return false;">🎨 Impara Canva</a>
+<a href="assistente-vocale-italiano-online-gratis.html">Scopri Oreste AI</a>
+</nav>
+<div class="input-container">
+<input id="input" type="text" placeholder="Scrivi o parla..." autocomplete="off" onkeydown="if(event.key==='Enter') ask();">
+<br>
+<button onclick="ask()">Invia</button>
+<button id="voiceButton" class="voice-button" onclick="voice()">🎤 Parla</button>
+<button class="secondary-button" onclick="pulisciChat()">🗑️ Pulisci chat</button>
+<div id="voiceStatus"></div>
+</div>
+<div id="chat"></div>
+<section id="motivazione" class="section-box">
+<div class="sun-stage" aria-hidden="true">
+  <div class="sun-rays"></div>
+  <div class="sun-disc"></div>
+  <div class="sun-horizon"></div>
+  <div class="sun-wave"></div>
+  <div class="sun-wave wave-two"></div>
+</div>
+<h2>🌻 Motivazione con Oreste AI</h2>
+<p class="motivation-lead">La calma è dentro di te. Una piccola dose di motivazione può aiutarti a ripartire, concentrarti e affrontare meglio la giornata.</p>
+<div class="video-grid">
+  <article class="video-card">
+    <h3>🌊 Il silenzio è forza</h3>
+    <p>Ritrova la calma e lascia parlare la tua forza interiore.</p>
+    <a href="https://www.youtube.com/shorts/0P1oNhdWL8Q" target="_blank" rel="noopener noreferrer">▶️ Guarda il video</a>
+  </article>
+  <article class="video-card">
+    <h3>💪 Credi in te stesso</h3>
+    <p>Ricorda il tuo valore e continua a credere nelle tue capacità.</p>
+    <a href="https://www.youtube.com/shorts/2CEJzlZR7gc" target="_blank" rel="noopener noreferrer">▶️ Guarda il video</a>
+  </article>
+  <article class="video-card">
+    <h3>🚀 Il fuoco dentro</h3>
+    <p>Ritrova la tua determinazione e la voglia di andare avanti.</p>
+    <a href="https://www.youtube.com/shorts/MGYU_zIlpoA" target="_blank" rel="noopener noreferrer">▶️ Guarda il video</a>
+  </article>
+  <article class="video-card">
+    <h3>🔥 Un passo alla volta</h3>
+    <p>Continua a muoverti, un passo dopo l'altro.</p>
+    <a href="https://www.youtube.com/shorts/GYmM6jZUPPA?feature=share" target="_blank" rel="noopener noreferrer">▶️ Guarda il video</a>
+  </article>
+  <article class="video-card">
+    <h3>🦁 Affronta la paura e vinci con coraggio</h3>
+    <p>Un messaggio per trovare coraggio e non fermarsi.</p>
+    <a href="https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share" target="_blank" rel="noopener noreferrer">▶️ Guarda il video</a>
+  </article>
+  <article class="video-card">
+    <h3>🌅 Non è mai troppo tardi per ricominciare</h3>
+    <p>Puoi sempre ripartire: ogni giorno è una nuova occasione.</p>
+    <a href="https://www.youtube.com/shorts/LxVeagUVRfI?feature=share" target="_blank" rel="noopener noreferrer">▶️ Guarda il video</a>
+  </article>
+  <article class="video-card">
+    <h3>🌅 Rinasci dal dolore</h3>
+    <p>Rinasci dal dolore: la tua storia non è finita.</p>
+    <a href="https://www.youtube.com/shorts/7PLwMDJFggU?feature=share" target="_blank" rel="noopener noreferrer">▶️ Guarda il video</a>
+   </article>
+      
+<p><a class="motivation-page-link" href="motivazione.html">🌻 Apri la pagina Motivazione completa</a></p>
+</section>
+<section id="canva-section" class="section-box">
+<h2>🎨 Impara Canva con Oreste AI</h2>
+<p>Usa i comandi vocali di Oreste AI per aprire direttamente la guida Canva.</p>
+<button onclick="apriCanva()">🎨 Apri Impara Canva</button>
+<div class="canva-grid">
+<div class="canva-card"><h3>🖼️ Mockup</h3><button onclick="apriCanvaFunzione('mockup')">Apri Canva</button></div>
+<div class="canva-card"><h3>📊 Presentazioni</h3><button onclick="apriCanvaFunzione('presentazioni')">Apri Canva</button></div>
+<div class="canva-card"><h3>🏷️ Logo</h3><button onclick="apriCanvaFunzione('logo')">Crea logo</button></div>
+<div class="canva-card"><h3>📄 Volantini</h3><button onclick="apriCanvaFunzione('volantini')">Crea volantino</button></div>
+<div class="canva-card"><h3>🎬 Video</h3><button onclick="apriCanvaFunzione('video')">Crea video</button></div>
+<div class="canva-card"><h3>📱 Social</h3><button onclick="apriCanvaFunzione('social')">Crea contenuto</button></div>
+</div>
+</section>
+<section id="meditazione" class="section-box">
+<h2>🌿 Meditazione con Oreste AI</h2>
+<p>Fermati per qualche minuto, respira lentamente e lascia che Oreste AI ti accompagni.</p>
+<div class="meditation-card">
+<h3>🧘 Respirazione guidata</h3>
+<div id="meditationPhase">Pronto</div>
+<div id="meditationInstruction">Premi "Inizia meditazione" per cominciare.</div>
+<div id="meditationTimer">02:00</div>
+<button onclick="avviaMeditazione()">▶️ Inizia meditazione</button>
+<button class="secondary-button" onclick="fermaMeditazione()">⏹️ Ferma</button>
+<button class="secondary-button" onclick="voceMeditazione()">🔊 Voce meditazione</button>
+<div id="meditationStatus"></div>
+</div>
+</section>
+<div class="calendar-container">
+<h2>📅 Calendario Mensile</h2>
+<div class="calendar-header"><button class="secondary-button" onclick="prevMonth()">⬅️</button><span id="monthTitle"></span><button class="secondary-button" onclick="nextMonth()">➡️</button></div>
+<div id="calendar"></div>
+<div class="calendar-help">Clicca su un giorno per aggiungere un evento.</div>
+</div>
+<div class name="logo">
+<img src="https://iostoconamnesty.altervista.org/" alt="io-sto-con-amnesty" border="0"></a>
+
+</class>
  
+<script>
+function add(nome,testo){const chat=document.getElementById("chat");if(!chat)return;const messaggio=document.createElement("div");messaggio.className="msg";const nomeElemento=document.createElement("b");nomeElemento.textContent=nome+": ";messaggio.appendChild(nomeElemento);messaggio.appendChild(document.createTextNode(String(testo??"")));chat.appendChild(messaggio);chat.scrollTop=chat.scrollHeight;}
+function pulisciChat(){const chat=document.getElementById("chat");if(chat)chat.innerHTML="";}
+function trovaVoceItaliana(){if(!("speechSynthesis" in window))return null;const voci=window.speechSynthesis.getVoices();return voci.find(voce=>voce.lang&&voce.lang.toLowerCase().startsWith("it"))||null;}
+function speak(testo){if(!(typeof speechSynthesis!=="undefined"))return;if(!testo)return;window.speechSynthesis.cancel();const voce=new SpeechSynthesisUtterance(String(testo));voce.lang="it-IT";voce.rate=.95;voce.pitch=1;voce.volume=1;const italiana=trovaVoceItaliana();if(italiana)voce.voice=italiana;window.speechSynthesis.speak(voce);}
+let benvenutoRiprodotto=false;
+function benvenutoOreste(forza=false){if(!forza&&benvenutoRiprodotto)return;benvenutoRiprodotto=true;const testo="Ciao! Sono Oreste AI. Sono pronto ad aiutarti. Puoi parlarmi oppure scrivere un comando.";const stato=document.getElementById("introVoiceStatus");if(stato)stato.textContent="🔊 Oreste AI sta parlando...";speak(testo);setTimeout(()=>{if(stato)stato.textContent="✅ Oreste AI è pronto.";},2500);}
+function salvaNome(nome){localStorage.setItem("nomeAI",nome);}function getNome(){return localStorage.getItem("nomeAI");}
+function getEventi(){try{const dati=localStorage.getItem("eventiAI");if(!dati)return[];const arr=JSON.parse(dati);return Array.isArray(arr)?arr:[];}catch(e){console.error(e);return[];}}
+function salvaEvento(evento){const eventi=getEventi();eventi.push(evento);localStorage.setItem("eventiAI",JSON.stringify(eventi));}
+function eventiDelGiorno(dataString){return getEventi().filter(evento=>evento.data===dataString);}
+let timer=null;
+function startTimer(secondi){secondi=parseInt(secondi,10);if(isNaN(secondi)||secondi<=0)return"Scrivi, ad esempio: timer 30";if(timer)clearInterval(timer);let tempo=secondi;add("⏱️","Timer avviato: "+secondi+" secondi.");timer=setInterval(()=>{tempo--;if(tempo<=0){clearInterval(timer);timer=null;add("⏱️","FINITO");speak("Timer terminato");alert("⏰ Timer finito!");return;}add("⏱️",tempo+" secondi");},1000);return"Timer avviato per "+secondi+" secondi.";}
+let svegliaTimer=null;
+function sveglia(orario){const parti=String(orario||"").split(":");if(parti.length!==2)return"Scrivi, ad esempio: sveglia 08:30";const h=parseInt(parti[0],10),m=parseInt(parti[1],10);if(isNaN(h)||isNaN(m)||h<0||h>23||m<0||m>59)return"Orario non valido.";const adesso=new Date(),obiettivo=new Date();obiettivo.setHours(h,m,0,0);if(obiettivo<=adesso)obiettivo.setDate(obiettivo.getDate()+1);const differenza=obiettivo-adesso;if(svegliaTimer)clearTimeout(svegliaTimer);svegliaTimer=setTimeout(()=>{add("⏰","SVEGLIA!");speak("Sveglia!");alert("⏰ SVEGLIA!");svegliaTimer=null;},differenza);return"Sveglia impostata alle "+orario;}
+async function meteo(citta){if(!citta)return"Dimmi quale città vuoi controllare.";try{const r=await fetch("https://geocoding-api.open-meteo.com/v1/search?name="+encodeURIComponent(citta)+"&count=1&language=it&format=json");if(!r.ok)throw new Error("Errore geocoding");const dati=await r.json();if(!dati.results||!dati.results.length)return"Città non trovata.";const risultato=dati.results[0];const w=await fetch("https://api.open-meteo.com/v1/forecast?latitude="+risultato.latitude+"&longitude="+risultato.longitude+"&current_weather=true");if(!w.ok)throw new Error("Errore meteo");const tempo=await w.json();if(!tempo.current_weather)return"Dati meteo non disponibili.";return"🌤️ "+risultato.name+": "+tempo.current_weather.temperature+" °C.";}catch(e){console.error("Errore meteo:",e);return"Errore durante la richiesta del meteo.";}}
+function openSite(testo){const siti={google:"https://www.google.com/",youtube:"https://www.youtube.com/",facebook:"https://www.facebook.com/",instagram:"https://www.instagram.com/",tiktok:"https://www.tiktok.com/",canva:"https://www.canva.com/",whatsapp:"https://web.whatsapp.com/",github:"https://github.com/",gmail:"https://mail.google.com/",email:"https://mail.google.com/",pinterest:"https://www.pinterest.com/",linkedin:"https://www.linkedin.com/"};for(const nome in siti){if(testo.includes(nome)){window.open(siti[nome],"_blank","noopener,noreferrer");return"Apro "+nome+".";}}return null;}
+function canva(testo){const funzioni={mockup:"https://www.canva.com/mockups/",presentazioni:"https://www.canva.com/presentations/",logo:"https://www.canva.com/create/logos/",volantini:"https://www.canva.com/create/flyers/",video:"https://www.canva.com/create/videos/",poster:"https://www.canva.com/create/posters/",curriculum:"https://www.canva.com/create/resumes/",social:"https://www.canva.com/create/social-media/",biglietti:"https://www.canva.com/create/cards/"};for(const comando in funzioni){if(testo.includes(comando)){window.open(funzioni[comando],"_blank","noopener,noreferrer");return"Apro Canva per "+comando+".";}}return null;}
+function apriCanva(){speak("Impara Canva con Oreste AI");setTimeout(()=>window.open("guida-canva-oreste-ai.html","_blank","noopener,noreferrer"),700);}
+function apriCanvaFunzione(funzione){const url={mockup:"https://www.canva.com/mockups/",presentazioni:"https://www.canva.com/presentations/",logo:"https://www.canva.com/create/logos/",volantini:"https://www.canva.com/create/flyers/",video:"https://www.canva.com/create/videos/",social:"https://www.canva.com/create/social-media/"}[funzione];if(url){window.open(url,"_blank","noopener,noreferrer");}}
+function scaricaProgramma(nome){if(!nome)return"Dimmi quale programma vuoi cercare.";const ricerca=nome+" download ufficiale";window.open("https://www.google.com/search?q="+encodeURIComponent(ricerca),"_blank","noopener,noreferrer");return"Cerco il download ufficiale di "+nome;}
+function apriPagina(testo){const pagine={"chi siamo":"chi-siamo.html","spagna campione":"spagna-campione-del-mondo-2026.html","oreste os":"os.html","tecnologie":"tecnologie oreste ai.html","comandi":"comandi-oreste-ai.html","mondiali":"mondiali2026.html","assistente":"assistente.html","motivazione":"motivazione.html","meditazione":"meditazione.html","download":"download.html","storybook":"storybook.html","contatti":"contatti.html","dashboard":"dashboard.html","funzioni":"funzioni.html","storia":"storia.html","blog":"blog.html","chat":"chat.html","home":"index.html"};const nomi=Object.keys(pagine).sort((a,b)=>b.length-a.length);for(const nome of nomi){if(testo.includes(nome)){window.open(pagine[nome],"_blank","noopener,noreferrer");return"Apro la pagina "+nome+".";}}return null;}
+function apriVicinoContursi(testo){const episodi={"1":"https://youtu.be/r5gGcrJJn_0","2":"https://youtu.be/-MwXVX1tEdo","3":"https://youtu.be/dSdqAWsUxwQ","4":"https://youtu.be/jozTmOx66m4","5":"https://youtu.be/8HoZ3vStWwc"};const parole={uno:"1",due:"2",tre:"3",quattro:"4",cinque:"5"};for(const parola in parole){if(testo.includes("vicino contursi "+parola)){const n=parole[parola];window.open(episodi[n],"_blank","noopener,noreferrer");return"Vicino Contursi "+n+".";}}for(const numero in episodi){if(testo.includes("vicino contursi "+numero)){window.open(episodi[numero],"_blank","noopener,noreferrer");return"Vicino Contursi "+numero+".";}}return null;}
+function mostraMotivazione(){window.open("https://www.youtube.com/shorts/GYmM6jZUPPA?feature=share","_blank","noopener,noreferrer");return"Certo. Ti apro il video motivazionale.";}
+function apriCleaner(){return fetch("http://127.0.0.1:8765/cleaner").then(async risposta=>{if(!risposta.ok)throw new Error("HTTP "+risposta.status);const dati=await risposta.json();return dati.message||"Oreste AI Cleaner avviato.";}).catch(errore=>{console.error("Errore avvio Oreste AI Cleaner:",errore);return"Non riesco ad avviare Oreste AI Cleaner. Controlla che il servizio Cleaner sia attivo su questa macchina.";});}
+async function handle(text){text=String(text||"").toLowerCase().trim();if(!text)return"Scrivi un comando.";
+const vicino=apriVicinoContursi(text);if(vicino)return vicino;
+if(text.includes("affronta la paura e vinci con coraggio")){window.open("https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share","_blank","noopener,noreferrer");return"Affronta la paura e vinci con coraggio.";}
+if(text.includes("non è mai troppo tardi per ricominciare")){window.open("https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share","_blank","noopener,noreferrer");return"Non è mai troppo tardi per ricominciare.";}
+if(text.includes("un passo alla volta")){window.open("https://www.youtube.com/shorts/GYmM6jZUPPA?feature=share","_blank","noopener,noreferrer");return"Un passo alla volta.";}
+if(text.includes("comincio da zero")||text.includes("cominciare da zero")){window.open("https://www.youtube.com/shorts/xKTSSWy8SDM?feature=share","_blank","noopener,noreferrer");return"comincio da zero.";}
+if(text.includes("credi in te stesso")||text.includes("credi")){window.open("https://www.youtube.com/shorts/2CEJzlZR7gc?feature=share","_blank","noopener,noreferrer");return"credi in te stesso.";}
+if(text.includes("il silenzio è forza")||text.includes("silenzio")){window.open("https://www.youtube.com/shorts/0P1oNhdWL8Q?feature=share","_blank","noopener,noreferrer");return"il silenzio è forza.";}
+if(text.includes("rinasci dal dolore")||text.includes("rinasci")){window.open("https://www.youtube.com/shorts/7PLwMDJFggU?feature=share","_blank","noopener,noreferrer");return"rinasci dal dolore.";}
+
+const pagina=apriPagina(text);if(pagina)return pagina;
+if(text==="ciao"||text.includes("ciao"))return"Ciao! Sono Oreste AI.";
+if(text.includes("aiuto")||text.includes("cosa sai fare"))return"Sono Oreste AI. Posso aiutarti con meteo, timer, sveglia, ricerca, download, siti, Canva, video motivazionali, Vicino Contursi, meditazione e comandi vocali.";
+if(text==="ora"||text.includes("che ore sono"))return"Sono le "+new Date().toLocaleTimeString("it-IT");
+if(text==="data"||text.includes("che giorno è")||text.includes("che giorno e"))return"Oggi è il "+new Date().toLocaleDateString("it-IT");
+if(text.includes("difesa personale")){window.open("https://youtu.be/uUUilRrSrLA","_blank","noopener,noreferrer");return"Difesa personale.";}
+if(text.includes("io sto con amnesty")){window.open("https://iostoconamnesty.altervista.org/","_blank","noopener,noreferrer");return"Io sto con Amnesty.";}
+if(text.includes("portfolio oreste de chiara")){window.open("https://testonuovo.github.io/portfolio-oreste-de-chiara/","_blank","noopener,noreferrer");return"Portfolio Oreste De Chiara";}
+if(text.includes("amnesty international")){window.open("https://www.amnesty.org/","_blank","noopener,noreferrer");return"Amnesty International.";}
+if(text.includes("non ti arrendere")){window.open("https://nontiarrendere.altervista.org/","_blank","noopener,noreferrer");return"Non ti arrendere.";}
+if(text.includes("karaoke")){window.open("https://testonuovo.github.io/karaokeoresteai/","_blank","noopener,noreferrer");return"Karaoke.";}
+if(text.includes("apri oreste ai cleaner")||text.includes("apri oreste cleaner")||text.includes("avvia oreste ai cleaner")||text.includes("avvia oreste cleaner")||text==="apri cleaner"||text==="avvia cleaner"||text.includes("apri il cleaner")||text.includes("avvia il cleaner")){return await apriCleaner();}
+if(text.startsWith("meteo"))return await meteo(text.replace("meteo","").trim());
+if(text.startsWith("timer"))return startTimer(text.replace("timer","").trim());
+if(text.startsWith("sveglia"))return sveglia(text.replace("sveglia","").trim());
+if(text.startsWith("cerca")||text.startsWith("trova")){const ricerca=text.replace(/^cerca|^trova/,"").trim();if(!ricerca)return"Dimmi cosa devo cercare.";window.open("https://www.google.com/search?q="+encodeURIComponent(ricerca),"_blank","noopener,noreferrer");return"Cerco "+ricerca+".";}
+if(text.startsWith("scarica"))return scaricaProgramma(text.replace("scarica","").trim());
+if(text.includes("impara canva")||text.includes("canva oreste ai")){window.open("guida-canva-oreste-ai.html","_blank","noopener,noreferrer");return"Apro la guida Canva di Oreste AI.";}
+const comandoCanva=canva(text);if(comandoCanva)return comandoCanva;
+const sito=openSite(text);if(sito)return sito;
+if(text.includes("video motivazionale")||text.includes("motivazione"))return mostraMotivazione();
+if(text.includes("meditazione")||text.includes("medita")){document.getElementById("meditazione").scrollIntoView({behavior:"smooth"});return"Certo. Ti accompagno nella meditazione guidata. Premi il pulsante Inizia meditazione.";}
+return"Non ho capito. Scrivi 'aiuto' per vedere i comandi.";
+}
+async function ask(){const campo=document.getElementById("input");if(!campo)return;const testo=campo.value.trim();if(!testo)return;add("🧑",testo);campo.value="";try{const risposta=await handle(testo);add("🤖",risposta);if(risposta)speak(risposta);}catch(errore){console.error("Errore Oreste AI:",errore);const rispostaErrore="Si è verificato un errore. Riprova.";add("🤖",rispostaErrore);speak(rispostaErrore);}}
+function voice(){const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SpeechRecognition){alert("Il riconoscimento vocale funziona meglio con Google Chrome.");return;}const ascolto=new SpeechRecognition();ascolto.lang="it-IT";ascolto.continuous=false;ascolto.interimResults=false;ascolto.onstart=()=>{document.getElementById("voiceButton")?.classList.add("listening");add("🎤","Ascolto attivo...");};ascolto.onresult=async event=>{const testo=event.results[0][0].transcript;add("🧑",testo);try{const risposta=await handle(testo);add("🤖",risposta);if(risposta)speak(risposta);}catch(errore){console.error("Errore comando vocale:",errore);add("🤖","Si è verificato un errore.");speak("Si è verificato un errore.");}};ascolto.onerror=event=>{console.error("Errore riconoscimento vocale:",event);add("🎤","Errore nel riconoscimento vocale.");};ascolto.onend=()=>{document.getElementById("voiceButton")?.classList.remove("listening");};try{ascolto.start();}catch(errore){console.error("Impossibile avviare il microfono:",errore);add("🎤","Impossibile avviare il microfono.");}}
+let date=new Date();const mesi=["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];const giorni=["Lun","Mar","Mer","Gio","Ven","Sab","Dom"];
+function getDataKey(anno,mese,giorno){return anno+"-"+String(mese+1).padStart(2,"0")+"-"+String(giorno).padStart(2,"0");}
+function render(){const cal=document.getElementById("calendar"),monthTitle=document.getElementById("monthTitle");if(!cal||!monthTitle)return;cal.innerHTML="";const y=date.getFullYear(),m=date.getMonth();monthTitle.innerText=mesi[m]+" "+y;giorni.forEach(giorno=>{const e=document.createElement("div");e.className="weekday";e.textContent=giorno;cal.appendChild(e);});const first=new Date(y,m,1).getDay();const offset=first===0?6:first-1;const days=new Date(y,m+1,0).getDate();for(let i=0;i<offset;i++){const e=document.createElement("div");e.className="day empty";cal.appendChild(e);}const oggi=new Date();for(let d=1;d<=days;d++){const div=document.createElement("div");div.className="day";const dataKey=getDataKey(y,m,d);if(oggi.getFullYear()===y&&oggi.getMonth()===m&&oggi.getDate()===d)div.classList.add("today");const num=document.createElement("div");num.className="day-number";num.textContent=d;div.appendChild(num);eventiDelGiorno(dataKey).forEach(evento=>{const ed=document.createElement("div");ed.className="event";ed.textContent="• "+evento.testo;div.appendChild(ed);});div.onclick=()=>{const ev=prompt("Evento per "+dataKey+":");if(!ev)return;salvaEvento({data:dataKey,testo:ev});render();add("📅","Evento salvato per "+dataKey+": "+ev);};cal.appendChild(div);}}
+function prevMonth(){date.setMonth(date.getMonth()-1);render();}function nextMonth(){date.setMonth(date.getMonth()+1);render();}
+let meditationInterval=null,meditationTimeout=null,meditationRemaining=120,meditationRunning=false,meditationPhaseIndex=0;const meditationPhases=[{nome:"Inspira",testo:"Inspira lentamente dal naso.",durata:4},{nome:"Trattieni",testo:"Trattieni il respiro con calma.",durata:4},{nome:"Espira",testo:"Espira lentamente e rilassati.",durata:6}];
+function formatMeditationTime(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
+function aggiornaMeditazioneUI(fase,istruzione){const p=document.getElementById("meditationPhase"),i=document.getElementById("meditationInstruction"),t=document.getElementById("meditationTimer");if(p)p.textContent=fase;if(i)i.textContent=istruzione;if(t)t.textContent=formatMeditationTime(meditationRemaining);}
+function cicloRespirazione(){if(!meditationRunning)return;const fase=meditationPhases[meditationPhaseIndex];aggiornaMeditazioneUI(fase.nome,fase.testo);speak(fase.testo);meditationTimeout=setTimeout(()=>{meditationPhaseIndex=(meditationPhaseIndex+1)%meditationPhases.length;cicloRespirazione();},fase.durata*1000);}
+function avviaMeditazione(){fermaMeditazione();meditationRunning=true;meditationRemaining=120;meditationPhaseIndex=0;document.getElementById("meditationStatus").textContent="🧘 Meditazione iniziata.";aggiornaMeditazioneUI("Preparati","Siediti comodamente e rilassa le spalle.");speak("Preparati. Siediti comodamente e rilassa le spalle.");cicloTimerMeditazione();setTimeout(()=>{if(meditationRunning)cicloRespirazione();},4000);}
+function cicloTimerMeditazione(){if(!meditationRunning)return;const t=document.getElementById("meditationTimer");if(t)t.textContent=formatMeditationTime(meditationRemaining);if(meditationRemaining<=0){fineMeditazione();return;}meditationRemaining--;meditationInterval=setTimeout(cicloTimerMeditazione,1000);}
+function fineMeditazione(){meditationRunning=false;clearTimeout(meditationInterval);clearTimeout(meditationTimeout);meditationInterval=null;meditationTimeout=null;aggiornaMeditazioneUI("🌿 Fine","Hai completato la meditazione. Respira ancora una volta lentamente.");document.getElementById("meditationStatus").textContent="✅ Meditazione completata.";speak("Meditazione completata. Respira ancora una volta lentamente.");}
+function fermaMeditazione(){meditationRunning=false;clearTimeout(meditationInterval);clearTimeout(meditationTimeout);meditationInterval=null;meditationTimeout=null;if("speechSynthesis" in window)window.speechSynthesis.cancel();meditationRemaining=120;aggiornaMeditazioneUI("Pronto",'Premi "Inizia meditazione" per cominciare.');document.getElementById("meditationStatus").textContent="";}
+function voceMeditazione(){speak("Benvenuto nella meditazione di Oreste AI. Rilassa le spalle, inspira lentamente dal naso e lascia uscire l'aria con calma. Quando sei pronto, premi inizia meditazione.");}
+render();
+window.addEventListener("load",()=>{const messaggio="Ciao! Sono Oreste AI. Scrivi 'aiuto' per vedere cosa posso fare.";const chat=document.getElementById("chat");if(chat&&!chat.dataset.benvenuto){chat.dataset.benvenuto="true";add("🤖",messaggio);setTimeout(()=>benvenutoOreste(false),700);}});
+document.addEventListener("click",()=>benvenutoOreste(false),{once:true});
+if("speechSynthesis" in window&&"onvoiceschanged" in window.speechSynthesis){window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();}
+</script>
+<footer>© 2026 Oreste De Chiara – Oreste AI – Tutti i diritti riservati.</footer>
+</body>
+</html>
