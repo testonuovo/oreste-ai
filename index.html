@@ -471,7 +471,16 @@ if(text.startsWith("scarica"))return scaricaProgramma(text.replace("scarica","")
 if(text.includes("impara canva")||text.includes("canva oreste ai")){window.open("guida-canva-oreste-ai.html","_blank","noopener,noreferrer");return"Apro la guida Canva di Oreste AI.";}
 const comandoCanva=canva(text);if(comandoCanva)return comandoCanva;
 const sito=openSite(text);if(sito)return sito;
-if(text.includes("video motivazionale")||text.includes("motivazione"))return mostraMotivazione();
+if (
+    text.includes("motivami") ||
+    text.includes("motivazione") ||
+    text.includes("video motivazionale") ||
+    text.includes("video motivazionali") ||
+    text.includes("fammi vedere un video") ||
+    text.includes("voglio un video motivazionale")
+) {
+    return mostraMotivazione();
+}
 if(text.includes("meditazione")||text.includes("medita")){document.getElementById("meditazione").scrollIntoView({behavior:"smooth"});return"Certo. Ti accompagno nella meditazione guidata. Premi il pulsante Inizia meditazione.";}
 return"Non ho capito. Scrivi 'aiuto' per vedere i comandi.";
 }
