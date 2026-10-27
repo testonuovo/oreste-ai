@@ -501,9 +501,8 @@ async function handle(text){text=String(text||"").toLowerCase().trim();if(!text)
         text.includes("video motivazionale") ||
         text.includes("video motivazionali") ||
         text.includes("fammi vedere un video") ||
-        text.includes("voglio un video motivazionale")||
-        text.includes("fammi vedere un video motivazionale")
-    ) {
+        text.includes("voglio un video motivazionale")
+           ) {
         return mostraMotivazione();
     }                            
 const vicino=apriVicinoContursi(text);if(vicino)return vicino;
