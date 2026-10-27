@@ -491,6 +491,20 @@ function mostraMotivazione() {
 }
 function apriCleaner(){return fetch("http://127.0.0.1:8765/cleaner").then(async risposta=>{if(!risposta.ok)throw new Error("HTTP "+risposta.status);const dati=await risposta.json();return dati.message||"Oreste AI Cleaner avviato.";}).catch(errore=>{console.error("Errore avvio Oreste AI Cleaner:",errore);return"Non riesco ad avviare Oreste AI Cleaner. Controlla che il servizio Cleaner sia attivo su questa macchina.";});}
 async function handle(text){text=String(text||"").toLowerCase().trim();if(!text)return"Scrivi un comando.";
+/* ==========================================
+       VIDEO MOTIVAZIONALE - PRIORITÀ
+    ========================================== */
+
+    if (
+        text.includes("motivami") ||
+        text.includes("motivazione") ||
+        text.includes("video motivazionale") ||
+        text.includes("video motivazionali") ||
+        text.includes("fammi vedere un video") ||
+        text.includes("voglio un video motivazionale")
+    ) {
+        return mostraMotivazione();
+    }                            
 const vicino=apriVicinoContursi(text);if(vicino)return vicino;
 if(text.includes("affronta la paura e vinci con coraggio")){window.open("https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share","_blank","noopener,noreferrer");return"Affronta la paura e vinci con coraggio.";}
 if(text.includes("non è mai troppo tardi per ricominciare")){window.open("https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share","_blank","noopener,noreferrer");return"Non è mai troppo tardi per ricominciare.";}
