@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -487,7 +487,7 @@ function downloadNote(){
 const blob = new Blob([noteText.value],{type:"text/plain"});
 const a=document.createElement("a");
 a.href=URL.createObjectURL(blob);
-a.download="note.oresteai.txt";
+a.download="note.oreste.txt";
 a.click();
 speak("Download effettuato");
 }
