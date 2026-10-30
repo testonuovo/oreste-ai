@@ -486,7 +486,102 @@ function apriCanvaFunzione(funzione){const url={mockup:"https://www.canva.com/mo
 function scaricaProgramma(nome){if(!nome)return"Dimmi quale programma vuoi cercare.";const ricerca=nome+" download ufficiale";window.open("https://www.google.com/search?q="+encodeURIComponent(ricerca),"_blank","noopener,noreferrer");return"Cerco il download ufficiale di "+nome;}
 function apriPagina(testo){const pagine={"chi siamo":"chi-siamo.html","spagna campione":"spagna-campione-del-mondo-2026.html","oreste os":"os.html","tecnologie":"tecnologie oreste ai.html","comandi":"comandi-oreste-ai.html","mondiali":"mondiali2026.html","assistente":"assistente.html","motivazione":"motivazione.html","meditazione":"meditazione.html","download":"download.html","storybook":"storybook.html","contatti":"contatti.html","dashboard":"dashboard.html","funzioni":"funzioni.html","storia":"storia.html","blog":"blog.html","chat":"chat.html","home":"index.html"};const nomi=Object.keys(pagine).sort((a,b)=>b.length-a.length);for(const nome of nomi){if(testo.includes(nome)){window.open(pagine[nome],"_blank","noopener,noreferrer");return"Apro la pagina "+nome+".";}}return null;}
 function apriVicinoContursi(testo){const episodi={"1":"https://youtu.be/r5gGcrJJn_0","2":"https://youtu.be/-MwXVX1tEdo","3":"https://youtu.be/dSdqAWsUxwQ","4":"https://youtu.be/jozTmOx66m4","5":"https://youtu.be/8HoZ3vStWwc"};const parole={uno:"1",due:"2",tre:"3",quattro:"4",cinque:"5"};for(const parola in parole){if(testo.includes("vicino contursi "+parola)){const n=parole[parola];window.open(episodi[n],"_blank","noopener,noreferrer");return"Vicino Contursi "+n+".";}}for(const numero in episodi){if(testo.includes("vicino contursi "+numero)){window.open(episodi[numero],"_blank","noopener,noreferrer");return"Vicino Contursi "+numero+".";}}return null;}
+function apriIlContediMontecristo(testo) {
 
+    testo = testo
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[’']/g, " ")
+        .replace(/[.,!?;:]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    const episodi = {
+        "1": "https://youtu.be/r5gGcrJJn_0",
+        "2": "https://youtu.be/b-ButlM_zQ4",
+        "3": "https://youtu.be/B8p_x6gzYzo",
+        "4": "https://youtu.be/TtNT5eMuDV0",
+        "5": "https://youtu.be/Sjrdaqyqea0",
+        "6": "https://youtu.be/TtNT5eMuDV0"
+    };
+
+    const numeri = {
+        "uno": "1",
+        "prima": "1",
+        "primo": "1",
+        "due": "2",
+        "seconda": "2",
+        "secondo": "2",
+        "tre": "3",
+        "terza": "3",
+        "terzo": "3",
+        "quattro": "4",
+        "quarta": "4",
+        "quarto": "4",
+        "cinque": "5",
+        "quinta": "5",
+        "quinto": "5",
+        "sei": "6",
+        "sesta": "6",
+        "sesto": "6"
+    };
+
+    // Riconosce il titolo anche se scritto senza spazi.
+    const titolo =
+        /\bconte\s+di\s+montecristo\b/.test(testo) ||
+        /\bconte\s+del\s+montecristo\b/.test(testo) ||
+        /\bcontedimontecristo\b/.test(testo);
+
+    if (!titolo) {
+        return null;
+    }
+
+    let numero = null;
+
+    // Cerca prima un numero associato a episodio, puntata o parte.
+    const match = testo.match(
+        /\b(?:episodio|puntata|parte)\s*(?:numero\s*)?([1-6])\b/
+    );
+
+    if (match) {
+        numero = match[1];
+    } else {
+        // Cerca i numeri scritti in lettere.
+        const parole = Object.keys(numeri)
+            .sort((a, b) => b.length - a.length);
+
+        for (const parola of parole) {
+            const regex = new RegExp("\\b" + parola + "\\b");
+
+            if (regex.test(testo)) {
+                numero = numeri[parola];
+                break;
+            }
+        }
+
+        // Accetta anche un numero isolato da 1 a 6.
+        if (!numero) {
+            const numeroMatch = testo.match(/\b([1-6])\b/);
+
+            if (numeroMatch) {
+                numero = numeroMatch[1];
+            }
+        }
+    }
+
+    if (!numero) {
+        return "Quale episodio del Conte di Montecristo vuoi aprire? Puoi scegliere da 1 a 6.";
+    }
+
+    window.open(
+        episodi[numero],
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+    return "Apro Il Conte di Montecristo, episodio " + numero + ".";
+}
 function mostraMotivazione() {
     window.open(
         "https://www.youtube.com/shorts/GYmM6jZUPPA",
