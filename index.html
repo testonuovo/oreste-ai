@@ -503,31 +503,31 @@ function apriIlContediMontecristo(testo) {
         "3": "https://youtu.be/B8p_x6gzYzo",
         "4": "https://youtu.be/TtNT5eMuDV0",
         "5": "https://youtu.be/Sjrdaqyqea0",
-        "6": "https://youtu.be/TtNT5eMuDV0"
+        "6": "https://youtu.be/Dq6Rb9aqQ4Q"
     };
 
     const numeri = {
         "uno": "1",
-        "prima": "1",
         "primo": "1",
+        "prima": "1",
         "due": "2",
-        "seconda": "2",
         "secondo": "2",
+        "seconda": "2",
         "tre": "3",
-        "terza": "3",
         "terzo": "3",
+        "terza": "3",
         "quattro": "4",
-        "quarta": "4",
         "quarto": "4",
+        "quarta": "4",
         "cinque": "5",
-        "quinta": "5",
         "quinto": "5",
+        "quinta": "5",
         "sei": "6",
-        "sesta": "6",
-        "sesto": "6"
+        "sesto": "6",
+        "sesta": "6"
     };
 
-    // Riconosce il titolo anche se scritto senza spazi.
+    // Riconosce il titolo.
     const titolo =
         /\bconte\s+di\s+montecristo\b/.test(testo) ||
         /\bconte\s+del\s+montecristo\b/.test(testo) ||
@@ -539,19 +539,18 @@ function apriIlContediMontecristo(testo) {
 
     let numero = null;
 
-    // Cerca prima un numero associato a episodio, puntata o parte.
-    const match = testo.match(
+    // Riconosce "episodio 1", "puntata 2", "parte 3" e simili.
+    const corrispondenza = testo.match(
         /\b(?:episodio|puntata|parte)\s*(?:numero\s*)?([1-6])\b/
     );
 
-    if (match) {
-        numero = match[1];
-    } else {
-        // Cerca i numeri scritti in lettere.
-        const parole = Object.keys(numeri)
-            .sort((a, b) => b.length - a.length);
+    if (corrispondenza) {
+        numero = corrispondenza[1];
+    }
 
-        for (const parola of parole) {
+    // Riconosce i numeri scritti in lettere.
+    if (!numero) {
+        for (const parola of Object.keys(numeri)) {
             const regex = new RegExp("\\b" + parola + "\\b");
 
             if (regex.test(testo)) {
@@ -559,21 +558,23 @@ function apriIlContediMontecristo(testo) {
                 break;
             }
         }
+    }
 
-        // Accetta anche un numero isolato da 1 a 6.
-        if (!numero) {
-            const numeroMatch = testo.match(/\b([1-6])\b/);
+    // Riconosce anche il numero scritto da solo.
+    if (!numero) {
+        const corrispondenzaNumero = testo.match(/\b([1-6])\b/);
 
-            if (numeroMatch) {
-                numero = numeroMatch[1];
-            }
+        if (corrispondenzaNumero) {
+            numero = corrispondenzaNumero[1];
         }
     }
 
+    // Se manca il numero, chiede quale episodio aprire.
     if (!numero) {
-        return "Quale episodio del Conte di Montecristo vuoi aprire? Puoi scegliere da 1 a 6.";
+        return "Quale episodio del Conte di Montecristo vuoi aprire? Dimmi un numero da 1 a 6.";
     }
 
+    // Apre l'episodio selezionato.
     window.open(
         episodi[numero],
         "_blank",
@@ -608,6 +609,11 @@ async function handle(text){text=String(text||"").toLowerCase().trim();if(!text)
         return mostraMotivazione();
     }                            
 const vicino=apriVicinoContursi(text);if(vicino)return vicino;
+  const conte = apriIlContediMontecristo(text);
+
+if (conte) {
+    return conte;
+}                         
 if(text.includes("affronta la paura e vinci con coraggio")){window.open("https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share","_blank","noopener,noreferrer");return"Affronta la paura e vinci con coraggio.";}
 if(text.includes("non è mai troppo tardi per ricominciare")){window.open("https://www.youtube.com/shorts/vJ10Q1nU60s?feature=share","_blank","noopener,noreferrer");return"Non è mai troppo tardi per ricominciare.";}
 if(text.includes("un passo alla volta")){window.open("https://www.youtube.com/shorts/GYmM6jZUPPA?feature=share","_blank","noopener,noreferrer");return"Un passo alla volta.";}
