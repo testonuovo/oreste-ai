@@ -745,17 +745,27 @@ if(text.includes("un passo alla volta")){window.open("https://www.youtube.com/sh
 if(text.includes("comincio da zero")||text.includes("cominciare da zero")){window.open("https://www.youtube.com/shorts/xKTSSWy8SDM?feature=share","_blank","noopener,noreferrer");return"comincio da zero.";}
 if(text.includes("credi in te stesso")||text.includes("credi")){window.open("https://www.youtube.com/shorts/2CEJzlZR7gc?feature=share","_blank","noopener,noreferrer");return"credi in te stesso.";}
 if(text.includes("il silenzio è forza")||text.includes("silenzio")){window.open("https://www.youtube.com/shorts/0P1oNhdWL8Q?feature=share","_blank","noopener,noreferrer");return"il silenzio è forza.";}
-if(text.includes("rinasci dal dolore")||text.includes("rinasci")){window.open("https://www.youtube.com/shorts/7PLwMDJFggU?feature=share","_blank","noopener,noreferrer");return"rinasci dal dolore.";}
 if(text.includes("vai avanti")||text.includes("vai")){window.open("https://www.youtube.com/shorts/CpuZy9YHDdg?feature=share");return"vai avanti.";}
 if(text.includes("resta te stesso")||text.includes("resta")){window.open("https://www.youtube.com/shorts/BEpIqNg7VKo?feature=share");return"resta te stesso.";}
 if(text.includes("la trappola del domani")||text.includes("domani")){window.open("https://www.youtube.com/shorts/PpTxzXHNUvw?feature=share");return"la trappola del domani.";}
-if(text.includes("dal fallimento alla rinascita") || text.includes("rinascita")) {
+// Prima il comando più specifico
+if(text.includes("dal fallimento alla rinascita")) {
     window.open(
         "https://www.youtube.com/shorts/exK9SKnvTcU?feature=share",
         "_blank",
         "noopener,noreferrer"
     );
     return "Ti apro il video Dal fallimento alla rinascita.";
+}
+
+// Poi il comando generico
+if(text.includes("rinasci dal dolore") || text.includes("rinasci")) {
+    window.open(
+        "https://www.youtube.com/shorts/7PLwMDJFggU?feature=share",
+        "_blank",
+        "noopener,noreferrer"
+    );
+    return "Ti apro il video Rinasci dal dolore.";
 }
 const pagina=apriPagina(text);if(pagina)return pagina;
 if(text==="ciao"||text.includes("ciao"))return"Ciao! Sono Oreste AI.";
