@@ -55,31 +55,6 @@ h3,
 .oreste-intro-title {
     color: #ffffff !important;
 }
-.contenitore {
-    background:pink;
-    padding:35px;
-    border: 2px solid #f5c6d0;
-    border-radius: 18px;
-    max-width: 420px;
-    margin: 30px auto;
-    box-shadow: 0 5px 18px #c08091;
-}
-
-a {
-    color: white;
-    text-decoration: none;
-    font-size:21px;
-    font-weight: bold;
-}
-
-a:hover {
-    color: #ffe4ec;
-}
-
-p {
-    font-size: 19px;
-}
-
 /* =====================================================
    MOTIVAZIONE: SOLE E ANIMAZIONI
 ===================================================== */
@@ -248,49 +223,56 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
   display: block;
   object-fit: contain;
 }
-/* GALLERIA VIDEO ORESTE AI */
-
-/* GALLERIA VIDEO ORESTE AI */
-
+/* =====================================================
+   GALLERIA VIDEO ORESTE AI
+===================================================== */
 .oreste-galleria {
     width: 94%;
     max-width: 900px;
     margin: 35px auto;
     padding: 25px 20px;
-    background: rgba(0,0,0,.25);
+    background: rgba(0, 0, 0, .25);
     border-radius: 16px;
     text-align: center;
 }
-
-.oreste-galleria .video {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 20px;
+.oreste-galleria h2 {
+    color: #ffffff !important;
+    margin-bottom: 22px;
 }
-
-.oreste-galleria .contenitore {
+.oreste-galleria-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+    margin: 20px auto 0;
+}
+.oreste-video-card {
+    min-width: 0;
     background: #d96b91;
-    padding: 25px;
+    padding: 25px 18px;
     border: 2px solid #f5c6d0;
     border-radius: 18px;
-    margin: 0;
-    box-shadow: 0 5px 18px rgba(0,0,0,.2);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, .2);
 }
-
-.oreste-galleria .contenitore a {
-    color: white;
+.oreste-video-card h3 {
+    color: #ffffff !important;
+    margin-top: 0;
+}
+.oreste-video-card p {
+    font-size: 17px;
+    line-height: 1.5;
+}
+.oreste-video-card a {
+    display: inline-block;
+    color: #ffffff;
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
 }
-
-.oreste-galleria .contenitore a:hover {
+.oreste-video-card a:hover {
     color: #ffe4ec;
 }
-
 @media (max-width: 600px) {
-    .oreste-galleria .video {
+    .oreste-galleria-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -426,14 +408,11 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
 </section>
  
 
-  <section id="galleria-video" class="oreste-galleria">
-
+<section id="galleria-video" class="oreste-galleria">
     <h2>❤️ La nostra Galleria Video ❤️</h2>
 
-    <div class="video">
-
-        <!-- PRIMO RIQUADRO -->
-        <div class="contenitore">
+    <div class="oreste-galleria-grid">
+        <div class="oreste-video-card">
             <h3>❤️ Un'emozione chiamata amore ❤️</h3>
             <p>
                 <a href="https://canva.link/1xl488yn094snl7"
@@ -444,8 +423,7 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
             </p>
         </div>
 
-        <!-- SECONDO RIQUADRO -->
-        <div class="contenitore">
+        <div class="oreste-video-card">
             <h3>❤️ Un abbraccio, mille emozioni ❤️</h3>
             <p>
                 <a href="https://canva.link/avkub4ntma5rlmm"
@@ -455,10 +433,8 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
                 </a>
             </p>
         </div>
-
     </div>
-
-</section>  
+</section>   
 
 <section id="canva-section" class="section-box">
 <h2>🎨 Impara Canva con Oreste AI</h2>
@@ -526,7 +502,7 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
 </a>
 
 
-</style>
+
 
 
 
