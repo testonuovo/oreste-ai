@@ -250,20 +250,45 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
 }
 /* GALLERIA VIDEO ORESTE AI */
 
+/* GALLERIA VIDEO ORESTE AI */
+
+.oreste-galleria {
+    width: 94%;
+    max-width: 900px;
+    margin: 35px auto;
+    padding: 25px 20px;
+    background: rgba(0,0,0,.25);
+    border-radius: 16px;
+    text-align: center;
+}
+
 .oreste-galleria .video {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
-    max-width: 900px;
-    margin: 25px auto;
+    margin-top: 20px;
 }
 
 .oreste-galleria .contenitore {
+    background: #d96b91;
+    padding: 25px;
+    border: 2px solid #f5c6d0;
+    border-radius: 18px;
     margin: 0;
-    width: auto;
+    box-shadow: 0 5px 18px rgba(0,0,0,.2);
 }
 
-/* Visualizzazione su smartphone */
+.oreste-galleria .contenitore a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.oreste-galleria .contenitore a:hover {
+    color: #ffe4ec;
+}
+
 @media (max-width: 600px) {
     .oreste-galleria .video {
         grid-template-columns: 1fr;
@@ -401,14 +426,15 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
 </section>
  
 
- <section id="galleria-video" class="oreste-galleria">
+  <section id="galleria-video" class="oreste-galleria">
 
     <h2>❤️ La nostra Galleria Video ❤️</h2>
 
     <div class="video">
-        <h3>❤️ Un'emozione chiamata amore ❤️</h3>
 
+        <!-- PRIMO RIQUADRO -->
         <div class="contenitore">
+            <h3>❤️ Un'emozione chiamata amore ❤️</h3>
             <p>
                 <a href="https://canva.link/1xl488yn094snl7"
                    target="_blank"
@@ -418,10 +444,9 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
             </p>
         </div>
 
-        
-        <h3>❤️ Un abbraccio, mille emozioni ❤️</h3>
-
+        <!-- SECONDO RIQUADRO -->
         <div class="contenitore">
+            <h3>❤️ Un abbraccio, mille emozioni ❤️</h3>
             <p>
                 <a href="https://canva.link/avkub4ntma5rlmm"
                    target="_blank"
@@ -430,12 +455,10 @@ footer{margin-top:30px;padding:15px;font-size:14px;opacity:.9}
                 </a>
             </p>
         </div>
+
     </div>
-        
 
-        
-
-</section>   
+</section>  
 
 <section id="canva-section" class="section-box">
 <h2>🎨 Impara Canva con Oreste AI</h2>
