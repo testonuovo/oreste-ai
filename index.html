@@ -749,7 +749,14 @@ if(text.includes("rinasci dal dolore")||text.includes("rinasci")){window.open("h
 if(text.includes("vai avanti")||text.includes("vai")){window.open("https://www.youtube.com/shorts/CpuZy9YHDdg?feature=share");return"vai avanti.";}
 if(text.includes("resta te stesso")||text.includes("resta")){window.open("https://www.youtube.com/shorts/BEpIqNg7VKo?feature=share");return"resta te stesso.";}
 if(text.includes("la trappola del domani")||text.includes("domani")){window.open("https://www.youtube.com/shorts/PpTxzXHNUvw?feature=share");return"la trappola del domani.";}
-if(text.includes("dal fallimento alla rinascita")||text.includes("rinascita")){window.open("https://www.youtube.com/shorts/exK9SKnvTcU?feature=share");return"dal fallimento alla rinascita.";}
+if(text.includes("dal fallimento alla rinascita") || text.includes("rinascita")) {
+    window.open(
+        "https://www.youtube.com/shorts/exK9SKnvTcU?feature=share",
+        "_blank",
+        "noopener,noreferrer"
+    );
+    return "Ti apro il video Dal fallimento alla rinascita.";
+}
 const pagina=apriPagina(text);if(pagina)return pagina;
 if(text==="ciao"||text.includes("ciao"))return"Ciao! Sono Oreste AI.";
 if(text.includes("aiuto")||text.includes("cosa sai fare"))return"Sono Oreste AI. Posso aiutarti con meteo, timer, sveglia, ricerca, download, siti, Canva, video motivazionali, Vicino Contursi, meditazione e comandi vocali.";
