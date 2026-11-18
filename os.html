@@ -214,26 +214,31 @@ height:220px;
 <script>
 
 /* 🎙 VOCE + AVATAR */
-function speak(t){
+function speak(t) {
+    const oreste = document.getElementById("oreste");
+    const virus = document.getElementById("virus");
 
-const oreste = document.getElementById("oreste");
-const virus = document.getElementById("virus");
+    if (!("speechSynthesis" in window)) {
+        console.log("Voce non supportata");
+        return;
+    }
 
-let u = new SpeechSynthesisUtterance(t);
-u.lang = "it-IT";
+    let u = new SpeechSynthesisUtterance(t);
+    u.lang = "it-IT";
+    u.rate = 1;
+    u.volume = 1;
 
-u.onstart = () => {
-oreste.classList.add("speaking");
-virus.classList.add("speaking");
-};
+    u.onstart = () => {
+        oreste?.classList.add("speaking");
+        virus?.classList.add("speaking");
+    };
 
-u.onend = () => {
-oreste.classList.remove("speaking");
-virus.classList.remove("speaking");
-};
+    u.onend = () => {
+        oreste?.classList.remove("speaking");
+        virus?.classList.remove("speaking");
+    };
 
-speechSynthesis.cancel();
-speechSynthesis.speak(u);
+    speechSynthesis.speak(u);
 }
 
 /* APP SWITCH */
