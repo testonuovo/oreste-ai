@@ -174,49 +174,31 @@ height:220px;
 </div>
 
 <!-- BROWSER -->
-<!-- 🌐 ORESTE OS BROWSER 2.0 -->
-<div id="browser" class="app">
+<div id="browser" class="app" style="display:none;">
+    <h2>Browser Oreste</h2>
 
-<h3>🌐 Oreste OS Browser</h3>
+    <input
+        type="text"
+        id="url"
+        placeholder="Scrivi un sito o cerca..."
+        onkeydown="if(event.key==='Enter') go()"
+    >
 
-<input 
-id="url" 
-placeholder="Scrivi sito o cerca..."
-style="width:90%;">
+    <button onclick="go()">Vai</button>
+    <button onclick="homeBrowser()">Pulisci</button>
 
-<br>
+    <h3>Preferiti</h3>
+    <button onclick="openFavorite('https://www.google.com')">Google</button>
+    <button onclick="openFavorite('https://www.youtube.com')">YouTube</button>
+    <button onclick="openFavorite('https://github.com')">GitHub</button>
 
-<button onclick="go()">🚀 Vai</button>
-<button onclick="homeBrowser()">🏠 Home</button>
-<button onclick="clearHistory()">🗑 Cancella cronologia</button>
+    <h3>Cronologia</h3>
+    <button onclick="clearHistory()">Cancella cronologia</button>
 
-<div class="card">
+    <ul id="history"></ul>
 
-<h4>⭐ Preferiti</h4>
-
-<button onclick="openFavorite('https://www.google.com')">
-Google
-</button>
-
-<button onclick="openFavorite('https://www.youtube.com')">
-YouTube
-</button>
-
-<button onclick="openFavorite('https://github.com')">
-GitHub
-</button>
-
+    <p id="browserStatus"></p>
 </div>
-
-
-<div class="card">
-
-<h4>🕘 Cronologia</h4>
-
-<ul id="history"></ul>
-
-</div>
-
 
 </div>
 <!-- ANTIVIRUS -->
@@ -277,175 +259,173 @@ res.innerText = Number(a.value)/Number(b.value);
 /* BROWSER */
 /* 🌐 ORESTE OS BROWSER 2.0 */
 
-let historyList = JSON.parse(
-localStorage.getItem("oreste_history")
-) || [];
+// CRONOLOGIA BROWSER
+let historyList = [];
 
+try {
+    const savedHistory = localStorage.getItem("oreste_history");
+    historyList = savedHistory ? JSON.parse(savedHistory) : [];
 
-function go(){
-
-let text = document.getElementById("url").value.trim();
-
-if(!text) return;
-
-
-let url;
-
-
-/* Siti conosciuti */
-
-const sites = {
-
-google:"https://www.google.com",
-
-youtube:"https://www.youtube.com",
-
-github:"https://github.com",
-
-facebook:"https://facebook.com",
-
-instagram:"https://instagram.com",
-
-linkedin:"https://linkedin.com"
-
-};
-
-
-if(sites[text.toLowerCase()]){
-
-url = sites[text.toLowerCase()];
-
-}
-
-else if(text.includes(".") && !text.includes(" ")){
-
-if(!text.startsWith("http")){
-
-url="https://"+text;
-
-}else{
-
-url=text;
-
-}
-
-}
-
-else{
-
-url=
-"https://www.google.com/search?q="
-+encodeURIComponent(text);
-
+    if (!Array.isArray(historyList)) {
+        historyList = [];
+    }
+} catch (error) {
+    historyList = [];
+    localStorage.removeItem("oreste_history");
 }
 
 
-window.open(url,"_blank");
+// APERTURA SITO O RICERCA
+function go() {
+    const input = document.getElementById("url");
+    const status = document.getElementById("browserStatus");
 
+    const value = input.value.trim();
 
-addHistory(text);
+    if (!value) {
+        status.textContent = "Scrivi un sito o una ricerca.";
+        return;
+    }
 
-let voce = text
-.replace("https://","")
-.replace("http://","")
-.replace("www.","")
-.replace(".com","")
-.replace(".it","")
-.replace(".org","");
+    const sites = {
+        google: "https://www.google.com",
+        youtube: "https://www.youtube.com",
+        github: "https://github.com",
+        facebook: "https://www.facebook.com",
+        instagram: "https://www.instagram.com",
+        linkedin: "https://www.linkedin.com"
+    };
 
-speak("Apro" + voce);
+    let url;
 
+    const shortcut = value.toLowerCase();
+
+    if (sites[shortcut]) {
+        url = sites[shortcut];
+
+    } else if (
+        value.includes(".") &&
+        !value.includes(" ")
+    ) {
+        try {
+            url = new URL(
+                /^https?:\/\//i.test(value)
+                    ? value
+                    : "https://" + value
+            ).href;
+
+            const parsed = new URL(url);
+
+            if (
+                parsed.protocol !== "http:" &&
+                parsed.protocol !== "https:"
+            ) {
+                throw new Error("Indirizzo non valido");
+            }
+
+        } catch (error) {
+            url = "https://www.google.com/search?q=" +
+                encodeURIComponent(value);
+        }
+
+    } else {
+        url = "https://www.google.com/search?q=" +
+            encodeURIComponent(value);
+    }
+
+    const newWindow = window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+    addHistory(value);
+
+    if (newWindow === null) {
+        status.textContent =
+            "Se la pagina non si apre, consenti i popup per questo sito.";
+    } else {
+        status.textContent = "Apertura: " + url;
+    }
+
+    speak("Apro " + value);
 }
 
 
+// AGGIUNGE ALLA CRONOLOGIA
+function addHistory(item) {
+    historyList.unshift(item);
 
-function addHistory(item){
+    historyList = historyList.slice(0, 10);
 
-historyList.unshift(item);
+    try {
+        localStorage.setItem(
+            "oreste_history",
+            JSON.stringify(historyList)
+        );
+    } catch (error) {
+        console.warn("Impossibile salvare la cronologia:", error);
+    }
 
-
-if(historyList.length>10){
-
-historyList.pop();
-
+    showHistory();
 }
 
 
-localStorage.setItem(
-"oreste_history",
-JSON.stringify(historyList)
-);
+// MOSTRA LA CRONOLOGIA IN MODO SICURO
+function showHistory() {
+    const box = document.getElementById("history");
 
+    if (!box) return;
 
-showHistory();
+    box.replaceChildren();
 
+    historyList.forEach(function(item) {
+        const li = document.createElement("li");
+
+        li.textContent = item;
+
+        box.appendChild(li);
+    });
 }
 
 
+// CANCELLA CRONOLOGIA
+function clearHistory() {
+    historyList = [];
 
-function showHistory(){
+    localStorage.removeItem("oreste_history");
 
-let box=document.getElementById("history");
+    showHistory();
 
+    document.getElementById("browserStatus").textContent =
+        "Cronologia cancellata.";
 
-if(!box)return;
-
-
-box.innerHTML="";
-
-
-historyList.forEach(x=>{
-
-box.innerHTML +=
-"<li>"+x+"</li>";
-
-});
-
-
+    speak("Cronologia cancellata");
 }
 
 
+// APRE I PREFERITI
+function openFavorite(url) {
+    window.open(url, "_blank", "noopener,noreferrer");
 
-function clearHistory(){
+    addHistory(url);
 
-historyList=[];
-
-localStorage.removeItem(
-"oreste_history"
-);
-
-showHistory();
-
-speak("Cronologia cancellata");
-
+    speak("Apro il sito preferito");
 }
 
 
+// PULISCE IL CAMPO
+function homeBrowser() {
+    document.getElementById("url").value = "";
 
-function openFavorite(url){
+    document.getElementById("browserStatus").textContent = "";
 
-window.open(url,"_blank");
-
-speak("Apro preferito");
-
+    speak("Campo di ricerca pulito");
 }
 
 
-
-function homeBrowser(){
-
-document.getElementById("url").value="";
-
-speak("Browser pronto");
-
-}
-
-
-
-window.addEventListener(
-"load",
-showHistory
-);
+// CARICA LA CRONOLOGIA
+window.addEventListener("load", showHistory);
 
 /* ANTIVIRUS */
 function scan(){
