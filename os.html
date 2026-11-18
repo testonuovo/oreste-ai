@@ -288,67 +288,39 @@ function go() {
     }
 
     const sites = {
-        google: "https://www.google.com",
-        youtube: "https://www.youtube.com",
-        github: "https://github.com",
-        facebook: "https://www.facebook.com",
-        instagram: "https://www.instagram.com",
-        linkedin: "https://www.linkedin.com"
+        google: ["https://www.google.com", "Google"],
+        "www.google.com": ["https://www.google.com", "Google"],
+        youtube: ["https://www.youtube.com", "YouTube"],
+        "www.youtube.com": ["https://www.youtube.com", "YouTube"],
+        github: ["https://github.com", "GitHub"],
+        "www.github.com": ["https://github.com", "GitHub"]
     };
 
+    const key = value.toLowerCase();
     let url;
+    let nome;
 
-    const shortcut = value.toLowerCase();
-
-    if (sites[shortcut]) {
-        url = sites[shortcut];
-
-    } else if (
-        value.includes(".") &&
-        !value.includes(" ")
-    ) {
-        try {
-            url = new URL(
-                /^https?:\/\//i.test(value)
-                    ? value
-                    : "https://" + value
-            ).href;
-
-            const parsed = new URL(url);
-
-            if (
-                parsed.protocol !== "http:" &&
-                parsed.protocol !== "https:"
-            ) {
-                throw new Error("Indirizzo non valido");
-            }
-
-        } catch (error) {
-            url = "https://www.google.com/search?q=" +
-                encodeURIComponent(value);
-        }
-
+    if (sites[key]) {
+        url = sites[key][0];
+        nome = sites[key][1];
+    } else if (value.includes(".") && !value.includes(" ")) {
+        url = /^https?:\/\//i.test(value)
+            ? value
+            : "https://" + value;
+        nome = new URL(url).hostname.replace(/^www\./, "");
     } else {
         url = "https://www.google.com/search?q=" +
             encodeURIComponent(value);
+        nome = "Google";
     }
 
-    const newWindow = window.open(
-        url,
-        "_blank",
-        "noopener,noreferrer"
-    );
+    window.open(url, "_blank", "noopener,noreferrer");
 
     addHistory(value);
 
-    if (newWindow === null) {
-        status.textContent =
-            "Se la pagina non si apre, consenti i popup per questo sito.";
-    } else {
-        status.textContent = "Apertura: " + url;
-    }
+    status.textContent = "Apertura: " + nome;
 
-    speak("Apro " + value);
+    speak("Apro " + nome);
 }
 
 
@@ -473,9 +445,11 @@ speak("Download effettuato");
 }
 
 /* START */
-window.onload=()=>{
-speak("Benvenuto in Oreste OS");
-};
+window.addEventListener("load", function() {
+    setTimeout(function() {
+        speak("Benvenuto in Oreste OS");
+    }, 1000);
+});
 
 </script>
 
