@@ -775,14 +775,11 @@ document.addEventListener("DOMContentLoaded", function() {
         window.speechSynthesis.getVoices();
     }
 });
-function avviaSaluto() {
-    speak("Benvenuto in Oreste AI");
-    document.removeEventListener("click", avviaSaluto);
-    document.removeEventListener("keydown", avviaSaluto);
-}
-
-document.addEventListener("click", avviaSaluto);
-document.addEventListener("keydown", avviaSaluto);
+window.addEventListener("load", function() {
+    setTimeout(function() {
+        speak("Benvenuto in Oreste AI");
+    }, 1000);
+});
 </script>
 
 </body>
