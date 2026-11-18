@@ -6,340 +6,356 @@
 <title>Oreste OS</title>
 
 <style>
-body{
-margin:0;
-font-family:Arial;
-background:#0b1b3a;
-color:white;
-text-align:center;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b1b3a;
+    color: white;
+    text-align: center;
 }
 
 /* NAV */
-nav{
-background:blue;
-padding:10px;
+nav {
+    background: blue;
+    padding: 10px;
 }
-nav a{
-color:white;
-text-decoration:none;
-margin:10px;
-font-weight:bold;
+nav a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    margin: 8px;
+    font-weight: bold;
 }
 
 /* BUTTON */
-button{
-padding:8px;
-border:none;
-border-radius:6px;
-background:#0071e3;
-color:white;
-cursor:pointer;
-margin:4px;
+button {
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    background: #0071e3;
+    color: white;
+    cursor: pointer;
+    margin: 4px;
 }
 
 /* CARD */
-.card{
-background:#1e3a8a;
-padding:15px;
-border-radius:10px;
-max-width:700px;
-margin:20px auto;
+.card {
+    background: #1e3a8a;
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 700px;
+    margin: 20px auto;
 }
 
 /* AVATAR AREA */
-#stage{
-display:flex;
-justify-content:center;
-gap:40px;
-margin:20px;
-align-items:center;
+#stage {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px;
+    align-items: center;
 }
-
-.character{
-width:140px;
-border-radius:50%;
-transition:0.3s;
+.character {
+    width: 140px;
+    border-radius: 50%;
+    transition: 0.3s;
 }
-
-.speaking{
-transform:scale(1.15);
-box-shadow:0 0 25px cyan;
+.speaking {
+    transform: scale(1.15);
+    box-shadow: 0 0 25px cyan;
 }
 
 /* APP */
-.app{
-display:none;
-margin-top:20px;
+.app {
+    display: none;
+    margin-top: 20px;
 }
 
-input, textarea{
-padding:6px;
-margin:4px;
-border-radius:10px;
-border:none;
+input, textarea {
+    padding: 6px;
+    margin: 4px;
+    border-radius: 10px;
+    border: none;
 }
-
-textarea{
-width:95%;
-height:220px;
+textarea {
+    width: 95%;
+    height: 220px;
+}
+#history {
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+#browserStatus, #noteStatus {
+    min-height: 1.2em;
+}
+@media (max-width: 600px) {
+    .character {
+        width: 105px;
+    }
+    #stage {
+        gap: 20px;
+    }
+    .card {
+        margin: 12px;
+    }
 }
 </style>
 </head>
 
-
 <body>
 
 <nav>
-<a href="index.html">🏠 Home</a>
-<a href="assistente.html">🎤 Assistente</a>
-<a href="chat.html">💬 Chat</a>
-<a href="motivazione.html">🌻 Motivazione</a>
-<a href="download.html">📥 Download</a>
-<a href="blog.html">📰 Blog</a>
-<a href="chi-siamo.html">👤 Chi siamo</a>
-<a href="contatti.html">📞 Contatti</a>
-<a href="dashboard.html">📊 Dashboard</a>
-<a href="os.html">🖥️ Oreste OS</a>
-<a href="chi-ha-creato-oreste-ai.html">👨‍💻 Creatore</a>
-<a href="meditazione.html">🧘 Meditazione</a>
-<a href="storybook.html">📚 Storybook</a>
-<a href="storia.html">📖 La Storia</a>
-<a href="funzioni.html">Funzioni</a>
-<a href="tecnologie oreste ai.html">Tecnologie Oreste AI</a>
-<a href="comandi-oreste-ai.html">🎤 Comandi</a>  
-<a href="mondiali2026.html">🏆 Mondiali 2026</a>
+    <a href="index.html">🏠 Home</a>
+    <a href="assistente.html">🎤 Assistente</a>
+    <a href="chat.html">💬 Chat</a>
+    <a href="motivazione.html">🌻 Motivazione</a>
+    <a href="download.html">📥 Download</a>
+    <a href="blog.html">📰 Blog</a>
+    <a href="chi-siamo.html">👤 Chi siamo</a>
+    <a href="contatti.html">📞 Contatti</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="os.html">🖥️ Oreste OS</a>
+    <a href="chi-ha-creato-oreste-ai.html">👨‍💻 Creatore</a>
+    <a href="meditazione.html">🧘 Meditazione</a>
+    <a href="storybook.html">📚 Storybook</a>
+    <a href="storia.html">📖 La Storia</a>
+    <a href="funzioni.html">Funzioni</a>
+    <a href="tecnologie oreste ai.html">Tecnologie Oreste AI</a>
+    <a href="comandi-oreste-ai.html">🎤 Comandi</a>
+    <a href="mondiali2026.html">🏆 Mondiali 2026</a>
 </nav>
 
-<!-- 🧠 AVATAR ORESTE -->
+<!-- AVATAR ORESTE -->
 <div id="stage">
-
     <img
         id="oreste"
         class="character"
         src="https://i.ibb.co/fzBXJPK1/oreste-ai-avatar.png"
         alt="Oreste AI"
     >
-
     <img
         id="virus"
         class="character"
         src="https://i.ibb.co/7t3jhP7w/Emblema-Robot-AI-Neon-Blu.png"
         alt="Robot AI Oreste OS"
     >
-
 </div>
 
 <h1>🖥️ Oreste OS</h1>
 
 <div class="card">
 
+    <button onclick="app('calc')">🧮 Calcolatrice</button>
+    <button onclick="app('browser')">🌐 Browser</button>
+    <button onclick="app('antivirus')">🛡 Antivirus</button>
+    <button onclick="app('note')">📝 Blocco Note</button>
 
-<button onclick="app('calc')">🧮 Calcolatrice</button>
-<button onclick="app('browser')">🌐 Browser</button>
-<button onclick="app('antivirus')">🛡 Antivirus</button>
-<button onclick="app('note')">📝 Blocco Note</button>
+    <!-- BLOCCO NOTE -->
+    <div id="note" class="app">
+        <h3>📝 Blocco Note</h3>
+        <textarea id="noteText"></textarea>
+        <br>
+        <button onclick="saveNote()">💾 Salva</button>
+        <button onclick="loadNote()">📂 Carica</button>
+        <button onclick="copyNote()">📋 Copia</button>
+        <button onclick="downloadNote()">📥 Scarica</button>
+        <button onclick="clearNote()">🗑 Cancella</button>
+        <p id="noteStatus"></p>
+    </div>
 
-<!-- 📝 NOTE -->
-<div id="note" class="app">
-<h3>📝 Blocco Note</h3>
+    <!-- CALCOLATRICE -->
+    <div id="calc" class="app">
+        <h3>Calcolatrice</h3>
+        <input id="a" type="number" aria-label="Primo numero">
+        <input id="b" type="number" aria-label="Secondo numero">
+        <br>
+        <button onclick="sum()">+</button>
+        <button onclick="sub()">-</button>
+        <button onclick="mul()">*</button>
+        <button onclick="div()">/</button>
+        <p id="res"></p>
+    </div>
 
-<textarea id="noteText"></textarea>
+    <!-- BROWSER -->
+    <div id="browser" class="app">
+        <h2>Browser Oreste</h2>
+        <input
+            type="text"
+            id="url"
+            placeholder="Scrivi un sito o cerca..."
+            onkeydown="if(event.key === 'Enter') go()"
+        >
+        <button onclick="go()">Vai</button>
+        <button onclick="homeBrowser()">Pulisci</button>
 
-<br>
+        <h3>Preferiti</h3>
+        <button onclick="openFavorite('https://www.google.com', 'Google')">Google</button>
+        <button onclick="openFavorite('https://www.youtube.com', 'YouTube')">YouTube</button>
+        <button onclick="openFavorite('https://github.com', 'GitHub')">GitHub</button>
 
-<button onclick="saveNote()">💾 Salva</button>
-<button onclick="loadNote()">📂 Carica</button>
-<button onclick="copyNote()">📋 Copia</button>
-<button onclick="downloadNote()">📥 Scarica</button>
-<button onclick="clearNote()">🗑 Cancella</button>
+        <h3>Cronologia</h3>
+        <button onclick="clearHistory()">Cancella cronologia</button>
+        <ul id="history"></ul>
+        <p id="browserStatus" aria-live="polite"></p>
+    </div>
 
-<p id="noteStatus"></p>
-</div>
-
-<!-- CALC -->
-<div id="calc" class="app">
-<h3>Calcolatrice</h3>
-
-<input id="a" type="number">
-<input id="b" type="number">
-
-<br>
-
-<button onclick="sum()">+</button>
-<button onclick="sub()">-</button>
-<button onclick="mul()">*</button>
-<button onclick="div()">/</button>
-
-<p id="res"></p>
-</div>
-
-<!-- BROWSER -->
-<div id="browser" class="app" style="display:none;">
-    <h2>Browser Oreste</h2>
-
-    <input
-        type="text"
-        id="url"
-        placeholder="Scrivi un sito o cerca..."
-        onkeydown="if(event.key==='Enter') go()"
-    >
-
-    <button onclick="go()">Vai</button>
-    <button onclick="homeBrowser()">Pulisci</button>
-
-    <h3>Preferiti</h3>
-    <button onclick="openFavorite('https://www.google.com')">Google</button>
-    <button onclick="openFavorite('https://www.youtube.com')">YouTube</button>
-    <button onclick="openFavorite('https://github.com')">GitHub</button>
-
-    <h3>Cronologia</h3>
-    <button onclick="clearHistory()">Cancella cronologia</button>
-
-    <ul id="history"></ul>
-
-    <p id="browserStatus"></p>
-</div>
+    <!-- ANTIVIRUS -->
+    <div id="antivirus" class="app">
+        <h3>Antivirus</h3>
+        <button onclick="scan()">Scansiona</button>
+        <p id="status"></p>
+        <small>Nota: questa funzione è una simulazione dimostrativa, non una scansione antivirus reale.</small>
+    </div>
 
 </div>
-<!-- ANTIVIRUS -->
-<div id="antivirus" class="app">
-<h3>Antivirus</h3>
 
-<button onclick="scan()">Scansiona</button>
-<p id="status"></p>
-</div>
-
-</div>
+<footer style="margin-top:30px; padding:15px; font-size:14px; opacity:0.9;">
+    © 2026 Oreste De Chiara – Oreste AI – Tutti i diritti riservati.
+</footer>
 
 <script>
-
-/* 🎙 VOCE + AVATAR */
-function speak(t) {
-    const oreste = document.getElementById("oreste");
-    const virus = document.getElementById("virus");
-
-    if (!("speechSynthesis" in window)) {
-        console.log("Voce non supportata");
+/* VOCE E AVATAR */
+function speak(text) {
+    if (!("speechSynthesis" in window) ||
+        typeof SpeechSynthesisUtterance === "undefined") {
+        console.warn("La sintesi vocale non è supportata da questo browser.");
         return;
     }
 
-    let u = new SpeechSynthesisUtterance(t);
-    u.lang = "it-IT";
-    u.rate = 1;
-    u.volume = 1;
+    const oreste = document.getElementById("oreste");
+    const virus = document.getElementById("virus");
 
-    u.onstart = () => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "it-IT";
+    utterance.rate = 1;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+
+    // Se il browser ha già caricato una voce italiana, la seleziona.
+    const voices = window.speechSynthesis.getVoices();
+    const italianVoice = voices.find(voice =>
+        voice.lang && voice.lang.toLowerCase().startsWith("it")
+    );
+    if (italianVoice) {
+        utterance.voice = italianVoice;
+    }
+
+    utterance.onstart = function () {
         oreste?.classList.add("speaking");
         virus?.classList.add("speaking");
     };
 
-    u.onend = () => {
+    utterance.onend = function () {
         oreste?.classList.remove("speaking");
         virus?.classList.remove("speaking");
     };
 
-    speechSynthesis.speak(u);
+    utterance.onerror = function (event) {
+        console.warn("Errore sintesi vocale:", event.error);
+        oreste?.classList.remove("speaking");
+        virus?.classList.remove("speaking");
+    };
+
+    // Non cancelliamo le frasi precedenti: il benvenuto non viene tagliato
+    // dalla voce associata al pulsante premuto subito dopo.
+    window.speechSynthesis.speak(utterance);
 }
 
-/* APP SWITCH */
-function app(id){
-document.querySelectorAll(".app").forEach(a => a.style.display = "none");
-const el = document.getElementById(id);
+/*
+ * I browser spesso impediscono l'audio automatico appena si apre una pagina.
+ * Per questo Oreste pronuncia il benvenuto al primo clic o tasto premuto.
+ */
+let welcomeSpoken = false;
 
-if(el){
-el.style.display = "block";
-speak("Apro " + id);
+function welcomeOreste() {
+    if (welcomeSpoken) return;
+    welcomeSpoken = true;
+    speak("Benvenuto in Oreste OS");
 }
+
+document.addEventListener("click", welcomeOreste, { once: true, capture: true });
+document.addEventListener("keydown", welcomeOreste, { once: true, capture: true });
+
+/* CAMBIO APPLICAZIONE */
+function app(id) {
+    document.querySelectorAll(".app").forEach(element => {
+        element.style.display = "none";
+    });
+
+    const selectedApp = document.getElementById(id);
+    if (!selectedApp) return;
+
+    selectedApp.style.display = "block";
+
+    const appNames = {
+        calc: "la calcolatrice",
+        browser: "il browser",
+        antivirus: "l'antivirus",
+        note: "il blocco note"
+    };
+
+    speak("Apro " + (appNames[id] || id));
+
+    if (id === "browser") {
+        showHistory();
+    }
 }
 
 /* CALCOLATRICE */
-function sum(){ res.innerText = Number(a.value)+Number(b.value); }
-function sub(){ res.innerText = Number(a.value)-Number(b.value); }
-function mul(){ res.innerText = Number(a.value)*Number(b.value); }
-function div(){
-if(Number(b.value)==0){ res.innerText="Errore"; return; }
-res.innerText = Number(a.value)/Number(b.value);
+function getCalculatorValues() {
+    const first = Number(document.getElementById("a").value);
+    const second = Number(document.getElementById("b").value);
+    return { first, second };
 }
 
-/* BROWSER */
-/* 🌐 ORESTE OS BROWSER 2.0 */
+function showCalculation(result) {
+    document.getElementById("res").textContent = result;
+}
 
-// CRONOLOGIA BROWSER
+function sum() {
+    const { first, second } = getCalculatorValues();
+    showCalculation(first + second);
+}
+
+function sub() {
+    const { first, second } = getCalculatorValues();
+    showCalculation(first - second);
+}
+
+function mul() {
+    const { first, second } = getCalculatorValues();
+    showCalculation(first * second);
+}
+
+function div() {
+    const { first, second } = getCalculatorValues();
+    if (second === 0) {
+        showCalculation("Errore: divisione per zero");
+        return;
+    }
+    showCalculation(first / second);
+}
+
+/* BROWSER: CRONOLOGIA */
 let historyList = [];
 
 try {
     const savedHistory = localStorage.getItem("oreste_history");
-    historyList = savedHistory ? JSON.parse(savedHistory) : [];
-
-    if (!Array.isArray(historyList)) {
-        historyList = [];
-    }
+    const parsedHistory = savedHistory ? JSON.parse(savedHistory) : [];
+    historyList = Array.isArray(parsedHistory)
+        ? parsedHistory.filter(item => typeof item === "string").slice(0, 10)
+        : [];
 } catch (error) {
     historyList = [];
     localStorage.removeItem("oreste_history");
 }
 
-
-// APERTURA SITO O RICERCA
-function go() {
-    const input = document.getElementById("url");
-    const status = document.getElementById("browserStatus");
-
-    const value = input.value.trim();
-
-    if (!value) {
-        status.textContent = "Scrivi un sito o una ricerca.";
-        return;
-    }
-
-    const sites = {
-        google: ["https://www.google.com", "Google"],
-        "www.google.com": ["https://www.google.com", "Google"],
-        youtube: ["https://www.youtube.com", "YouTube"],
-        "www.youtube.com": ["https://www.youtube.com", "YouTube"],
-        github: ["https://github.com", "GitHub"],
-        "www.github.com": ["https://github.com", "GitHub"]
-    };
-
-    const key = value.toLowerCase();
-    let url;
-    let nome;
-
-    if (sites[key]) {
-        url = sites[key][0];
-        nome = sites[key][1];
-    } else if (value.includes(".") && !value.includes(" ")) {
-        url = /^https?:\/\//i.test(value)
-            ? value
-            : "https://" + value;
-        nome = new URL(url).hostname.replace(/^www\./, "");
-    } else {
-        url = "https://www.google.com/search?q=" +
-            encodeURIComponent(value);
-        nome = "Google";
-    }
-
-    window.open(url, "_blank", "noopener,noreferrer");
-
-    addHistory(value);
-
-    status.textContent = "Apertura: " + nome;
-
-    speak("Apro " + nome);
-}
-
-
-// AGGIUNGE ALLA CRONOLOGIA
 function addHistory(item) {
     historyList.unshift(item);
-
     historyList = historyList.slice(0, 10);
 
     try {
-        localStorage.setItem(
-            "oreste_history",
-            JSON.stringify(historyList)
-        );
+        localStorage.setItem("oreste_history", JSON.stringify(historyList));
     } catch (error) {
         console.warn("Impossibile salvare la cronologia:", error);
     }
@@ -347,119 +363,205 @@ function addHistory(item) {
     showHistory();
 }
 
-
-// MOSTRA LA CRONOLOGIA IN MODO SICURO
 function showHistory() {
     const box = document.getElementById("history");
-
     if (!box) return;
 
     box.replaceChildren();
 
-    historyList.forEach(function(item) {
+    historyList.forEach(item => {
         const li = document.createElement("li");
-
         li.textContent = item;
-
         box.appendChild(li);
     });
 }
 
-
-// CANCELLA CRONOLOGIA
 function clearHistory() {
     historyList = [];
 
-    localStorage.removeItem("oreste_history");
+    try {
+        localStorage.removeItem("oreste_history");
+    } catch (error) {
+        console.warn("Impossibile cancellare la cronologia:", error);
+    }
 
     showHistory();
-
-    document.getElementById("browserStatus").textContent =
-        "Cronologia cancellata.";
-
+    document.getElementById("browserStatus").textContent = "Cronologia cancellata.";
     speak("Cronologia cancellata");
 }
 
+/* BROWSER: APERTURA SITI E RICERCHE */
+const favoriteSites = {
+    google: { url: "https://www.google.com", name: "Google" },
+    youtube: { url: "https://www.youtube.com", name: "YouTube" },
+    github: { url: "https://github.com", name: "GitHub" },
+    facebook: { url: "https://www.facebook.com", name: "Facebook" },
+    instagram: { url: "https://www.instagram.com", name: "Instagram" },
+    linkedin: { url: "https://www.linkedin.com", name: "LinkedIn" }
+};
 
-// APRE I PREFERITI
-function openFavorite(url) {
-    window.open(url, "_blank", "noopener,noreferrer");
+function go() {
+    const input = document.getElementById("url");
+    const status = document.getElementById("browserStatus");
+    const value = input.value.trim();
 
-    addHistory(url);
+    if (!value) {
+        status.textContent = "Scrivi un sito o una ricerca.";
+        return;
+    }
 
-    speak("Apro il sito preferito");
+    const key = value.toLowerCase();
+    let destination;
+    let spokenName;
+
+    if (favoriteSites[key]) {
+        destination = favoriteSites[key].url;
+        spokenName = favoriteSites[key].name;
+    } else if (value.includes(".") && !/\s/.test(value)) {
+        try {
+            const candidate = /^https?:\/\//i.test(value)
+                ? value
+                : "https://" + value;
+            const parsedUrl = new URL(candidate);
+
+            if (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") {
+                throw new Error("Protocollo non consentito");
+            }
+
+            destination = parsedUrl.href;
+            spokenName = parsedUrl.hostname.replace(/^www\./i, "");
+        } catch (error) {
+            destination = "https://www.google.com/search?q=" + encodeURIComponent(value);
+            spokenName = "Google";
+        }
+    } else {
+        destination = "https://www.google.com/search?q=" + encodeURIComponent(value);
+        spokenName = "Google";
+    }
+
+    // window.open viene eseguito direttamente in risposta al clic/Invio,
+    // così si riduce il rischio che il browser blocchi la nuova scheda.
+    const openedWindow = window.open(destination, "_blank");
+
+    if (openedWindow) {
+        try {
+            openedWindow.opener = null;
+        } catch (error) {
+            // Alcuni browser non consentono di modificare opener.
+        }
+    } else {
+        status.textContent = "Il browser potrebbe aver bloccato il popup. Consenti i popup per questo sito.";
+    }
+
+    addHistory(value);
+    if (openedWindow) {
+        status.textContent = "Apertura: " + spokenName;
+    }
+
+    speak("Apro " + spokenName);
 }
 
+function openFavorite(url, name) {
+    const openedWindow = window.open(url, "_blank");
 
-// PULISCE IL CAMPO
+    if (openedWindow) {
+        try {
+            openedWindow.opener = null;
+        } catch (error) {}
+        document.getElementById("browserStatus").textContent = "Apertura: " + name;
+    } else {
+        document.getElementById("browserStatus").textContent =
+            "Il browser potrebbe aver bloccato il popup. Consenti i popup per questo sito.";
+    }
+
+    addHistory(name);
+    speak("Apro " + name);
+}
+
 function homeBrowser() {
     document.getElementById("url").value = "";
-
     document.getElementById("browserStatus").textContent = "";
-
     speak("Campo di ricerca pulito");
 }
 
+/* ANTIVIRUS DIMOSTRATIVO */
+function scan() {
+    const status = document.getElementById("status");
+    status.textContent = "Scansione dimostrativa in corso...";
 
-// CARICA LA CRONOLOGIA
-window.addEventListener("load", showHistory);
-
-/* ANTIVIRUS */
-function scan(){
-status.innerText="Scansione...";
-setTimeout(()=>{
-let r=Math.random()>0.5?"Virus rilevato":"Sistema pulito";
-status.innerText=r;
-speak(r);
-},1200);
+    setTimeout(function () {
+        status.textContent = "Simulazione completata: nessuna scansione reale del dispositivo.";
+        speak("Simulazione completata");
+    }, 1200);
 }
 
-/* NOTE */
-function saveNote(){
-localStorage.setItem("oreste_note", noteText.value);
-noteStatus.innerText="💾 Documento salvato";
-speak("Documento salvato");
+/* BLOCCO NOTE */
+function saveNote() {
+    const noteText = document.getElementById("noteText");
+    const noteStatus = document.getElementById("noteStatus");
+
+    try {
+        localStorage.setItem("oreste_note", noteText.value);
+        noteStatus.textContent = "💾 Documento salvato";
+        speak("Documento salvato");
+    } catch (error) {
+        noteStatus.textContent = "Impossibile salvare il documento.";
+    }
 }
 
-function loadNote(){
-noteText.value = localStorage.getItem("oreste_note") || "";
-noteStatus.innerText="📂 Documento caricato";
-speak("Documento caricato");
+function loadNote() {
+    document.getElementById("noteText").value =
+        localStorage.getItem("oreste_note") || "";
+    document.getElementById("noteStatus").textContent = "📂 Documento caricato";
+    speak("Documento caricato");
 }
 
-function clearNote(){
-localStorage.removeItem("oreste_note");
-noteText.value="";
-noteStatus.innerText="🗑 Documento eliminato";
-speak("Documento eliminato");
+function clearNote() {
+    localStorage.removeItem("oreste_note");
+    document.getElementById("noteText").value = "";
+    document.getElementById("noteStatus").textContent = "🗑 Documento eliminato";
+    speak("Documento eliminato");
 }
 
-function copyNote(){
-navigator.clipboard.writeText(noteText.value);
-noteStatus.innerText="📋 Documento copiato";
-speak("Documento copiato");
+async function copyNote() {
+    const noteText = document.getElementById("noteText");
+    const noteStatus = document.getElementById("noteStatus");
+
+    try {
+        await navigator.clipboard.writeText(noteText.value);
+        noteStatus.textContent = "📋 Documento copiato";
+        speak("Documento copiato");
+    } catch (error) {
+        noteStatus.textContent = "Copia non disponibile: il browser potrebbe richiedere una connessione sicura.";
+    }
 }
 
-function downloadNote(){
-const blob = new Blob([noteText.value],{type:"text/plain"});
-const a=document.createElement("a");
-a.href=URL.createObjectURL(blob);
-a.download="note.oreste.txt";
-a.click();
-speak("Download effettuato");
+function downloadNote() {
+    const noteText = document.getElementById("noteText");
+    const blob = new Blob([noteText.value], { type: "text/plain;charset=utf-8" });
+    const objectUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = objectUrl;
+    link.download = "note.oreste.txt";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+    speak("Download effettuato");
 }
 
-/* START */
-window.addEventListener("load", function() {
-    setTimeout(function() {
-        speak("Benvenuto in Oreste OS");
-    }, 1000);
+/* INIZIALIZZAZIONE */
+document.addEventListener("DOMContentLoaded", function () {
+    showHistory();
+
+    // Prova a caricare l'elenco delle voci disponibili.
+    if ("speechSynthesis" in window) {
+        window.speechSynthesis.getVoices();
+    }
 });
-
 </script>
 
 </body>
-<footer style="margin-top:30px; padding:15px; font-size:14px; opacity:0.9;">
-    © 2026 Oreste De Chiara – Oreste AI – Tutti i diritti riservati.
-</footer>  
 </html>
