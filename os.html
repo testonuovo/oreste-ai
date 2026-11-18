@@ -242,26 +242,19 @@ textarea {
    VOCE E AVATAR
 ================================= */
 
-let welcomeSpoken = false;
+let welcomeStarted = false;
+let welcomeQueued = false;
+let welcomeUtterance = null;
 
-function speak(text) {
-
-    if (!("speechSynthesis" in window) ||
-        typeof SpeechSynthesisUtterance === "undefined") {
-        console.warn("Sintesi vocale non supportata.");
-        return;
-    }
-
+function setAvatarSpeaking(isSpeaking) {
     const oreste = document.getElementById("oreste");
     const virus = document.getElementById("virus");
 
-    const utterance = new SpeechSynthesisUtterance(text);
+    oreste?.classList.toggle("speaking", isSpeaking);
+    virus?.classList.toggle("speaking", isSpeaking);
+}
 
-    utterance.lang = "it-IT";
-    utterance.rate = 1;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-
+function configureItalianVoice(utterance) {
     const voices = window.speechSynthesis.getVoices();
 
     const italianVoice = voices.find(voice =>
@@ -271,21 +264,35 @@ function speak(text) {
     if (italianVoice) {
         utterance.voice = italianVoice;
     }
+}
+
+function speak(text) {
+    if (!("speechSynthesis" in window) ||
+        typeof SpeechSynthesisUtterance === "undefined") {
+        console.warn("Sintesi vocale non supportata.");
+        return;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    utterance.lang = "it-IT";
+    utterance.rate = 1;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+
+    configureItalianVoice(utterance);
 
     utterance.onstart = function() {
-        oreste?.classList.add("speaking");
-        virus?.classList.add("speaking");
+        setAvatarSpeaking(true);
     };
 
     utterance.onend = function() {
-        oreste?.classList.remove("speaking");
-        virus?.classList.remove("speaking");
+        setAvatarSpeaking(false);
     };
 
     utterance.onerror = function(event) {
+        setAvatarSpeaking(false);
         console.warn("Errore vocale:", event.error);
-        oreste?.classList.remove("speaking");
-        virus?.classList.remove("speaking");
     };
 
     window.speechSynthesis.speak(utterance);
@@ -296,55 +303,90 @@ function speak(text) {
    SALUTO AUTOMATICO ALL'AVVIO
 ================================= */
 
-function welcomeOreste() {
+function tryWelcome() {
+    if (welcomeStarted || welcomeQueued) return;
 
-    if (welcomeSpoken) return;
-
-    welcomeSpoken = true;
-
-    speak("Benvenuto in Oreste OS. Sono Oreste e sono pronto ad aiutarti.");
-}
-
-function startWelcome() {
-
-    if (welcomeSpoken) return;
-
-    if (!("speechSynthesis" in window)) {
+    if (!("speechSynthesis" in window) ||
+        typeof SpeechSynthesisUtterance === "undefined") {
         console.warn("Sintesi vocale non supportata dal browser.");
         return;
     }
 
-    const voices = window.speechSynthesis.getVoices();
+    const speech = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(
+        "Benvenuto in Oreste OS. Sono Oreste e sono pronto ad aiutarti."
+    );
 
-    // Se le voci sono già disponibili, avvia subito il saluto.
-    if (voices.length > 0) {
-        welcomeOreste();
+    welcomeQueued = true;
+    welcomeUtterance = utterance;
+
+    utterance.lang = "it-IT";
+    utterance.rate = 1;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+
+    configureItalianVoice(utterance);
+
+    utterance.onstart = function() {
+        welcomeStarted = true;
+        welcomeQueued = false;
+        setAvatarSpeaking(true);
+    };
+
+    utterance.onend = function() {
+        welcomeStarted = true;
+        welcomeQueued = false;
+        welcomeUtterance = null;
+        setAvatarSpeaking(false);
+    };
+
+    utterance.onerror = function(event) {
+        welcomeQueued = false;
+        welcomeUtterance = null;
+        setAvatarSpeaking(false);
+        console.warn("Saluto iniziale non riprodotto:", event.error);
+    };
+
+    // Non cancelliamo la coda: evitiamo di interrompere altre eventuali voci.
+    speech.speak(utterance);
+}
+
+function startWelcome() {
+    // Tentativo automatico all'apertura della pagina.
+    tryWelcome();
+}
+
+// Il primo tentativo parte appena il documento è pronto.
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startWelcome, { once: true });
+} else {
+    startWelcome();
+}
+
+// Alcuni browser caricano le voci vocali in ritardo.
+if ("speechSynthesis" in window) {
+    window.speechSynthesis.addEventListener("voiceschanged", function() {
+        if (!welcomeStarted && !welcomeQueued) {
+            tryWelcome();
+        }
+    });
+}
+
+// Se il browser richiede un'interazione dell'utente,
+// riproviamo al primo tocco o clic, prima dell'azione del pulsante.
+function welcomeOnFirstInteraction() {
+    if (!welcomeStarted && !welcomeQueued) {
+        tryWelcome();
+    }
+
+    if (welcomeStarted || welcomeQueued) {
+        document.removeEventListener("pointerdown", welcomeOnFirstInteraction, true);
+        document.removeEventListener("keydown", welcomeOnFirstInteraction, true);
     }
 }
 
-// Il saluto parte al caricamento completo della pagina.
-window.addEventListener("load", function() {
-
-    if (!("speechSynthesis" in window)) return;
-
-    // Primo tentativo automatico.
-    window.speechSynthesis.getVoices();
-
-    setTimeout(startWelcome, 800);
-
-    // Se le voci italiane arrivano in ritardo, avvia il saluto.
-    window.speechSynthesis.addEventListener(
-        "voiceschanged",
-        startWelcome
-    );
-
-    // Fallback se il browser non invia voiceschanged.
-    setTimeout(function() {
-        if (!welcomeSpoken) {
-            welcomeOreste();
-        }
-    }, 2500);
-});
+document.addEventListener("pointerdown", welcomeOnFirstInteraction, true);
+document.addEventListener("keydown", welcomeOnFirstInteraction, true);
 
 
 /* =================================
@@ -816,15 +858,3 @@ document.addEventListener("DOMContentLoaded", function() {
 
 </body>
 </html>
- 
-  
-
-
-
-   
-   
- 
-
-  
-   
-
