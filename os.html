@@ -242,6 +242,8 @@ textarea {
    VOCE E AVATAR
 ================================= */
 
+let welcomeSpoken = false;
+
 function speak(text) {
 
     if (!("speechSynthesis" in window) ||
@@ -291,10 +293,8 @@ function speak(text) {
 
 
 /* =================================
-   BENVENUTO ORESTE
+   SALUTO AUTOMATICO ALL'AVVIO
 ================================= */
-
-let welcomeSpoken = false;
 
 function welcomeOreste() {
 
@@ -302,20 +302,49 @@ function welcomeOreste() {
 
     welcomeSpoken = true;
 
-    speak("Benvenuto in Oreste OS");
+    speak("Benvenuto in Oreste OS. Sono Oreste e sono pronto ad aiutarti.");
 }
 
-document.addEventListener(
-    "click",
-    welcomeOreste,
-    { once: true, capture: true }
-);
+function startWelcome() {
 
-document.addEventListener(
-    "keydown",
-    welcomeOreste,
-    { once: true, capture: true }
-);
+    if (welcomeSpoken) return;
+
+    if (!("speechSynthesis" in window)) {
+        console.warn("Sintesi vocale non supportata dal browser.");
+        return;
+    }
+
+    const voices = window.speechSynthesis.getVoices();
+
+    // Se le voci sono già disponibili, avvia subito il saluto.
+    if (voices.length > 0) {
+        welcomeOreste();
+    }
+}
+
+// Il saluto parte al caricamento completo della pagina.
+window.addEventListener("load", function() {
+
+    if (!("speechSynthesis" in window)) return;
+
+    // Primo tentativo automatico.
+    window.speechSynthesis.getVoices();
+
+    setTimeout(startWelcome, 800);
+
+    // Se le voci italiane arrivano in ritardo, avvia il saluto.
+    window.speechSynthesis.addEventListener(
+        "voiceschanged",
+        startWelcome
+    );
+
+    // Fallback se il browser non invia voiceschanged.
+    setTimeout(function() {
+        if (!welcomeSpoken) {
+            welcomeOreste();
+        }
+    }, 2500);
+});
 
 
 /* =================================
@@ -415,7 +444,7 @@ try {
 
     historyList = [];
 
-    localStorage.removeItem("oreste_history");
+    console.warn("Errore nel caricamento della cronologia:", error);
 }
 
 
@@ -689,26 +718,38 @@ function saveNote() {
 
 function loadNote() {
 
-    document.getElementById("noteText").value =
-        localStorage.getItem("oreste_note") || "";
+    try {
+        document.getElementById("noteText").value =
+            localStorage.getItem("oreste_note") || "";
 
-    document.getElementById("noteStatus").textContent =
-        "📂 Documento caricato";
+        document.getElementById("noteStatus").textContent =
+            "📂 Documento caricato";
 
-    speak("Documento caricato");
+        speak("Documento caricato");
+
+    } catch (error) {
+        document.getElementById("noteStatus").textContent =
+            "Impossibile caricare il documento.";
+    }
 }
 
 
 function clearNote() {
 
-    localStorage.removeItem("oreste_note");
+    try {
+        localStorage.removeItem("oreste_note");
 
-    document.getElementById("noteText").value = "";
+        document.getElementById("noteText").value = "";
 
-    document.getElementById("noteStatus").textContent =
-        "🗑 Documento eliminato";
+        document.getElementById("noteStatus").textContent =
+            "🗑 Documento eliminato";
 
-    speak("Documento eliminato");
+        speak("Documento eliminato");
+
+    } catch (error) {
+        document.getElementById("noteStatus").textContent =
+            "Impossibile eliminare il documento.";
+    }
 }
 
 
@@ -768,18 +809,9 @@ function downloadNote() {
 ================================= */
 
 document.addEventListener("DOMContentLoaded", function() {
-
     showHistory();
+});
 
-    if ("speechSynthesis" in window) {
-        window.speechSynthesis.getVoices();
-    }
-});
-window.addEventListener("load", function() {
-    setTimeout(function() {
-        speak("Benvenuto in Oreste AI");
-    }, 1000);
-});
 </script>
 
 </body>
