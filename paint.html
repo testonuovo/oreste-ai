@@ -369,7 +369,7 @@ function startDrawing(e) {
     if (tool === "text") {
         drawing = false;
 
-        const text = prompt("Inserisci il testo:");
+        const text=prompt("Inserisci il testo");
 
         if (text) {
             ctx.font = `${Math.max(16, Number(sizeInput.value) * 4)}px Arial`;
