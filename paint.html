@@ -361,11 +361,19 @@ function startDrawing(e) {
     startY = pos.y;
 
     canvas.setPointerCapture(e.pointerId);
-const text = prompt("Inserisci il testo");
+
+    saveState();
+
+    setupStroke();
+
+    if (tool === "text") {
+        drawing = false;
+
+        const text = prompt("Inserisci il testo:");
 
         if (text) {
             ctx.font = `${Math.max(16, Number(sizeInput.value) * 4)}px Arial`;
-            crx.fillStyle = color.Input.value;
+            ctx.fillStyle = colorInput.value;
             ctx.fillText(text, pos.x, pos.y);
         }
 
