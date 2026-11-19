@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oreste Paint</title>
+
+<style>
+:root {
+    --bg: #171c29;
+    --panel: #222a3b;
+    --panel2: #2d374b;
+    --accent: #3995ef;
+    --text: #f1f5fb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+header {
+    height: 58px;
+    background: #111724;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid #354057;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: bold;
+    color: #58aaff;
+}
+
+header button, .toolbar button {
+    background: var(--panel2);
+    border: 1px solid #46536b;
+    color: white;
+    padding: 9px 13px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--accent);
+}
+
+button.active {
+    background: var(--accent);
+    border-color: #80c1ff;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+.toolbar {
+    width: 220px;
+    background: var(--panel);
+    padding: 15px;
+    overflow-y: auto;
+    border-right: 1px solid #354057;
+}
+
+.section {
+    margin-bottom: 22px;
+}
+
+.section h3 {
+    font-size: 12px;
+    color: #9eacc4;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+    letter-spacing: 1px;
+}
+
+.tools {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.tools button {
+    min-height: 42px;
+}
+
+.control {
+    margin: 12px 0;
+}
+
+.control label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+input[type="color"] {
+    width: 100%;
+    height: 38px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+}
+
+.workspace {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: #101521;
+}
+
+.canvas-area {
+    flex: 1;
+    min-height: 0;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+#paintCanvas {
+    background: white;
+    box-shadow: 0 5px 30px #0008;
+    cursor: crosshair;
+    touch-action: none;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.status {
+    height: 32px;
+    background: #202a3b;
+    padding: 8px 15px;
+    font-size: 12px;
+    color: #aebbd0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+@media(max-width: 650px) {
+    .toolbar { width: 155px; padding: 9px; }
+    .canvas-area { padding: 8px; }
+    header { padding: 0 10px; }
+    header button { padding: 7px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🎨 Oreste Paint</div>
+    <div class="actions">
+        <button onclick="newDrawing()">Nuovo</button>
+        <button onclick="openImage()">Apri</button>
+        <button onclick="saveImage()">Salva PNG</button>
+    </div>
+</header>
+
+<main>
+
+<aside class="toolbar">
+
+    <div class="section">
+        <h3>Strumenti</h3>
+        <div class="tools">
+            <button class="active" data-tool="pencil">✏️ Matita</button>
+            <button data-tool="brush">🖌️ Pennello</button>
+            <button data-tool="eraser">🧽 Gomma</button>
+            <button data-tool="line">📏 Linea</button>
+            <button data-tool="rect">▭ Rettangolo</button>
+            <button data-tool="ellipse">◯ Cerchio</button>
+            <button data-tool="text">T Testo</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Colori</h3>
+        <div class="control">
+            <label for="color">Colore principale</label>
+            <input type="color" id="color" value="#111111">
+        </div>
+        <div class="control">
+            <label>Colori rapidi</label>
+            <div class="tools">
+                <button onclick="setColor('#000000')" style="background:#000">Nero</button>
+                <button onclick="setColor('#ffffff')" style="background:#fff;color:#111">Bianco</button>
+                <button onclick="setColor('#ff0000')" style="background:#f00">Rosso</button>
+                <button onclick="setColor('#0000ff')" style="background:#00f">Blu</button>
+                <button onclick="setColor('#00aa44')" style="background:#0a4">Verde</button>
+                <button onclick="setColor('#ffff00')" style="background:#ff0;color:#111">Giallo</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Dimensione</h3>
+        <div class="control">
+            <label>Spessore: <span id="sizeValue">5</span> px</label>
+            <input type="range" id="size" min="1" max="50" value="5">
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Modifica</h3>
+        <div class="tools">
+            <button onclick="undo()">↶ Annulla</button>
+            <button onclick="redo()">↷ Ripeti</button>
+            <button onclick="clearCanvas()">🗑️ Pulisci</button>
+        </div>
+    </div>
+
+</aside>
+
+<section class="workspace">
+    <div class="canvas-area">
+        <canvas id="paintCanvas" width="1000" height="650"></canvas>
+    </div>
+    <div class="status">
+        <span id="statusText">Pronto per disegnare</span>
+        <span>Oreste Paint 1.0</span>
+    </div>
+</section>
+
+</main>
+
+<input type="file" id="fileInput" accept="image/*" hidden>
+
+<script>
+const canvas = document.getElementById("paintCanvas");
+const ctx = canvas.getContext("2d");
+
+const colorInput = document.getElementById("color");
+const sizeInput = document.getElementById("size");
+const sizeValue = document.getElementById("sizeValue");
+const statusText = document.getElementById("statusText");
+
+let tool = "pencil";
+let drawing = false;
+let startX = 0;
+let startY = 0;
+let snapshot = null;
+
+let undoStack = [];
+let redoStack = [];
+
+ctx.fillStyle = "#ffffff";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+function saveState() {
+    undoStack.push(canvas.toDataURL());
+
+    if (undoStack.length > 30) {
+        undoStack.shift();
+    }
+
+    redoStack = [];
+}
+
+function restoreState(data) {
+    const img = new Image();
+
+    img.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+    };
+
+    img.src = data;
+}
+
+function undo() {
+    if (undoStack.length === 0) return;
+
+    redoStack.push(canvas.toDataURL());
+    restoreState(undoStack.pop());
+
+    statusText.textContent = "Operazione annullata";
+}
+
+function redo() {
+    if (redoStack.length === 0) return;
+
+    undoStack.push(canvas.toDataURL());
+    restoreState(redoStack.pop());
+
+    statusText.textContent = "Operazione ripristinata";
+}
+
+function setColor(color) {
+    colorInput.value = color;
+}
+
+sizeInput.addEventListener("input", () => {
+    sizeValue.textContent = sizeInput.value;
+});
+
+document.querySelectorAll("[data-tool]").forEach(button => {
+    button.addEventListener("click", () => {
+        document.querySelectorAll("[data-tool]").forEach(b => {
+            b.classList.remove("active");
+        });
+
+        button.classList.add("active");
+        tool = button.dataset.tool;
+
+        statusText.textContent = "Strumento: " + button.textContent;
+    });
+});
+
+function getPosition(e) {
+    const rect = canvas.getBoundingClientRect();
+
+    return {
+        x: (e.clientX - rect.left) * canvas.width / rect.width,
+        y: (e.clientY - rect.top) * canvas.height / rect.height
+    };
+}
+
+function setupStroke() {
+    ctx.lineWidth = Number(sizeInput.value);
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.strokeStyle = colorInput.value;
+    ctx.fillStyle = colorInput.value;
+}
+
+function startDrawing(e) {
+    if (e.button !== undefined && e.button !== 0) return;
+
+    e.preventDefault();
+
+    const pos = getPosition(e);
+
+    drawing = true;
+    startX = pos.x;
+    startY = pos.y;
+
+    canvas.setPointerCapture(e.pointerId);
+
+    saveState();
+
+    setupStroke();
+
+    if (tool === "text") {
+        drawing = false;
+
+        const text = prompt("Inserisci il testo:");
+
+        if (text) {
+            ctx.font = `${Math.max(16, Number(sizeInput.value) * 4)}px Arial`;
+            ctx.fillStyle = colorInput.value;
+            ctx.fillText(text, pos.x, pos.y);
+        }
+
+        return;
+    }
+
+    if (tool === "pencil" || tool === "brush" || tool === "eraser") {
+        if (tool === "brush") {
+            ctx.lineWidth = Number(sizeInput.value) * 2;
+        }
+
+        if (tool === "eraser") {
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = Number(sizeInput.value) * 3;
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+        ctx.lineTo(pos.x + 0.1, pos.y + 0.1);
+        ctx.stroke();
+    }
+
+    snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+}
+
+function draw(e) {
+    if (!drawing) return;
+
+    e.preventDefault();
+
+    const pos = getPosition(e);
+
+    if (tool === "pencil" || tool === "brush" || tool === "eraser") {
+        setupStroke();
+
+        if (tool === "brush") {
+            ctx.lineWidth = Number(sizeInput.value) * 2;
+        }
+
+        if (tool === "eraser") {
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = Number(sizeInput.value) * 3;
+        }
+
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+        return;
+    }
+
+    ctx.putImageData(snapshot, 0, 0);
+    setupStroke();
+
+    ctx.beginPath();
+
+    if (tool === "line") {
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+    }
+
+    if (tool === "rect") {
+        ctx.strokeRect(
+            startX,
+            startY,
+            pos.x - startX,
+            pos.y - startY
+        );
+    }
+
+    if (tool === "ellipse") {
+        const rx = Math.abs(pos.x - startX) / 2;
+        const ry = Math.abs(pos.y - startY) / 2;
+
+        ctx.ellipse(
+            (startX + pos.x) / 2,
+            (startY + pos.y) / 2,
+            rx,
+            ry,
+            0,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.stroke();
+    }
+}
+
+function stopDrawing() {
+    if (!drawing) return;
+
+    drawing = false;
+    snapshot = null;
+
+    statusText.textContent = "Disegno aggiornato";
+}
+
+canvas.addEventListener("pointerdown", startDrawing);
+canvas.addEventListener("pointermove", draw);
+canvas.addEventListener("pointerup", stopDrawing);
+canvas.addEventListener("pointercancel", stopDrawing);
+canvas.addEventListener("lostpointercapture", stopDrawing);
+
+function clearCanvas() {
+    if (!confirm("Vuoi cancellare tutto il disegno?")) return;
+
+    saveState();
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    statusText.textContent = "Tela pulita";
+}
+
+function newDrawing() {
+    if (!confirm("Creare un nuovo disegno?")) return;
+
+    saveState();
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    statusText.textContent = "Nuovo disegno";
+}
+
+function saveImage() {
+    const link = document.createElement("a");
+
+    link.download = "Oreste-Paint.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+
+    statusText.textContent = "Immagine salvata in PNG";
+}
+
+function openImage() {
+    document.getElementById("fileInput").click();
+}
+
+document.getElementById("fileInput").addEventListener("change", e => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+
+    img.onload = () => {
+        saveState();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const scale = Math.min(
+            canvas.width / img.width,
+            canvas.height / img.height
+        );
+
+        const width = img.width * scale;
+        const height = img.height * scale;
+
+        ctx.drawImage(
+            img,
+            (canvas.width - width) / 2,
+            (canvas.height - height) / 2,
+            width,
+            height
+        );
+
+        URL.revokeObjectURL(url);
+        statusText.textContent = "Immagine aperta";
+    };
+
+    img.onerror = () => {
+        URL.revokeObjectURL(url);
+        alert("Impossibile aprire questa immagine.");
+    };
+
+    img.src = url;
+    e.target.value = "";
+});
+
+// Scorciatoie da tastiera
+document.addEventListener("keydown", e => {
+    if (e.ctrlKey && e.key.toLowerCase() === "z") {
+        e.preventDefault();
+        undo();
+    }
+
+    if (e.ctrlKey && e.key.toLowerCase() === "y") {
+        e.preventDefault();
+        redo();
+    }
+});
+</script>
+
+</body>
+</html>
+
