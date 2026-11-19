@@ -314,10 +314,10 @@ function redo() {
 function setColor(color) {
     colorInput.value = color;
 }
-
 sizeInput.addEventListener("input", () => {
     sizeValue.textContent = sizeInput.value;
 });
+  
 
 document.querySelectorAll("[data-tool]").forEach(button => {
     button.addEventListener("click", () => {
