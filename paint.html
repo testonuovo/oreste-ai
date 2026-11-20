@@ -357,18 +357,7 @@ function startDrawing(e) {
 
     const pos = getPosition(e);
 
-    drawing = true;
-    startX = pos.x;
-    startY = pos.y;
-
-    canvas.setPointerCapture(e.pointerId);
-
-    saveState();
-
-    setupStroke();
-
-    if (tool === "text") {
-        drawing = false;
+    const pos = getPosition(e);
 
         const text = prompt("Inserisci il testo:");
 
