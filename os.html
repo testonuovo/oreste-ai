@@ -869,7 +869,27 @@ function downloadNote() {
 document.addEventListener("DOMContentLoaded", function() {
     showHistory();
 });
+/* =================================
+   APERTURA APP TRAMITE COMANDI VOCALI
+================================= */
 
+document.addEventListener("DOMContentLoaded", function() {
+
+    const requestedApp = new URLSearchParams(window.location.search).get("app");
+
+    const allowedApps = [
+        "calc",
+        "browser",
+        "antivirus",
+        "note",
+        "paint"
+    ];
+
+    if (allowedApps.includes(requestedApp)) {
+        app(requestedApp);
+    }
+
+});
 </script>
 
 </body>
