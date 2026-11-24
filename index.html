@@ -799,15 +799,39 @@ if (
 ) {
     return mostraMotivazione();
 }
-if(text.includes("meditazione")||text.includes("medita")){document.getElementById("meditazione").scrollIntoView({behavior:"smooth"});return"Certo. Ti accompagno nella meditazione guidata. Premi il pulsante Inizia meditazione.";}
+/* ==========================================
+   COMANDI VOCALI ORESTE OS
+========================================== */
+
+// CALCOLATRICE
 if(text.includes("calcolatrice")){
   window.location.href = "https://testonuovo.github.io/oreste-ai/os.html";
-  return "Apro la Calcolatrice.";
+  return "Apro la Calcolatrice di Oreste OS.";
+}
+
+// BROWSER
 if(text.includes("oreste browser") || text.includes("apri internet")){
   window.open("https://testonuovo.github.io/oreste-ai/os.html", "_blank");
   return "Apro il Browser di Oreste OS.";
 }
-}                         
+
+// ANTIVIRUS
+if(text.includes("antivirus")){
+  window.open("https://testonuovo.github.io/oreste-ai/os.html", "_blank");
+  return "Apro l'Antivirus di Oreste OS.";
+}
+
+// BLOCCO NOTE
+if(text.includes("blocco note") || text.includes("bloc notes")){
+  window.open("https://testonuovo.github.io/oreste-ai/os.html", "_blank");
+  return "Apro il Blocco note di Oreste OS.";
+}
+
+// ORESTE PAINT
+if(text.includes("oreste paint") || text.includes("apri paint")){
+  window.open("https://testonuovo.github.io/oreste-ai/paint.html", "_blank");
+  return "Apro Oreste Paint.";
+}               
 return"Non ho capito. Scrivi 'aiuto' per vedere i comandi.";
 }
 async function ask(){const campo=document.getElementById("input");if(!campo)return;const testo=campo.value.trim();if(!testo)return;add("🧑",testo);campo.value="";try{const risposta=await handle(testo);add("🤖",risposta);if(risposta)speak(risposta);}catch(errore){console.error("Errore Oreste AI:",errore);const rispostaErrore="Si è verificato un errore. Riprova.";add("🤖",rispostaErrore);speak(rispostaErrore);}}
