@@ -803,35 +803,47 @@ if (
    COMANDI VOCALI ORESTE OS
 ========================================== */
 
+const oresteOS = "https://testonuovo.github.io/oreste-ai/os.html";
+
 // CALCOLATRICE
-if(text.includes("calcolatrice")){
-  window.location.href = "https://testonuovo.github.io/oreste-ai/os.html";
-  return "Apro la Calcolatrice di Oreste OS.";
+if (text.includes("calcolatrice")) {
+    window.open(oresteOS + "?app=calc", "_blank");
+    return "Apro la Calcolatrice di Oreste OS.";
 }
 
 // BROWSER
-if(text.includes("oreste browser") || text.includes("apri internet")){
-  window.open("https://testonuovo.github.io/oreste-ai/os.html", "_blank");
-  return "Apro il Browser di Oreste OS.";
+if (
+    text.includes("oreste browser") ||
+    text.includes("apri browser") ||
+    text.includes("apri internet")
+) {
+    window.open(oresteOS + "?app=browser", "_blank");
+    return "Apro Oreste Browser.";
 }
 
 // ANTIVIRUS
-if(text.includes("antivirus")){
-  window.open("https://testonuovo.github.io/oreste-ai/os.html", "_blank");
-  return "Apro l'Antivirus di Oreste OS.";
+if (text.includes("antivirus")) {
+    window.open(oresteOS + "?app=antivirus", "_blank");
+    return "Apro l'Antivirus di Oreste OS.";
 }
 
 // BLOCCO NOTE
-if(text.includes("blocco note") || text.includes("bloc notes")){
-  window.open("https://testonuovo.github.io/oreste-ai/os.html", "_blank");
-  return "Apro il Blocco note di Oreste OS.";
+if (
+    text.includes("blocco note") ||
+    text.includes("bloc notes")
+) {
+    window.open(oresteOS + "?app=note", "_blank");
+    return "Apro il Blocco Note.";
 }
 
 // ORESTE PAINT
-if(text.includes("oreste paint") || text.includes("apri paint")){
-  window.open("https://testonuovo.github.io/oreste-ai/paint.html", "_blank");
-  return "Apro Oreste Paint.";
-}               
+if (
+    text.includes("oreste paint") ||
+    text.includes("apri paint")
+) {
+    window.open(oresteOS + "?app=paint", "_blank");
+    return "Apro Oreste Paint.";
+}
 return"Non ho capito. Scrivi 'aiuto' per vedere i comandi.";
 }
 async function ask(){const campo=document.getElementById("input");if(!campo)return;const testo=campo.value.trim();if(!testo)return;add("🧑",testo);campo.value="";try{const risposta=await handle(testo);add("🤖",risposta);if(risposta)speak(risposta);}catch(errore){console.error("Errore Oreste AI:",errore);const rispostaErrore="Si è verificato un errore. Riprova.";add("🤖",rispostaErrore);speak(rispostaErrore);}}
