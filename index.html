@@ -803,11 +803,11 @@ if (
    COMANDI VOCALI ORESTE OS
 ========================================== */
 
-const oreste_OS= "https://testonuovo.github.io/oreste-ai/os.html";
+const oresteOS = "https://testonuovo.github.io/oreste-ai/os.html";
 
 // CALCOLATRICE
 if (text.includes("calcolatrice")) {
-    window.open(oreste_OS + "?app=calc", "_blank");
+    window.open(oresteOS + "?app=calc", "_blank");
     return "Apro la Calcolatrice di Oreste OS.";
 }
 
@@ -817,13 +817,13 @@ if (
     text.includes("apri browser") ||
     text.includes("apri internet")
 ) {
-    window.open(oreste_OS + "?app=browser", "_blank");
+    window.open(oresteOS + "?app=browser", "_blank");
     return "Apro Oreste Browser.";
 }
 
 // ANTIVIRUS
 if (text.includes("antivirus")) {
-    window.open(oreste_OS + "?app=antivirus", "_blank");
+    window.open(oresteOS + "?app=antivirus", "_blank");
     return "Apro l'Antivirus di Oreste OS.";
 }
 
@@ -832,7 +832,7 @@ if (
     text.includes("blocco note") ||
     text.includes("bloc notes")
 ) {
-    window.open(oreste_OS + "?app=note", "_blank");
+    window.open(oresteOS + "?app=note", "_blank");
     return "Apro il Blocco Note.";
 }
 
@@ -841,7 +841,7 @@ if (
     text.includes("oreste paint") ||
     text.includes("apri paint")
 ) {
-    window.open(oreste_OS + "?app=paint", "_blank");
+    window.open(oresteOS + "?app=paint", "_blank");
     return "Apro Oreste Paint.";
 }
 return"Non ho capito. Scrivi 'aiuto' per vedere i comandi.";
